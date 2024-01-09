@@ -16,7 +16,7 @@ namespace RuntimeNodeEditor.Canvas
             pan = Vector3.zero;
             if (!CanvasData.isDraging && !CanvasData.isPointing)
             {
-                Vector2 mousePos = MouseController.GetMousePosition(camera);
+                Vector2 mousePos = MouseController.GetMouseWorldPosition(camera);
 
                 if (Input.GetMouseButton(1) == true)
                 {

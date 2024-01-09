@@ -12,14 +12,19 @@ namespace RuntimeNodeEditor.Canvas.Data
                 CanvasData.canDrag = true;
         }
 
-        public static Vector2 GetMousePosition(Camera camera)
+        public static Vector2 GetMouseWorldPosition(Camera camera)
         {
             return camera.ScreenToWorldPoint(Input.mousePosition);
         }
 
+        public static Vector2 GetMouseViewportPosition(Camera camera)
+        {
+            return camera.ScreenToViewportPoint(Input.mousePosition);
+        }
+
         public static Vector2 GetMousePositionRelativeToCenter(Camera camera, Vector2 resolution)
         {
-            Vector2 mousePos = GetMousePosition(camera);
+            Vector2 mousePos = GetMouseViewportPosition(camera);
 
             mousePos.x *= resolution.x;
             mousePos.x -= resolution.x / 2.0f;
