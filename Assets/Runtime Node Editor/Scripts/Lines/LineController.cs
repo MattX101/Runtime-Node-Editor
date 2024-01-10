@@ -1,3 +1,4 @@
+using RuntimeNodeEditor.Canvas;
 using RuntimeNodeEditor.RuntimeNode.Pointer;
 using UnityEngine;
 
@@ -24,13 +25,18 @@ namespace RuntimeNodeEditor.RuntimeNode.Line
 
             lineRenderer = lineObject.AddComponent<LineRenderer>();
 
-            lineRenderer.startWidth = _lineWidth;
-            lineRenderer.endWidth = _lineWidth;
+            UpdateWidth();
 
             lineRenderer.material = new Material(material);
 
             startPosition = start;
             lineRenderer.SetPosition(0, start);
+        }
+
+        public void UpdateWidth()
+        {
+            lineRenderer.startWidth = _lineWidth * Zoom.scale;
+            lineRenderer.endWidth = _lineWidth * Zoom.scale;
         }
 
         public void UpdateDraggingLine(Vector3 endPosition)

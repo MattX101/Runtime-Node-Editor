@@ -16,9 +16,16 @@ namespace RuntimeNodeEditor.RuntimeNode.Line
         private RaycastHit2D _raycastHit2D;
 
         private LineController _currentLineData;
+        private List<LineController> _droppedLines;
+
         private OutputPointer _currentOutput;
 
         [SerializeField] private Material _sourceMaterial;
+
+        private void Awake()
+        {
+            _droppedLines = new List<LineController>();
+        }
 
         private void Update()
         {
@@ -36,6 +43,11 @@ namespace RuntimeNodeEditor.RuntimeNode.Line
 
             if (Input.GetMouseButtonDown(1))
                 DeletePointerConnectionsOnClick();
+
+            if (_droppedLines != null)
+                if (_droppedLines.Count > 0)
+                    foreach (LineController line in _droppedLines)
+                        line.UpdateWidth();
         }
 
         private void CreateLineOnClick()
@@ -113,15 +125,26 @@ namespace RuntimeNodeEditor.RuntimeNode.Line
 
             inputPointer.SetConnection(_currentOutput);
             inputPointer.line = _currentLineData;
+
+            _droppedLines.Add(_currentLineData);
         }
 
         private void DeletePointerConnectionsOnClick()
         {
             if (_raycastHit2D.collider != null && !CanvasData.isPointing)
+            {
                 if (_raycastHit2D.collider.TryGetComponent(out OutputPointer outputPointer))
+                {
+                    foreach (LineController line in outputPointer.lines)
+                        _droppedLines.Remove(line);
                     outputPointer.DeleteConnections();
+                }
                 else if (_raycastHit2D.collider.TryGetComponent(out InputPointer inputPointer))
+                {
+                    _droppedLines.Remove(inputPointer.line);
                     inputPointer.DeleteConnection();
+                }
+            }
         }
     }
 }
