@@ -6,31 +6,31 @@ namespace RuntimeNodeEditor.RuntimeNode
 {
     public class Test : Node
     {
-        private string _intInput1PointerName;
-        private string _intInput2PointerName;
-
-        private string _outputPointerName;
-
         public override void AddPointers(InputPointer[] inputs, OutputPointer[] outputs)
         {
             AddInputPointer(inputs[0]);
             AddInputPointer(inputs[1]);
 
             AddOutputPointer(outputs[0]);
-
-            _intInput1PointerName = inputs[0].name;
-            _intInput2PointerName = inputs[1].name;
-
-            _outputPointerName = outputs[0].name;
-
-            values.Add(_intInput1PointerName, 0);
-            values.Add(_intInput2PointerName, 0);
-            values.Add(_outputPointerName, 0);
         }
 
         public override void Exectute()
         {
-            //
+            float value1 = 0;
+            if (inputs[0].connectedOutputPointer != null)
+            {
+                inputs[0].connectedOutputPointer.node.Exectute();
+                value1 = inputs[0].connectedOutputPointer.data.intValue;
+            }
+
+            float value2 = 0;
+            if (inputs[1].connectedOutputPointer != null)
+            {
+                inputs[1].connectedOutputPointer.node.Exectute();
+                value2 = inputs[1].connectedOutputPointer.data.intValue;
+            }
+
+            outputs[0].data.floatValue = value1 + value2;
 
             wasExecuted = true;
         }
@@ -39,18 +39,7 @@ namespace RuntimeNodeEditor.RuntimeNode
         {
             wasExecuted = false;
 
-            values[_intInput1PointerName] = 0;
-            values[_intInput2PointerName] = 0;
-
-            values[_outputPointerName] = 0;
-        }
-
-        public override dynamic GetValue<T>(string valueKey)
-        {
-            if (!wasExecuted)
-                Exectute();
-
-            return values[valueKey];
+            outputs[0].data.floatValue = 0;
         }
 
         public override NodeUI Paste(Vector3 spawnPosition)

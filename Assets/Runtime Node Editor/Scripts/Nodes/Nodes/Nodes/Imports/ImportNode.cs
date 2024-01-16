@@ -8,20 +8,14 @@ namespace RuntimeNodeEditor.RuntimeNode
     {
         public int value = 1;
 
-        private string _outputPointerName;
-
         public override void AddPointers(InputPointer[] inputs, OutputPointer[] outputs)
         {
             AddOutputPointer(outputs[0]);
-
-            _outputPointerName = outputs[0].name;
-
-            values.Add(_outputPointerName, 0);
         }
 
         public override void Exectute()
         {
-            //
+            outputs[0].data.intValue = value;
 
             wasExecuted = true;
         }
@@ -30,15 +24,7 @@ namespace RuntimeNodeEditor.RuntimeNode
         {
             wasExecuted = false;
 
-            values[_outputPointerName] = 0;
-        }
-
-        public override dynamic GetValue<T>(string valueKey)
-        {
-            if (!wasExecuted)
-                Exectute();
-
-            return values[valueKey];
+            outputs[0].data.intValue = 0;
         }
 
         public override NodeUI Paste(Vector3 spawnPosition)

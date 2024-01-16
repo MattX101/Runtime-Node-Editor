@@ -6,12 +6,19 @@ namespace RuntimeNodeEditor.RuntimeNode.Pointer
 {
     public class OutputPointer : Pointer
     {
-        public List<InputPointer> connectedInputPointers = new List<InputPointer>();
-        public List<LineController> lines = new List<LineController>();
+        public List<InputPointer> connectedInputPointers;
+        public List<LineController> lines;
+
+        public PointerData data;
 
         public OutputPointer(string name, Node node) : base(name, node)
         {
             valueType = ValueType.None;
+        }
+
+        private void Awake()
+        {
+            data = new PointerData();
         }
 
         private void Update()

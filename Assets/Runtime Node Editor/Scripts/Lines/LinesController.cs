@@ -1,6 +1,5 @@
 using RuntimeNodeEditor.Canvas.Data;
 using RuntimeNodeEditor.RuntimeNode.Pointer;
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -57,7 +56,7 @@ namespace RuntimeNodeEditor.RuntimeNode.Line
                 CanvasData.isPointing = true;
                 CanvasData.canPoint = false;
 
-                CreateLine(outputPointer, _mousePos);
+                CreateLine(outputPointer);
             }
         }
 
@@ -83,13 +82,11 @@ namespace RuntimeNodeEditor.RuntimeNode.Line
             }
         }*/
 
-        private void CreateLine(OutputPointer outputPointer, Vector3 startPos)
+        private void CreateLine(OutputPointer outputPointer)
         {
-            startPos = new Vector3(startPos.x, startPos.y, 100.0f);
-
             _sourceMaterial.color = PointerColor.PickColor(outputPointer.valueType);
 
-            _currentLineData = new LineController(parent, _sourceMaterial, startPos);
+            _currentLineData = new LineController(parent, _sourceMaterial, new Vector3(_mousePos.x, _mousePos.y, 100.0f));
             _currentLineData.output = outputPointer;
 
             _currentOutput = outputPointer;

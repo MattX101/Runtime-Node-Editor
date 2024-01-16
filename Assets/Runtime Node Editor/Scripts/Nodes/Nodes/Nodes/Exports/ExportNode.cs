@@ -6,20 +6,17 @@ namespace RuntimeNodeEditor.RuntimeNode
 {
     public class ExportNode : Node
     {
-        private string _inputPointerName;
-
         public override void AddPointers(InputPointer[] inputs, OutputPointer[] outputs)
         {
             AddInputPointer(inputs[0]);
-
-            _inputPointerName = inputs[0].name;
-
-            values.Add(_inputPointerName, 0);
         }
 
         public override void Exectute()
         {
-            //
+            if (inputs[0].connectedOutputPointer != null)
+            {
+                inputs[0].connectedOutputPointer.node.Exectute();
+            }
 
             wasExecuted = true;
         }
@@ -27,8 +24,6 @@ namespace RuntimeNodeEditor.RuntimeNode
         public override void Reset()
         {
             wasExecuted = false;
-
-            values[_inputPointerName] = 0;
         }
 
         public override NodeUI Paste(Vector3 spawnPosition)

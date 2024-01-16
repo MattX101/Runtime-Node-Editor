@@ -21,7 +21,7 @@ namespace RuntimeNodeEditor.RuntimeNode
 
         [SerializeField] private LinesController _lineController;
 
-        private void Start()
+        private void Awake()
         {
             _camera = FindObjectOfType<Camera>();
             _canvasScaler = FindObjectOfType<CanvasScaler>();
@@ -38,8 +38,7 @@ namespace RuntimeNodeEditor.RuntimeNode
                 if (_raycastHit2D.collider.TryGetComponent<Node>(out Node node))
                     if (Input.GetMouseButtonDown(0))
                         Select(node);
-                    else
-                if (Input.GetMouseButtonDown(0) && _currentNode != null) Deselect();
+                    else if (Input.GetMouseButtonDown(0) && _currentNode != null) Deselect();
 
             /*if (Input.GetKey(KeyCode.LeftControl))
                 if (Input.GetKeyDown(KeyCode.C)) Copy();

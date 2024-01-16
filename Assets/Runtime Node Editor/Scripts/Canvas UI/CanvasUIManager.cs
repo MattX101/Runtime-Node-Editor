@@ -27,12 +27,12 @@ namespace RuntimeNodeEditor.Canvas
 
         private BackgroundLinesController _backgroundLinesController;
 
-        public void Start()
+        public void Awake()
         {
             _screenRes = new Vector3(_camera.pixelWidth, _camera.pixelHeight, 1);
             _screenWorldRes = _camera.ScreenToWorldPoint(_screenRes);
 
-            ScreenScale.CalcaulteScale(_camera.pixelWidth);
+            ScreenScale.CalculateScale(_camera.pixelWidth);
 
             Pan.nodesRect = _nodesRect;
             Zoom.canvasScaler = _canvasScaler;
@@ -48,6 +48,8 @@ namespace RuntimeNodeEditor.Canvas
 
         private void Update()
         {
+            UpdateCanvasData();
+
             if (_backgroundLinesController != null)
             {
                 MouseController.CheckMouse();
@@ -55,7 +57,7 @@ namespace RuntimeNodeEditor.Canvas
                 Pan.PanCanvas(_camera);
                 Zoom.ZoomCanvas();
 
-                ScreenScale.CalcaulteScale(_camera.pixelWidth);
+                ScreenScale.CalculateScale(_camera.pixelWidth);
 
                 Vector3 updatedScreenRes = new Vector3(_camera.pixelWidth, _camera.pixelHeight, 1);
                 Vector3 updatedScreenWorldRes = _camera.ScreenToWorldPoint(updatedScreenRes);
@@ -98,6 +100,12 @@ namespace RuntimeNodeEditor.Canvas
                 hsl.z * 0.5f);
 
             _backgroundLinesController.UpdateLinesColour();
+        }
+        private void UpdateCanvasData()
+        {
+            CanvasData.canvasScale = new Vector2(
+                _canvasRect.rect.width / _canvasScaler.referenceResolution.x,
+                _canvasRect.rect.height / _canvasScaler.referenceResolution.y);
         }
     }
 }

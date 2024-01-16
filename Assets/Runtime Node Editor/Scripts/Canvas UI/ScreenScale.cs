@@ -4,7 +4,7 @@ namespace RuntimeNodeEditor.Canvas
     {
         public static float scale;
 
-        public static void CalcaulteScale(int screenWidth)
+        public static void CalculateScale(int screenWidth)
         {
             scale = (float)screenWidth / 1000.0f;
         }

@@ -14,8 +14,6 @@ namespace RuntimeNodeEditor.RuntimeNode
         public List<InputPointer> inputs = new List<InputPointer>();
         public List<OutputPointer> outputs = new List<OutputPointer>();
 
-        public Dictionary<string, dynamic> values = new Dictionary<string, dynamic>();
-
         public virtual void Reset()
         {
             //
@@ -38,11 +36,6 @@ namespace RuntimeNodeEditor.RuntimeNode
         public virtual void Exectute()
         {
             //
-        }
-
-        public virtual dynamic GetValue<T>(string valueKey)
-        {
-            return null;
         }
 
         public virtual NodeUI Paste(Vector3 spawnPosition)

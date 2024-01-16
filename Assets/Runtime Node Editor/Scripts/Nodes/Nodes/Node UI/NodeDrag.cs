@@ -49,7 +49,7 @@ namespace RuntimeNodeEditor.RuntimeNode.UI
                     _dragThisNode = true;
                     CanvasData.isDraging = true;
                     CanvasData.canDrag = false;
-
+                    
                     Vector3 mousePos = MouseController.GetMousePositionRelativeToCenter(_camera, _canvasScaler.referenceResolution);
                     Vector3 nodeLocalPos = _rectTransform.localPosition;
                     _distanceFromCenter = mousePos - nodeLocalPos - (Pan.positionFromOrigin / Zoom.scale);
