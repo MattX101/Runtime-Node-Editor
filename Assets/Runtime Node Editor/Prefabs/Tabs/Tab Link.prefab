@@ -138,7 +138,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _tab: {fileID: 5853239373712218634}
-  _tabsManagers: {fileID: 0}
 --- !u!114 &5245667865690493312
 MonoBehaviour:
   m_ObjectHideFlags: 0

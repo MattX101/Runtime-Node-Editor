@@ -8,8 +8,12 @@ namespace RuntimeNodeEditor.UI.Interface
         [SerializeField]
         private GameObject _tab;
 
-        [SerializeField]
         private TabsManager _tabsManagers;
+
+        private void Awake()
+        {
+            _tabsManagers = GetComponentInParent<TabsManager>();
+        }
 
         public void Show()
         {
