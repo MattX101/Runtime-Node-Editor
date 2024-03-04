@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace RuntimeNodeEditor.RuntimeNode
+namespace RuntimeNodeEditor.Node
 {
     public class NodeExecution : MonoBehaviour
     {

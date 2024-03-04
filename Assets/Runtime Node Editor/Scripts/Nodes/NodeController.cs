@@ -1,10 +1,10 @@
-using RuntimeNodeEditor.Canvas.Data;
-using RuntimeNodeEditor.RuntimeNode.Line;
-using RuntimeNodeEditor.RuntimeNode.UI;
+using RuntimeNodeEditor.UI.Canvas.Data;
+using RuntimeNodeEditor.Node.Line;
+using RuntimeNodeEditor.UI.Node;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace RuntimeNodeEditor.RuntimeNode
+namespace RuntimeNodeEditor.Node
 {
     public class NodeController : MonoBehaviour
     {
