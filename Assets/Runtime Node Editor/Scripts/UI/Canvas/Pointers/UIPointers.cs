@@ -1,3 +1,4 @@
+using RuntimeNodeEditor.Node.Component;
 using RuntimeNodeEditor.Node.Pointer;
 using RuntimeNodeEditor.UI.Elements;
 using RuntimeNodeEditor.UI.Node;
@@ -10,8 +11,15 @@ namespace RuntimeNodeEditor.UI.Pointer
 {
     public class UIPointers
     {
+        private RuntimeNodeEditor.Node.Node _node;
+
         private List<GameObject> _inputs = new List<GameObject>();
         private List<GameObject> _outputs = new List<GameObject>();
+
+        public UIPointers(RuntimeNodeEditor.Node.Node node)
+        {
+            _node = node;
+        }
 
         public GameObject CreatePointer(string name, GameObject parent, ValueType valueType, int i, bool createText, bool pointerIsInput)
         {
@@ -109,6 +117,7 @@ namespace RuntimeNodeEditor.UI.Pointer
         public TMP_InputField AddInputField(Transform parent, TMP_InputField.ContentType contentType, int i, bool pointerIsInput, bool interactable)
         {
             TMP_InputField inputField = UIInputField.CreateInputField(parent, contentType, interactable);
+            UIInputField.UpdateNodeOnValueChange(inputField, _node);
 
             float posX = (UISettings.nodeWidth + UISettings.pointerSize) / 2;
             posX -= UISettings.borderSize;
@@ -120,13 +129,14 @@ namespace RuntimeNodeEditor.UI.Pointer
             return inputField;
         }
 
-        public Button AddBooleanPreview(Transform parent, bool pointerIsInput)
+        public BooleanButton AddBooleanPreview(Transform parent, bool pointerIsInput)
         {
-            Button button = UIBooleanPreview.CreateBooleanPreview(parent, !pointerIsInput);
+            BooleanButton button = UIBooleanPreview.CreateBooleanPreview(parent, !pointerIsInput);
+            UIBooleanPreview.UpdateNodeOnValueChange(button.button, _node);
 
             float posX = UISettings.pointerSize * 1.5f;
             posX = pointerIsInput ? posX : -posX;
-            button.gameObject.transform.localPosition = new Vector3(posX, 0, -1);
+            button.button.gameObject.transform.localPosition = new Vector3(posX, 0, -1);
 
             return button;
         }

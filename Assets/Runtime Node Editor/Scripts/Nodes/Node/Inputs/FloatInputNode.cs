@@ -6,8 +6,6 @@ namespace RuntimeNodeEditor.Node
 {
     public class FloatInputNode : Node
     {
-        public float value = 0.0f;
-
         public override void AddPointers(InputPointer[] inputs, OutputPointer[] outputs)
         {
             AddOutputPointer(outputs[0]);
@@ -15,7 +13,10 @@ namespace RuntimeNodeEditor.Node
 
         public override void Exectute()
         {
-            outputs[0].data.floatValue = value;
+            outputs[0].data.floatValue =
+                nodeUI.inputFields[0].text.Length != 0
+                ? float.Parse(nodeUI.inputFields[0].text)
+                : 0.0f;
 
             wasExecuted = true;
         }

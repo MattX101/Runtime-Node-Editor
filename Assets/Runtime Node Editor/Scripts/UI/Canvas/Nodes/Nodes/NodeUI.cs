@@ -1,4 +1,5 @@
 using RuntimeNodeEditor.Node.Pointer;
+using RuntimeNodeEditor.Node.Component;
 using RuntimeNodeEditor.UI.Elements;
 using RuntimeNodeEditor.UI.Pointer;
 using RuntimeNodeEditor.Utils.Colour;
@@ -31,7 +32,8 @@ namespace RuntimeNodeEditor.UI.Node
         private GameObject _outputs;
 
         private GameObject _previewImageObject;
-        public RawImage previewRawImage;
+        //public RawImage previewRawImage;
+        public ImagePreview imagePreview;
 
         public NodeDrag nodeDrag;
 
@@ -41,7 +43,7 @@ namespace RuntimeNodeEditor.UI.Node
         public InputPointer[] inputs;
         public OutputPointer[] outputs;
 
-        private UIPointers _uIPointers = new UIPointers();
+        protected UIPointers uIPointers;
 
         // Input Field
         public bool toggleInputField = false;
@@ -61,17 +63,19 @@ namespace RuntimeNodeEditor.UI.Node
         private float _sizeX, _sizeY;
 
         // Elements
-        protected TMP_InputField[] inputFields = null;
-        protected Button[] buttons = null;
-        protected Slider[] sliders = null;
+        public TMP_InputField[] inputFields = null;
+        public BooleanButton[] buttons = null;
+        public Slider[] sliders = null;
 
         public void CreateRoot(string title)
         {
             root = UIElement.CreateUIElement(UISettings.nodeCanvasTransform, title, Vector2.one, Vector3.zero);
         }
 
-        public void CreateNodeUI(Color primaryColour, string title)
+        public void CreateNodeUI(RuntimeNodeEditor.Node.Node node, Color primaryColour, string title)
         {
+            uIPointers = new UIPointers(node);
+
             int count = numOfInputs > numOfOutputs ? numOfInputs : numOfOutputs;
             _bodyHeight = count * UISettings.pointerSize;
             _bodyHeight += (count - 1) * UISettings.pointerPadding;
@@ -171,7 +175,8 @@ namespace RuntimeNodeEditor.UI.Node
             _inputs.GetComponent<RectTransform>().transform.localPosition = new Vector3(0, 0, -1);
             _outputs.GetComponent<RectTransform>().transform.localPosition = new Vector3(0, 0, -1);
 
-            AddPreviewImage();
+            if (togglePreviewImage)
+                AddPreviewImage();
         }
 
         private void AddNodeDrag(GameObject gameObject, Vector2 size)
@@ -198,7 +203,9 @@ namespace RuntimeNodeEditor.UI.Node
                     "Preview", 
                     previewImageSize, 
                     previewImagePos);
-                previewRawImage = UIImage.CreateRawImage(_previewImageObject, Color.black);
+
+                imagePreview = new ImagePreview();
+                imagePreview.image = UIImage.CreateRawImage(_previewImageObject, Color.black);
             }
         }
 
@@ -253,7 +260,7 @@ namespace RuntimeNodeEditor.UI.Node
 
         protected GameObject CreatePointer(string name, ValueType valueType, int i, bool createText, bool pointerIsInput)
         {
-            return _uIPointers.CreatePointer(
+            return uIPointers.CreatePointer(
                 name,
                 pointerIsInput ? _inputs : _outputs, 
                 valueType, 
@@ -264,7 +271,7 @@ namespace RuntimeNodeEditor.UI.Node
 
         protected TMP_InputField AddInputField(Transform parent, TMP_InputField.ContentType contentType, int i, bool pointerIsInput, bool interactable)
         {
-            return _uIPointers.AddInputField(
+            return uIPointers.AddInputField(
                 parent, 
                 contentType, 
                 i, 
@@ -272,33 +279,37 @@ namespace RuntimeNodeEditor.UI.Node
                 interactable);
         }
 
-        protected Button AddBooleanPreview(Transform parent, bool pointerIsInput)
+        protected BooleanButton AddBooleanPreview(Transform parent, bool pointerIsInput)
         {
-            return _uIPointers.AddBooleanPreview(parent, pointerIsInput);
+            return uIPointers.AddBooleanPreview(parent, pointerIsInput);
         }
 
         protected Slider AddSlider(Transform parent, bool pointerIsInput)
         {
-            return _uIPointers.AddSlider(parent, pointerIsInput);
+            return uIPointers.AddSlider(parent, pointerIsInput);
         }
 
         protected void PreviewColor(int a, int b, int c, bool pointersAreInput)
         {
-            if (pointersAreInput)
+            if (togglePreviewImage)
             {
-                new UIColorPreview(
-                    previewRawImage,
-                    inputs[a].gameObject.GetComponentInChildren<Slider>(),
-                    inputs[b].gameObject.GetComponentInChildren<Slider>(),
-                    inputs[c].gameObject.GetComponentInChildren<Slider>());
-            }
-            else
-            {
-                new UIColorPreview(
-                    previewRawImage,
-                    outputs[a].gameObject.GetComponentInChildren<Slider>(),
-                    outputs[b].gameObject.GetComponentInChildren<Slider>(),
-                    outputs[c].gameObject.GetComponentInChildren<Slider>());
+                if (imagePreview == null)
+                    AddPreviewImage();
+
+                if (pointersAreInput)
+                {
+                    imagePreview.SetSliderInput(
+                        inputs[a].gameObject.GetComponentInChildren<Slider>(),
+                        inputs[b].gameObject.GetComponentInChildren<Slider>(),
+                        inputs[c].gameObject.GetComponentInChildren<Slider>());
+                }
+                else
+                {
+                    imagePreview.SetSliderInput(
+                        outputs[a].gameObject.GetComponentInChildren<Slider>(),
+                        outputs[b].gameObject.GetComponentInChildren<Slider>(),
+                        outputs[c].gameObject.GetComponentInChildren<Slider>());
+                }
             }
         }
     }

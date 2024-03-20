@@ -11,6 +11,7 @@ namespace RuntimeNodeEditor.UI.Node
         {
             CreateRoot("Vector 2");
             Vector2OutputNode vector2OutputNode = root.AddComponent<Vector2OutputNode>();
+            vector2OutputNode.endNode = true;
             vector2OutputNode.nodeUI = this;
 
             inputs = new InputPointer[3];
@@ -23,7 +24,7 @@ namespace RuntimeNodeEditor.UI.Node
             toggleInputField = true;
             isInput = true;
 
-            CreateNodeUI(Color.gray, "Vector 2");
+            CreateNodeUI(vector2OutputNode, Color.gray, "Vector 2");
 
             inputs[0] = CreatePointer("In", ValueType.Vector2, 0, false, true).AddComponent<InputPointer>();
             inputs[0].name = "In";

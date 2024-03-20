@@ -6,16 +6,25 @@ namespace RuntimeNodeEditor.Node
 {
     public class ColorInputNode : Node
     {
-        public Color value = Color.black;
-
         public override void AddPointers(InputPointer[] inputs, OutputPointer[] outputs)
         {
             AddOutputPointer(outputs[0]);
+            AddOutputPointer(outputs[1]);
+            AddOutputPointer(outputs[2]);
+            AddOutputPointer(outputs[3]);
         }
 
         public override void Exectute()
         {
-            outputs[0].data.colorValue = value;
+            outputs[1].data.floatValue = nodeUI.sliders[0].value;
+            outputs[2].data.floatValue = nodeUI.sliders[1].value;
+            outputs[3].data.floatValue = nodeUI.sliders[2].value;
+            
+            outputs[0].data.colorValue = 
+                new Color(
+                    outputs[1].data.floatValue,
+                    outputs[2].data.floatValue,
+                    outputs[3].data.floatValue);
 
             wasExecuted = true;
         }

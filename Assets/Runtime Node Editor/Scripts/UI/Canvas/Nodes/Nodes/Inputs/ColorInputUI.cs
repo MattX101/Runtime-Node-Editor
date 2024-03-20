@@ -1,4 +1,5 @@
 using RuntimeNodeEditor.Node;
+using RuntimeNodeEditor.Node.Component;
 using RuntimeNodeEditor.Node.Pointer;
 using UnityEngine;
 
@@ -19,7 +20,7 @@ namespace RuntimeNodeEditor.UI.Node
             drawBodyImage = false;
             togglePreviewImage = true;
 
-            CreateNodeUI(Color.gray, "Color");
+            CreateNodeUI(colorInputNode, Color.gray, "Color");
 
             outputs[0] = CreatePointer("Color", ValueType.Color, 0, false, false).AddComponent<OutputPointer>();
             outputs[0].name = "Color";
@@ -47,6 +48,9 @@ namespace RuntimeNodeEditor.UI.Node
             sliders[2] = AddSlider(outputs[3].transform, false);
 
             PreviewColor(1, 2, 3, false);
+            imagePreview.UpdateNodeOnValueChange(sliders[0], colorInputNode);
+            imagePreview.UpdateNodeOnValueChange(sliders[1], colorInputNode);
+            imagePreview.UpdateNodeOnValueChange(sliders[2], colorInputNode);
 
             colorInputNode.AddPointers(inputs, outputs);
         }

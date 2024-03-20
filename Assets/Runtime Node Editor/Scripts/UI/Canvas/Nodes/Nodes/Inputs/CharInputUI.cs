@@ -23,7 +23,7 @@ namespace RuntimeNodeEditor.UI.Node
             toggleInputField = true;
             isInput = true;
 
-            CreateNodeUI(Color.gray, "Char");
+            CreateNodeUI(charInputNode, Color.gray, "Char");
 
             outputs[0] = CreatePointer("Out", ValueType.Char, 0, false, false).AddComponent<OutputPointer>();
             outputs[0].name = "Out";

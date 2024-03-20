@@ -11,6 +11,7 @@ namespace RuntimeNodeEditor.UI.Node
         {
             CreateRoot("Float");
             FloatOutputNode floatOutputNode = root.AddComponent<FloatOutputNode>();
+            floatOutputNode.endNode = true;
             floatOutputNode.nodeUI = this;
 
             inputs = new InputPointer[1];
@@ -22,7 +23,7 @@ namespace RuntimeNodeEditor.UI.Node
             toggleInputField = true;
             isInput = false;
 
-            CreateNodeUI(Color.gray, "Float");
+            CreateNodeUI(floatOutputNode, Color.gray, "Float");
 
             inputs[0] = CreatePointer("In", ValueType.Float, 0, false, true).AddComponent<InputPointer>();
             inputs[0].name = "In";

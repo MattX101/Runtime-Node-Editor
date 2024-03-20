@@ -8,6 +8,7 @@ namespace RuntimeNodeEditor.Node
     public class Node : MonoBehaviour
     {
         protected bool wasExecuted = false;
+        public bool endNode = false;
 
         public NodeUI nodeUI = null;
 
@@ -36,6 +37,30 @@ namespace RuntimeNodeEditor.Node
         public virtual void Exectute()
         {
             //
+        }
+
+        public void MoveUp()
+        {
+            if (endNode)
+            {
+                Exectute();
+            }
+            else
+            {
+                if (outputs != null)
+                {
+                    foreach (OutputPointer output in outputs)
+                    {
+                        if (output.connectedInputPointers != null)
+                        {
+                            foreach (InputPointer input in output.connectedInputPointers)
+                            {
+                                input.node.MoveUp();
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         public virtual NodeUI Paste(Vector3 spawnPosition)

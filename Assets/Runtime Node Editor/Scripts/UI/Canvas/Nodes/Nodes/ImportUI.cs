@@ -17,7 +17,7 @@ namespace RuntimeNodeEditor.UI.Node
             numOfOutputs = outputs.Length;
 
             togglePreviewImage = false;
-            CreateNodeUI(Color.gray, "Import");
+            CreateNodeUI(importNode, Color.gray, "Import");
 
             outputs[0] = CreatePointer("Out", ValueType.Int, 0, true, false).AddComponent<OutputPointer>();
             outputs[0].name = "Out";

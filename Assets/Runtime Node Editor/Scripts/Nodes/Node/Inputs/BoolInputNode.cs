@@ -6,8 +6,6 @@ namespace RuntimeNodeEditor.Node
 {
     public class BoolInputNode : Node
     {
-        public bool value = false;
-
         public override void AddPointers(InputPointer[] inputs, OutputPointer[] outputs)
         {
             AddOutputPointer(outputs[0]);
@@ -15,7 +13,7 @@ namespace RuntimeNodeEditor.Node
 
         public override void Exectute()
         {
-            outputs[0].data.boolValue = value;
+            outputs[0].data.boolValue = nodeUI.buttons[0].Toggled;
 
             wasExecuted = true;
         }

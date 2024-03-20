@@ -17,7 +17,7 @@ namespace RuntimeNodeEditor.UI.Node
             numOfOutputs = 0;
 
             togglePreviewImage = true;
-            CreateNodeUI(Color.gray, "Export");
+            CreateNodeUI(exportNode, Color.gray, "Export");
 
             inputs[0] = CreatePointer("In", ValueType.Float, 0, true, true).AddComponent<InputPointer>();
             inputs[0].name = "In";

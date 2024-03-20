@@ -6,8 +6,6 @@ namespace RuntimeNodeEditor.Node
 {
     public class StringInputNode : Node
     {
-        public string value = "";
-
         public override void AddPointers(InputPointer[] inputs, OutputPointer[] outputs)
         {
             AddOutputPointer(outputs[0]);
@@ -15,7 +13,7 @@ namespace RuntimeNodeEditor.Node
 
         public override void Exectute()
         {
-            outputs[0].data.stringValue = value;
+            outputs[0].data.stringValue = nodeUI.inputFields[0].text;
 
             wasExecuted = true;
         }

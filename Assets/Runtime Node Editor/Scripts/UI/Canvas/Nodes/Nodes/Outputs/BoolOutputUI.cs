@@ -1,5 +1,6 @@
 using RuntimeNodeEditor.Node;
 using RuntimeNodeEditor.Node.Pointer;
+using RuntimeNodeEditor.Node.Component;
 using UnityEngine;
 
 namespace RuntimeNodeEditor.UI.Node
@@ -10,6 +11,7 @@ namespace RuntimeNodeEditor.UI.Node
         {
             CreateRoot("Bool");
             BoolOutputNode boolOutputNode = root.AddComponent<BoolOutputNode>();
+            boolOutputNode.endNode = true;
             boolOutputNode.nodeUI = this;
 
             inputs = new InputPointer[1];
@@ -20,14 +22,14 @@ namespace RuntimeNodeEditor.UI.Node
             interactablePreview = true;
             isInput = false;
 
-            CreateNodeUI(Color.gray, "Bool");
+            CreateNodeUI(boolOutputNode, Color.gray, "Bool");
 
             inputs[0] = CreatePointer("In", ValueType.Bool, 0, false, true).AddComponent<InputPointer>();
             inputs[0].name = "In";
             inputs[0].node = boolOutputNode;
             inputs[0].valueType = ValueType.Bool;
 
-            buttons = new UnityEngine.UI.Button[1];
+            buttons = new BooleanButton[1];
             buttons[0] = AddBooleanPreview(inputs[0].transform, true);
 
             boolOutputNode.AddPointers(inputs, outputs);

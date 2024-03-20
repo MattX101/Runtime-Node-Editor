@@ -22,7 +22,7 @@ namespace RuntimeNodeEditor.UI.Node
             toggleInputField = true;
             isInput = true;
 
-            CreateNodeUI(Color.gray, "Vector 3");
+            CreateNodeUI(vector3InputNode, Color.gray, "Vector 3");
 
             outputs[0] = CreatePointer("Out", ValueType.Vector3, 0, false, false).AddComponent<OutputPointer>();
             outputs[0].name = "Out";

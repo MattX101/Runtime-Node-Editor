@@ -18,7 +18,7 @@ namespace RuntimeNodeEditor.UI.Node
             numOfOutputs = outputs.Length;
 
             togglePreviewImage = true;
-            CreateNodeUI(Color.red, "Test");
+            CreateNodeUI(testNode, Color.red, "Test");
 
             inputs[0] = CreatePointer("Int In 1", ValueType.Int, 0, true, true).AddComponent<InputPointer>();
             inputs[0].name = "Int In 1";

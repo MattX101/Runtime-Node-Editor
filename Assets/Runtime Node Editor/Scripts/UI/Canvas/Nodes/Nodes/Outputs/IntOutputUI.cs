@@ -11,6 +11,7 @@ namespace RuntimeNodeEditor.UI.Node
         {
             CreateRoot("Int");
             IntOutputNode intOutputNode = root.AddComponent<IntOutputNode>();
+            intOutputNode.endNode = true;
             intOutputNode.nodeUI = this;
 
             inputs = new InputPointer[1];
@@ -22,7 +23,7 @@ namespace RuntimeNodeEditor.UI.Node
             toggleInputField = true;
             isInput = false;
 
-            CreateNodeUI(Color.gray, "Int");
+            CreateNodeUI(intOutputNode, Color.gray, "Int");
 
             inputs[0] = CreatePointer("In", ValueType.Int, 0, false, true).AddComponent<InputPointer>();
             inputs[0].name = "In";

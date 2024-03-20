@@ -42,6 +42,15 @@ namespace RuntimeNodeEditor.UI.Elements
                 });
         }
 
+        public static void UpdateNodeOnValueChange(TMP_InputField inputField, RuntimeNodeEditor.Node.Node node)
+        {
+            inputField.onValueChanged.AddListener(
+                delegate
+                {
+                    node.MoveUp();
+                });
+        }
+
         private static void SetSingle(TMP_InputField inputField)
         {
             if (inputField.text.Length > 1)

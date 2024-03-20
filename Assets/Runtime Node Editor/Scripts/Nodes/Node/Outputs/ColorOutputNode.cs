@@ -16,6 +16,7 @@ namespace RuntimeNodeEditor.Node
             if (inputs[0].connectedOutputPointer != null)
             {
                 inputs[0].connectedOutputPointer.node.Exectute();
+                nodeUI.imagePreview.image.color = inputs[0].connectedOutputPointer.data.colorValue;
             }
 
             wasExecuted = true;

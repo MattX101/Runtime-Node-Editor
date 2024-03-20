@@ -10,6 +10,7 @@ namespace RuntimeNodeEditor.UI.Node
         {
             CreateRoot("Color");
             ColorOutputNode colorOutputNode = root.AddComponent<ColorOutputNode>();
+            colorOutputNode.endNode = true;
             colorOutputNode.nodeUI = this;
 
             inputs = new InputPointer[1];
@@ -19,7 +20,7 @@ namespace RuntimeNodeEditor.UI.Node
             drawBodyImage = false;
             togglePreviewImage = true;
 
-            CreateNodeUI(Color.gray, "Color");
+            CreateNodeUI(colorOutputNode, Color.gray, "Color");
 
             inputs[0] = CreatePointer("Color", ValueType.Color, 0, false, true).AddComponent<InputPointer>();
             inputs[0].name = "Color";

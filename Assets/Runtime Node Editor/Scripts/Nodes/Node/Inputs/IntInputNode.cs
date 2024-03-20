@@ -6,8 +6,6 @@ namespace RuntimeNodeEditor.Node
 {
     public class IntInputNode : Node
     {
-        public int value = 0;
-
         public override void AddPointers(InputPointer[] inputs, OutputPointer[] outputs)
         {
             AddOutputPointer(outputs[0]);
@@ -15,7 +13,10 @@ namespace RuntimeNodeEditor.Node
 
         public override void Exectute()
         {
-            outputs[0].data.intValue = value;
+            outputs[0].data.intValue = 
+                nodeUI.inputFields[0].text.Length != 0 
+                ? int.Parse(nodeUI.inputFields[0].text) 
+                : 0;
 
             wasExecuted = true;
         }

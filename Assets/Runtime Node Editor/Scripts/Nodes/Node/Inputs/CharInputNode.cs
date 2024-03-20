@@ -6,8 +6,6 @@ namespace RuntimeNodeEditor.Node
 {
     public class CharInputNode : Node
     {
-        public char value = ' ';
-
         public override void AddPointers(InputPointer[] inputs, OutputPointer[] outputs)
         {
             AddOutputPointer(outputs[0]);
@@ -15,7 +13,10 @@ namespace RuntimeNodeEditor.Node
 
         public override void Exectute()
         {
-            outputs[0].data.charValue = value;
+            outputs[0].data.charValue = 
+                nodeUI.inputFields[0].text.Length != 0 ? 
+                nodeUI.inputFields[0].text[0] : 
+                ' ';
 
             wasExecuted = true;
         }

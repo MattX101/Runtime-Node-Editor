@@ -124,6 +124,8 @@ namespace RuntimeNodeEditor.Node.Line
             inputPointer.line = _currentLineData;
 
             _droppedLines.Add(_currentLineData);
+
+            _currentOutput.node.MoveUp();
         }
 
         private void DeletePointerConnectionsOnClick()
