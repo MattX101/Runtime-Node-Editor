@@ -1,0 +1,69 @@
+using RuntimeNodeEditor.Node;
+using RuntimeNodeEditor.Node.Pointer;
+using TMPro;
+using UnityEngine;
+
+namespace RuntimeNodeEditor.UI.Node
+{
+    public class Vector3OutputUI : NodeUI
+    {
+        public Vector3OutputUI()
+        {
+            CreateRoot("Vector 3");
+            Vector3OutputNode vector3OutputNode = root.AddComponent<Vector3OutputNode>();
+            vector3OutputNode.nodeUI = this;
+
+            inputs = new InputPointer[4];
+            numOfInputs = inputs.Length;
+            numOfOutputs = 0;
+
+            drawBodyImage = false;
+            interactablePreview = true;
+            togglePreviewImage = false;
+            toggleInputField = true;
+            isInput = true;
+
+            CreateNodeUI(Color.gray, "Vector 3");
+
+            inputs[0] = CreatePointer("In", ValueType.Vector3, 0, false, true).AddComponent<InputPointer>();
+            inputs[0].name = "In";
+            inputs[0].node = vector3OutputNode;
+            inputs[0].valueType = ValueType.Vector3;
+
+            inputs[1] = CreatePointer("X", ValueType.Float, 1, false, true).AddComponent<InputPointer>();
+            inputs[1].name = "X";
+            inputs[1].node = vector3OutputNode;
+            inputs[1].valueType = ValueType.Float;
+            inputs[2] = CreatePointer("Y", ValueType.Float, 2, false, true).AddComponent<InputPointer>();
+            inputs[2].name = "Y";
+            inputs[2].node = vector3OutputNode;
+            inputs[2].valueType = ValueType.Float;
+            inputs[3] = CreatePointer("Z", ValueType.Float, 3, false, true).AddComponent<InputPointer>();
+            inputs[3].name = "Z";
+            inputs[3].node = vector3OutputNode;
+            inputs[3].valueType = ValueType.Float;
+
+            inputFields = new TMP_InputField[3];
+            inputFields[0] = AddInputField(
+                inputs[1].gameObject.transform,
+                TMP_InputField.ContentType.DecimalNumber,
+                0,
+                true,
+                false);
+            inputFields[1] = AddInputField(
+                inputs[2].gameObject.transform,
+                TMP_InputField.ContentType.DecimalNumber,
+                0,
+                true,
+                false);
+            inputFields[2] = AddInputField(
+                inputs[3].gameObject.transform,
+                TMP_InputField.ContentType.DecimalNumber,
+                0,
+                true,
+                false);
+
+            vector3OutputNode.AddPointers(inputs, outputs);
+        }
+    }
+}

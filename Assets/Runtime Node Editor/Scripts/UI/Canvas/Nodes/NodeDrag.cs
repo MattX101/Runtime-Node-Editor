@@ -9,7 +9,7 @@ namespace RuntimeNodeEditor.UI.Node
     public class NodeDrag : MonoBehaviour
     {
         private Camera _camera;
-        private RectTransform _rectTransform;
+        public RectTransform target;
         private CanvasGroup _canvasGroup;
         private CanvasScaler _canvasScaler;
 
@@ -18,11 +18,10 @@ namespace RuntimeNodeEditor.UI.Node
 
         private Vector3 _distanceFromCenter;
 
-        private void Start()
+        public void Awake()
         {
             _camera = FindObjectOfType<Camera>();
 
-            _rectTransform = GetComponentInParent<RectTransform>();
             _canvasGroup = GetComponentInParent<CanvasGroup>();
             _canvasScaler = FindObjectOfType<CanvasScaler>();
         }
@@ -46,14 +45,14 @@ namespace RuntimeNodeEditor.UI.Node
                     _canvasGroup.alpha = 0.5f;
                     if (Input.GetMouseButton(0))
                     {
-                        _canvasGroup.blocksRaycasts = true;
+                        _canvasGroup.blocksRaycasts = false;
 
                         _dragThisNode = true;
                         CanvasData.isDraging = true;
                         CanvasData.canDrag = false;
 
                         Vector3 mousePos = MouseController.GetMousePositionRelativeToCenter(_camera, _canvasScaler.referenceResolution);
-                        Vector3 nodeLocalPos = _rectTransform.localPosition;
+                        Vector3 nodeLocalPos = target.localPosition;
                         _distanceFromCenter = mousePos - nodeLocalPos - (Pan.positionFromOrigin / Zoom.scale);
                     }
                 }
@@ -63,7 +62,7 @@ namespace RuntimeNodeEditor.UI.Node
         private void OnMouseExit()
         {
             _canvasGroup.alpha = 1.0f;
-            _canvasGroup.blocksRaycasts = false;
+            _canvasGroup.blocksRaycasts = true;
         }
 
         private void DragNode()
@@ -71,7 +70,10 @@ namespace RuntimeNodeEditor.UI.Node
             Vector3 mousePos = MouseController.GetMousePositionRelativeToCenter(_camera, _canvasScaler.referenceResolution);
             Vector3 nodePos = mousePos - (Pan.positionFromOrigin / Zoom.scale);
 
-            _rectTransform.localPosition = new Vector3(nodePos.x - _distanceFromCenter.x, nodePos.y - _distanceFromCenter.y, _rectTransform.localPosition.z);
+            target.localPosition = new Vector3(
+                nodePos.x - _distanceFromCenter.x, 
+                nodePos.y - _distanceFromCenter.y, 
+                target.localPosition.z);
         }
 
         private void DropNode()

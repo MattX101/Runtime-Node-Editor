@@ -5,7 +5,11 @@ namespace RuntimeNodeEditor.Node.Pointer
         None,
         Int,
         Float,
+        Vector2,
+        Vector3,
+        Char,
         String,
-        Bool
+        Bool,
+        Color
     };
 }

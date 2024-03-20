@@ -16,5 +16,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Data
         public static bool isScrolling = false;
 
         public static bool canvasIsActive = true;
+
+        public static GameObject inputField;
     }
 }

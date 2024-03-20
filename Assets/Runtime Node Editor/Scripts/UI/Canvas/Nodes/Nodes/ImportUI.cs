@@ -19,7 +19,7 @@ namespace RuntimeNodeEditor.UI.Node
             togglePreviewImage = false;
             CreateNodeUI(Color.gray, "Import");
 
-            outputs[0] = CreateOutputPointer("Out", ValueType.Int, 0).AddComponent<OutputPointer>();
+            outputs[0] = CreatePointer("Out", ValueType.Int, 0, true, false).AddComponent<OutputPointer>();
             outputs[0].name = "Out";
             outputs[0].node = importNode;
             outputs[0].valueType = ValueType.Int;

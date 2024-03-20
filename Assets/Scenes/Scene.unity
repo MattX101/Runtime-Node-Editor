@@ -7874,7 +7874,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1653891191
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8186,6 +8186,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _parent: {fileID: 1777772064}
   _pointerTexture: {fileID: 2800000, guid: c1f96df7fbe79ca4f99cedf104c748b2, type: 3}
+  _inputField: {fileID: 6393276738254335750, guid: a9b66b8f1df99184dbaeae8a49883997, type: 3}
 --- !u!114 &1777772067
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8226,7 +8227,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1809428003
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8305,7 +8306,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
