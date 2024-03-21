@@ -17,6 +17,7 @@ namespace RuntimeNodeEditor.Node.Pointer
 
         public void SetConnection(OutputPointer outputPointer)
         {
+            hasConnection = true;
             connectedOutputPointer = outputPointer;
         }
 
@@ -26,8 +27,12 @@ namespace RuntimeNodeEditor.Node.Pointer
             {
                 line.DestroyLine();
 
+                hasConnection = false;
+
                 connectedOutputPointer.connectedInputPointers.Remove(this);
                 connectedOutputPointer = null;
+
+                node.MoveUp();
             }
         }
     }

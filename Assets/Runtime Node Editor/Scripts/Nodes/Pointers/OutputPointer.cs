@@ -39,8 +39,12 @@ namespace RuntimeNodeEditor.Node.Pointer
                 {
                     lines[i].DestroyLine();
 
+                    connectedInputPointers[i].hasConnection = false;
                     connectedInputPointers[i].connectedOutputPointer = null;
+                    connectedInputPointers[i].node.MoveUp();
+
                     connectedInputPointers.RemoveAt(i);
+
                 }
             }
         }

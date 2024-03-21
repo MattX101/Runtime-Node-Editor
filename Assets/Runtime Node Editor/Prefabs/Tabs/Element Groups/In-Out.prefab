@@ -266,7 +266,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 775562060191794058, guid: 5698feda4751d67438106881977dec52, type: 3}
       propertyPath: m_text
-      value: Vector
+      value: Vector2
       objectReference: {fileID: 0}
     - target: {fileID: 1112749044331609105, guid: 5698feda4751d67438106881977dec52, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size

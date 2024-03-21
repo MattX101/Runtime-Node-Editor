@@ -43,10 +43,9 @@ namespace RuntimeNodeEditor.Node.Line
             if (Input.GetMouseButtonDown(1))
                 DeletePointerConnectionsOnClick();
 
-            if (_droppedLines != null)
-                if (_droppedLines.Count > 0)
-                    foreach (LineController line in _droppedLines)
-                        line.UpdateWidth();
+            if (_droppedLines != null && _droppedLines.Count > 0)
+                foreach (LineController line in _droppedLines)
+                    line.UpdateWidth();
         }
 
         private void CreateLineOnClick()
@@ -98,12 +97,7 @@ namespace RuntimeNodeEditor.Node.Line
 
         private void DropLine()
         {
-            if (_raycastHit2D.collider != null && _raycastHit2D.collider.TryGetComponent<InputPointer>(out InputPointer inputPointer))
-                if (!inputPointer.hasConnection && _currentOutput.valueType == inputPointer.valueType)
-                    DropOnInputPointer(inputPointer);
-                else
-                    _currentLineData.DestroyLine();
-            else
+            if (!LineDropped())
                 _currentLineData.DestroyLine();
 
             CanvasData.isPointing = false;
@@ -112,6 +106,23 @@ namespace RuntimeNodeEditor.Node.Line
             _currentLineData = null;
             _currentOutput = null;
         }
+
+        private bool LineDropped()
+        {
+            if (_raycastHit2D.collider == null)
+                return false;
+            _raycastHit2D.collider.TryGetComponent<InputPointer>(out InputPointer inputPointer);
+
+            if (inputPointer == null)
+                return false;
+            if (inputPointer.hasConnection || _currentOutput.valueType != inputPointer.valueType)
+                return false;
+
+            DropOnInputPointer(inputPointer);
+
+            return true;
+        }
+
         private void DropOnInputPointer(InputPointer inputPointer)
         {
             if (_currentOutput.connectedInputPointers == null)
@@ -137,11 +148,13 @@ namespace RuntimeNodeEditor.Node.Line
                     foreach (LineController line in outputPointer.lines)
                         _droppedLines.Remove(line);
                     outputPointer.DeleteConnections();
+                    //outputPointer.node.MoveUp();
                 }
                 else if (_raycastHit2D.collider.TryGetComponent(out InputPointer inputPointer))
                 {
                     _droppedLines.Remove(inputPointer.line);
                     inputPointer.DeleteConnection();
+                    //inputPointer.node.MoveUp();
                 }
             }
         }
