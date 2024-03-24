@@ -1,4 +1,5 @@
 using RuntimeNodeEditor.UI.Canvas.Data;
+using RuntimeNodeEditor.UI.Data;
 using RuntimeNodeEditor.Node.Pointer;
 using System.Collections.Generic;
 using UnityEngine;
@@ -28,24 +29,27 @@ namespace RuntimeNodeEditor.Node.Line
 
         private void Update()
         {
-            _raycastHit2D = Physics2D.Raycast(_mousePos, Vector2.zero);
+            if (CanvasData.canvasIsActive && !(UIData.tabOpened || UIData.windowOpened))
+            {
+                _raycastHit2D = Physics2D.Raycast(_mousePos, Vector2.zero);
 
-            _mousePos = Input.mousePosition;
-            _mousePos = _camera.ScreenToWorldPoint(_mousePos);
+                _mousePos = Input.mousePosition;
+                _mousePos = _camera.ScreenToWorldPoint(_mousePos);
 
-            if (Input.GetMouseButtonDown(0))
-                CreateLineOnClick();
-            else if (Input.GetMouseButtonUp(0) && CanvasData.isPointing)
-                DropLine();
-            else if (_currentLineData != null)
-                _currentLineData.UpdateDraggingLine(_mousePos);
+                if (Input.GetMouseButtonDown(0))
+                    CreateLineOnClick();
+                else if (Input.GetMouseButtonUp(0) && CanvasData.isPointing)
+                    DropLine();
+                else if (_currentLineData != null)
+                    _currentLineData.UpdateDraggingLine(_mousePos);
 
-            if (Input.GetMouseButtonDown(1))
-                DeletePointerConnectionsOnClick();
+                if (Input.GetMouseButtonDown(1))
+                    DeletePointerConnectionsOnClick();
 
-            if (_droppedLines != null && _droppedLines.Count > 0)
-                foreach (LineController line in _droppedLines)
-                    line.UpdateWidth();
+                if (_droppedLines != null && _droppedLines.Count > 0)
+                    foreach (LineController line in _droppedLines)
+                        line.UpdateWidth();
+            }
         }
 
         private void CreateLineOnClick()

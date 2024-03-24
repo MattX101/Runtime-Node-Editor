@@ -8,19 +8,21 @@ namespace RuntimeNodeEditor.UI.Interface
     {
         private TabsManager[] _tabsManagers;
 
-        [SerializeField] private Transform windowSpawnParent;
+        [SerializeField] private Transform _windowSpawnParent;
+        [SerializeField] private GameObject _nodePanel;
 
-        private Button[] buttons;
+        private Button[] _buttons;
 
         void Awake()
         {
-            UISettings.windowSpawnParent = windowSpawnParent;
+            UISettings.windowSpawnParent = _windowSpawnParent;
 
             _tabsManagers = GetComponentsInChildren<TabsManager>();
 
             UIData.interfaceUIManager = this;
+            UIData.nodePanel = _nodePanel;
 
-            buttons = FindObjectsOfType<Button>();
+            _buttons = FindObjectsOfType<Button>();
         }
 
         public void HideTabs()
@@ -31,7 +33,7 @@ namespace RuntimeNodeEditor.UI.Interface
 
         public void ToggleButtons(bool active)
         {
-            foreach (Button button in buttons)
+            foreach (Button button in _buttons)
                 button.enabled = active;
         }
     }

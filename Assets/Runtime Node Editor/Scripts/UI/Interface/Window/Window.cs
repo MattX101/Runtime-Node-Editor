@@ -16,7 +16,7 @@ namespace RuntimeNodeEditor.UI.Interface
                 UIData.windowOpened = true;
                 Instantiate(window, UISettings.windowSpawnParent);
 
-                UIData.interfaceUIManager.ToggleButtons(false);
+                Toggle();
             }
         }
 
@@ -25,7 +25,23 @@ namespace RuntimeNodeEditor.UI.Interface
             UIData.windowOpened = false;
             Destroy(this.gameObject);
 
-            UIData.interfaceUIManager.ToggleButtons(true);
+            Toggle();
+        }
+
+        private void Toggle()
+        {
+            ToggleButtons();
+            ToggleNodePanel();
+        }
+
+        private void ToggleButtons()
+        {
+            UIData.interfaceUIManager.ToggleButtons(!UIData.windowOpened);
+        }
+
+        private void ToggleNodePanel()
+        {
+            UIData.nodePanel.SetActive(UIData.windowOpened);
         }
     }
 }

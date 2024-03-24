@@ -112,7 +112,7 @@ namespace RuntimeNodeEditor.UI.Canvas
                 _canvasRect.rect.height / _canvasScaler.referenceResolution.y);
         }
 
-        public void Activate()
+        /*public void Activate()
         {
             CanvasData.canZoom = true;
 
@@ -126,6 +126,6 @@ namespace RuntimeNodeEditor.UI.Canvas
 
             if (!(Input.GetMouseButton(0) || Input.GetMouseButton(1)))
                 CanvasData.canvasIsActive = false;
-        }
+        }*/
     }
 }

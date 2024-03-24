@@ -1,5 +1,6 @@
 using RuntimeNodeEditor.UI.Canvas;
 using RuntimeNodeEditor.UI.Canvas.Data;
+using RuntimeNodeEditor.UI.Data;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
@@ -28,12 +29,13 @@ namespace RuntimeNodeEditor.UI.Node
 
         private void Update()
         {
-            if (spawnDrag)
-                if (Input.GetMouseButtonDown(0)) DropNode();
-                else DragNode();
-            else if (_dragThisNode && !spawnDrag)
-                if (!Input.GetMouseButton(0)) DropNode();
-                else DragNode();
+            if (CanvasData.canvasIsActive && !(UIData.tabOpened || UIData.windowOpened))
+                if (spawnDrag)
+                    if (Input.GetMouseButtonDown(0)) DropNode();
+                    else DragNode();
+                else if (_dragThisNode && !spawnDrag)
+                    if (!Input.GetMouseButton(0)) DropNode();
+                    else DragNode();
         }
 
         private void OnMouseOver()
