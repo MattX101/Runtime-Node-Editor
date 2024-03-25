@@ -6,10 +6,7 @@ namespace RuntimeNodeEditor.Node
     {
         public void Execute()
         {
-            ExportNode[] exportNodes = FindObjectsOfType<ExportNode>();
-
-            foreach (ExportNode exportNode in exportNodes)
-                exportNode.Exectute();
+            //
         }
     }
 }
