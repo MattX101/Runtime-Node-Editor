@@ -26,10 +26,12 @@ namespace RuntimeNodeEditor.UI.Node
             string nodeNamespace = "RuntimeNodeEditor.UI.Node.";
 
             Type type = Type.GetType(nodeNamespace + id);
+
             if (type == null)
-                Debug.LogError("Type cannot be null!");
-            else
-                Activator.CreateInstance(type);
+                throw new ArgumentNullException(nameof(type));
+            
+            NodeUI nodeUI = (NodeUI)Activator.CreateInstance(type);
+            nodeUI.nodeDrag.spawnDrag = true;
         }
     }
 }

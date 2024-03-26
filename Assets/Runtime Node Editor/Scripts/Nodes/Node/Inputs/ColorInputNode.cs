@@ -38,7 +38,7 @@ namespace RuntimeNodeEditor.Node
 
         public override NodeUI Paste(Vector3 spawnPosition)
         {
-            return Paste(new (), spawnPosition);
+            return Paste(new ColorInputUI(), spawnPosition);
         }
     }
 }
