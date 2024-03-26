@@ -11,8 +11,9 @@ namespace RuntimeNodeEditor.UI.Node
     {
         private Camera _camera;
         public RectTransform target;
-        private CanvasGroup _canvasGroup;
         private CanvasScaler _canvasScaler;
+
+        public NodeUI nodeUI;
 
         private bool _dragThisNode = false;
         [NonSerialized] public bool spawnDrag = false;
@@ -23,48 +24,64 @@ namespace RuntimeNodeEditor.UI.Node
         {
             _camera = FindObjectOfType<Camera>();
 
-            _canvasGroup = GetComponentInParent<CanvasGroup>();
             _canvasScaler = FindObjectOfType<CanvasScaler>();
         }
 
         private void Update()
         {
-            if (CanvasData.canvasIsActive && !(UIData.tabOpened || UIData.windowOpened))
-                if (spawnDrag)
-                    if (Input.GetMouseButtonDown(0)) DropNode();
-                    else DragNode();
-                else if (_dragThisNode && !spawnDrag)
-                    if (!Input.GetMouseButton(0)) DropNode();
-                    else DragNode();
+            if (!CanvasData.canvasIsActive || UIData.tabOpened || UIData.windowOpened)
+                return;
+
+            SpawnDrag();
+            NormalDrag();
         }
 
         private void OnMouseOver()
         {
-            if (CanvasData.canvasIsActive)
+            if (!CanvasData.canvasIsActive || !CanvasData.canDrag || _dragThisNode || !CanvasData.canPoint)
+                return;
+
+            nodeUI.highLightAlpha = true;
+            if (Input.GetMouseButton(0))
             {
-                if (CanvasData.canDrag && !_dragThisNode && CanvasData.canPoint)
-                {
-                    _canvasGroup.alpha = 0.5f;
-                    if (Input.GetMouseButton(0))
-                    {
-                        _canvasGroup.blocksRaycasts = false;
+                nodeUI.canvasGroup.blocksRaycasts = false;
 
-                        _dragThisNode = true;
-                        CanvasData.isDraging = true;
-                        CanvasData.canDrag = false;
+                _dragThisNode = true;
+                CanvasData.isDraging = true;
+                CanvasData.canDrag = false;
 
-                        Vector3 mousePos = MouseController.GetMousePositionRelativeToCenter(_camera, _canvasScaler.referenceResolution);
-                        Vector3 nodeLocalPos = target.localPosition;
-                        _distanceFromCenter = mousePos - nodeLocalPos - (Pan.positionFromOrigin / Zoom.scale);
-                    }
-                }
+                Vector3 mousePos = MouseController.GetMousePositionRelativeToCenter(_camera, _canvasScaler.referenceResolution);
+                Vector3 nodeLocalPos = target.localPosition;
+                _distanceFromCenter = mousePos - nodeLocalPos - (Pan.positionFromOrigin / Zoom.scale);
             }
         }
 
         private void OnMouseExit()
         {
-            _canvasGroup.alpha = 1.0f;
-            _canvasGroup.blocksRaycasts = true;
+            nodeUI.highLightAlpha = false;
+            nodeUI.canvasGroup.blocksRaycasts = true;
+        }
+
+        private void SpawnDrag()
+        {
+            if (!spawnDrag)
+                return;
+
+            if (Input.GetMouseButtonDown(0))
+                DropNode();
+
+            DragNode();
+        }
+
+        private void NormalDrag()
+        {
+            if (!_dragThisNode || spawnDrag)
+                return;
+
+            if (!Input.GetMouseButton(0))
+                DropNode();
+
+            DragNode();
         }
 
         private void DragNode()
@@ -80,8 +97,7 @@ namespace RuntimeNodeEditor.UI.Node
 
         private void DropNode()
         {
-            _canvasGroup.alpha = 1.0f;
-            _canvasGroup.blocksRaycasts = false;
+            nodeUI.canvasGroup.blocksRaycasts = false;
 
             _dragThisNode = false;
             spawnDrag = false;

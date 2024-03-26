@@ -15,6 +15,12 @@ namespace RuntimeNodeEditor.UI.Node
         public GameObject root;
         public RectTransform rootRect;
 
+        private Vector2 _rootSize;
+
+        public CanvasGroup canvasGroup;
+        public float alpha = 1.0f;
+        public bool highLightAlpha = false;
+
         // Header
         private GameObject _header;
         private RectTransform _headerRect;
@@ -25,6 +31,7 @@ namespace RuntimeNodeEditor.UI.Node
         private RectTransform _bodyRect;
 
         private float _bodyHeight;
+        private Vector2 _bodySize;
 
         public bool drawBodyImage = true;
 
@@ -92,7 +99,7 @@ namespace RuntimeNodeEditor.UI.Node
             root.transform.SetParent(UISettings.nodeCanvasTransform);
             RawImage rawImage = root.AddComponent<RawImage>();
             rawImage.color = rootHSL;
-            root.AddComponent<CanvasGroup>();
+            canvasGroup = root.AddComponent<CanvasGroup>();
 
             rootRect = root.GetComponent<RectTransform>();
 
@@ -107,19 +114,22 @@ namespace RuntimeNodeEditor.UI.Node
             _sizeX = rootRect.sizeDelta.x - _borderX2;
             _sizeY = UISettings.headerHeight - _borderX2;
 
+            _rootSize = new Vector2(_sizeX, _sizeY);
+
             AddHeader(headerHSL, title);
             AddBody(bodyHSL);
+
+            AddNodeDrag(root);
         }
 
         private void AddHeader(Color headerHSL, string text)
         {
-            Vector2 headerSize = new Vector2(_sizeX, _sizeY);
             Vector3 headerPos = new Vector3(0, (rootRect.sizeDelta.y - (_sizeY + _borderX2)) / 2, 0);
 
             _header = UIElement.CreateUIElement(
                 root.transform,
                 "Header",
-                headerSize,
+                _rootSize,
                 headerPos);
             _headerRect = _header.GetComponent<RectTransform>();
             UIImage.CreateRawImage(_header, headerHSL);
@@ -139,21 +149,17 @@ namespace RuntimeNodeEditor.UI.Node
             
             UIText.SetFontStyle(_titleText, FontStyles.Bold);
             UIText.SetFontAligment(_titleText, TextAlignmentOptions.Center);
-
-            AddNodeDrag(_header, headerSize);
         }
 
         private void AddBody(Color bodyHSL)
         {
-            _sizeY = rootRect.sizeDelta.y - UISettings.headerHeight - UISettings.borderSize;
-
-            Vector2 bodySize = new Vector2(_sizeX, _sizeY);
+            _bodySize = new Vector2(_sizeX, rootRect.sizeDelta.y - UISettings.headerHeight - UISettings.borderSize);
             Vector3 bodyPos = new Vector3(0, (-UISettings.headerHeight + UISettings.borderSize) / 2, 0);
 
             _body = UIElement.CreateUIElement(
                 root.transform,
                 "Body",
-                bodySize,
+                _bodySize,
                 bodyPos);
             _bodyRect = _body.GetComponent<RectTransform>();
 
@@ -164,12 +170,12 @@ namespace RuntimeNodeEditor.UI.Node
             _inputs = UIElement.CreateUIElement(
                 _body.transform,
                 "Inputs",
-                bodySize,
+                _bodySize,
                 bodyPos);
             _outputs = UIElement.CreateUIElement(
                 _body.transform,
                 "Outputs",
-                bodySize,
+                _bodySize,
                 bodyPos);
 
             _inputs.GetComponent<RectTransform>().transform.localPosition = new Vector3(0, 0, -1);
@@ -179,13 +185,19 @@ namespace RuntimeNodeEditor.UI.Node
                 AddPreviewImage();
         }
 
-        private void AddNodeDrag(GameObject gameObject, Vector2 size)
+        private void AddNodeDrag(GameObject gameObject)
         {
+            Vector2 offset = Vector2.zero;
+            offset.y += _bodySize.y / 2;
+            offset.y += UISettings.borderSize / 2;
+
             BoxCollider2D boxCollider = gameObject.AddComponent<BoxCollider2D>();
-            boxCollider.size = size;
+            boxCollider.offset = offset;
+            boxCollider.size = _rootSize;
             
             nodeDrag = gameObject.AddComponent<NodeDrag>();
             nodeDrag.target = rootRect;
+            nodeDrag.nodeUI = this;
         }
 
         private void AddPreviewImage()
@@ -311,6 +323,14 @@ namespace RuntimeNodeEditor.UI.Node
                         outputs[c].gameObject.GetComponentInChildren<Slider>());
                 }
             }
+        }
+
+        public void SetAlpha()
+        {
+            canvasGroup.alpha =
+                highLightAlpha ?
+                alpha * 0.75f :
+                alpha;
         }
     }
 }

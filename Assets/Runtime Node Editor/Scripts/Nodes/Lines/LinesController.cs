@@ -63,28 +63,6 @@ namespace RuntimeNodeEditor.Node.Line
             }
         }
 
-        /*public void CreateLinesOnNodePaste(List<InputPointer> inputs)
-        {
-            foreach (InputPointer input in inputs)
-            {
-                OutputPointer outputPointer = input.connectedOutputPointer;
-                if (outputPointer != null)
-                {
-                    outputPointer.connectedInputPointers.Add(input);
-                    Vector3 startPos = outputPointer.transform.position;
-
-                    CreateLine(outputPointer, startPos);
-                    DropOnInputPointer(input);
-
-                    CanvasData.isPointing = false;
-                    CanvasData.canPoint = true;
-
-                    _currentLineData = null;
-                    _currentOutput = null;
-                }
-            }
-        }*/
-
         private void CreateLine(OutputPointer outputPointer)
         {
             _sourceMaterial.color = PointerColor.PickColor(outputPointer.valueType);
@@ -152,13 +130,11 @@ namespace RuntimeNodeEditor.Node.Line
                     foreach (LineController line in outputPointer.lines)
                         _droppedLines.Remove(line);
                     outputPointer.DeleteConnections();
-                    //outputPointer.node.MoveUp();
                 }
                 else if (_raycastHit2D.collider.TryGetComponent(out InputPointer inputPointer))
                 {
                     _droppedLines.Remove(inputPointer.line);
                     inputPointer.DeleteConnection();
-                    //inputPointer.node.MoveUp();
                 }
             }
         }

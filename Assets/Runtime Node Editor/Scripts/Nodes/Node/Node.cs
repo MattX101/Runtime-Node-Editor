@@ -15,6 +15,11 @@ namespace RuntimeNodeEditor.Node
         public List<InputPointer> inputs = new List<InputPointer>();
         public List<OutputPointer> outputs = new List<OutputPointer>();
 
+        private void Update()
+        {
+            nodeUI.SetAlpha();
+        }
+
         public virtual void Reset()
         {
             //
@@ -44,21 +49,20 @@ namespace RuntimeNodeEditor.Node
             if (endNode)
             {
                 Exectute();
+                return;
             }
             else
             {
-                if (outputs != null)
+                if (outputs == null)
+                    return;
+
+                foreach (OutputPointer output in outputs)
                 {
-                    foreach (OutputPointer output in outputs)
-                    {
-                        if (output.connectedInputPointers != null)
-                        {
-                            foreach (InputPointer input in output.connectedInputPointers)
-                            {
-                                input.node.MoveUp();
-                            }
-                        }
-                    }
+                    if (output.connectedInputPointers == null)
+                        continue;
+
+                    foreach (InputPointer input in output.connectedInputPointers)
+                        input.node.MoveUp();
                 }
             }
         }

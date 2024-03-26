@@ -1,8 +1,9 @@
 using RuntimeNodeEditor.UI.Canvas.Data;
 using RuntimeNodeEditor.Node.Line;
-using RuntimeNodeEditor.UI.Node;
 using UnityEngine;
 using UnityEngine.UI;
+using RuntimeNodeEditor.UI.Canvas;
+using RuntimeNodeEditor.UI.Node;
 
 namespace RuntimeNodeEditor.Node
 {
@@ -34,109 +35,99 @@ namespace RuntimeNodeEditor.Node
             _mousePos = Input.mousePosition;
             _mousePos = _camera.ScreenToWorldPoint(_mousePos);
 
-            if (_raycastHit2D.collider != null)
-                if (_raycastHit2D.collider.TryGetComponent<Node>(out Node node))
-                    if (Input.GetMouseButtonDown(0))
-                        Select(node);
-                    else if (Input.GetMouseButtonDown(0) && _currentNode != null) Deselect();
+            Selection();
 
-            /*if (Input.GetKey(KeyCode.LeftControl))
-                if (Input.GetKeyDown(KeyCode.C)) Copy();
-                else if (Input.GetKeyDown(KeyCode.X)) Cut();
-                else if (Input.GetKeyDown(KeyCode.V)) Paste();*/
-            //if (Input.GetKeyDown(KeyCode.Delete)) Delete(_currentNode);
+            if (Input.GetKey(KeyCode.LeftControl))
+                if (Input.GetKeyDown(KeyCode.C)) Copy(false);
+                else if (Input.GetKeyDown(KeyCode.X)) Copy(true);
+                else if (Input.GetKeyDown(KeyCode.V)) Paste();
+
+            if (Input.GetKeyDown(KeyCode.Delete))
+                Delete(_currentNode);
+        }
+
+        private void Selection()
+        {
+            if (_raycastHit2D.collider == null)
+            {
+                if (Input.GetMouseButtonDown(0))
+                    Deselect();
+            }
+            else
+            {
+                _raycastHit2D.collider.TryGetComponent(out Node node);
+                if (node == null)
+                    return;
+                
+                if (Input.GetMouseButtonDown(0))
+                    Select(node);
+            }
         }
 
         private void Select(Node node)
         {
             _previousNode = _currentNode;
             _currentNode = node;
+
+            if (_previousNode != null)
+                _previousNode.nodeUI.alpha = 1.0f;
+            _currentNode.nodeUI.alpha = 0.5f;
         }
         private void Deselect()
         {
+            if (_currentNode == null)
+                return;
+
             _previousNode = _currentNode;
             _currentNode = null;
+
+            _previousNode.nodeUI.alpha = 1.0f;
         }
 
-        /*private void Copy()
+        private void Copy(bool cut)
         {
-            if (_currentNode != null)
-            {
-                _copiedNode = _currentNode;
-                _currentCopyIsCut = false;
-                UndoCut();
-            }
-        }
+            if (_currentNode == null)
+                return;
 
-        private void Cut()
-        {
-            if (_currentNode != null)
-            {
-                _copiedNode = _currentNode;
-                _currentCopyIsCut = true;
-            }
-        }
-        private void UndoCut()
-        {
-            if (_currentCopyIsCut)
-            {
-                _copiedNode = null;
-                _currentCopyIsCut = false;
-            }
+            _copiedNode = _currentNode;
+            _currentCopyIsCut = cut;
         }
 
         private void Paste()
         {
-            if (_copiedNode != null)
+            if (_copiedNode == null)
+                return;
+
+            Vector3 mousePos = MouseController.GetMouseViewportPosition(_camera);
+
+            NodeUI nodeUI = _copiedNode.Paste(new Vector3(mousePos.x, mousePos.y, 0.0f));
+            nodeUI.nodeDrag.spawnDrag = true;
+
+            Node newNode = nodeUI.root.GetComponent<Node>();
+
+            if (_currentCopyIsCut)
             {
-                if (_currentNode != null)
-                {
-                    _currentNode.GetComponent<RawImage>().color = Color.white;
-                    _previousNode = _currentNode;
-                }
-
-                Vector3 mousePos = GetMousePosition();
-
-                NodeUI nodeUI = _copiedNode.Paste(new Vector3(mousePos.x, mousePos.y, 0.0f));
-                nodeUI.nodeDrag.spawnDrag = true;
-
-                Node newNode = nodeUI.node;
-
-                if (_currentCopyIsCut)
-                {
-                    Delete(_copiedNode);
-
-                    _currentNode = newNode;
-                    _currentNode.GetComponent<RawImage>().color = Color.gray;
-
-                    Copy();
-                }
-                else
-                {
-                    _currentNode = newNode;
-                    _currentNode.GetComponent<RawImage>().color = Color.gray;
-                }
-
-                if (_lineController != null || newNode.inputs != null)
-                    _lineController.CreateLinesOnNodePaste(newNode.inputs);
+                Delete(_copiedNode);
+                _currentNode = newNode;
+                Copy(false);
             }
-        }*/
+        }
 
-        /*private void Delete(Node node)
+        private void Delete(Node node)
         {
-            if (_currentNode != null)
-            {
-                if (!CanvasData.isPointing && !CanvasData.isDraging && !CanvasData.isPanning && !CanvasData.isScrolling)
-                {
-                    for (int i = 0; i < node.inputs.Count; i++)
-                        node.inputs[i].DeleteConnection();
-                    for (int i = 0; i < node.outputs.Count; i++)
-                        node.outputs[i].DeleteConnections();
+            if (_currentNode == null)
+                return;
 
-                    Destroy(node.gameObject);
-                    _currentNode = null;
-                }
-            }
-        }*/
+            if (CanvasData.isPointing || CanvasData.isDraging || CanvasData.isPanning || CanvasData.isScrolling)
+                return;
+
+            for (int i = 0; i < node.inputs.Count; i++)
+                node.inputs[i].DeleteConnection();
+            for (int i = 0; i < node.outputs.Count; i++)
+                node.outputs[i].DeleteConnections();
+
+            Destroy(node.gameObject);
+            _currentNode = null;
+        }
     }
 }
