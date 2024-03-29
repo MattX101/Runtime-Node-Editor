@@ -23,7 +23,6 @@ namespace RuntimeNodeEditor.UI.Node
         public void Awake()
         {
             _camera = FindObjectOfType<Camera>();
-
             _canvasScaler = FindObjectOfType<CanvasScaler>();
         }
 
@@ -32,28 +31,29 @@ namespace RuntimeNodeEditor.UI.Node
             if (!CanvasData.canvasIsActive || UIData.tabOpened || UIData.windowOpened)
                 return;
 
-            SpawnDrag();
-            NormalDrag();
+            if (spawnDrag)
+                DragNode();
         }
 
         private void OnMouseOver()
         {
-            if (!CanvasData.canvasIsActive || !CanvasData.canDrag || _dragThisNode || !CanvasData.canPoint)
+            if (!CanvasData.canvasIsActive || !CanvasData.canDrag || !CanvasData.canPoint || _dragThisNode)
                 return;
 
             nodeUI.highLightAlpha = true;
-            if (Input.GetMouseButton(0))
-            {
-                nodeUI.canvasGroup.blocksRaycasts = false;
+        }
 
-                _dragThisNode = true;
-                CanvasData.isDraging = true;
-                CanvasData.canDrag = false;
+        private void OnMouseDown()
+        {
+            nodeUI.canvasGroup.blocksRaycasts = false;
 
-                Vector3 mousePos = MouseController.GetMousePositionRelativeToCenter(_camera, _canvasScaler.referenceResolution);
-                Vector3 nodeLocalPos = target.localPosition;
-                _distanceFromCenter = mousePos - nodeLocalPos - (Pan.positionFromOrigin / Zoom.scale);
-            }
+            _dragThisNode = true;
+            CanvasData.isDraging = true;
+            CanvasData.canDrag = false;
+
+            Vector3 mousePos = MouseController.GetMousePositionRelativeToCenter(_camera, _canvasScaler.referenceResolution);
+            Vector3 nodeLocalPos = target.localPosition;
+            _distanceFromCenter = mousePos - nodeLocalPos - (Pan.positionFromOrigin / Zoom.scale);
         }
 
         private void OnMouseExit()
@@ -62,26 +62,29 @@ namespace RuntimeNodeEditor.UI.Node
             nodeUI.canvasGroup.blocksRaycasts = true;
         }
 
-        private void SpawnDrag()
+        private void OnMouseDrag()
         {
-            if (!spawnDrag)
+            if (_InValid)
                 return;
-
-            if (Input.GetMouseButtonDown(0))
-                DropNode();
-
+            
             DragNode();
         }
 
-        private void NormalDrag()
+        private void OnMouseUp()
         {
-            if (!_dragThisNode || spawnDrag)
+            if (_InValid)
                 return;
-
-            if (!Input.GetMouseButton(0))
-                DropNode();
-
-            DragNode();
+            
+            DropNode();
+        }
+        
+        private bool _Valid
+        {
+            get => _dragThisNode;
+        }
+        private bool _InValid
+        {
+            get => _Valid.Equals(false);
         }
 
         private void DragNode()
@@ -90,8 +93,8 @@ namespace RuntimeNodeEditor.UI.Node
             Vector3 nodePos = mousePos - (Pan.positionFromOrigin / Zoom.scale);
 
             target.localPosition = new Vector3(
-                nodePos.x - _distanceFromCenter.x, 
-                nodePos.y - _distanceFromCenter.y, 
+                nodePos.x - _distanceFromCenter.x,
+                nodePos.y - _distanceFromCenter.y,
                 target.localPosition.z);
         }
 
