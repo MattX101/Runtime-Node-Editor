@@ -1,5 +1,6 @@
 using RuntimeNodeEditor.UI.Canvas;
 using RuntimeNodeEditor.Node.Pointer;
+using RuntimeNodeEditor.Utils.Curves;
 using UnityEngine;
 
 namespace RuntimeNodeEditor.Node.Line

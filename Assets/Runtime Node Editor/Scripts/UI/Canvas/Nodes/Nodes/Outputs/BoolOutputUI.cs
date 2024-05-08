@@ -20,7 +20,6 @@ namespace RuntimeNodeEditor.UI.Node
 
             drawBodyImage = false;
             interactablePreview = true;
-            isInput = false;
 
             CreateNodeUI(boolOutputNode, Color.gray, "Bool");
 

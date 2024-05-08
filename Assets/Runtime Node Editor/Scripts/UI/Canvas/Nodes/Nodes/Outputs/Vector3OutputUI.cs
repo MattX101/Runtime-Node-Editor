@@ -20,7 +20,6 @@ namespace RuntimeNodeEditor.UI.Node
 
             drawBodyImage = false;
             interactablePreview = true;
-            togglePreviewImage = false;
             toggleInputField = true;
             isInput = true;
 

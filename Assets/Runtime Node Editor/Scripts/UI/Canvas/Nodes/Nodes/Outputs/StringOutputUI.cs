@@ -19,9 +19,7 @@ namespace RuntimeNodeEditor.UI.Node
             numOfOutputs = 0;
 
             drawBodyImage = false;
-            interactablePreview = false;
             toggleInputField = true;
-            isInput = false;
 
             CreateNodeUI(stringOutputNode, Color.gray, "String");
 
