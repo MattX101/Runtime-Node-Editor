@@ -3,11 +3,16 @@ using UnityEngine;
 
 namespace RuntimeNodeEditor.Utils.IO.Selection
 {
-    public class IOSelection : MonoBehaviour
+    public class IOSelection
     {
-        private readonly string _startDirectory = Paths.GetPath(Paths.Desktop);
+        private readonly static string _defualtDirectory = Paths.GetPath(Paths.Desktop);
+        private readonly string _startDirectory;
 
         private readonly bool _multiSelect = false;
+
+        public IOSelection() : this(_defualtDirectory, false) { }
+
+        public IOSelection(string startDirectory) : this(startDirectory, false) { }
 
         public IOSelection(string startDirectory, bool multiSelect)
         {
@@ -24,7 +29,7 @@ namespace RuntimeNodeEditor.Utils.IO.Selection
                     new ExtensionFilter("All Files", "*")
                 };
             }
-
+            
             string[] paths = StandaloneFileBrowser.OpenFilePanel(
                 "Select File",
                 _startDirectory,
@@ -59,6 +64,23 @@ namespace RuntimeNodeEditor.Utils.IO.Selection
 
                 return null;
             }
+        }
+
+        public string SaveFile(string defualtFileName, string filter)
+        {
+            return StandaloneFileBrowser.SaveFilePanel(
+                "Save As",
+                _defualtDirectory,
+                defualtFileName,
+                filter);
+        }
+        public string SaveFile(string defualtFileName, ExtensionFilter[] filters)
+        {
+            return StandaloneFileBrowser.SaveFilePanel(
+                "Save As",
+                _defualtDirectory,
+                defualtFileName,
+                filters);
         }
     }
 }

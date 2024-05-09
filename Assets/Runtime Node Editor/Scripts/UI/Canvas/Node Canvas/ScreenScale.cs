@@ -1,3 +1,6 @@
+using System;
+using UnityEngine;
+
 namespace RuntimeNodeEditor.UI.Canvas
 {
     public static class ScreenScale
@@ -7,6 +10,11 @@ namespace RuntimeNodeEditor.UI.Canvas
         public static void CalculateScale(int screenWidth)
         {
             scale = (float)screenWidth / 1000.0f;
+        }
+
+        public static byte[] Save()
+        {
+            return BitConverter.GetBytes(scale);
         }
     }
 }

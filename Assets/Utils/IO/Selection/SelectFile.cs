@@ -9,7 +9,7 @@ namespace RuntimeNodeEditor.Utils.IO.Selection
         [SerializeField]
         private TMP_Text _text;
 
-        public SelectFile() : base(Paths.GetPath(Paths.Desktop), false)
+        public SelectFile() : base()
         {
             //
         }

@@ -1,4 +1,5 @@
 using RuntimeNodeEditor.UI.Canvas.Data;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -37,6 +38,11 @@ namespace RuntimeNodeEditor.UI.Canvas
 
             canvasScaler.scaleFactor = 1.0f;
             scale = 1.0f;
+        }
+
+        public static byte[] Save()
+        {
+            return BitConverter.GetBytes(scale);
         }
     }
 }

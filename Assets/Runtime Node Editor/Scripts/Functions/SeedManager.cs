@@ -1,9 +1,13 @@
+using System;
 using UnityEngine;
 
 namespace RuntimeNodeEditor.Functions.Seed
 {
     public class SeedManager : MonoBehaviour
     {
+        [NonSerialized]
+        public int seed;
+
         private int _min, _max;
 
         private System.Random _rnd;
@@ -14,11 +18,17 @@ namespace RuntimeNodeEditor.Functions.Seed
             _max = int.MaxValue;
 
             _rnd = new System.Random();
+            GenerateSeed();
         }
 
         public void GenerateSeed()
         {
-            Debug.Log(_rnd.Next(_min, _max));
+            seed = _rnd.Next(_min, _max);
+        }
+
+        public byte[] Save()
+        {
+            return BitConverter.GetBytes(seed);
         }
     }
 }

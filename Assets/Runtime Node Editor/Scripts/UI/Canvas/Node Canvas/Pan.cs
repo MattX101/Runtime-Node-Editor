@@ -1,4 +1,5 @@
 using RuntimeNodeEditor.UI.Canvas.Data;
+using System;
 using UnityEngine;
 
 namespace RuntimeNodeEditor.UI.Canvas
@@ -59,6 +60,24 @@ namespace RuntimeNodeEditor.UI.Canvas
             positionFromOrigin = Vector3.zero;
 
             nodesRect.position = new Vector3(0, 0, nodesRect.position.z);
+        }
+
+        public static byte[] Save()
+        {
+            byte[] x = BitConverter.GetBytes(positionFromOrigin.x);
+            byte[] y = BitConverter.GetBytes(positionFromOrigin.y);
+            byte[] z = BitConverter.GetBytes(positionFromOrigin.z);
+
+            byte[] bytes = new byte[12];
+
+            for (int i = 0; i < 4; i++)
+            {
+                bytes[i] = x[i];
+                bytes[i + 4] = y[i];
+                bytes[i + 8] = z[i];
+            }
+
+            return bytes;
         }
     }
 }
