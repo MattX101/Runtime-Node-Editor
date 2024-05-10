@@ -20,6 +20,16 @@ namespace RuntimeNodeEditor.Utils.IO.Selection
             _multiSelect = multiSelect;
         }
 
+        public string SelectFile(string extension)
+        {
+            string[] paths = StandaloneFileBrowser.OpenFilePanel(
+                "Select File",
+                _startDirectory,
+                extension,
+                _multiSelect);
+
+            return GetPath(paths);
+        }
         public string SelectFile(ExtensionFilter[] extensions)
         {
             if (extensions == null)

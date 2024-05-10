@@ -24,14 +24,13 @@ namespace RuntimeNodeEditor.UI.Canvas
         [SerializeField] private Material _lineMaterial;
 
         private Vector2 _windowSize, _windowSizeWithBorder, _canvasSize;
-        private Vector3 _screenRes, _screenWorldRes;
+        private Vector3 _screenRes;
 
         private BackgroundLinesController _backgroundLinesController;
 
         public void Awake()
         {
             _screenRes = new Vector3(_camera.pixelWidth, _camera.pixelHeight, 1);
-            _screenWorldRes = _camera.ScreenToWorldPoint(_screenRes);
 
             ScreenScale.CalculateScale(_camera.pixelWidth);
 
@@ -63,11 +62,9 @@ namespace RuntimeNodeEditor.UI.Canvas
                     ScreenScale.CalculateScale(_camera.pixelWidth);
 
                     Vector3 updatedScreenRes = new Vector3(_camera.pixelWidth, _camera.pixelHeight, 1);
-                    Vector3 updatedScreenWorldRes = _camera.ScreenToWorldPoint(updatedScreenRes);
                     if (_screenRes != updatedScreenRes)
                     {
                         _screenRes = updatedScreenRes;
-                        _screenWorldRes = updatedScreenWorldRes;
 
                         Pan.Reset();
                         Zoom.Reset();
@@ -127,5 +124,10 @@ namespace RuntimeNodeEditor.UI.Canvas
             if (!(Input.GetMouseButton(0) || Input.GetMouseButton(1)))
                 CanvasData.canvasIsActive = false;
         }*/
+
+        public void Load()
+        {
+            //
+        }
     }
 }

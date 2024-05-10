@@ -1,5 +1,4 @@
 using System;
-using UnityEngine;
 
 namespace RuntimeNodeEditor.UI.Canvas
 {
@@ -15,6 +14,11 @@ namespace RuntimeNodeEditor.UI.Canvas
         public static byte[] Save()
         {
             return BitConverter.GetBytes(scale);
+        }
+
+        public static void Load()
+        {
+            //
         }
     }
 }
