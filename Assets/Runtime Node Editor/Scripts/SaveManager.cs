@@ -73,9 +73,8 @@ namespace RuntimeNodeEditor
                 return;
             }
 
-            byte[] data = File.ReadAllBytes(path);
-
             int position = 0;
+            byte[] data = File.ReadAllBytes(path);
 
             _seedManager.seed = BitConverter.ToInt32(data, position);
             position += 4;
@@ -89,13 +88,28 @@ namespace RuntimeNodeEditor
             if (numOfNodes > 0)
             {
                 string[] ids = new string[numOfNodes];
+                Vector3[] positions = new Vector3[numOfNodes];
 
-                for (int i = 0; i < numOfNodes; i++, position += data[position], position++) 
-                    for (int j = 0; j < data[position]; j++)
-                        ids[i] += (char)data[position + 1 + j];
+                for (int i = 0; i < numOfNodes; i++)
+                {
+                    byte length = data[position];
+                    position++;
 
-                _nodeUIManager.Load(ids);
+                    for (int j = 0; j < length; j++)
+                        ids[i] += (char)data[position + j];
+                    position += length;
+
+                    positions[i] = new Vector3(
+                        BitConverter.ToSingle(data, position),
+                        BitConverter.ToSingle(data, position + 4),
+                        0);
+                    position += 8;
+                }
+
+                _nodeUIManager.Load(ids, positions);
+
                 ids = null;
+                positions = null;
             }
         }
     }

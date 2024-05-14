@@ -10,7 +10,6 @@ namespace RuntimeNodeEditor.UI.Node
     public class NodeDrag : MonoBehaviour
     {
         private Camera _camera;
-        public RectTransform target;
         private CanvasScaler _canvasScaler;
 
         public NodeUI nodeUI;
@@ -52,7 +51,7 @@ namespace RuntimeNodeEditor.UI.Node
             CanvasData.canDrag = false;
             
             Vector3 mousePos = MouseController.GetMousePositionRelativeToCenter(_camera, _canvasScaler.referenceResolution);
-            Vector3 nodeLocalPos = target.localPosition;
+            Vector3 nodeLocalPos = nodeUI.rootRect.localPosition;
             _distanceFromCenter = mousePos - nodeLocalPos - (Pan.positionFromOrigin / Zoom.scale);
         }
 
@@ -92,10 +91,10 @@ namespace RuntimeNodeEditor.UI.Node
             Vector3 mousePos = MouseController.GetMousePositionRelativeToCenter(_camera, _canvasScaler.referenceResolution);
             Vector3 nodePos = mousePos - (Pan.positionFromOrigin / Zoom.scale);
 
-            target.localPosition = new Vector3(
+            nodeUI.rootRect.localPosition = new Vector3(
                 nodePos.x - _distanceFromCenter.x,
                 nodePos.y - _distanceFromCenter.y,
-                target.localPosition.z);
+                nodeUI.rootRect.localPosition.z);
         }
 
         private void DropNode()

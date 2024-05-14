@@ -26,9 +26,9 @@ namespace RuntimeNodeEditor.UI.Node
 
         public void Spawn(string id)
         {
-            Spawn(id, true);
+            Spawn(id, new Vector3(0, 0, 0), true);
         }
-        public void Spawn(string id, bool spawnDrag)
+        public void Spawn(string id, Vector3 position, bool spawnDrag)
         {
             if (id.Length > byte.MaxValue)
             {
@@ -45,6 +45,7 @@ namespace RuntimeNodeEditor.UI.Node
 
             _nodes.Add((NodeUI)Activator.CreateInstance(type));
             _nodes[_nodes.Count - 1].nodeDrag.spawnDrag = spawnDrag;
+            _nodes[_nodes.Count - 1].rootRect.localPosition = position;
         }
 
         public byte[] Save()
@@ -62,22 +63,18 @@ namespace RuntimeNodeEditor.UI.Node
                 return bytes.ToArray();
 
             foreach (NodeUI node in _nodes)
-            {
-                bytes.Add((byte)node.nodeId.Length);
-
-                foreach (char c in node.nodeId) 
-                    bytes.Add((byte)c);
-            }
+                foreach (byte b in node.Save())
+                    bytes.Add(b);
 
             return bytes.ToArray();
         }
 
-        public void Load(string[] ids)
+        public void Load(string[] ids, Vector3[] positions)
         {
             _nodes.Clear();
 
-            foreach (string id in ids)
-                Spawn(id, false);
+            for (int i = 0; i < ids.Length; i++)
+                Spawn(ids[i], positions[i], false);
         }
     }
 }

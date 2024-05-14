@@ -6,6 +6,7 @@ using RuntimeNodeEditor.Utils.Colour;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 namespace RuntimeNodeEditor.UI.Node
 {
@@ -208,7 +209,6 @@ namespace RuntimeNodeEditor.UI.Node
             boxCollider.size = _rootSize;
             
             nodeDrag = gameObject.AddComponent<NodeDrag>();
-            nodeDrag.target = rootRect;
             nodeDrag.nodeUI = this;
         }
 
@@ -282,7 +282,7 @@ namespace RuntimeNodeEditor.UI.Node
             _uIPointers.UpdateUIPointers(pointerRect, false);
         }*/
 
-        protected GameObject CreatePointer(string name, ValueType valueType, int i, bool createText, bool pointerIsInput)
+        protected GameObject CreatePointer(string name, RuntimeNodeEditor.Node.Pointer.ValueType valueType, int i, bool createText, bool pointerIsInput)
         {
             return uIPointers.CreatePointer(
                 name,
@@ -343,6 +343,33 @@ namespace RuntimeNodeEditor.UI.Node
                 highLightAlpha ?
                 alpha * 0.75f :
                 alpha;
+        }
+
+        public byte[] Save()
+        {
+            int poisition = 0;
+            byte[] bytes = new byte[1 + nodeId.Length + 8];
+
+            bytes[poisition] = (byte)nodeId.Length;
+            poisition++;
+
+            for (int i = 0; i < nodeId.Length; i++)
+                bytes[poisition + i] = (byte)nodeId[i];
+            poisition += nodeId.Length;
+
+            byte[] posX = BitConverter.GetBytes(rootRect.localPosition.x);
+            byte[] posY = BitConverter.GetBytes(rootRect.localPosition.y);
+
+            for (int i = 0; i < posX.Length; i++)
+            {
+                bytes[poisition + i] = posX[i];
+                bytes[poisition + i + posX.Length] = posY[i];
+            }
+
+            posX = new byte[0]; 
+            posY = new byte[0];
+
+            return bytes;
         }
     }
 }
