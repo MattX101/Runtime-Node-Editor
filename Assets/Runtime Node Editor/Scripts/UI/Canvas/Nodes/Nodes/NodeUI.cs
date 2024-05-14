@@ -11,6 +11,8 @@ namespace RuntimeNodeEditor.UI.Node
 {
     public class NodeUI
     {
+        public readonly string nodeId = "NodeUI";
+
         // Root
         public GameObject root;
         public RectTransform rootRect;
@@ -73,6 +75,16 @@ namespace RuntimeNodeEditor.UI.Node
         public TMP_InputField[] inputFields = null;
         public BooleanButton[] buttons = null;
         public Slider[] sliders = null;
+
+        public NodeUI()
+        {
+            //
+        }
+
+        public NodeUI(string nodeId)
+        {
+            this.nodeId = nodeId;
+        }
 
         public void CreateRoot(string title)
         {

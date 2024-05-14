@@ -7,7 +7,7 @@ namespace RuntimeNodeEditor.UI.Node
 {
     public class BoolOutputUI : NodeUI
     {
-        public BoolOutputUI()
+        public BoolOutputUI() : base("BoolOutputUI")
         {
             CreateRoot("Bool");
             BoolOutputNode boolOutputNode = root.AddComponent<BoolOutputNode>();

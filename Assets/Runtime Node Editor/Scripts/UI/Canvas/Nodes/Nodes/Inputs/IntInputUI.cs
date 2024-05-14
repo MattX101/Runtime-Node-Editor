@@ -7,7 +7,7 @@ namespace RuntimeNodeEditor.UI.Node
 {
     public class IntInputUI : NodeUI
     {
-        public IntInputUI()
+        public IntInputUI() : base("IntInputUI")
         {
             CreateRoot("Int");
             IntInputNode intInputNode = root.AddComponent<IntInputNode>();

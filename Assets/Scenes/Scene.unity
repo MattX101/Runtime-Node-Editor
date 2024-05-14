@@ -7307,6 +7307,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: File Tab Link
       objectReference: {fileID: 0}
+    - target: {fileID: 1992283373957326843, guid: d3b9463e2872b0e418e7ef815b5b5fc1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2997894263415094488, guid: d3b9463e2872b0e418e7ef815b5b5fc1, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -7778,6 +7782,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _camera: {fileID: 519420031}
   _seedManager: {fileID: 1105068428}
+  _nodeUIManager: {fileID: 1777772066}
 --- !u!224 &1581603607 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2997894263415094488, guid: 80a2800d3e688574f98975d465eb2478, type: 3}

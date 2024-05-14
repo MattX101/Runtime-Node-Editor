@@ -7,7 +7,7 @@ namespace RuntimeNodeEditor.UI.Node
 {
     public class BoolInputUI : NodeUI
     {
-        public BoolInputUI()
+        public BoolInputUI() : base("BoolInputUI")
         {
             CreateRoot("Bool");
             BoolInputNode boolInputNode = root.AddComponent<BoolInputNode>();
@@ -20,7 +20,7 @@ namespace RuntimeNodeEditor.UI.Node
             drawBodyImage = false;
             interactablePreview = true;
             isInput = true;
-
+            
             CreateNodeUI(boolInputNode, Color.gray, "Bool");
 
             outputs[0] = CreatePointer("Out", ValueType.Bool, 0, false, false).AddComponent<OutputPointer>();

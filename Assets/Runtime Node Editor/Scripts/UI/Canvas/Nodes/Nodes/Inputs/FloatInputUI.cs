@@ -7,7 +7,7 @@ namespace RuntimeNodeEditor.UI.Node
 {
     public class FloatInputUI : NodeUI
     {
-        public FloatInputUI()
+        public FloatInputUI() : base("FloatInputUI")
         {
             CreateRoot("Float");
             FloatInputNode floatInputNode = root.AddComponent<FloatInputNode>();

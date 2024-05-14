@@ -1,5 +1,6 @@
 using RuntimeNodeEditor.Functions.Seed;
 using RuntimeNodeEditor.UI.Canvas;
+using RuntimeNodeEditor.UI.Node;
 using RuntimeNodeEditor.Utils.IO.Selection;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,9 @@ namespace RuntimeNodeEditor
 
         [SerializeField]
         private SeedManager _seedManager;
+
+        [SerializeField]
+        private NodeUIManager _nodeUIManager;
 
         private List<byte> _data = new List<byte>();
 
@@ -53,6 +57,7 @@ namespace RuntimeNodeEditor
 
             foreach (byte b in _seedManager.Save()) _data.Add(b);
             foreach (byte b in Zoom.Save()) _data.Add(b);
+            foreach (byte b in _nodeUIManager.Save()) _data.Add(b);
 
             File.WriteAllBytes(_saveDirectory, _data.ToArray());
         }
@@ -70,8 +75,28 @@ namespace RuntimeNodeEditor
 
             byte[] data = File.ReadAllBytes(path);
 
-            _seedManager.seed = BitConverter.ToInt32(data, 0);
-            Zoom.scale = BitConverter.ToSingle(data, 4);
+            int position = 0;
+
+            _seedManager.seed = BitConverter.ToInt32(data, position);
+            position += 4;
+
+            Zoom.scale = BitConverter.ToSingle(data, position);
+            position += 4;
+
+            int numOfNodes = BitConverter.ToInt32(data, position);
+            position += 4;
+            
+            if (numOfNodes > 0)
+            {
+                string[] ids = new string[numOfNodes];
+
+                for (int i = 0; i < numOfNodes; i++, position += data[position], position++) 
+                    for (int j = 0; j < data[position]; j++)
+                        ids[i] += (char)data[position + 1 + j];
+
+                _nodeUIManager.Load(ids);
+                ids = null;
+            }
         }
     }
 }

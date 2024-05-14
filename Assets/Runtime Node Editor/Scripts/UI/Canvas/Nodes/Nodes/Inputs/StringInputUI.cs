@@ -7,7 +7,7 @@ namespace RuntimeNodeEditor.UI.Node
 {
     public class StringInputUI : NodeUI
     {
-        public StringInputUI()
+        public StringInputUI() : base("StringInputUI")
         {
             CreateRoot("String");
             StringInputNode stringInputNode = root.AddComponent<StringInputNode>();

@@ -7,7 +7,7 @@ namespace RuntimeNodeEditor.UI.Node
 {
     public class CharOutputUI : NodeUI
     {
-        public CharOutputUI()
+        public CharOutputUI() : base("CharOutputUI")
         {
             CreateRoot("Char");
             CharOutputNode charOutputNode = root.AddComponent<CharOutputNode>();

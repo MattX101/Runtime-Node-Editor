@@ -7,7 +7,7 @@ namespace RuntimeNodeEditor.UI.Node
 {
     public class ColorInputUI : NodeUI
     {
-        public ColorInputUI()
+        public ColorInputUI() : base("ColorInputUI")
         {
             CreateRoot("Color");
             ColorInputNode colorInputNode = root.AddComponent<ColorInputNode>();

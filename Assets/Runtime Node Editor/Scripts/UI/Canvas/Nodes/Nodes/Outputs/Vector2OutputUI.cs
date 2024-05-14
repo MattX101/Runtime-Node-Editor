@@ -7,7 +7,7 @@ namespace RuntimeNodeEditor.UI.Node
 {
     public class Vector2OutputUI : NodeUI
     {
-        public Vector2OutputUI()
+        public Vector2OutputUI() : base("Vector2OutputUI")
         {
             CreateRoot("Vector 2");
             Vector2OutputNode vector2OutputNode = root.AddComponent<Vector2OutputNode>();

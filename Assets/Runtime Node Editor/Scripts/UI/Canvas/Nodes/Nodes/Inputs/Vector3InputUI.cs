@@ -7,7 +7,7 @@ namespace RuntimeNodeEditor.UI.Node
 {
     public class Vector3InputUI : NodeUI
     {
-        public Vector3InputUI()
+        public Vector3InputUI() : base("Vector3InputUI")
         {
             CreateRoot("Vector 3");
             Vector3InputNode vector3InputNode = root.AddComponent<Vector3InputNode>();
