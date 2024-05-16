@@ -68,8 +68,7 @@ namespace RuntimeNodeEditor.UI.Node
                 if (selectedNodeUI == null)
                     return;
 
-                selectedNodeUI.ToggleRaycasts(true);
-                //selectedNodeUI.canvasGroup.blocksRaycasts = true;
+                selectedNodeUI.BlockRaycasts(false);
 
                 CanvasData.isDraging = true;
                 CanvasData.canDrag = false;
@@ -150,8 +149,7 @@ namespace RuntimeNodeEditor.UI.Node
         }
         private void Drop()
         {
-            selectedNodeUI.ToggleRaycasts(false);
-            //selectedNodeUI.canvasGroup.blocksRaycasts = false;
+            selectedNodeUI.BlockRaycasts(true);
 
             spawnDrag = false;
             CanvasData.isDraging = false;

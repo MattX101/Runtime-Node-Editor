@@ -343,7 +343,7 @@ namespace RuntimeNodeEditor.UI.Node
             _canvasGroup.alpha = alpha;
         }
 
-        public void ToggleRaycasts(bool toggle)
+        public void BlockRaycasts(bool toggle)
         {
             _canvasGroup.blocksRaycasts = toggle;
         }
