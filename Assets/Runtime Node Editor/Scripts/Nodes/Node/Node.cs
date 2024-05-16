@@ -15,11 +15,6 @@ namespace RuntimeNodeEditor.Node
         public List<InputPointer> inputs = new List<InputPointer>();
         public List<OutputPointer> outputs = new List<OutputPointer>();
 
-        private void Update()
-        {
-            nodeUI.SetAlpha();
-        }
-
         public virtual void Reset()
         {
             //
@@ -69,7 +64,13 @@ namespace RuntimeNodeEditor.Node
 
         public virtual NodeUI Paste(Vector3 spawnPosition)
         {
-            return Paste(new NodeUI(), spawnPosition);
+            return Paste(
+                new NodeUI(), 
+                new Vector3(
+                    spawnPosition.x, 
+                    spawnPosition.y, 
+                    0)
+                );
         }
 
         protected NodeUI Paste(NodeUI ui, Vector3 spawnPosition)

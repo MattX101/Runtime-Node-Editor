@@ -1,3 +1,4 @@
+using RuntimeNodeEditor.Node;
 using RuntimeNodeEditor.UI.Canvas.Data;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,9 @@ namespace RuntimeNodeEditor.UI.Node
 
         [Header("UI Elements")]
         [SerializeField] private GameObject _inputField;
+
+        [SerializeField]
+        private NodeController _nodeController;
 
         private List<NodeUI> _nodes = new List<NodeUI>();
 
@@ -44,7 +48,7 @@ namespace RuntimeNodeEditor.UI.Node
                 throw new ArgumentNullException(nameof(type));
 
             _nodes.Add((NodeUI)Activator.CreateInstance(type));
-            _nodes[_nodes.Count - 1].nodeDrag.spawnDrag = spawnDrag;
+            _nodeController.nodeDrag.InitSpawnDrag(_nodes[_nodes.Count - 1], spawnDrag);
             _nodes[_nodes.Count - 1].rootRect.localPosition = position;
         }
 

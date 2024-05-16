@@ -20,9 +20,10 @@ namespace RuntimeNodeEditor.UI.Node
 
         private Vector2 _rootSize;
 
-        public CanvasGroup canvasGroup;
-        public float alpha = 1.0f;
-        public bool highLightAlpha = false;
+        private CanvasGroup _canvasGroup;
+
+        private RawImage _rootImage;
+        private Color _primaryColor;
 
         // Header
         private GameObject _header;
@@ -44,8 +45,6 @@ namespace RuntimeNodeEditor.UI.Node
         private GameObject _previewImageObject;
         //public RawImage previewRawImage;
         public ImagePreview imagePreview;
-
-        public NodeDrag nodeDrag;
 
         // In/Out Pointers
         protected int numOfInputs, numOfOutputs;
@@ -103,16 +102,13 @@ namespace RuntimeNodeEditor.UI.Node
 
             // Colours
             Vector3 primaryHSL = ColourConversion.RGBToHSL(primaryColour);
-
-            Color headerHSL = ColourConversion.HSLToRGB(primaryHSL.x, primaryHSL.y, primaryHSL.z * 0.75f);
-            Color rootHSL   = ColourConversion.HSLToRGB(primaryHSL.x, primaryHSL.y, primaryHSL.z * 0.5f);
-            Color bodyHSL   = ColourConversion.HSLToRGB(primaryHSL.x, primaryHSL.y * 0.5f, primaryHSL.z);
+            _primaryColor = ColourConversion.HSLToRGB(primaryHSL.x, primaryHSL.y, primaryHSL.z * 0.5f);
 
             // Root element
             root.transform.SetParent(UISettings.nodeCanvasTransform);
-            RawImage rawImage = root.AddComponent<RawImage>();
-            rawImage.color = rootHSL;
-            canvasGroup = root.AddComponent<CanvasGroup>();
+            _rootImage = root.AddComponent<RawImage>();
+            SetPrimaryColor();
+            _canvasGroup = root.AddComponent<CanvasGroup>();
 
             rootRect = root.GetComponent<RectTransform>();
 
@@ -129,10 +125,13 @@ namespace RuntimeNodeEditor.UI.Node
 
             _rootSize = new Vector2(_sizeX, _sizeY);
 
-            AddHeader(headerHSL, title);
-            AddBody(bodyHSL);
+            AddHeader(
+                ColourConversion.HSLToRGB(primaryHSL.x, primaryHSL.y, primaryHSL.z * 0.75f), 
+                title);
+            AddBody(
+                ColourConversion.HSLToRGB(primaryHSL.x, primaryHSL.y * 0.5f, primaryHSL.z));
 
-            AddNodeDrag(root);
+            AddCollision(root);
         }
 
         private void AddHeader(Color headerHSL, string text)
@@ -198,18 +197,11 @@ namespace RuntimeNodeEditor.UI.Node
                 AddPreviewImage();
         }
 
-        private void AddNodeDrag(GameObject gameObject)
+        private void AddCollision(GameObject gameObject)
         {
-            Vector2 offset = Vector2.zero;
-            offset.y += _bodySize.y / 2;
-            offset.y += UISettings.borderSize / 2;
-
             BoxCollider2D boxCollider = gameObject.AddComponent<BoxCollider2D>();
-            boxCollider.offset = offset;
+            boxCollider.offset = new Vector2(0, (_bodySize.y + UISettings.borderSize) / 2);
             boxCollider.size = _rootSize;
-            
-            nodeDrag = gameObject.AddComponent<NodeDrag>();
-            nodeDrag.nodeUI = this;
         }
 
         private void AddPreviewImage()
@@ -337,12 +329,23 @@ namespace RuntimeNodeEditor.UI.Node
             }
         }
 
-        public void SetAlpha()
+        public void ToggleSelectColor()
         {
-            canvasGroup.alpha =
-                highLightAlpha ?
-                alpha * 0.75f :
-                alpha;
+            _rootImage.color = _primaryColor * new Color(0.5f, 0.5f, 0.5f);
+        }
+        public void SetPrimaryColor()
+        {
+            _rootImage.color = _primaryColor;
+        }
+
+        public void SetAlpha(float alpha)
+        {
+            _canvasGroup.alpha = alpha;
+        }
+
+        public void ToggleRaycasts(bool toggle)
+        {
+            _canvasGroup.blocksRaycasts = toggle;
         }
 
         public byte[] Save()
@@ -365,6 +368,7 @@ namespace RuntimeNodeEditor.UI.Node
                 bytes[poisition + i] = posX[i];
                 bytes[poisition + i + posX.Length] = posY[i];
             }
+            poisition += 8;
 
             posX = new byte[0]; 
             posY = new byte[0];
