@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using System.Collections.Generic;
 
 namespace RuntimeNodeEditor.UI.Node
 {
@@ -149,13 +150,13 @@ namespace RuntimeNodeEditor.UI.Node
             // Title Text element
             string title = "Title TMP_Text";
 
-            Vector2 titleTextSize = _headerRect.sizeDelta - (Vector2.one * _borderX2);
+            Vector2 title_textsize = _headerRect.sizeDelta - (Vector2.one * _borderX2);
             Vector3 titleTextPos = new Vector3(0, 0, -1);
 
             _titleText = UIText.CreateText(
                 _header.transform,
                 title,
-                titleTextSize,
+                title_textsize,
                 titleTextPos,
                 text);
             
@@ -350,30 +351,65 @@ namespace RuntimeNodeEditor.UI.Node
 
         public byte[] Save()
         {
-            int poisition = 0;
-            byte[] bytes = new byte[1 + nodeId.Length + 8];
+            List<byte> bytes = new List<byte>();
 
-            bytes[poisition] = (byte)nodeId.Length;
-            poisition++;
+            // Node ID
+            bytes.Add((byte)nodeId.Length);
 
             for (int i = 0; i < nodeId.Length; i++)
-                bytes[poisition + i] = (byte)nodeId[i];
-            poisition += nodeId.Length;
+                bytes.Add((byte)nodeId[i]);
 
-            byte[] posX = BitConverter.GetBytes(rootRect.localPosition.x);
-            byte[] posY = BitConverter.GetBytes(rootRect.localPosition.y);
+            // Node Position
+            foreach (byte b in BitConverter.GetBytes(rootRect.localPosition.x)) bytes.Add(b);
+            foreach (byte b in BitConverter.GetBytes(rootRect.localPosition.y)) bytes.Add(b);
 
-            for (int i = 0; i < posX.Length; i++)
+            // Inputfields
+            if (inputFields == null)
             {
-                bytes[poisition + i] = posX[i];
-                bytes[poisition + i + posX.Length] = posY[i];
+                bytes.Add(0);
             }
-            poisition += 8;
+            else
+            {
+                bytes.Add((byte)inputFields.Length);
 
-            posX = new byte[0]; 
-            posY = new byte[0];
+                foreach (TMP_InputField inputField in inputFields)
+                {
+                    bytes.Add((byte)inputField.text.Length);
 
-            return bytes;
+                    if (inputField.text.Length > 0)
+                        for (int i = 0; i < inputField.text.Length; i++)
+                            bytes.Add((byte)inputField.text[i]);
+                }
+            }
+
+            // Boolean Buttons
+            if (buttons == null)
+            {
+                bytes.Add(0);
+            }
+            else
+            {
+                bytes.Add((byte)buttons.Length);
+
+                foreach (BooleanButton button in buttons)
+                    bytes.Add(button.Toggled == true ? (byte)1 : (byte)0);
+            }
+
+            // Sliders
+            if (sliders == null)
+            {
+                bytes.Add(0);
+            }
+            else
+            {
+                bytes.Add((byte)sliders.Length);
+
+                foreach (Slider slider in sliders)
+                    foreach (byte b in BitConverter.GetBytes(slider.value))
+                        bytes.Add(b);
+            }
+
+            return bytes.ToArray();
         }
     }
 }

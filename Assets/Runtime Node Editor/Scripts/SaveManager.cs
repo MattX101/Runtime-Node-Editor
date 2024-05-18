@@ -84,32 +84,16 @@ namespace RuntimeNodeEditor
 
             int numOfNodes = BitConverter.ToInt32(data, position);
             position += 4;
-            
-            if (numOfNodes > 0)
+
+            if (numOfNodes == 0)
+                return;
+
+            for (int i = 0; i < numOfNodes; i++)
             {
-                string[] ids = new string[numOfNodes];
-                Vector3[] positions = new Vector3[numOfNodes];
+                NodeUILoadData nodeUIData = new NodeUILoadData(data, position);
+                position = nodeUIData.endIndex;
 
-                for (int i = 0; i < numOfNodes; i++)
-                {
-                    byte length = data[position];
-                    position++;
-
-                    for (int j = 0; j < length; j++)
-                        ids[i] += (char)data[position + j];
-                    position += length;
-
-                    positions[i] = new Vector3(
-                        BitConverter.ToSingle(data, position),
-                        BitConverter.ToSingle(data, position + 4),
-                        0);
-                    position += 8;
-                }
-
-                _nodeUIManager.Load(ids, positions);
-
-                ids = null;
-                positions = null;
+                _nodeUIManager.Load(nodeUIData);
             }
         }
     }

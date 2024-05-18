@@ -12,18 +12,14 @@ namespace RuntimeNodeEditor.UI.Node
 
         [SerializeField] private Texture2D _pointerTexture;
 
-        [Header("UI Elements")]
-        [SerializeField] private GameObject _inputField;
-
         [SerializeField]
         private NodeController _nodeController;
 
-        private List<NodeUI> _nodes = new List<NodeUI>();
+        [SerializeField]
+        private GameObject _nodesObject;
 
         void Awake()
         {
-            CanvasData.inputField = _inputField;
-
             UISettings.nodeCanvasTransform = _parent.transform;
             UISettings.pointerTexture = _pointerTexture;
         }
@@ -32,6 +28,7 @@ namespace RuntimeNodeEditor.UI.Node
         {
             Spawn(id, new Vector3(0, 0, 0), true);
         }
+
         public void Spawn(string id, Vector3 position, bool spawnDrag)
         {
             if (id.Length > byte.MaxValue)
@@ -47,38 +44,70 @@ namespace RuntimeNodeEditor.UI.Node
             if (type == null)
                 throw new ArgumentNullException(nameof(type));
 
-            _nodes.Add((NodeUI)Activator.CreateInstance(type));
-            _nodeController.nodeDrag.InitSpawnDrag(_nodes[_nodes.Count - 1], spawnDrag);
-            _nodes[_nodes.Count - 1].rootRect.localPosition = position;
+            NodeUI nodeUI = (NodeUI)Activator.CreateInstance(type);
+            _nodeController.nodeDrag.InitSpawnDrag(nodeUI, spawnDrag);
+            nodeUI.rootRect.localPosition = position;
+        }
+
+        public void Spawn(NodeUILoadData data, bool spawnDrag)
+        {
+            if (data.id.Length > byte.MaxValue)
+            {
+                Debug.LogError("Name of node cannot exceed 255 characters!");
+
+                return;
+            }
+
+            Type type = Type.GetType("RuntimeNodeEditor.UI.Node." + data.id);
+            if (type == null)
+                throw new ArgumentNullException(nameof(type));
+
+            NodeUI nodeUI = (NodeUI)Activator.CreateInstance(type);
+
+            nodeUI.rootRect.localPosition = data.position;
+
+            if (nodeUI.inputFields != null)
+                for (int i = 0; i < nodeUI.inputFields.Length; i++)
+                    nodeUI.inputFields[i].text = data.Texts[i];
+
+            if (nodeUI.buttons != null)
+                for (int i = 0; i < nodeUI.buttons.Length; i++)
+                    nodeUI.buttons[i].Toggle(data.Booleans[i]);
+
+            if (nodeUI.sliders != null)
+                for (int i = 0; i < nodeUI.sliders.Length; i++)
+                    nodeUI.sliders[i].value = data.Values[i];
+
+            _nodeController.nodeDrag.InitSpawnDrag(nodeUI, spawnDrag);
         }
 
         public byte[] Save()
         {
             List<byte> bytes = new List<byte>();
 
-            byte[] numOfNodes = BitConverter.GetBytes(_nodes.Count);
+            RuntimeNodeEditor.Node.Node[] nodes = _nodesObject.GetComponentsInChildren<RuntimeNodeEditor.Node.Node>();
+            Debug.Log(nodes.Length);
+
+            byte[] numOfNodes = BitConverter.GetBytes(nodes.Length);
             bytes.Add(numOfNodes[0]);
             bytes.Add(numOfNodes[1]);
             bytes.Add(numOfNodes[2]);
             bytes.Add(numOfNodes[3]);
             numOfNodes = null;
 
-            if (_nodes == null)
+            if (nodes == null)
                 return bytes.ToArray();
 
-            foreach (NodeUI node in _nodes)
-                foreach (byte b in node.Save())
+            foreach (RuntimeNodeEditor.Node.Node node in nodes)
+                foreach (byte b in node.nodeUI.Save())
                     bytes.Add(b);
 
             return bytes.ToArray();
         }
 
-        public void Load(string[] ids, Vector3[] positions)
+        public void Load(NodeUILoadData data)
         {
-            _nodes.Clear();
-
-            for (int i = 0; i < ids.Length; i++)
-                Spawn(ids[i], positions[i], false);
+            Spawn(data, false);
         }
     }
 }

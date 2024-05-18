@@ -5,12 +5,12 @@ namespace RuntimeNodeEditor.UI.Elements
 {
     public static class UIText
     {
-        public static TextMeshPro CreateText(Transform parent, string title, Vector2 size, Vector3 pos, string textString)
+        public static TextMeshPro CreateText(Transform parent, string title, Vector2 size, Vector3 pos, string _textstring)
         {
             GameObject textObject = UIElement.CreateUIElement(parent, title, size, pos);
 
             TextMeshPro text = textObject.AddComponent<TextMeshPro>();
-            text.text = textString;
+            text.text = _textstring;
             text.color = Color.black;
             text.enableAutoSizing = true;
             text.fontSizeMin = 1.0f;
