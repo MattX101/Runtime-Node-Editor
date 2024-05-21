@@ -17,19 +17,23 @@ namespace RuntimeNodeEditor.UI.Interface
 
         public void Show()
         {
-            if (!UIData.windowOpened)
-            {
-                _tabsManagers.HideTabs();
+            if (UIData.windowOpened)
+                return;
 
-                _tab.SetActive(true);
-                UIData.tabOpened = true;
-            }
+            _tabsManagers.HideTabs();
+
+            Toggle(true);
         }
 
         public void Hide()
         {
-            _tab.SetActive(false);
-            UIData.tabOpened = false;
+            Toggle(false);
+        }
+
+        private void Toggle(bool toggle)
+        {
+            _tab.SetActive(toggle);
+            UIData.tabOpened = toggle;
         }
     }
 }

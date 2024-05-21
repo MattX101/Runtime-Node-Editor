@@ -1,5 +1,4 @@
 using RuntimeNodeEditor.Node;
-using RuntimeNodeEditor.UI.Canvas.Data;
 using System;
 using System.Collections.Generic;
 using UnityEngine;

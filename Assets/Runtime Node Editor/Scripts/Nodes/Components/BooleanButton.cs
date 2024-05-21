@@ -28,6 +28,7 @@ namespace RuntimeNodeEditor.Node.Component
         public void Toggle(bool toggle)
         {
             image.color = toggle ? Color.green : Color.red;
+
             if (!button.interactable)
                 image.color *= 0.75f;
         }

@@ -5,42 +5,40 @@ namespace RuntimeNodeEditor.UI.Interface
 {
     public class Window : MonoBehaviour
     {
-        [SerializeField] private Transform _parent;
+        [SerializeField] 
+        private Transform _parent;
 
-        [SerializeField] protected GameObject window;
+        [SerializeField] 
+        protected GameObject window;
 
         public void Create()
         {
-            if (UISettings.windowSpawnParent.childCount == 0)
-            {
-                UIData.windowOpened = true;
-                Instantiate(window, UISettings.windowSpawnParent);
+            if (UISettings.windowSpawnParent.childCount != 0)
+                return;
 
-                Toggle();
-            }
+            Manage(true);
         }
 
         public void Close()
         {
-            UIData.windowOpened = false;
-            Destroy(this.gameObject);
+            Manage(false);
+        }
+
+        private void Manage(bool windowIsOpen)
+        {
+            UIData.windowOpened = windowIsOpen;
+
+            if (windowIsOpen) 
+                Instantiate(window, UISettings.windowSpawnParent);
+            else 
+                Destroy(this.gameObject);
 
             Toggle();
         }
 
         private void Toggle()
         {
-            ToggleButtons();
-            ToggleNodePanel();
-        }
-
-        private void ToggleButtons()
-        {
             UIData.interfaceUIManager.ToggleButtons(!UIData.windowOpened);
-        }
-
-        private void ToggleNodePanel()
-        {
             UIData.nodePanel.SetActive(UIData.windowOpened);
         }
     }

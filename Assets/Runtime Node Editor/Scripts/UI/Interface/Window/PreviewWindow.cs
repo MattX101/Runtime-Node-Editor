@@ -6,7 +6,8 @@ namespace RuntimeNodeEditor.UI.Interface
 {
     public class PreviewWindow : Window
     {
-        [SerializeField] private Image _togglePreviewIcon;
+        [SerializeField] 
+        private Image _togglePreviewIcon;
 
         private void Awake()
         {
@@ -15,22 +16,27 @@ namespace RuntimeNodeEditor.UI.Interface
 
         public void Toggle()
         {
-            if (!UIData.windowOpened)
-            {
-                window.SetActive(!window.activeSelf);
+            if (UIData.windowOpened)
+                return;
 
-                _togglePreviewIcon.color =
-                    window.activeSelf ?
-                    Color.white :
-                    new Color(0.75f, 0.75f, 0.75f);
-            }
+            window.SetActive(!window.activeSelf);
+
+            _togglePreviewIcon.color =
+                window.activeSelf ?
+                Color.white :
+                InActiveIconColor();
         }
 
         public void Hide()
         {
             window.SetActive(false);
 
-            _togglePreviewIcon.color = new Color(0.75f, 0.75f, 0.75f);
+            _togglePreviewIcon.color = InActiveIconColor();
+        }
+
+        private Color InActiveIconColor()
+        {
+            return new Color(0.75f, 0.75f, 0.75f);
         }
     }
 }

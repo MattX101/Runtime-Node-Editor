@@ -42,7 +42,7 @@ namespace RuntimeNodeEditor.Node
 
         public override void Reset()
         {
-            wasExecuted = false;
+            ResetExecution();
         }
 
         public override NodeUI Paste(Vector3 spawnPosition)

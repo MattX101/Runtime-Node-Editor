@@ -89,7 +89,7 @@ namespace RuntimeNodeEditor.UI.Node
 
         public void CreateRoot(string title)
         {
-            root = UIElement.CreateUIElement(UISettings.nodeCanvasTransform, title, Vector2.one, Vector3.zero);
+            root = UIElement.Create(UISettings.nodeCanvasTransform, title, Vector2.one, Vector3.zero);
         }
 
         public void CreateNodeUI(RuntimeNodeEditor.Node.Node node, Color primaryColour, string title)
@@ -139,13 +139,13 @@ namespace RuntimeNodeEditor.UI.Node
         {
             Vector3 headerPos = new Vector3(0, (rootRect.sizeDelta.y - (_sizeY + _borderX2)) / 2, 0);
 
-            _header = UIElement.CreateUIElement(
+            _header = UIElement.Create(
                 root.transform,
                 "Header",
                 _rootSize,
                 headerPos);
             _headerRect = _header.GetComponent<RectTransform>();
-            UIImage.CreateRawImage(_header, headerHSL);
+            UIImage.Create(_header, headerHSL);
 
             // Title Text element
             string title = "Title TMP_Text";
@@ -169,7 +169,7 @@ namespace RuntimeNodeEditor.UI.Node
             _bodySize = new Vector2(_sizeX, rootRect.sizeDelta.y - UISettings.headerHeight - UISettings.borderSize);
             Vector3 bodyPos = new Vector3(0, (-UISettings.headerHeight + UISettings.borderSize) / 2, 0);
 
-            _body = UIElement.CreateUIElement(
+            _body = UIElement.Create(
                 root.transform,
                 "Body",
                 _bodySize,
@@ -177,15 +177,15 @@ namespace RuntimeNodeEditor.UI.Node
             _bodyRect = _body.GetComponent<RectTransform>();
 
             if (drawBodyImage)
-                UIImage.CreateRawImage(_body, bodyHSL);
+                UIImage.Create(_body, bodyHSL);
 
             // Pointer elements
-            _inputs = UIElement.CreateUIElement(
+            _inputs = UIElement.Create(
                 _body.transform,
                 "Inputs",
                 _bodySize,
                 bodyPos);
-            _outputs = UIElement.CreateUIElement(
+            _outputs = UIElement.Create(
                 _body.transform,
                 "Outputs",
                 _bodySize,
@@ -207,23 +207,23 @@ namespace RuntimeNodeEditor.UI.Node
 
         private void AddPreviewImage()
         {
-            if (togglePreviewImage)
-            {
-                float size = UISettings.previewSize - UISettings.previewImageMargin;
+            if (!togglePreviewImage)
+                return;
 
-                Vector2 previewImageSize = new Vector2(size, size);
-                float posY = (rootRect.sizeDelta.y - size - UISettings.previewImageMargin) / 2 - UISettings.headerHeight - _bodyHeight;
-                Vector3 previewImagePos = new Vector3(0.0f, posY, 0.0f);
+            float size = UISettings.previewSize - UISettings.previewImageMargin;
 
-                _previewImageObject = UIElement.CreateUIElement(
-                    root.transform, 
-                    "Preview", 
-                    previewImageSize, 
-                    previewImagePos);
+            Vector2 previewImageSize = new Vector2(size, size);
+            float posY = (rootRect.sizeDelta.y - size - UISettings.previewImageMargin) / 2 - UISettings.headerHeight - _bodyHeight;
+            Vector3 previewImagePos = new Vector3(0.0f, posY, 0.0f);
 
-                imagePreview = new ImagePreview();
-                imagePreview.image = UIImage.CreateRawImage(_previewImageObject, Color.black);
-            }
+            _previewImageObject = UIElement.Create(
+                root.transform,
+                "Preview",
+                previewImageSize,
+                previewImagePos);
+
+            imagePreview = new ImagePreview();
+            imagePreview.image = UIImage.Create(_previewImageObject, Color.black);
         }
 
         /*public void UpdateNodeUI(float scale, float previewImageScale)
@@ -308,26 +308,22 @@ namespace RuntimeNodeEditor.UI.Node
 
         protected void PreviewColor(int a, int b, int c, bool pointersAreInput)
         {
-            if (togglePreviewImage)
-            {
-                if (imagePreview == null)
-                    AddPreviewImage();
+            if (!togglePreviewImage)
+                return;
 
-                if (pointersAreInput)
-                {
-                    imagePreview.SetSliderInput(
-                        inputs[a].gameObject.GetComponentInChildren<Slider>(),
-                        inputs[b].gameObject.GetComponentInChildren<Slider>(),
-                        inputs[c].gameObject.GetComponentInChildren<Slider>());
-                }
-                else
-                {
-                    imagePreview.SetSliderInput(
-                        outputs[a].gameObject.GetComponentInChildren<Slider>(),
-                        outputs[b].gameObject.GetComponentInChildren<Slider>(),
-                        outputs[c].gameObject.GetComponentInChildren<Slider>());
-                }
-            }
+            if (imagePreview == null)
+                AddPreviewImage();
+
+            if (pointersAreInput)
+                imagePreview.SetSliderInput(
+                    inputs[a].gameObject.GetComponentInChildren<Slider>(),
+                    inputs[b].gameObject.GetComponentInChildren<Slider>(),
+                    inputs[c].gameObject.GetComponentInChildren<Slider>());
+            else
+                imagePreview.SetSliderInput(
+                    outputs[a].gameObject.GetComponentInChildren<Slider>(),
+                    outputs[b].gameObject.GetComponentInChildren<Slider>(),
+                    outputs[c].gameObject.GetComponentInChildren<Slider>());
         }
 
         public void ToggleSelectColor()

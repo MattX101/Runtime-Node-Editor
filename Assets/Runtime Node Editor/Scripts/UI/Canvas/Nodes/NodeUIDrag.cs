@@ -58,31 +58,33 @@ namespace RuntimeNodeEditor.UI.Node
 
         private void OnClick(Camera camera, CanvasScaler canvasScaler)
         {
-            if (Input.GetMouseButtonDown(0))
-            {
-                selectedNodeUI = SelectNodeUI(Physics2D.Raycast(
+            if (!Input.GetMouseButtonDown(0))
+                return;
+
+            selectedNodeUI = SelectNodeUI(Physics2D.Raycast(
                     MouseController.GetMouseWorldPosition(camera),
                     Vector2.zero)
                     );
 
-                if (selectedNodeUI == null)
-                    return;
+            if (selectedNodeUI == null)
+                return;
 
-                selectedNodeUI.BlockRaycasts(false);
+            selectedNodeUI.BlockRaycasts(false);
 
-                CanvasData.isDraging = true;
-                CanvasData.canDrag = false;
+            CanvasData.isDraging = true;
+            CanvasData.canDrag = false;
 
-                Vector3 mousePos = MouseController.GetMousePositionRelativeToCenter(camera, canvasScaler.referenceResolution);
-                Vector3 nodeLocalPos = selectedNodeUI.rootRect.localPosition;
-                _distanceFromCenter = mousePos - nodeLocalPos - (Pan.positionFromOrigin / Zoom.scale);
-            }
+            Vector3 mousePos = MouseController.GetMousePositionRelativeToCenter(camera, canvasScaler.referenceResolution);
+            Vector3 nodeLocalPos = selectedNodeUI.rootRect.localPosition;
+            _distanceFromCenter = mousePos - nodeLocalPos - (Pan.positionFromOrigin / Zoom.scale);
         }
 
         private void OnClickRelease()
         {
-            if (Input.GetMouseButtonUp(0))
-                ValidateDrop();
+            if (!Input.GetMouseButtonUp(0))
+                return;
+
+            ValidateDrop();
         }
 
         private void OnHover(Camera camera)
@@ -129,6 +131,7 @@ namespace RuntimeNodeEditor.UI.Node
         {
             selectedNodeUI = null;
         }
+
         private void Drag(Camera camera, CanvasScaler canvasScaler)
         {
             Vector3 mousePos = MouseController.GetMousePositionRelativeToCenter(camera, canvasScaler.referenceResolution);

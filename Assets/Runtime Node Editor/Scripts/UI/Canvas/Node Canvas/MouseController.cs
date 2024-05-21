@@ -7,10 +7,7 @@ namespace RuntimeNodeEditor.UI.Canvas
     {
         public static void CheckMouse()
         {
-            if (Input.GetMouseButtonDown(0))
-                CanvasData.canDrag = false;
-            else if (Input.GetMouseButtonUp(0))
-                CanvasData.canDrag = true;
+            CanvasData.canDrag = Input.GetMouseButtonUp(0);
         }
 
         public static Vector2 GetMouseWorldPosition(Camera camera)

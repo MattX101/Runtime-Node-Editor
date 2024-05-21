@@ -15,34 +15,39 @@ namespace RuntimeNodeEditor.UI.Canvas
         public static void PanCanvas(Camera camera)
         {
             pan = Vector3.zero;
-            if (!CanvasData.isDraging && !CanvasData.isPointing)
+
+            if (CanvasData.isDraging || CanvasData.isPointing)
+                return;
+
+            Vector2 mousePos = MouseController.GetMouseWorldPosition(camera);
+
+            if (Input.GetMouseButton(1) == false)
             {
-                Vector2 mousePos = MouseController.GetMouseWorldPosition(camera);
-
-                if (Input.GetMouseButton(1) == true)
-                {
-                    CanvasData.isPanning = true;
-
-                    float x = Mathf.Clamp(mousePos.x - _lastFrameMousePos.x, -1, 1);
-                    float y = Mathf.Clamp(mousePos.y - _lastFrameMousePos.y, -1, 1);
-
-                    nodesRect.position = new Vector3(
-                        nodesRect.position.x + x, 
-                        nodesRect.position.y + y, 
-                        nodesRect.position.z);
-
-                    pan = new Vector3(x, y, 0);
-
-                    Vector3 halfRes = new Vector3(camera.pixelWidth / 2, camera.pixelHeight / 2, 0);
-                    positionFromOrigin = halfRes - camera.WorldToScreenPoint(-nodesRect.position);
-                }
-                else
-                {
-                    CanvasData.isPanning = false;
-                }
-
+                CanvasData.isPanning = false;
                 _lastFrameMousePos = mousePos;
+
+                return;
             }
+
+            CanvasData.isPanning = true;
+
+            float x = Mathf.Clamp(mousePos.x - _lastFrameMousePos.x, -1, 1);
+            float y = Mathf.Clamp(mousePos.y - _lastFrameMousePos.y, -1, 1);
+
+            nodesRect.position = new Vector3(
+                nodesRect.position.x + x,
+                nodesRect.position.y + y,
+                nodesRect.position.z);
+
+            pan = new Vector3(x, y, 0);
+
+            positionFromOrigin = new Vector3(
+                camera.pixelWidth / 2,
+                camera.pixelHeight / 2,
+                0);
+            positionFromOrigin -= camera.WorldToScreenPoint(-nodesRect.position);
+
+            _lastFrameMousePos = mousePos;
         }
 
         public static void UpdatePositionFromOrigin()

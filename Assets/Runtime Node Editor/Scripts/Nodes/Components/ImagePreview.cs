@@ -12,33 +12,33 @@ namespace RuntimeNodeEditor.Node.Component
             if (red == null || green == null || blue == null)
             {
                 Debug.LogError("One or more of the sliders are null");
+
+                return;
             }
-            else
+
+            image.color = new Color(
+                red.value,
+                green.value,
+                blue.value,
+                1);
+
+            red.onValueChanged.AddListener(
+            delegate
             {
-                image.color = new Color(
-                    red.value,
-                    green.value,
-                    blue.value,
-                    1);
+                SetR(red);
+            });
 
-                red.onValueChanged.AddListener(
-                delegate
-                {
-                    SetR(red);
-                });
+            green.onValueChanged.AddListener(
+            delegate
+            {
+                SetG(green);
+            });
 
-                green.onValueChanged.AddListener(
-                delegate
-                {
-                    SetG(green);
-                });
-
-                blue.onValueChanged.AddListener(
-                delegate
-                {
-                    SetB(blue);
-                });
-            }
+            blue.onValueChanged.AddListener(
+            delegate
+            {
+                SetB(blue);
+            });
         }
 
         private void SetR(Slider red)

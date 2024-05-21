@@ -48,38 +48,39 @@ namespace RuntimeNodeEditor.UI.Canvas
 
         private void Update()
         {
-            if (CanvasData.canvasIsActive && !(UIData.tabOpened || UIData.windowOpened))
+            if (!CanvasData.canvasIsActive || UIData.tabOpened || UIData.windowOpened)
+                return;
+
+            UpdateCanvasData();
+
+            if (_backgroundLinesController == null)
+                return;
+
+            MouseController.CheckMouse();
+
+            Pan.PanCanvas(_camera);
+            Zoom.ZoomCanvas();
+
+            ScreenScale.CalculateScale(_camera.pixelWidth);
+
+            Vector3 updatedScreenRes = new Vector3(_camera.pixelWidth, _camera.pixelHeight, 1);
+            if (_screenRes != updatedScreenRes)
             {
-                UpdateCanvasData();
+                _screenRes = updatedScreenRes;
 
-                if (_backgroundLinesController != null)
-                {
-                    MouseController.CheckMouse();
+                Pan.Reset();
+                Zoom.Reset();
 
-                    Pan.PanCanvas(_camera);
-                    Zoom.ZoomCanvas();
-
-                    ScreenScale.CalculateScale(_camera.pixelWidth);
-
-                    Vector3 updatedScreenRes = new Vector3(_camera.pixelWidth, _camera.pixelHeight, 1);
-                    if (_screenRes != updatedScreenRes)
-                    {
-                        _screenRes = updatedScreenRes;
-
-                        Pan.Reset();
-                        Zoom.Reset();
-
-                        SetSizes(Zoom.scale);
-                        _backgroundLinesController.DeleteAllLines();
-                        _backgroundLinesController.DrawLines(_windowSizeWithBorder);
-                    }
-                    else
-                    {
-                        SetSizes(Zoom.scale);
-                        if (_cameraBackgroundColour != _camera.backgroundColor) SetCanvasColor();
-                        _backgroundLinesController.ManageLines(_canvasSize, _windowSizeWithBorder);
-                    }
-                }
+                SetSizes(Zoom.scale);
+                _backgroundLinesController.DeleteAllLines();
+                _backgroundLinesController.DrawLines(_windowSizeWithBorder);
+            }
+            else
+            {
+                SetSizes(Zoom.scale);
+                if (_cameraBackgroundColour != _camera.backgroundColor)
+                    SetCanvasColor();
+                _backgroundLinesController.ManageLines(_canvasSize, _windowSizeWithBorder);
             }
         }
 
@@ -124,10 +125,5 @@ namespace RuntimeNodeEditor.UI.Canvas
             if (!(Input.GetMouseButton(0) || Input.GetMouseButton(1)))
                 CanvasData.canvasIsActive = false;
         }*/
-
-        public void Load()
-        {
-            //
-        }
     }
 }

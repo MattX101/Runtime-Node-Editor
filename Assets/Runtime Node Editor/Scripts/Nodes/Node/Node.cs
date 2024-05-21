@@ -20,6 +20,11 @@ namespace RuntimeNodeEditor.Node
             //
         }
 
+        public void ResetExecution()
+        {
+            wasExecuted = false;
+        }
+
         protected void AddInputPointer(InputPointer inputPointer)
         {
             inputs.Add(inputPointer);

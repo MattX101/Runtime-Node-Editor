@@ -50,7 +50,7 @@ namespace RuntimeNodeEditor.Node
 
         public override void Reset()
         {
-            wasExecuted = false;
+            ResetExecution();
 
             outputs[0].data.vector3Value = Vector3.zero;
         }

@@ -23,7 +23,7 @@ namespace RuntimeNodeEditor.Node
 
         public override void Reset()
         {
-            wasExecuted = false;
+            ResetExecution();
 
             outputs[0].data.intValue = 0;
         }

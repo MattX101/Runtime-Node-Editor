@@ -15,10 +15,5 @@ namespace RuntimeNodeEditor.UI.Canvas
         {
             return BitConverter.GetBytes(scale);
         }
-
-        public static void Load()
-        {
-            //
-        }
     }
 }

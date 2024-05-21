@@ -35,7 +35,7 @@ namespace RuntimeNodeEditor.UI.Pointer
 
         private GameObject AddPointer(string name, GameObject parent, ValueType valueType, int i, bool createText, bool pointerIsInput)
         {
-            GameObject uiElement = UIElement.CreateUIElement(
+            GameObject uiElement = UIElement.Create(
                 parent.transform,
                 name,
                 new Vector2(UISettings.pointerSize, UISettings.pointerSize),
@@ -86,7 +86,7 @@ namespace RuntimeNodeEditor.UI.Pointer
 
         private void AddImage(GameObject uiElement, ValueType valueType)
         {
-            UIImage.CreateRawImage(uiElement, PickPointerColor(valueType));
+            UIImage.Create(uiElement, PickPointerColor(valueType));
             UIImage.AssignTexture(uiElement);
         }
 
@@ -116,8 +116,8 @@ namespace RuntimeNodeEditor.UI.Pointer
 
         public TMP_InputField AddInputField(Transform parent, TMP_InputField.ContentType contentType, int i, bool pointerIsInput, bool interactable)
         {
-            TMP_InputField inputField = UIInputField.CreateInputField(parent, contentType, interactable);
-            UIInputField.UpdateNodeOnValueChange(inputField, _node);
+            TMP_InputField inputField = UIInputField.Create(parent, contentType, interactable);
+            UIInputField.AddOnValueChange(inputField, _node);
 
             float posX = (UISettings.nodeWidth + UISettings.pointerSize) / 2;
             posX -= UISettings.borderSize;
@@ -131,8 +131,8 @@ namespace RuntimeNodeEditor.UI.Pointer
 
         public BooleanButton AddBooleanPreview(Transform parent, bool pointerIsInput)
         {
-            BooleanButton button = UIBooleanPreview.CreateBooleanPreview(parent, !pointerIsInput);
-            UIBooleanPreview.UpdateNodeOnValueChange(button.button, _node);
+            BooleanButton button = UIBooleanPreview.Create(parent, !pointerIsInput);
+            UIBooleanPreview.AddOnValueChange(button.button, _node);
 
             float posX = UISettings.pointerSize * 1.5f;
             posX = pointerIsInput ? posX : -posX;
@@ -143,11 +143,10 @@ namespace RuntimeNodeEditor.UI.Pointer
 
         public Slider AddSlider(Transform parent, bool pointerIsInput)
         {
-            GameObject sliderObject = UISlider.CreateElement(parent);
-            Slider slider = UISlider.CreateSliderElement(sliderObject.transform);
+            GameObject sliderObject = UISlider.Create(parent);
+            Slider slider = UISlider.CreateSlider(sliderObject.transform);
 
             float posX = sliderObject.transform.localPosition.x;
-            //incorrect
             if (pointerIsInput)
             {
                 posX += UISettings.nodeWidth;

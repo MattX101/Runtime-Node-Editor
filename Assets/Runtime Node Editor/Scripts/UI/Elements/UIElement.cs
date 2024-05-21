@@ -4,7 +4,7 @@ namespace RuntimeNodeEditor.UI.Elements
 {
     public static class UIElement
     {
-        public static GameObject CreateUIElement(Transform parent, string objectName, Vector2 size, Vector3 pos)
+        public static GameObject Create(Transform parent, string objectName, Vector2 size, Vector3 pos)
         {
             GameObject uiElement = new GameObject();
             uiElement.name = objectName;
@@ -18,7 +18,7 @@ namespace RuntimeNodeEditor.UI.Elements
             return uiElement;
         }
 
-        public static void UpdateUIElement(RectTransform rect, Vector2 size, Vector3 pos)
+        public static void Update(RectTransform rect, Vector2 size, Vector3 pos)
         {
             rect.sizeDelta = size;
             rect.localPosition = pos;

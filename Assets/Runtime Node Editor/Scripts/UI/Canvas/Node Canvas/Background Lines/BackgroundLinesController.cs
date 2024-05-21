@@ -163,13 +163,15 @@ namespace RuntimeNodeEditor.UI.Canvas.Lines
 
             if (_bounds.x > -size.x) AddNewLine(_bounds.x, windowSize, false, true);
             if (_bounds.y > -size.y) AddNewLine(_bounds.y, windowSize, false, false);
-            if (_bounds.z < size.x) AddNewLine(_bounds.z, windowSize, true, true);
-            if (_bounds.w < size.y) AddNewLine(_bounds.w, windowSize, true, false);
+            if (_bounds.z < size.x)  AddNewLine(_bounds.z, windowSize, true, true);
+            if (_bounds.w < size.y)  AddNewLine(_bounds.w, windowSize, true, false);
         }
         private void AddNewLine(float position, Vector2 windowSize, bool increment, bool isVertical)
         {
-            if (increment) position += 1.0f / ScreenScale.scale;
-            else position -= 1.0f / ScreenScale.scale;
+            position = 
+                increment ? 
+                position + (1.0f / ScreenScale.scale) : 
+                position - (1.0f / ScreenScale.scale);
 
             float value = Mathf.Abs(position) * Zoom.scale;
             if (isVertical && value <= windowSize.x)
@@ -187,7 +189,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Lines
         public void DeleteAllLines()
         {
             for (int i = _horizontalLines.Count - 1; i >= 0; i--) DeleteLine(_horizontalLines, i);
-            for (int i = _verticalLines.Count - 1; i >= 0; i--) DeleteLine(_verticalLines, i);
+            for (int i = _verticalLines.Count - 1; i >= 0; i--)   DeleteLine(_verticalLines, i);
         }
         private void DeleteLine(List<BackgroundLineController> lines, int i)
         {

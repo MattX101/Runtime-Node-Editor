@@ -5,15 +5,15 @@ namespace RuntimeNodeEditor.UI.Elements
 {
     public static class UIInputField
     {
-        public static TMP_InputField CreateInputField(Transform parent, TMP_InputField.ContentType contentType, bool interactable)
+        public static TMP_InputField Create(Transform parent, TMP_InputField.ContentType contentType, bool interactable)
         {
             // Root
-            GameObject root = UIElement.CreateUIElement(parent, "Input Field", new Vector2(UISettings.nodeWidth - UISettings.pointerSize, UISettings.inputFieldHeight), Vector3.zero);
+            GameObject root = UIElement.Create(parent, "Input Field", new Vector2(UISettings.nodeWidth - UISettings.pointerSize, UISettings.inputFieldHeight), Vector3.zero);
             RectTransform rect = root.GetComponent<RectTransform>();
-            UIImage.CreateRawImage(root, Color.white);
+            UIImage.Create(root, Color.white);
 
             // Text Area
-            GameObject textArea = UIElement.CreateUIElement(root.transform, "Text Area", Vector2.zero, Vector3.zero);
+            GameObject textArea = UIElement.Create(root.transform, "Text Area", Vector2.zero, Vector3.zero);
             RectTransform textAreaRect = textArea.GetComponent<RectTransform>();
 
             // Text
@@ -38,11 +38,11 @@ namespace RuntimeNodeEditor.UI.Elements
             inputField.onValueChanged.AddListener(
                 delegate
                 {
-                    SetSingle(inputField);
+                    UpdateCharacter(inputField);
                 });
         }
 
-        public static void UpdateNodeOnValueChange(TMP_InputField inputField, RuntimeNodeEditor.Node.Node node)
+        public static void AddOnValueChange(TMP_InputField inputField, RuntimeNodeEditor.Node.Node node)
         {
             inputField.onValueChanged.AddListener(
                 delegate
@@ -51,15 +51,13 @@ namespace RuntimeNodeEditor.UI.Elements
                 });
         }
 
-        private static void SetSingle(TMP_InputField inputField)
+        private static void UpdateCharacter(TMP_InputField inputField)
         {
-            if (inputField.text.Length > 1)
-            {
-                char character = inputField.text[inputField.text.Length - 1];
+            if (inputField.text.Length == 0)
+                return;
 
-                inputField.text = "";
-                inputField.text += character;
-            }
+            char character = inputField.text[inputField.text.Length - 1];
+            inputField.text = character.ToString();
         }
     }
 }
