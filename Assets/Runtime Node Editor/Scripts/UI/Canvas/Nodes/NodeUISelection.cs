@@ -14,7 +14,7 @@ namespace RuntimeNodeEditor.UI.Node
             Selection(camera);
 
             if (Input.GetKey(KeyCode.LeftControl))
-                if (Input.GetKeyDown(KeyCode.C)) Copy(false);
+                if      (Input.GetKeyDown(KeyCode.C)) Copy(false);
                 else if (Input.GetKeyDown(KeyCode.X)) Copy(true);
                 else if (Input.GetKeyDown(KeyCode.V)) Paste(camera, nodeDrag);
 
@@ -88,6 +88,8 @@ namespace RuntimeNodeEditor.UI.Node
             nodeDrag.InitSpawnDrag(nodeUI, true);
 
             RuntimeNodeEditor.Node.Node newNode = nodeUI.root.GetComponent<RuntimeNodeEditor.Node.Node>();
+
+            nodeUI.elements.SetElements(_copiedNode.nodeUI.elements);
 
             if (_currentCopyIsCut)
             {

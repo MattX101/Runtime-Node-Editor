@@ -34,8 +34,8 @@ namespace RuntimeNodeEditor.Node
                 _value.y = inputs[2].connectedOutputPointer.data.floatValue;
             }
 
-            nodeUI.inputFields[0].text = _value.x.ToString();
-            nodeUI.inputFields[1].text = _value.y.ToString();
+            nodeUI.elements.inputFields[0].text = _value.x.ToString();
+            nodeUI.elements.inputFields[1].text = _value.y.ToString();
 
             wasExecuted = true;
         }

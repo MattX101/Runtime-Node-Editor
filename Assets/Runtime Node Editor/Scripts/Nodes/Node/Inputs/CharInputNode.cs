@@ -13,9 +13,9 @@ namespace RuntimeNodeEditor.Node
 
         public override void Exectute()
         {
-            outputs[0].data.charValue = 
-                nodeUI.inputFields[0].text.Length != 0 ? 
-                nodeUI.inputFields[0].text[0] : 
+            outputs[0].data.charValue =
+                nodeUI.elements.inputFields[0].text.Length != 0 ?
+                nodeUI.elements.inputFields[0].text[0] : 
                 ' ';
 
             wasExecuted = true;

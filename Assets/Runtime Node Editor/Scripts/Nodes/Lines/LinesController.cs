@@ -29,38 +29,41 @@ namespace RuntimeNodeEditor.Node.Line
 
         private void Update()
         {
-            if (CanvasData.canvasIsActive && !(UIData.tabOpened || UIData.windowOpened))
-            {
-                _raycastHit2D = Physics2D.Raycast(_mousePos, Vector2.zero);
+            if (!(CanvasData.canvasIsActive || UIData.tabOpened || UIData.windowOpened))
+                return;
 
-                _mousePos = Input.mousePosition;
-                _mousePos = _camera.ScreenToWorldPoint(_mousePos);
+            _raycastHit2D = Physics2D.Raycast(_mousePos, Vector2.zero);
 
-                if (Input.GetMouseButtonDown(0))
-                    CreateLineOnClick();
-                else if (Input.GetMouseButtonUp(0) && CanvasData.isPointing)
-                    DropLine();
-                else if (_currentLineData != null)
-                    _currentLineData.UpdateDraggingLine(_mousePos);
+            _mousePos = Input.mousePosition;
+            _mousePos = _camera.ScreenToWorldPoint(_mousePos);
 
-                if (Input.GetMouseButtonDown(1))
-                    DeletePointerConnectionsOnClick();
+            if (Input.GetMouseButtonDown(0))
+                CreateLineOnClick();
+            else if (Input.GetMouseButtonUp(0) && CanvasData.isPointing)
+                DropLine();
+            else if (_currentLineData != null)
+                _currentLineData.UpdateDraggingLine(_mousePos);
 
-                if (_droppedLines != null && _droppedLines.Count > 0)
-                    foreach (LineController line in _droppedLines)
-                        line.UpdateWidth();
-            }
+            if (Input.GetMouseButtonDown(1))
+                DeletePointerConnectionsOnClick();
+
+            if (_droppedLines != null && _droppedLines.Count > 0)
+                foreach (LineController line in _droppedLines)
+                    line.UpdateWidth();
         }
 
         private void CreateLineOnClick()
         {
-            if (_raycastHit2D.collider != null && CanvasData.canPoint && _raycastHit2D.collider.TryGetComponent<OutputPointer>(out OutputPointer outputPointer))
-            {
-                CanvasData.isPointing = true;
-                CanvasData.canPoint = false;
+            if (!CanvasData.canPoint)
+                return;
 
-                CreateLine(outputPointer);
-            }
+            if (_raycastHit2D.collider == null || _raycastHit2D.collider.TryGetComponent(out OutputPointer outputPointer) == false)
+                return;
+
+            CanvasData.isPointing = true;
+            CanvasData.canPoint = false;
+
+            CreateLine(outputPointer);
         }
 
         private void CreateLine(OutputPointer outputPointer)
@@ -93,6 +96,7 @@ namespace RuntimeNodeEditor.Node.Line
         {
             if (_raycastHit2D.collider == null)
                 return false;
+
             _raycastHit2D.collider.TryGetComponent<InputPointer>(out InputPointer inputPointer);
 
             if (inputPointer == null)
@@ -123,20 +127,25 @@ namespace RuntimeNodeEditor.Node.Line
 
         private void DeletePointerConnectionsOnClick()
         {
-            if (_raycastHit2D.collider != null && !CanvasData.isPointing)
-            {
-                if (_raycastHit2D.collider.TryGetComponent(out OutputPointer outputPointer))
-                {
-                    foreach (LineController line in outputPointer.lines)
-                        _droppedLines.Remove(line);
-                    outputPointer.DeleteConnections();
-                }
-                else if (_raycastHit2D.collider.TryGetComponent(out InputPointer inputPointer))
-                {
-                    _droppedLines.Remove(inputPointer.line);
-                    inputPointer.DeleteConnection();
-                }
-            }
+            if (_raycastHit2D.collider == null || CanvasData.isPointing)
+                return;
+
+            if (_raycastHit2D.collider.TryGetComponent(out OutputPointer outputPointer))
+                DeleteOutputConnections(outputPointer);
+            else if (_raycastHit2D.collider.TryGetComponent(out InputPointer inputPointer))
+                DeleteInputConnections(inputPointer);
+        }
+
+        private void DeleteOutputConnections(OutputPointer outputPointer)
+        {
+            foreach (LineController line in outputPointer.lines)
+                _droppedLines.Remove(line);
+            outputPointer.DeleteConnections();
+        }
+        private void DeleteInputConnections(InputPointer inputPointer)
+        {
+            _droppedLines.Remove(inputPointer.line);
+            inputPointer.DeleteConnection();
         }
     }
 }

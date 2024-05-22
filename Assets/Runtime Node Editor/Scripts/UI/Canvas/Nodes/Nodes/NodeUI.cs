@@ -2,12 +2,11 @@ using RuntimeNodeEditor.Node.Pointer;
 using RuntimeNodeEditor.Node.Component;
 using RuntimeNodeEditor.UI.Elements;
 using RuntimeNodeEditor.UI.Pointer;
+using RuntimeNodeEditor.UI.Node.Elements;
 using RuntimeNodeEditor.Utils.Colour;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using System;
-using System.Collections.Generic;
 
 namespace RuntimeNodeEditor.UI.Node
 {
@@ -73,9 +72,7 @@ namespace RuntimeNodeEditor.UI.Node
         private float _sizeX, _sizeY;
 
         // Elements
-        public TMP_InputField[] inputFields = null;
-        public BooleanButton[] buttons = null;
-        public Slider[] sliders = null;
+        public NodeUIElements elements;
 
         public NodeUI()
         {
@@ -275,7 +272,7 @@ namespace RuntimeNodeEditor.UI.Node
             _uIPointers.UpdateUIPointers(pointerRect, false);
         }*/
 
-        protected GameObject CreatePointer(string name, RuntimeNodeEditor.Node.Pointer.ValueType valueType, int i, bool createText, bool pointerIsInput)
+        protected GameObject CreatePointer(string name, ValueType valueType, int i, bool createText, bool pointerIsInput)
         {
             return uIPointers.CreatePointer(
                 name,
@@ -347,65 +344,7 @@ namespace RuntimeNodeEditor.UI.Node
 
         public byte[] Save()
         {
-            List<byte> bytes = new List<byte>();
-
-            // Node ID
-            bytes.Add((byte)nodeId.Length);
-
-            for (int i = 0; i < nodeId.Length; i++)
-                bytes.Add((byte)nodeId[i]);
-
-            // Node Position
-            foreach (byte b in BitConverter.GetBytes(rootRect.localPosition.x)) bytes.Add(b);
-            foreach (byte b in BitConverter.GetBytes(rootRect.localPosition.y)) bytes.Add(b);
-
-            // Inputfields
-            if (inputFields == null)
-            {
-                bytes.Add(0);
-            }
-            else
-            {
-                bytes.Add((byte)inputFields.Length);
-
-                foreach (TMP_InputField inputField in inputFields)
-                {
-                    bytes.Add((byte)inputField.text.Length);
-
-                    if (inputField.text.Length > 0)
-                        for (int i = 0; i < inputField.text.Length; i++)
-                            bytes.Add((byte)inputField.text[i]);
-                }
-            }
-
-            // Boolean Buttons
-            if (buttons == null)
-            {
-                bytes.Add(0);
-            }
-            else
-            {
-                bytes.Add((byte)buttons.Length);
-
-                foreach (BooleanButton button in buttons)
-                    bytes.Add(button.Toggled == true ? (byte)1 : (byte)0);
-            }
-
-            // Sliders
-            if (sliders == null)
-            {
-                bytes.Add(0);
-            }
-            else
-            {
-                bytes.Add((byte)sliders.Length);
-
-                foreach (Slider slider in sliders)
-                    foreach (byte b in BitConverter.GetBytes(slider.value))
-                        bytes.Add(b);
-            }
-
-            return bytes.ToArray();
+            return elements.Save(nodeId, rootRect.localPosition);
         }
     }
 }

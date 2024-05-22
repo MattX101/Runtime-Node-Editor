@@ -13,7 +13,7 @@ namespace RuntimeNodeEditor.Node
 
         public override void Exectute()
         {
-            outputs[0].data.stringValue = nodeUI.inputFields[0].text;
+            outputs[0].data.stringValue = nodeUI.elements.inputFields[0].text;
 
             wasExecuted = true;
         }

@@ -73,15 +73,15 @@ namespace RuntimeNodeEditor.Node.Line
 
         private void UpdatePointsPositions(Vector3 a, Vector3 b)
         {
-            if (lineRenderer.positionCount > 2)
-            {
-                for (int i = 1; i < lineRenderer.positionCount - 1; i++)
-                {
-                    float x = Mathf.Lerp(a.x, b.x, (float)i / lineRenderer.positionCount);
-                    float easeY = Mathf.Lerp(a.y, b.y, LinearEaseCurves.EaseInOutCos((float)i / lineRenderer.positionCount));
+            if (lineRenderer.positionCount <= 2)
+                return;
 
-                    lineRenderer.SetPosition(i, new Vector3(x, easeY, 100));
-                }
+            for (int i = 1; i < lineRenderer.positionCount - 1; i++)
+            {
+                float x = Mathf.Lerp(a.x, b.x, (float)i / lineRenderer.positionCount);
+                float easeY = Mathf.Lerp(a.y, b.y, LinearEaseCurves.EaseInOutCos((float)i / lineRenderer.positionCount));
+
+                lineRenderer.SetPosition(i, new Vector3(x, easeY, 100));
             }
         }
 

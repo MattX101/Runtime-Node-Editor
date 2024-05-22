@@ -1,5 +1,6 @@
 using RuntimeNodeEditor.Node;
 using RuntimeNodeEditor.Node.Pointer;
+using RuntimeNodeEditor.UI.Node.Elements;
 using TMPro;
 using UnityEngine;
 
@@ -38,14 +39,15 @@ namespace RuntimeNodeEditor.UI.Node
             outputs[2].node = vector2InputNode;
             outputs[2].valueType = ValueType.Float;
 
-            inputFields = new TMP_InputField[2];
-            inputFields[0] = AddInputField(
+            elements = new NodeUIElements(2, 0, 0);
+
+            elements.inputFields[0] = AddInputField(
                 outputs[1].gameObject.transform,
                 TMP_InputField.ContentType.DecimalNumber,
                 0,
                 false,
                 true);
-            inputFields[1] = AddInputField(
+            elements.inputFields[1] = AddInputField(
                 outputs[2].gameObject.transform,
                 TMP_InputField.ContentType.DecimalNumber,
                 0,

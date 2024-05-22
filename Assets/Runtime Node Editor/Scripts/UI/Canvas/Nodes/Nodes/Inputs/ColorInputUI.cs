@@ -1,5 +1,6 @@
 using RuntimeNodeEditor.Node;
 using RuntimeNodeEditor.Node.Pointer;
+using RuntimeNodeEditor.UI.Node.Elements;
 using UnityEngine;
 
 namespace RuntimeNodeEditor.UI.Node
@@ -41,15 +42,16 @@ namespace RuntimeNodeEditor.UI.Node
             outputs[3].node = colorInputNode;
             outputs[3].valueType = ValueType.Float;
 
-            sliders = new UnityEngine.UI.Slider[3];
-            sliders[0] = AddSlider(outputs[1].transform, false);
-            sliders[1] = AddSlider(outputs[2].transform, false);
-            sliders[2] = AddSlider(outputs[3].transform, false);
+            elements = new NodeUIElements(0, 0, 3);
+
+            elements.sliders[0] = AddSlider(outputs[1].transform, false);
+            elements.sliders[1] = AddSlider(outputs[2].transform, false);
+            elements.sliders[2] = AddSlider(outputs[3].transform, false);
 
             PreviewColor(1, 2, 3, false);
-            imagePreview.UpdateNodeOnValueChange(sliders[0], colorInputNode);
-            imagePreview.UpdateNodeOnValueChange(sliders[1], colorInputNode);
-            imagePreview.UpdateNodeOnValueChange(sliders[2], colorInputNode);
+            imagePreview.UpdateNodeOnValueChange(elements.sliders[0], colorInputNode);
+            imagePreview.UpdateNodeOnValueChange(elements.sliders[1], colorInputNode);
+            imagePreview.UpdateNodeOnValueChange(elements.sliders[2], colorInputNode);
 
             colorInputNode.AddPointers(inputs, outputs);
         }

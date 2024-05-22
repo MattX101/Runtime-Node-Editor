@@ -4,8 +4,6 @@ namespace RuntimeNodeEditor.Node.Pointer
 {
     public class Pointer : MonoBehaviour
     {
-        public string name;
-
         public Node node;
 
         public ValueType valueType = ValueType.None;

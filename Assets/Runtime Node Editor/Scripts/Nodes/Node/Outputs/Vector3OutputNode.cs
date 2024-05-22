@@ -40,9 +40,9 @@ namespace RuntimeNodeEditor.Node
                 _value.z = inputs[3].connectedOutputPointer.data.floatValue;
             }
 
-            nodeUI.inputFields[0].text = _value.x.ToString();
-            nodeUI.inputFields[1].text = _value.y.ToString();
-            nodeUI.inputFields[2].text = _value.z.ToString();
+            nodeUI.elements.inputFields[0].text = _value.x.ToString();
+            nodeUI.elements.inputFields[1].text = _value.y.ToString();
+            nodeUI.elements.inputFields[2].text = _value.z.ToString();
 
             wasExecuted = true;
         }

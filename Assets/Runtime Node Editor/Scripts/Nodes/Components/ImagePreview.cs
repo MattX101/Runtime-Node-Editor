@@ -11,7 +11,7 @@ namespace RuntimeNodeEditor.Node.Component
         {
             if (red == null || green == null || blue == null)
             {
-                Debug.LogError("One or more of the sliders are null");
+                Debug.LogError("One or more of the _sliders are null");
 
                 return;
             }

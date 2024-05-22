@@ -1,6 +1,7 @@
 using RuntimeNodeEditor.Node;
 using RuntimeNodeEditor.Node.Pointer;
 using RuntimeNodeEditor.UI.Elements;
+using RuntimeNodeEditor.UI.Node.Elements;
 using TMPro;
 using UnityEngine;
 
@@ -30,15 +31,16 @@ namespace RuntimeNodeEditor.UI.Node
             outputs[0].node = charInputNode;
             outputs[0].valueType = ValueType.Char;
 
-            inputFields = new TMP_InputField[1];
-            inputFields[0] = AddInputField(
+            elements = new NodeUIElements(1, 0, 0);
+
+            elements.inputFields[0] = AddInputField(
                 outputs[0].gameObject.transform,
                 TMP_InputField.ContentType.Name,
                 0,
                 false,
                 true);
             
-            UIInputField.SetSingleCharacterInputField(inputFields[0]);
+            UIInputField.SetSingleCharacterInputField(elements.inputFields[0]);
 
             charInputNode.AddPointers(inputs, outputs);
         }

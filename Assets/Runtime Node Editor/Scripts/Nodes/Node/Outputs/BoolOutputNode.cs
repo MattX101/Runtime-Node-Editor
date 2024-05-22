@@ -16,7 +16,7 @@ namespace RuntimeNodeEditor.Node
             if (inputs[0].connectedOutputPointer != null)
             {
                 inputs[0].connectedOutputPointer.node.Exectute();
-                nodeUI.buttons[0].Toggle(inputs[0].connectedOutputPointer.data.boolValue);
+                nodeUI.elements.buttons[0].Toggle(inputs[0].connectedOutputPointer.data.boolValue);
             }
 
             wasExecuted = true;

@@ -9200,6 +9200,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1777772064}
   - component: {fileID: 1777772066}
+  - component: {fileID: 1777772068}
   - component: {fileID: 1777772067}
   m_Layer: 0
   m_Name: Nodes
@@ -9242,7 +9243,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _parent: {fileID: 1777772064}
   _pointerTexture: {fileID: 2800000, guid: c1f96df7fbe79ca4f99cedf104c748b2, type: 3}
-  _nodeController: {fileID: 1809428008}
+  _nodeUISelection: {fileID: 1777772068}
   _nodesObject: {fileID: 1777772063}
 --- !u!114 &1777772067
 MonoBehaviour:
@@ -9259,6 +9260,18 @@ MonoBehaviour:
   parent: {fileID: 1135406250}
   _camera: {fileID: 519420031}
   _sourceMaterial: {fileID: 2100000, guid: c7c12c2b7a8a5e94da7da553c6500f31, type: 2}
+--- !u!114 &1777772068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1777772063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c61c6761e49d3f24285462d7addef307, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1798159167
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9436,7 +9449,6 @@ GameObject:
   - component: {fileID: 1809428005}
   - component: {fileID: 1809428004}
   - component: {fileID: 1809428003}
-  - component: {fileID: 1809428008}
   m_Layer: 0
   m_Name: Nodes Canvas
   m_TagString: Untagged
@@ -9548,18 +9560,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &1809428008
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1809428001}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f71f6ed9a4ba0643a5ed1858ff14dba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1811203666
 GameObject:
   m_ObjectHideFlags: 0

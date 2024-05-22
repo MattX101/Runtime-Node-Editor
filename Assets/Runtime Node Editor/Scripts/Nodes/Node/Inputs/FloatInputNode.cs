@@ -14,8 +14,8 @@ namespace RuntimeNodeEditor.Node
         public override void Exectute()
         {
             outputs[0].data.floatValue =
-                nodeUI.inputFields[0].text.Length != 0
-                ? float.Parse(nodeUI.inputFields[0].text)
+                nodeUI.elements.inputFields[0].text.Length != 0
+                ? float.Parse(nodeUI.elements.inputFields[0].text)
                 : 0.0f;
 
             wasExecuted = true;

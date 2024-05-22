@@ -1,7 +1,7 @@
-using RuntimeNodeEditor.Node;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace RuntimeNodeEditor.UI.Node
 {
@@ -11,16 +11,31 @@ namespace RuntimeNodeEditor.UI.Node
 
         [SerializeField] private Texture2D _pointerTexture;
 
+        private Camera _camera;
+        private CanvasScaler _canvasScaler;
+
         [SerializeField]
-        private NodeController _nodeController;
+        private NodeUISelection _nodeUISelection;
+        public NodeUIDrag nodeDrag;
 
         [SerializeField]
         private GameObject _nodesObject;
 
         void Awake()
         {
+            _camera = FindObjectOfType<Camera>();
+            _canvasScaler = FindObjectOfType<CanvasScaler>();
+
+            nodeDrag = new NodeUIDrag();
+
             UISettings.nodeCanvasTransform = _parent.transform;
             UISettings.pointerTexture = _pointerTexture;
+        }
+
+        void Update()
+        {
+            _nodeUISelection.ManageNodes(_camera, nodeDrag);
+            nodeDrag.ManageDrag(_camera, _canvasScaler);
         }
 
         public void Spawn(string id)
@@ -44,7 +59,7 @@ namespace RuntimeNodeEditor.UI.Node
                 throw new ArgumentNullException(nameof(type));
 
             NodeUI nodeUI = (NodeUI)Activator.CreateInstance(type);
-            _nodeController.nodeDrag.InitSpawnDrag(nodeUI, spawnDrag);
+            nodeDrag.InitSpawnDrag(nodeUI, spawnDrag);
             nodeUI.rootRect.localPosition = position;
         }
 
@@ -65,19 +80,9 @@ namespace RuntimeNodeEditor.UI.Node
 
             nodeUI.rootRect.localPosition = data.position;
 
-            if (nodeUI.inputFields != null)
-                for (int i = 0; i < nodeUI.inputFields.Length; i++)
-                    nodeUI.inputFields[i].text = data.Texts[i];
+            nodeUI.elements.SetElements(data.Texts, data.Booleans, data.Values);
 
-            if (nodeUI.buttons != null)
-                for (int i = 0; i < nodeUI.buttons.Length; i++)
-                    nodeUI.buttons[i].Toggle(data.Booleans[i]);
-
-            if (nodeUI.sliders != null)
-                for (int i = 0; i < nodeUI.sliders.Length; i++)
-                    nodeUI.sliders[i].value = data.Values[i];
-
-            _nodeController.nodeDrag.InitSpawnDrag(nodeUI, spawnDrag);
+            nodeDrag.InitSpawnDrag(nodeUI, spawnDrag);
         }
 
         public byte[] Save()
@@ -85,7 +90,6 @@ namespace RuntimeNodeEditor.UI.Node
             List<byte> bytes = new List<byte>();
 
             RuntimeNodeEditor.Node.Node[] nodes = _nodesObject.GetComponentsInChildren<RuntimeNodeEditor.Node.Node>();
-            Debug.Log(nodes.Length);
 
             byte[] numOfNodes = BitConverter.GetBytes(nodes.Length);
             bytes.Add(numOfNodes[0]);

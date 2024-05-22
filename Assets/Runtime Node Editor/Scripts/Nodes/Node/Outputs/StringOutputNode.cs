@@ -16,7 +16,7 @@ namespace RuntimeNodeEditor.Node
             if (inputs[0].connectedOutputPointer != null)
             {
                 inputs[0].connectedOutputPointer.node.Exectute();
-                nodeUI.inputFields[0].text = inputs[0].connectedOutputPointer.data.stringValue;
+                nodeUI.elements.inputFields[0].text = inputs[0].connectedOutputPointer.data.stringValue;
             }
 
             wasExecuted = true;
