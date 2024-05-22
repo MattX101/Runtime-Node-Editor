@@ -45,10 +45,5 @@ namespace RuntimeNodeEditor.Node
 
             outputs[0].data.vector2Value = Vector2.zero;
         }
-
-        public override NodeUI Paste(Vector3 spawnPosition)
-        {
-            return Paste(new Vector2InputUI(), spawnPosition);
-        }
     }
 }

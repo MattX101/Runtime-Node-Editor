@@ -1,5 +1,6 @@
 using RuntimeNodeEditor.UI.Canvas.Data;
 using RuntimeNodeEditor.UI.Canvas;
+using RuntimeNodeEditor.Node.Line;
 using UnityEngine;
 
 namespace RuntimeNodeEditor.UI.Node
@@ -9,14 +10,20 @@ namespace RuntimeNodeEditor.UI.Node
         private RuntimeNodeEditor.Node.Node _currentNode, _previousNode, _copiedNode;
         private bool _currentCopyIsCut = false;
 
-        public void ManageNodes(Camera camera, NodeUIDrag nodeDrag)
+        [SerializeField]
+        private NodeUIManager _nodeUIManager;
+
+        [SerializeField]
+        private LinesController _linesController;
+
+        public void ManageNodes(Camera camera)
         {
             Selection(camera);
 
             if (Input.GetKey(KeyCode.LeftControl))
                 if      (Input.GetKeyDown(KeyCode.C)) Copy(false);
                 else if (Input.GetKeyDown(KeyCode.X)) Copy(true);
-                else if (Input.GetKeyDown(KeyCode.V)) Paste(camera, nodeDrag);
+                else if (Input.GetKeyDown(KeyCode.V)) Paste();
 
             if (Input.GetKeyDown(KeyCode.Delete))
                 Delete(_currentNode);
@@ -77,19 +84,17 @@ namespace RuntimeNodeEditor.UI.Node
             _currentCopyIsCut = cut;
         }
 
-        private void Paste(Camera camera, NodeUIDrag nodeDrag)
+        private void Paste()
         {
             if (_copiedNode == null)
                 return;
 
-            NodeUI nodeUI = _copiedNode.Paste(
-                MouseController.GetMouseViewportPosition(camera)
-                );
-            nodeDrag.InitSpawnDrag(nodeUI, true);
+            NodeUI nodeUI = _nodeUIManager.SpawnWithReturn(_copiedNode.nodeUI.nodeId, _copiedNode.nodeUI.rootRect.localPosition, true);
 
             RuntimeNodeEditor.Node.Node newNode = nodeUI.root.GetComponent<RuntimeNodeEditor.Node.Node>();
 
-            nodeUI.elements.SetElements(_copiedNode.nodeUI.elements);
+            newNode.nodeUI.elements.SetElements(_copiedNode.nodeUI.elements);
+            _linesController.Paste(_copiedNode, newNode);
 
             if (_currentCopyIsCut)
             {

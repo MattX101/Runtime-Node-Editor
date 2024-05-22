@@ -147,5 +147,35 @@ namespace RuntimeNodeEditor.Node.Line
             _droppedLines.Remove(inputPointer.line);
             inputPointer.DeleteConnection();
         }
+
+        public void Paste(Node copiedNode, Node newNode)
+        {
+            if (copiedNode.inputs.Count > 0)
+            {
+                for (int i = 0; i < copiedNode.inputs.Count; i++)
+                {
+                    if (copiedNode.inputs[i].connectedOutputPointer == null)
+                        continue;
+
+                    InputPointer newInput = newNode.inputs[i];
+                    OutputPointer output = copiedNode.inputs[i].connectedOutputPointer;
+
+                    if (output.connectedInputPointers == null)
+                        output.connectedInputPointers = new List<InputPointer>();
+                    output.connectedInputPointers.Add(newInput);
+
+                    newNode.inputs[i].SetConnection(output);
+
+                    CreateLine(output);
+
+                    newInput.line = _currentLineData;
+                    _currentLineData.input = newInput;
+
+                    _droppedLines.Add(_currentLineData);
+                }
+
+                _currentLineData = null;
+            }
+        }
     }
 }

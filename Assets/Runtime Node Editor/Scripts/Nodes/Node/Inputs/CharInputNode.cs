@@ -27,10 +27,5 @@ namespace RuntimeNodeEditor.Node
 
             outputs[0].data.charValue = ' ';
         }
-
-        public override NodeUI Paste(Vector3 spawnPosition)
-        {
-            return Paste(new CharInputUI(), spawnPosition);
-        }
     }
 }

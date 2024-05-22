@@ -35,10 +35,5 @@ namespace RuntimeNodeEditor.Node
 
             outputs[0].data.colorValue = Color.black;
         }
-
-        public override NodeUI Paste(Vector3 spawnPosition)
-        {
-            return Paste(new ColorInputUI(), spawnPosition);
-        }
     }
 }

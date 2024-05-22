@@ -51,10 +51,5 @@ namespace RuntimeNodeEditor.Node
         {
             ResetExecution();
         }
-
-        public override NodeUI Paste(Vector3 spawnPosition)
-        {
-            return Paste(new Vector3OutputUI(), spawnPosition);
-        }
     }
 }

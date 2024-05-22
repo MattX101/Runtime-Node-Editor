@@ -24,10 +24,5 @@ namespace RuntimeNodeEditor.Node
 
             outputs[0].data.boolValue = false;
         }
-
-        public override NodeUI Paste(Vector3 spawnPosition)
-        {
-            return Paste(new BoolInputUI(), spawnPosition);
-        }
     }
 }

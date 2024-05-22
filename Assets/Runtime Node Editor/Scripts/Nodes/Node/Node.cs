@@ -66,23 +66,5 @@ namespace RuntimeNodeEditor.Node
                 }
             }
         }
-
-        public virtual NodeUI Paste(Vector3 spawnPosition)
-        {
-            return Paste(
-                new NodeUI(), 
-                new Vector3(
-                    spawnPosition.x, 
-                    spawnPosition.y, 
-                    0)
-                );
-        }
-
-        protected NodeUI Paste(NodeUI ui, Vector3 spawnPosition)
-        {
-            ui.rootRect.localPosition = spawnPosition;
-
-            return ui;
-        }
     }
 }

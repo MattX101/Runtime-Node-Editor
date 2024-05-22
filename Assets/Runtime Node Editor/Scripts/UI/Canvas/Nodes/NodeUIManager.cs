@@ -34,7 +34,7 @@ namespace RuntimeNodeEditor.UI.Node
 
         void Update()
         {
-            _nodeUISelection.ManageNodes(_camera, nodeDrag);
+            _nodeUISelection.ManageNodes(_camera);
             nodeDrag.ManageDrag(_camera, _canvasScaler);
         }
 
@@ -45,11 +45,16 @@ namespace RuntimeNodeEditor.UI.Node
 
         public void Spawn(string id, Vector3 position, bool spawnDrag)
         {
+            SpawnWithReturn(id, position, spawnDrag);
+        }
+
+        public NodeUI SpawnWithReturn(string id, Vector3 position, bool spawnDrag)
+        {
             if (id.Length > byte.MaxValue)
             {
                 Debug.LogError("Name of node cannot exceed 255 characters!");
 
-                return;
+                return null;
             }
 
             string nodeNamespace = "RuntimeNodeEditor.UI.Node.";
@@ -61,6 +66,8 @@ namespace RuntimeNodeEditor.UI.Node
             NodeUI nodeUI = (NodeUI)Activator.CreateInstance(type);
             nodeDrag.InitSpawnDrag(nodeUI, spawnDrag);
             nodeUI.rootRect.localPosition = position;
+
+            return nodeUI;
         }
 
         public void Spawn(NodeUILoadData data, bool spawnDrag)
@@ -77,9 +84,7 @@ namespace RuntimeNodeEditor.UI.Node
                 throw new ArgumentNullException(nameof(type));
 
             NodeUI nodeUI = (NodeUI)Activator.CreateInstance(type);
-
             nodeUI.rootRect.localPosition = data.position;
-
             nodeUI.elements.SetElements(data.Texts, data.Booleans, data.Values);
 
             nodeDrag.InitSpawnDrag(nodeUI, spawnDrag);

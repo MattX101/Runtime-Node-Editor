@@ -27,10 +27,5 @@ namespace RuntimeNodeEditor.Node
 
             outputs[0].data.floatValue = 0.0f;
         }
-
-        public override NodeUI Paste(Vector3 spawnPosition)
-        {
-            return Paste(new FloatInputUI(), spawnPosition);
-        }
     }
 }

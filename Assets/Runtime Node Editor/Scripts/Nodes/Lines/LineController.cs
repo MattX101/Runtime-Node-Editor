@@ -7,14 +7,14 @@ namespace RuntimeNodeEditor.Node.Line
 {
     public class LineController
     {
-        public GameObject lineObject;
-        public LineRenderer lineRenderer;
+        private GameObject lineObject;
+        private LineRenderer lineRenderer;
 
         public InputPointer input;
-        public Vector3 startPosition;
+        private Vector3 startPosition;
 
         public OutputPointer output;
-        public Vector3 endPosition;
+        private Vector3 endPosition;
 
         private float _lineWidth = 0.1f;
 

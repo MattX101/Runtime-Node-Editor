@@ -9272,6 +9272,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c61c6761e49d3f24285462d7addef307, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _nodeUIManager: {fileID: 1777772066}
+  _linesController: {fileID: 1777772067}
 --- !u!1001 &1798159167
 PrefabInstance:
   m_ObjectHideFlags: 0
