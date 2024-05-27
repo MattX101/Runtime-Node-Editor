@@ -7,6 +7,7 @@ using RuntimeNodeEditor.Utils.Colour;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections.Generic;
 
 namespace RuntimeNodeEditor.UI.Node
 {
@@ -76,11 +77,13 @@ namespace RuntimeNodeEditor.UI.Node
 
         public NodeUI()
         {
-            //
+            elements = new NodeUIElements(0, 0, 0);
         }
 
         public NodeUI(string nodeId)
         {
+            elements = new NodeUIElements(0, 0, 0);
+
             this.nodeId = nodeId;
         }
 
@@ -342,9 +345,26 @@ namespace RuntimeNodeEditor.UI.Node
             _canvasGroup.blocksRaycasts = toggle;
         }
 
-        public byte[] Save()
+        public byte[] SaveNodeUI()
         {
-            return elements.Save(nodeId, rootRect.localPosition);
+            List<byte> bytes = new List<byte>();
+
+            // Node ID
+            bytes.Add((byte)nodeId.Length);
+
+            for (int i = 0; i < nodeId.Length; i++)
+                bytes.Add((byte)nodeId[i]);
+
+            // Node Position
+            foreach (byte b in System.BitConverter.GetBytes(rootRect.localPosition.x)) bytes.Add(b);
+            foreach (byte b in System.BitConverter.GetBytes(rootRect.localPosition.y)) bytes.Add(b);
+
+            return bytes.ToArray();
+        }
+            
+        public byte[] SaveUIElements()
+        {
+            return elements.Save();
         }
     }
 }

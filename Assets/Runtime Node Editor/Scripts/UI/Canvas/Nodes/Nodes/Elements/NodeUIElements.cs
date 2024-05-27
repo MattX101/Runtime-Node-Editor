@@ -1,7 +1,6 @@
 using RuntimeNodeEditor.Node.Component;
 using TMPro;
 using UnityEngine.UI;
-using UnityEngine;
 
 namespace RuntimeNodeEditor.UI.Node.Elements
 {
@@ -82,9 +81,9 @@ namespace RuntimeNodeEditor.UI.Node.Elements
                 sliders[i].value = values[i].value;
         }
 
-        public byte[] Save(string nodeId, Vector3 position)
+        public byte[] Save()
         {
-            return new SaveUIElements().Save(nodeId, position, inputFields, buttons, sliders);
+            return new SaveUIElements().Save(inputFields, buttons, sliders);
         }
     }
 }

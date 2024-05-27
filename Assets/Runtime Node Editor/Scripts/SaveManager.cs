@@ -1,4 +1,5 @@
 using RuntimeNodeEditor.Functions.Seed;
+using RuntimeNodeEditor.Node.Line;
 using RuntimeNodeEditor.UI.Canvas;
 using RuntimeNodeEditor.UI.Node;
 using RuntimeNodeEditor.Utils.IO.Selection;
@@ -17,11 +18,12 @@ namespace RuntimeNodeEditor
         [SerializeField]
         private Camera _camera;
 
-        [SerializeField]
-        private SeedManager _seedManager;
+        [SerializeField] private SeedManager _seedManager;
+        [SerializeField] private NodeUIManager _nodeUIManager;
+        [SerializeField] private LinesController _linesController;
 
         [SerializeField]
-        private NodeUIManager _nodeUIManager;
+        private GameObject _nodesObject;
 
         private List<byte> _data = new List<byte>();
 
@@ -57,7 +59,7 @@ namespace RuntimeNodeEditor
 
             foreach (byte b in _seedManager.Save()) _data.Add(b);
             foreach (byte b in Zoom.Save()) _data.Add(b);
-            foreach (byte b in _nodeUIManager.Save()) _data.Add(b);
+            foreach (byte b in _nodeUIManager.Save(_nodesObject)) _data.Add(b);
 
             File.WriteAllBytes(_saveDirectory, _data.ToArray());
         }
@@ -77,24 +79,42 @@ namespace RuntimeNodeEditor
             byte[] data = File.ReadAllBytes(path);
 
             _seedManager.seed = BitConverter.ToInt32(data, position);
-            position += 4;
-
-            Zoom.scale = BitConverter.ToSingle(data, position);
-            position += 4;
-
-            int numOfNodes = BitConverter.ToInt32(data, position);
-            position += 4;
+            Zoom.scale = BitConverter.ToSingle(data, position + 4);
+            int numOfNodes = BitConverter.ToInt32(data, position + 8);
+            position += 12;
 
             if (numOfNodes == 0)
                 return;
 
             for (int i = 0; i < numOfNodes; i++)
-            {
-                NodeUILoadData nodeUIData = new NodeUILoadData(data, position);
-                position = nodeUIData.endIndex;
+                position = LoadNodes(position, data);
 
-                _nodeUIManager.Load(nodeUIData);
-            }
+            Node.Node[] nodes = _nodesObject.GetComponentsInChildren<Node.Node>();
+
+            int connectionArrayLength = BitConverter.ToInt32(data, position);
+            position += 4;
+
+            for (int i = 0; i < connectionArrayLength; i++)
+                position = LoadConnections(nodes, position, data);
+        }
+
+        private int LoadNodes(int position, byte[] data)
+        {
+            NodeUILoadData nodeUIData = new NodeUILoadData(data, position);
+            position = nodeUIData.endIndex;
+
+            _nodeUIManager.Load(nodeUIData);
+
+            return position;
+        }
+
+        private int LoadConnections(Node.Node[] nodes, int position, byte[] data)
+        {
+            _linesController.Load(
+                nodes[BitConverter.ToInt32(data, position)].inputs[data[position + 4]], 
+                nodes[BitConverter.ToInt32(data, position + 5)].outputs[data[position + 9]]);
+
+            return position += 10;
         }
     }
 }

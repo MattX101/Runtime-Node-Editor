@@ -44,14 +44,14 @@ namespace RuntimeNodeEditor.UI.Node
                 0);
             index += 8;
 
-            index = SaveInputFields(data, index);
-            index = SaveBooleans(data, index);
-            index = SaveSliders(data, index);
+            index = LoadInputFields(data, index);
+            index = LoadBooleans(data, index);
+            index = LoadSliders(data, index);
 
             endIndex = index;
         }
 
-        private int SaveInputFields(byte[] data, int index)
+        private int LoadInputFields(byte[] data, int index)
         {
             byte numOfInputFields = data[index];
             index++;
@@ -77,15 +77,15 @@ namespace RuntimeNodeEditor.UI.Node
             return index;
         }
 
-        private int SaveBooleans(byte[] data, int index)
+        private int LoadBooleans(byte[] data, int index)
         {
-            byte numOf_booleans = data[index];
+            byte numOfBooleans = data[index];
             index++;
 
-            if (numOf_booleans == 0)
+            if (numOfBooleans == 0)
                 return index;
 
-            _booleans = new bool[numOf_booleans];
+            _booleans = new bool[numOfBooleans];
 
             for (int i = 0; i < _booleans.Length; i++, index++)
                 _booleans[i] = data[index] == 1 ? true : false;
@@ -93,7 +93,7 @@ namespace RuntimeNodeEditor.UI.Node
             return index;
         }
 
-        private int SaveSliders(byte[] data, int index)
+        private int LoadSliders(byte[] data, int index)
         {
             byte numOfSliders = data[index];
             index++;

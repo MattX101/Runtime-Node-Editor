@@ -3,25 +3,14 @@ using System.Collections.Generic;
 using System;
 using TMPro;
 using UnityEngine.UI;
-using UnityEngine;
 
 namespace RuntimeNodeEditor.UI.Node.Elements
 {
     public class SaveUIElements
     {
-        public byte[] Save(string nodeId, Vector3 position, TMP_InputField[] inputFields, BooleanButton[] buttons, Slider[] sliders)
+        public byte[] Save(TMP_InputField[] inputFields, BooleanButton[] buttons, Slider[] sliders)
         {
             List<byte> bytes = new List<byte>();
-
-            // Node ID
-            bytes.Add((byte)nodeId.Length);
-
-            for (int i = 0; i < nodeId.Length; i++)
-                bytes.Add((byte)nodeId[i]);
-
-            // Node Position
-            foreach (byte b in BitConverter.GetBytes(position.x)) bytes.Add(b);
-            foreach (byte b in BitConverter.GetBytes(position.y)) bytes.Add(b);
 
             bytes = SaveInputFields(bytes, inputFields);
             bytes = SaveBooleanButtons(bytes, buttons);

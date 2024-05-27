@@ -150,32 +150,43 @@ namespace RuntimeNodeEditor.Node.Line
 
         public void Paste(Node copiedNode, Node newNode)
         {
-            if (copiedNode.inputs.Count > 0)
+            if (copiedNode.inputs.Count == 0)
+                return;
+
+            for (int i = 0; i < copiedNode.inputs.Count; i++)
             {
-                for (int i = 0; i < copiedNode.inputs.Count; i++)
-                {
-                    if (copiedNode.inputs[i].connectedOutputPointer == null)
-                        continue;
+                if (copiedNode.inputs[i].connectedOutputPointer == null)
+                    continue;
 
-                    InputPointer newInput = newNode.inputs[i];
-                    OutputPointer output = copiedNode.inputs[i].connectedOutputPointer;
+                InputPointer newInput = newNode.inputs[i];
+                OutputPointer output = copiedNode.inputs[i].connectedOutputPointer;
 
-                    if (output.connectedInputPointers == null)
-                        output.connectedInputPointers = new List<InputPointer>();
-                    output.connectedInputPointers.Add(newInput);
-
-                    newNode.inputs[i].SetConnection(output);
-
-                    CreateLine(output);
-
-                    newInput.line = _currentLineData;
-                    _currentLineData.input = newInput;
-
-                    _droppedLines.Add(_currentLineData);
-                }
-
-                _currentLineData = null;
+                SetConnection(newInput, output);
             }
+
+            _currentLineData = null;
+        }
+
+        public void Load(InputPointer input, OutputPointer output)
+        {
+            SetConnection(input, output);
+
+            _currentLineData = null;
+        }
+
+        private void SetConnection(InputPointer input, OutputPointer output)
+        {
+            if (output.connectedInputPointers == null)
+                output.connectedInputPointers = new List<InputPointer>();
+            output.connectedInputPointers.Add(input);
+
+            input.SetConnection(output);
+            CreateLine(output);
+
+            input.line = _currentLineData;
+            _currentLineData.input = input;
+
+            _droppedLines.Add(_currentLineData);
         }
     }
 }
