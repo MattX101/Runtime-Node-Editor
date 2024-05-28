@@ -1,33 +1,28 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace RuntimeNodeEditor.Node.Component
 {
-    public class BooleanButton
+    public class BooleanButton : MonoBehaviour
     {
+        [NonSerialized]
         public Button button;
+
+        [NonSerialized]
         public RawImage image;
 
-        public bool Toggled
-        {
-            get
-            {
-                return 
-                    image.color == Color.green ? 
-                    true : 
-                    false;
-            }
-        }
+        public bool Toggled = false;
 
-        public BooleanButton(Button button, RawImage image)
+        public void Toggle()
         {
-            this.button = button;
-            this.image = image;
+            Toggle(!Toggled);
         }
 
         public void Toggle(bool toggle)
         {
             image.color = toggle ? Color.green : Color.red;
+            Toggled = toggle;
 
             if (!button.interactable)
                 image.color *= 0.75f;

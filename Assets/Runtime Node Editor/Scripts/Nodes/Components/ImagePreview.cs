@@ -1,10 +1,12 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace RuntimeNodeEditor.Node.Component
 {
-    public class ImagePreview
+    public class ImagePreview : MonoBehaviour
     {
+        [NonSerialized]
         public RawImage image;
 
         public void SetSliderInput(Slider red, Slider green, Slider blue)

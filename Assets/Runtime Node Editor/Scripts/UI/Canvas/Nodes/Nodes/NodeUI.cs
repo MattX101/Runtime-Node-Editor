@@ -44,7 +44,6 @@ namespace RuntimeNodeEditor.UI.Node
         private GameObject _outputs;
 
         private GameObject _previewImageObject;
-        //public RawImage previewRawImage;
         public ImagePreview imagePreview;
 
         // In/Out Pointers
@@ -57,11 +56,6 @@ namespace RuntimeNodeEditor.UI.Node
 
         // Input Field
         public bool toggleInputField = false;
-
-        //public TMP_InputField inputField = null;
-
-        // Boolean Preview
-        //public Button button = null;
 
         // Other
         public bool togglePreviewImage = false;
@@ -222,7 +216,8 @@ namespace RuntimeNodeEditor.UI.Node
                 previewImageSize,
                 previewImagePos);
 
-            imagePreview = new ImagePreview();
+            //imagePreview = new ImagePreview();
+            imagePreview = _previewImageObject.AddComponent<ImagePreview>();
             imagePreview.image = UIImage.Create(_previewImageObject, Color.black);
         }
 

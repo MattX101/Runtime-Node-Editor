@@ -3,6 +3,7 @@ using RuntimeNodeEditor.UI.Data;
 using RuntimeNodeEditor.Node.Pointer;
 using System.Collections.Generic;
 using UnityEngine;
+using RuntimeNodeEditor.Node.Component;
 
 namespace RuntimeNodeEditor.Node.Line
 {

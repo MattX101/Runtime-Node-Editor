@@ -84,7 +84,7 @@ namespace RuntimeNodeEditor.UI.Node
 
             NodeUI nodeUI = (NodeUI)Activator.CreateInstance(type);
             nodeUI.rootRect.localPosition = data.position;
-            nodeUI.elements.SetElements(data.Texts, data.Booleans, data.Values);
+            nodeUI.elements.SetElements(data);
 
             nodeDrag.InitSpawnDrag(nodeUI, spawnDrag);
         }

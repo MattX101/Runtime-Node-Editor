@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine;
 
 namespace RuntimeNodeEditor.UI.Node.Elements
 {
@@ -15,6 +16,16 @@ namespace RuntimeNodeEditor.UI.Node.Elements
             bytes = SaveInputFields(bytes, inputFields);
             bytes = SaveBooleanButtons(bytes, buttons);
             bytes = SaveSliders(bytes, sliders);
+
+            if (inputFields != null)
+                foreach (TMP_InputField inputField in inputFields)
+                    Debug.Log(inputField.text);
+            if (buttons != null)
+                foreach (BooleanButton button in buttons)
+                    Debug.Log(button.Toggled);
+            if (sliders != null)
+                foreach (Slider slider in sliders)
+                    Debug.Log(slider.value);
 
             return bytes.ToArray();
         }

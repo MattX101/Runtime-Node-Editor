@@ -17,11 +17,11 @@ namespace RuntimeNodeEditor.UI.Node.Elements
             sliders = new Slider[numOfSliders];
         }
 
-        public void SetElements(string[] texts, bool[] toggles, float[] values)
+        public void SetElements(NodeUILoadData elementsToLoad)
         {
-            SetInputFields(texts);
-            SetBooleans(toggles);
-            SetSliders(values);
+            SetInputFields(elementsToLoad.Texts);
+            SetBooleans(elementsToLoad.Booleans);
+            SetSliders(elementsToLoad.Values);
         }
         public void SetElements(NodeUIElements elementsToCopy)
         {

@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace RuntimeNodeEditor.UI.Node
 {
@@ -47,7 +48,6 @@ namespace RuntimeNodeEditor.UI.Node
             index = LoadInputFields(data, index);
             index = LoadBooleans(data, index);
             index = LoadSliders(data, index);
-
             endIndex = index;
         }
 
