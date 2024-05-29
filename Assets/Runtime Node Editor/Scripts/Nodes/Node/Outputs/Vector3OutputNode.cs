@@ -1,13 +1,9 @@
 using RuntimeNodeEditor.Node.Pointer;
-using RuntimeNodeEditor.UI.Node;
-using UnityEngine;
 
 namespace RuntimeNodeEditor.Node
 {
     public class Vector3OutputNode : Node
     {
-        private Vector3 _value = Vector3.zero;
-
         public override void AddPointers(InputPointer[] inputs, OutputPointer[] outputs)
         {
             AddInputPointer(inputs[0]);
@@ -18,31 +14,44 @@ namespace RuntimeNodeEditor.Node
 
         public override void Exectute()
         {
+            float x = 0;
+            float y = 0;
+            float z = 0;
+
             if (inputs[0].connectedOutputPointer != null)
             {
                 inputs[0].connectedOutputPointer.node.Exectute();
-                _value = inputs[0].connectedOutputPointer.data.vector3Value;
+
+                x = inputs[0].connectedOutputPointer.data.vector3Value.x;
+                y = inputs[0].connectedOutputPointer.data.vector3Value.y;
+                z = inputs[0].connectedOutputPointer.data.vector3Value.z;
             }
 
             if (inputs[1].connectedOutputPointer != null)
             {
                 inputs[1].connectedOutputPointer.node.Exectute();
-                _value.x = inputs[1].connectedOutputPointer.data.floatValue;
+                x = inputs[1].connectedOutputPointer.data.floatValue;
             }
             if (inputs[2].connectedOutputPointer != null)
             {
                 inputs[2].connectedOutputPointer.node.Exectute();
-                _value.y = inputs[2].connectedOutputPointer.data.floatValue;
+                y = inputs[2].connectedOutputPointer.data.floatValue;
             }
             if (inputs[3].connectedOutputPointer != null)
             {
                 inputs[3].connectedOutputPointer.node.Exectute();
-                _value.z = inputs[3].connectedOutputPointer.data.floatValue;
+                z = inputs[3].connectedOutputPointer.data.floatValue;
             }
 
-            nodeUI.elements.inputFields[0].text = _value.x.ToString();
-            nodeUI.elements.inputFields[1].text = _value.y.ToString();
-            nodeUI.elements.inputFields[2].text = _value.z.ToString();
+            nodeUI.elements.SetInputField(
+                nodeUI.elements.inputFields[0],
+                x.ToString());
+            nodeUI.elements.SetInputField(
+                nodeUI.elements.inputFields[1],
+                y.ToString());
+            nodeUI.elements.SetInputField(
+                nodeUI.elements.inputFields[2],
+                z.ToString());
 
             wasExecuted = true;
         }

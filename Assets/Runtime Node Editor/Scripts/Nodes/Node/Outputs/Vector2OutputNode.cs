@@ -1,13 +1,9 @@
 using RuntimeNodeEditor.Node.Pointer;
-using RuntimeNodeEditor.UI.Node;
-using UnityEngine;
 
 namespace RuntimeNodeEditor.Node
 {
     public class Vector2OutputNode : Node
     {
-        private Vector2 _value = Vector2.zero;
-
         public override void AddPointers(InputPointer[] inputs, OutputPointer[] outputs)
         {
             AddInputPointer(inputs[0]);
@@ -17,25 +13,34 @@ namespace RuntimeNodeEditor.Node
 
         public override void Exectute()
         {
+            float x = 0;
+            float y = 0;
+
             if (inputs[0].connectedOutputPointer != null)
             {
                 inputs[0].connectedOutputPointer.node.Exectute();
-                _value = inputs[0].connectedOutputPointer.data.vector2Value;
+
+                x = inputs[0].connectedOutputPointer.data.vector2Value.x;
+                y = inputs[0].connectedOutputPointer.data.vector2Value.y;
             }
 
             if (inputs[1].connectedOutputPointer != null)
             {
                 inputs[1].connectedOutputPointer.node.Exectute();
-                _value.x = inputs[1].connectedOutputPointer.data.floatValue;
+                x = inputs[1].connectedOutputPointer.data.floatValue;
             }
             if (inputs[2].connectedOutputPointer != null)
             {
                 inputs[2].connectedOutputPointer.node.Exectute();
-                _value.y = inputs[2].connectedOutputPointer.data.floatValue;
+                y = inputs[2].connectedOutputPointer.data.floatValue;
             }
 
-            nodeUI.elements.inputFields[0].text = _value.x.ToString();
-            nodeUI.elements.inputFields[1].text = _value.y.ToString();
+            nodeUI.elements.SetInputField(
+                nodeUI.elements.inputFields[0], 
+                x.ToString());
+            nodeUI.elements.SetInputField(
+                nodeUI.elements.inputFields[1], 
+                y.ToString());
 
             wasExecuted = true;
         }

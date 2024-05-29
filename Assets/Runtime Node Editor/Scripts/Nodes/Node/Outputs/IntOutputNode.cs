@@ -1,6 +1,4 @@
 using RuntimeNodeEditor.Node.Pointer;
-using RuntimeNodeEditor.UI.Node;
-using UnityEngine;
 
 namespace RuntimeNodeEditor.Node
 {
@@ -16,7 +14,9 @@ namespace RuntimeNodeEditor.Node
             if (inputs[0].connectedOutputPointer != null)
             {
                 inputs[0].connectedOutputPointer.node.Exectute();
-                nodeUI.elements.inputFields[0].text = inputs[0].connectedOutputPointer.data.intValue.ToString();
+                nodeUI.elements.SetInputField(
+                    nodeUI.elements.inputFields[0],
+                    inputs[0].connectedOutputPointer.data.intValue.ToString());
             }
 
             wasExecuted = true;

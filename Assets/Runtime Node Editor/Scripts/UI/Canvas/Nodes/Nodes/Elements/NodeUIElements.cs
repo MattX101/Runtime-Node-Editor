@@ -30,13 +30,18 @@ namespace RuntimeNodeEditor.UI.Node.Elements
             SetSliders(elementsToCopy.sliders);
         }
 
+        public void SetInputField(TMP_InputField inputField, string value)
+        {
+            inputField.text = value;
+        }
+
         private void SetInputFields(string[] values)
         {
             if (inputFields == null)
                 return;
 
             for (int i = 0; i < inputFields.Length; i++)
-                inputFields[i].text = values[i];
+                SetInputField(inputFields[i], values[i]);
         }
         private void SetInputFields(TMP_InputField[] values)
         {
@@ -44,7 +49,12 @@ namespace RuntimeNodeEditor.UI.Node.Elements
                 return;
 
             for (int i = 0; i < inputFields.Length; i++)
-                inputFields[i].text = values[i].text;
+                SetInputField(inputFields[i], values[i].text);
+        }
+
+        public void SetBoolean(BooleanButton booleanButton, bool value)
+        {
+            booleanButton.Toggle(value);
         }
 
         private void SetBooleans(bool[] values)
@@ -53,7 +63,7 @@ namespace RuntimeNodeEditor.UI.Node.Elements
                 return;
 
             for (int i = 0; i < buttons.Length; i++)
-                buttons[i].Toggle(values[i]);
+                SetBoolean(buttons[i], values[i]);
         }
         private void SetBooleans(BooleanButton[] values)
         {
@@ -61,7 +71,12 @@ namespace RuntimeNodeEditor.UI.Node.Elements
                 return;
 
             for (int i = 0; i < buttons.Length; i++)
-                buttons[i].Toggle(values[i].Toggled);
+                SetBoolean(buttons[i], values[i].Toggled);
+        }
+
+        public void SetSlider(Slider slider, float value)
+        {
+            slider.value = value;
         }
 
         private void SetSliders(float[] values)
@@ -70,7 +85,7 @@ namespace RuntimeNodeEditor.UI.Node.Elements
                 return;
 
             for (int i = 0; i < sliders.Length; i++)
-                sliders[i].value = values[i];
+                SetSlider(sliders[i], values[i]);
         }
         private void SetSliders(Slider[] values)
         {
@@ -78,7 +93,7 @@ namespace RuntimeNodeEditor.UI.Node.Elements
                 return;
 
             for (int i = 0; i < sliders.Length; i++)
-                sliders[i].value = values[i].value;
+                SetSlider(sliders[i], values[i].value);
         }
 
         public byte[] Save()
