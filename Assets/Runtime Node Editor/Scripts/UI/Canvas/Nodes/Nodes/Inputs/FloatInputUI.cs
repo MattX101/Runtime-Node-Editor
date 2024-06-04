@@ -1,18 +1,19 @@
+using RuntimeNodeEditor.Functions.UI.Elements;
 using RuntimeNodeEditor.Node;
 using RuntimeNodeEditor.Node.Pointer;
-using RuntimeNodeEditor.UI.Node.Elements;
 using TMPro;
 using UnityEngine;
 
-namespace RuntimeNodeEditor.UI.Node
+namespace RuntimeNodeEditor.UI.Canvas.Node
 {
     public class FloatInputUI : NodeUI
     {
-        public FloatInputUI() : base("FloatInputUI")
+        public override void Init(string nodeId)
         {
-            CreateRoot("Float");
+            base.Init(nodeId);
+
+            PopulateRoot("Float");
             FloatInputNode floatInputNode = root.AddComponent<FloatInputNode>();
-            floatInputNode.nodeUI = this;
 
             numOfInputs = 0;
             outputs = new OutputPointer[1];
@@ -30,9 +31,9 @@ namespace RuntimeNodeEditor.UI.Node
             outputs[0].node = floatInputNode;
             outputs[0].valueType = ValueType.Float;
 
-            elements = new NodeUIElements(1, 0, 0);
+            floatInputNode.elements = new NodeUIElements(1, 0, 0);
 
-            elements.inputFields[0] = AddInputField(
+            floatInputNode.elements.inputFields[0] = AddInputField(
                 outputs[0].gameObject.transform,
                 TMP_InputField.ContentType.DecimalNumber,
                 0,

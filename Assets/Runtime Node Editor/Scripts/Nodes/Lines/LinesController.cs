@@ -1,9 +1,7 @@
-using RuntimeNodeEditor.UI.Canvas.Data;
-using RuntimeNodeEditor.UI.Data;
+using RuntimeNodeEditor.Data;
 using RuntimeNodeEditor.Node.Pointer;
 using System.Collections.Generic;
 using UnityEngine;
-using RuntimeNodeEditor.Node.Component;
 
 namespace RuntimeNodeEditor.Node.Line
 {

@@ -14,7 +14,6 @@ namespace RuntimeNodeEditor.UI.Elements
             rect.localScale = Vector3.one;
             rect.sizeDelta = size;
             rect.localPosition = pos;
-
             return uiElement;
         }
 

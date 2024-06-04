@@ -1,4 +1,4 @@
-using RuntimeNodeEditor.UI.Canvas.Data;
+using RuntimeNodeEditor.Data;
 using RuntimeNodeEditor.Node.Line;
 using System.Collections.Generic;
 
@@ -33,28 +33,32 @@ namespace RuntimeNodeEditor.Node.Pointer
 
         public void DeleteConnections()
         {
-            if (connectedInputPointers != null)
-            {
-                for (int i = connectedInputPointers.Count - 1; i >= 0; i--)
-                {
-                    lines[i].DestroyLine();
+            if (connectedInputPointers == null)
+                return;
 
-                    connectedInputPointers[i].hasConnection = false;
-                    connectedInputPointers[i].connectedOutputPointer = null;
-                    connectedInputPointers[i].node.MoveUp();
+            for (int i = connectedInputPointers.Count - 1; i >= 0; i--)
+                DeleteConnection(i);
+        }
 
-                    connectedInputPointers.RemoveAt(i);
+        private void DeleteConnection(int i)
+        {
+            lines[i].DestroyLine();
 
-                }
-            }
+            connectedInputPointers[i].hasConnection = false;
+            connectedInputPointers[i].connectedOutputPointer = null;
+            connectedInputPointers[i].node.MoveUp();
+
+            connectedInputPointers.RemoveAt(i);
         }
 
         private void UpdateLines()
         {
-            if (lines != null && lines.Count > 0)
-                if ((!CanvasData.isPointing && CanvasData.canPoint && !CanvasData.canDrag) || CanvasData.isPanning || CanvasData.isScrolling)
-                    foreach (LineController line in lines)
-                        line.UpdateLinePositions();
+            if (lines == null || lines.Count == 0)
+                return;
+
+            if (CanvasData.isDraging || CanvasData.isPanning || CanvasData.isScrolling)
+                foreach (LineController line in lines)
+                    line.UpdateLinePositions();
         }
     }
 }

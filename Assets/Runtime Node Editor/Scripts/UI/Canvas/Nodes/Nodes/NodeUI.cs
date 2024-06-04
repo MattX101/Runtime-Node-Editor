@@ -1,19 +1,22 @@
 using RuntimeNodeEditor.Node.Pointer;
-using RuntimeNodeEditor.Node.Component;
 using RuntimeNodeEditor.UI.Elements;
-using RuntimeNodeEditor.UI.Pointer;
-using RuntimeNodeEditor.UI.Node.Elements;
+using RuntimeNodeEditor.UI.Canvas.Pointer;
+using RuntimeNodeEditor.Functions.UI.Component;
 using RuntimeNodeEditor.Utils.Colour;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections.Generic;
 
-namespace RuntimeNodeEditor.UI.Node
+namespace RuntimeNodeEditor.UI.Canvas.Node
 {
-    public class NodeUI
+    public class NodeUI : MonoBehaviour
     {
-        public readonly string nodeId = "NodeUI";
+        private string _nodeId = "NodeUI";
+        public string NodeId
+        {
+            get => _nodeId;
+        }
 
         // Root
         public GameObject root;
@@ -66,24 +69,22 @@ namespace RuntimeNodeEditor.UI.Node
         private float _borderX2;
         private float _sizeX, _sizeY;
 
-        // Elements
-        public NodeUIElements elements;
-
-        public NodeUI()
+        public virtual void Init(string nodeId)
         {
-            elements = new NodeUIElements(0, 0, 0);
+            _nodeId = nodeId;
+
+            root = this.gameObject;
         }
 
-        public NodeUI(string nodeId)
+        public void PopulateRoot(string title)
         {
-            elements = new NodeUIElements(0, 0, 0);
+            root.name = title;
+            root.transform.parent = UISettings.nodeCanvasTransform.transform;
 
-            this.nodeId = nodeId;
-        }
-
-        public void CreateRoot(string title)
-        {
-            root = UIElement.Create(UISettings.nodeCanvasTransform, title, Vector2.one, Vector3.zero);
+            RectTransform rect = root.AddComponent<RectTransform>();
+            rect.localScale = Vector3.one;
+            rect.sizeDelta = Vector2.one;
+            rect.localPosition = Vector3.zero;
         }
 
         public void CreateNodeUI(RuntimeNodeEditor.Node.Node node, Color primaryColour, string title)
@@ -216,59 +217,9 @@ namespace RuntimeNodeEditor.UI.Node
                 previewImageSize,
                 previewImagePos);
 
-            //imagePreview = new ImagePreview();
-            imagePreview = _previewImageObject.AddComponent<ImagePreview>();
-            imagePreview.image = UIImage.Create(_previewImageObject, Color.black);
+            imagePreview = new ImagePreview();
+            imagePreview.Image = UIImage.Create(_previewImageObject, Color.black);
         }
-
-        /*public void UpdateNodeUI(float scale, float previewImageScale)
-        {
-            rootRect.localScale = new Vector3(scale, scale, scale);
-
-            if (togglePreviewImage)
-            {
-                float updatedNodeWidth = UISettings.nodeWidth * previewImageScale;
-                float updatedPreviewImageSize = updatedNodeWidth;
-
-                RectTransform updatedRect = rootRect;
-                updatedRect.sizeDelta = new Vector2(updatedNodeWidth, UISettings.headerHeight + UISettings.elementSpacing + _bodyHeight + UISettings.elementSpacing + updatedPreviewImageSize);
-
-                Vector2 previewImageSize = new Vector2(updatedNodeWidth - UISettings.previewImageMargin, updatedNodeWidth - UISettings.previewImageMargin);
-                float posY = (updatedRect.sizeDelta.y / 2) - (previewImageSize.y / 2) - UISettings.headerHeight - UISettings.elementSpacing - _bodyHeight - UISettings.elementSpacing - (UISettings.previewImageMargin / 2);
-                Vector3 previewImagePos = new Vector3(0.0f, posY, 0.0f);
-
-                UIImage.TogglePreviewImage(false, _previewImageObject);
-
-                RectTransform updatedBodyRect = _bodyRect;
-                updatedBodyRect.sizeDelta = new Vector2(updatedNodeWidth, _bodyHeight);
-
-                UpdateElements(updatedRect, updatedBodyRect);
-                UIElement.UpdateUIElement(_previewImageObject.GetComponent<RectTransform>(), previewImageSize, previewImagePos);
-            }
-            else
-            {
-                UIImage.TogglePreviewImage(true, _previewImageObject);
-
-                RectTransform updatedBodyRect = rootRect;
-                updatedBodyRect.sizeDelta = new Vector2(UISettings.nodeWidth, UISettings.headerHeight + UISettings.elementSpacing + _bodyHeight + UISettings.elementSpacing);
-
-                UpdateElements(updatedBodyRect, _bodyRect);
-            }
-        }
-
-        private void UpdateElements(RectTransform rect, RectTransform pointerRect)
-        {
-            Vector2 headerSize = new Vector2(rect.sizeDelta.x, UISettings.headerHeight);
-            Vector3 headerPos = new Vector3(0.0f, (rect.sizeDelta.y / 2) - (headerSize.y / 2), 0.0f);
-            UIElement.UpdateUIElement(_headerRect, headerSize, headerPos);
-
-            Vector2 bodySize = new Vector2(rect.sizeDelta.x, _bodyHeight);
-            Vector3 bodyPos = new Vector3(0.0f, (rect.sizeDelta.y / 2) - (bodySize.y / 2) - UISettings.headerHeight - UISettings.elementSpacing, 0.0f);
-            UIElement.UpdateUIElement(_bodyRect, bodySize, bodyPos);
-
-            _uIPointers.UpdateUIPointers(pointerRect, true);
-            _uIPointers.UpdateUIPointers(pointerRect, false);
-        }*/
 
         protected GameObject CreatePointer(string name, ValueType valueType, int i, bool createText, bool pointerIsInput)
         {
@@ -345,21 +296,16 @@ namespace RuntimeNodeEditor.UI.Node
             List<byte> bytes = new List<byte>();
 
             // Node ID
-            bytes.Add((byte)nodeId.Length);
+            bytes.Add((byte)_nodeId.Length);
 
-            for (int i = 0; i < nodeId.Length; i++)
-                bytes.Add((byte)nodeId[i]);
+            for (int i = 0; i < _nodeId.Length; i++)
+                bytes.Add((byte)_nodeId[i]);
 
             // Node Position
             foreach (byte b in System.BitConverter.GetBytes(rootRect.localPosition.x)) bytes.Add(b);
             foreach (byte b in System.BitConverter.GetBytes(rootRect.localPosition.y)) bytes.Add(b);
 
             return bytes.ToArray();
-        }
-            
-        public byte[] SaveUIElements()
-        {
-            return elements.Save();
         }
     }
 }

@@ -43,14 +43,14 @@ namespace RuntimeNodeEditor.Node
                 z = inputs[3].connectedOutputPointer.data.floatValue;
             }
 
-            nodeUI.elements.SetInputField(
-                nodeUI.elements.inputFields[0],
+            elements.SetInputField(
+                elements.inputFields[0],
                 x.ToString());
-            nodeUI.elements.SetInputField(
-                nodeUI.elements.inputFields[1],
+            elements.SetInputField(
+                elements.inputFields[1],
                 y.ToString());
-            nodeUI.elements.SetInputField(
-                nodeUI.elements.inputFields[2],
+            elements.SetInputField(
+                elements.inputFields[2],
                 z.ToString());
 
             wasExecuted = true;

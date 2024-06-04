@@ -2,16 +2,17 @@ using RuntimeNodeEditor.Node;
 using RuntimeNodeEditor.Node.Pointer;
 using UnityEngine;
 
-namespace RuntimeNodeEditor.UI.Node
+namespace RuntimeNodeEditor.UI.Canvas.Node
 {
     public class ColorOutputUI : NodeUI
     {
-        public ColorOutputUI() : base("ColorOutputUI")
+        public override void Init(string nodeId)
         {
-            CreateRoot("Color");
+            base.Init(nodeId);
+
+            PopulateRoot("Color");
             ColorOutputNode colorOutputNode = root.AddComponent<ColorOutputNode>();
             colorOutputNode.endNode = true;
-            colorOutputNode.nodeUI = this;
 
             inputs = new InputPointer[1];
             numOfInputs = inputs.Length;
@@ -21,6 +22,7 @@ namespace RuntimeNodeEditor.UI.Node
             togglePreviewImage = true;
 
             CreateNodeUI(colorOutputNode, Color.gray, "Color");
+            colorOutputNode.imagePreview = imagePreview;
 
             inputs[0] = CreatePointer("Color", ValueType.Color, 0, false, true).AddComponent<InputPointer>();
             inputs[0].name = "Color";

@@ -23,17 +23,17 @@ namespace RuntimeNodeEditor.Node.Pointer
 
         public void DeleteConnection()
         {
-            if (line != null)
-            {
-                line.DestroyLine();
+            if (line == null)
+                return;
 
-                hasConnection = false;
+            line.DestroyLine();
 
-                connectedOutputPointer.connectedInputPointers.Remove(this);
-                connectedOutputPointer = null;
+            hasConnection = false;
 
-                node.MoveUp();
-            }
+            connectedOutputPointer.connectedInputPointers.Remove(this);
+            connectedOutputPointer = null;
+
+            node.MoveUp();
         }
     }
 }

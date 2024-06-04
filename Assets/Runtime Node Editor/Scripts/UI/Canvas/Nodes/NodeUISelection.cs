@@ -1,9 +1,9 @@
-using RuntimeNodeEditor.UI.Canvas.Data;
-using RuntimeNodeEditor.UI.Canvas;
+using RuntimeNodeEditor.Data;
+using RuntimeNodeEditor.CanvasInput;
 using RuntimeNodeEditor.Node.Line;
 using UnityEngine;
 
-namespace RuntimeNodeEditor.UI.Node
+namespace RuntimeNodeEditor.UI.Canvas.Node
 {
     public class NodeUISelection : MonoBehaviour
     {
@@ -56,12 +56,12 @@ namespace RuntimeNodeEditor.UI.Node
         private void Select(RuntimeNodeEditor.Node.Node node)
         {
             if (_currentNode != null)
-                _currentNode.nodeUI.SetPrimaryColor();
+                _currentNode.GetComponent<NodeUI>().SetPrimaryColor();
 
             _previousNode = _currentNode;
             _currentNode = node;
 
-            _currentNode.nodeUI.ToggleSelectColor();
+            _currentNode.GetComponent<NodeUI>().ToggleSelectColor();
         }
         private void Deselect()
         {
@@ -70,7 +70,7 @@ namespace RuntimeNodeEditor.UI.Node
 
             _previousNode = _currentNode;
 
-            _currentNode.nodeUI.SetPrimaryColor();
+            _currentNode.GetComponent<NodeUI>().SetPrimaryColor();
 
             _currentNode = null;
         }
@@ -89,11 +89,12 @@ namespace RuntimeNodeEditor.UI.Node
             if (_copiedNode == null)
                 return;
 
-            NodeUI nodeUI = _nodeUIManager.SpawnWithReturn(_copiedNode.nodeUI.nodeId, _copiedNode.nodeUI.rootRect.localPosition, true);
+            NodeUI copiedNodeUI = _copiedNode.GetComponent<NodeUI>();
+            NodeUI newNodeUI = _nodeUIManager.SpawnWithReturn(copiedNodeUI.NodeId, copiedNodeUI.rootRect.localPosition, true);
 
-            RuntimeNodeEditor.Node.Node newNode = nodeUI.root.GetComponent<RuntimeNodeEditor.Node.Node>();
+            RuntimeNodeEditor.Node.Node newNode = newNodeUI.root.GetComponent<RuntimeNodeEditor.Node.Node>();
 
-            newNode.nodeUI.elements.SetElements(_copiedNode.nodeUI.elements);
+            newNode.elements.SetElements(_copiedNode.elements);
             _linesController.Paste(_copiedNode, newNode);
 
             if (_currentCopyIsCut)

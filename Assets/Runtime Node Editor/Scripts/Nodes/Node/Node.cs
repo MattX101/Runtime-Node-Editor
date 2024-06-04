@@ -1,6 +1,6 @@
 using System.Collections.Generic;
+using RuntimeNodeEditor.Functions.UI.Elements;
 using RuntimeNodeEditor.Node.Pointer;
-using RuntimeNodeEditor.UI.Node;
 using UnityEngine;
 
 namespace RuntimeNodeEditor.Node
@@ -10,10 +10,10 @@ namespace RuntimeNodeEditor.Node
         protected bool wasExecuted = false;
         public bool endNode = false;
 
-        public NodeUI nodeUI = null;
-
         public List<InputPointer> inputs = new List<InputPointer>();
         public List<OutputPointer> outputs = new List<OutputPointer>();
+
+        public NodeUIElements elements;
 
         public virtual void Reset()
         {
@@ -44,17 +44,17 @@ namespace RuntimeNodeEditor.Node
             //
         }
 
-        public void MoveUp()
+        public int MoveUp()
         {
             if (endNode)
             {
                 Exectute();
-                return;
+                return 0;
             }
             else
             {
                 if (outputs == null)
-                    return;
+                    return 0;
 
                 foreach (OutputPointer output in outputs)
                 {
@@ -65,6 +65,8 @@ namespace RuntimeNodeEditor.Node
                         input.node.MoveUp();
                 }
             }
+
+            return 1;
         }
     }
 }

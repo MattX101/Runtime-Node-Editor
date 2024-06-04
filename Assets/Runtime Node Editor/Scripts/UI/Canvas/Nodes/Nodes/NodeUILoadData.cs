@@ -1,8 +1,7 @@
 using System;
 using UnityEngine;
-using UnityEngine.UI;
 
-namespace RuntimeNodeEditor.UI.Node
+namespace RuntimeNodeEditor.UI.Canvas.Node
 {
     public class NodeUILoadData
     {

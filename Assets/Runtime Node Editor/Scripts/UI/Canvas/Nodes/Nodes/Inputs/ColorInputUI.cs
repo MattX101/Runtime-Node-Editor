@@ -1,17 +1,18 @@
+using RuntimeNodeEditor.Functions.UI.Elements;
 using RuntimeNodeEditor.Node;
 using RuntimeNodeEditor.Node.Pointer;
-using RuntimeNodeEditor.UI.Node.Elements;
 using UnityEngine;
 
-namespace RuntimeNodeEditor.UI.Node
+namespace RuntimeNodeEditor.UI.Canvas.Node
 {
     public class ColorInputUI : NodeUI
     {
-        public ColorInputUI() : base("ColorInputUI")
+        public override void Init(string nodeId)
         {
-            CreateRoot("Color");
+            base.Init(nodeId);
+
+            PopulateRoot("Color");
             ColorInputNode colorInputNode = root.AddComponent<ColorInputNode>();
-            colorInputNode.nodeUI = this;
 
             numOfInputs = 0;
             outputs = new OutputPointer[4];
@@ -42,16 +43,16 @@ namespace RuntimeNodeEditor.UI.Node
             outputs[3].node = colorInputNode;
             outputs[3].valueType = ValueType.Float;
 
-            elements = new NodeUIElements(0, 0, 3);
+            colorInputNode.elements = new NodeUIElements(0, 0, 3);
 
-            elements.sliders[0] = AddSlider(outputs[1].transform, false);
-            elements.sliders[1] = AddSlider(outputs[2].transform, false);
-            elements.sliders[2] = AddSlider(outputs[3].transform, false);
+            colorInputNode.elements.sliders[0] = AddSlider(outputs[1].transform, false);
+            colorInputNode.elements.sliders[1] = AddSlider(outputs[2].transform, false);
+            colorInputNode.elements.sliders[2] = AddSlider(outputs[3].transform, false);
 
             PreviewColor(1, 2, 3, false);
-            imagePreview.UpdateNodeOnValueChange(elements.sliders[0], colorInputNode);
-            imagePreview.UpdateNodeOnValueChange(elements.sliders[1], colorInputNode);
-            imagePreview.UpdateNodeOnValueChange(elements.sliders[2], colorInputNode);
+            imagePreview.UpdateNodeOnValueChange(colorInputNode.elements.sliders[0], colorInputNode.MoveUp);
+            imagePreview.UpdateNodeOnValueChange(colorInputNode.elements.sliders[1], colorInputNode.MoveUp);
+            imagePreview.UpdateNodeOnValueChange(colorInputNode.elements.sliders[2], colorInputNode.MoveUp);
 
             colorInputNode.AddPointers(inputs, outputs);
         }

@@ -1,4 +1,4 @@
-using RuntimeNodeEditor.Node.Component;
+using RuntimeNodeEditor.Functions.UI.Component;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,7 +9,7 @@ namespace RuntimeNodeEditor.UI.Elements
         public static BooleanButton Create(Transform parent, bool interactable)
         {
             GameObject root = UIElement.Create(parent, "Boolean Preview", Vector2.one * 30, Vector3.zero);
-            BooleanButton booleanButton = root.AddComponent<BooleanButton>();
+            BooleanButton booleanButton = new BooleanButton();
 
             RawImage image = UIImage.Create(root, Color.red);
             booleanButton.image = image;

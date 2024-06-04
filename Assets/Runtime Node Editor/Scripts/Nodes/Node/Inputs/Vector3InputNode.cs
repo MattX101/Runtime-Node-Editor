@@ -18,9 +18,9 @@ namespace RuntimeNodeEditor.Node
         {
             outputs[0].data.vector2Value = Vector3.zero;
 
-            TMP_InputField xField = nodeUI.elements.inputFields[0];
-            TMP_InputField yField = nodeUI.elements.inputFields[1];
-            TMP_InputField zField = nodeUI.elements.inputFields[2];
+            TMP_InputField xField = elements.inputFields[0];
+            TMP_InputField yField = elements.inputFields[1];
+            TMP_InputField zField = elements.inputFields[2];
 
             if (xField.text.Length != 0)
             {

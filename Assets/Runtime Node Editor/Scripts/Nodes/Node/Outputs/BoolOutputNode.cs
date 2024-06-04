@@ -14,8 +14,8 @@ namespace RuntimeNodeEditor.Node
             if (inputs[0].connectedOutputPointer != null)
             {
                 inputs[0].connectedOutputPointer.node.Exectute();
-                nodeUI.elements.SetBoolean(
-                    nodeUI.elements.buttons[0], 
+                elements.SetBoolean(
+                    elements.buttons[0], 
                     inputs[0].connectedOutputPointer.data.boolValue);
             }
 

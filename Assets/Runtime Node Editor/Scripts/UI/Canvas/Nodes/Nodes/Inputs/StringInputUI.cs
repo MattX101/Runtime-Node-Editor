@@ -1,18 +1,19 @@
+using RuntimeNodeEditor.Functions.UI.Elements;
 using RuntimeNodeEditor.Node;
 using RuntimeNodeEditor.Node.Pointer;
-using RuntimeNodeEditor.UI.Node.Elements;
 using TMPro;
 using UnityEngine;
 
-namespace RuntimeNodeEditor.UI.Node
+namespace RuntimeNodeEditor.UI.Canvas.Node
 {
     public class StringInputUI : NodeUI
     {
-        public StringInputUI() : base("StringInputUI")
+        public override void Init(string nodeId)
         {
-            CreateRoot("String");
+            base.Init(nodeId);
+
+            PopulateRoot("String");
             StringInputNode stringInputNode = root.AddComponent<StringInputNode>();
-            stringInputNode.nodeUI = this;
 
             numOfInputs = 0;
             outputs = new OutputPointer[1];
@@ -30,9 +31,9 @@ namespace RuntimeNodeEditor.UI.Node
             outputs[0].node = stringInputNode;
             outputs[0].valueType = ValueType.String;
 
-            elements = new NodeUIElements(1, 0, 0);
+            stringInputNode.elements = new NodeUIElements(1, 0, 0);
 
-            elements.inputFields[0] = AddInputField(
+            stringInputNode.elements.inputFields[0] = AddInputField(
                 outputs[0].gameObject.transform,
                 TMP_InputField.ContentType.Name,
                 0,

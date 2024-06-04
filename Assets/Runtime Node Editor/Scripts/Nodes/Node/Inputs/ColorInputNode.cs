@@ -15,9 +15,9 @@ namespace RuntimeNodeEditor.Node
 
         public override void Exectute()
         {
-            outputs[1].data.floatValue = nodeUI.elements.sliders[0].value;
-            outputs[2].data.floatValue = nodeUI.elements.sliders[1].value;
-            outputs[3].data.floatValue = nodeUI.elements.sliders[2].value;
+            outputs[1].data.floatValue = elements.sliders[0].value;
+            outputs[2].data.floatValue = elements.sliders[1].value;
+            outputs[3].data.floatValue = elements.sliders[2].value;
             
             outputs[0].data.colorValue = 
                 new Color(

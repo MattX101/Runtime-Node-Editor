@@ -1,18 +1,19 @@
 using RuntimeNodeEditor.Node;
 using RuntimeNodeEditor.Node.Pointer;
-using RuntimeNodeEditor.UI.Node.Elements;
+using RuntimeNodeEditor.Functions.UI.Elements;
 using UnityEngine;
 
-namespace RuntimeNodeEditor.UI.Node
+namespace RuntimeNodeEditor.UI.Canvas.Node
 {
     public class BoolOutputUI : NodeUI
     {
-        public BoolOutputUI() : base("BoolOutputUI")
+        public override void Init(string nodeId)
         {
-            CreateRoot("Bool");
+            base.Init(nodeId);
+
+            PopulateRoot("Bool");
             BoolOutputNode boolOutputNode = root.AddComponent<BoolOutputNode>();
             boolOutputNode.endNode = true;
-            boolOutputNode.nodeUI = this;
 
             inputs = new InputPointer[1];
             numOfInputs = inputs.Length;
@@ -28,9 +29,9 @@ namespace RuntimeNodeEditor.UI.Node
             inputs[0].node = boolOutputNode;
             inputs[0].valueType = ValueType.Bool;
 
-            elements = new NodeUIElements(0, 1, 0);
+            boolOutputNode.elements = new NodeUIElements(0, 1, 0);
 
-            elements.buttons[0] = AddBooleanPreview(inputs[0].transform, true);
+            boolOutputNode.elements.buttons[0] = AddBooleanPreview(inputs[0].transform, true);
 
             boolOutputNode.AddPointers(inputs, outputs);
         }

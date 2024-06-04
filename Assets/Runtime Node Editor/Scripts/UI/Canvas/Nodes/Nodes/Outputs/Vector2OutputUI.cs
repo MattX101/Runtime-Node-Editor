@@ -1,19 +1,20 @@
 using RuntimeNodeEditor.Node;
 using RuntimeNodeEditor.Node.Pointer;
-using RuntimeNodeEditor.UI.Node.Elements;
+using RuntimeNodeEditor.Functions.UI.Elements;
 using TMPro;
 using UnityEngine;
 
-namespace RuntimeNodeEditor.UI.Node
+namespace RuntimeNodeEditor.UI.Canvas.Node
 {
     public class Vector2OutputUI : NodeUI
     {
-        public Vector2OutputUI() : base("Vector2OutputUI")
+        public override void Init(string nodeId)
         {
-            CreateRoot("Vector 2");
+            base.Init(nodeId);
+
+            PopulateRoot("Vector 2");
             Vector2OutputNode vector2OutputNode = root.AddComponent<Vector2OutputNode>();
             vector2OutputNode.endNode = true;
-            vector2OutputNode.nodeUI = this;
 
             inputs = new InputPointer[3];
             numOfInputs = inputs.Length;
@@ -40,15 +41,15 @@ namespace RuntimeNodeEditor.UI.Node
             inputs[2].node = vector2OutputNode;
             inputs[2].valueType = ValueType.Float;
 
-            elements = new NodeUIElements(2, 0, 0);
+            vector2OutputNode.elements = new NodeUIElements(2, 0, 0);
 
-            elements.inputFields[0] = AddInputField(
+            vector2OutputNode.elements.inputFields[0] = AddInputField(
                 inputs[1].gameObject.transform,
                 TMP_InputField.ContentType.DecimalNumber,
                 0,
                 true,
                 false);
-            elements.inputFields[1] = AddInputField(
+            vector2OutputNode.elements.inputFields[1] = AddInputField(
                 inputs[2].gameObject.transform,
                 TMP_InputField.ContentType.DecimalNumber,
                 0,

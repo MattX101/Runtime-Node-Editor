@@ -11,7 +11,7 @@ namespace RuntimeNodeEditor.Node
 
         public override void Exectute()
         {
-            outputs[0].data.boolValue = nodeUI.elements.buttons[0].Toggled;
+            outputs[0].data.boolValue = elements.buttons[0].Toggled;
 
             wasExecuted = true;
         }

@@ -1,9 +1,8 @@
-using RuntimeNodeEditor.UI.Elements;
 using TMPro;  
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace RuntimeNodeEditor.UI.Node
+namespace RuntimeNodeEditor.UI.Elements
 {
     public static class UISlider
     {

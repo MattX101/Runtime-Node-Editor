@@ -14,8 +14,8 @@ namespace RuntimeNodeEditor.Node
             if (inputs[0].connectedOutputPointer != null)
             {
                 inputs[0].connectedOutputPointer.node.Exectute();
-                nodeUI.elements.SetInputField(
-                    nodeUI.elements.inputFields[0],
+                elements.SetInputField(
+                    elements.inputFields[0],
                     inputs[0].connectedOutputPointer.data.intValue.ToString());
             }
 

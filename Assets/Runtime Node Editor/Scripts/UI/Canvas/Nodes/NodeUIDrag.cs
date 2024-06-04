@@ -1,10 +1,9 @@
-using RuntimeNodeEditor.UI.Canvas;
-using RuntimeNodeEditor.UI.Canvas.Data;
-using RuntimeNodeEditor.UI.Data;
+using RuntimeNodeEditor.Data;
+using RuntimeNodeEditor.CanvasInput;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace RuntimeNodeEditor.UI.Node
+namespace RuntimeNodeEditor.UI.Canvas.Node
 {
     public class NodeUIDrag
     {
@@ -124,7 +123,7 @@ namespace RuntimeNodeEditor.UI.Node
             if (!hit.collider.gameObject.TryGetComponent(out RuntimeNodeEditor.Node.Node node))
                 return null;
             
-            return node.nodeUI;
+            return node.gameObject.GetComponent<NodeUI>();
         }
 
         private void Reset()

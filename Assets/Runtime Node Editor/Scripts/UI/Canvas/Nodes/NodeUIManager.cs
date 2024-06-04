@@ -3,12 +3,13 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using static Codice.CM.WorkspaceServer.DataStore.WkTree.WriteWorkspaceTree;
 
-namespace RuntimeNodeEditor.UI.Node
+namespace RuntimeNodeEditor.UI.Canvas.Node
 {
     public class NodeUIManager : MonoBehaviour
     {
+        private const string _nodeNamespace = "RuntimeNodeEditor.UI.Canvas.Node.";
+
         [SerializeField] private Transform _parent;
 
         [SerializeField] private Texture2D _pointerTexture;
@@ -39,15 +40,31 @@ namespace RuntimeNodeEditor.UI.Node
 
         public void Spawn(string id)
         {
-            Spawn(id, new Vector3(0, 0, 0), true);
+            CreateNode(id, true, new Vector3(0, 0, 0));
         }
 
         public void Spawn(string id, Vector3 position, bool spawnDrag)
         {
-            SpawnWithReturn(id, position, spawnDrag);
+            CreateNode(id, spawnDrag, position);
         }
 
         public NodeUI SpawnWithReturn(string id, Vector3 position, bool spawnDrag)
+        {
+            return CreateNode(id, spawnDrag, position);
+        }
+
+        public void OnLoadSpawn(NodeUILoadData data, bool spawnDrag)
+        {
+            NodeUI nodeUI = CreateNode(data.id, spawnDrag, data.position);
+            RuntimeNodeEditor.Node.Node node = nodeUI.gameObject.GetComponent<RuntimeNodeEditor.Node.Node>();
+
+            if (node.elements == null)
+                return;
+
+            node.elements.SetElements(data.Texts, data.Booleans, data.Values);
+        }
+
+        private NodeUI CreateNode(string id, bool spawnDrag, Vector3 position)
         {
             if (id.Length > byte.MaxValue)
             {
@@ -56,37 +73,17 @@ namespace RuntimeNodeEditor.UI.Node
                 return null;
             }
 
-            string nodeNamespace = "RuntimeNodeEditor.UI.Node.";
-
-            Type type = Type.GetType(nodeNamespace + id);
+            Type type = Type.GetType(_nodeNamespace + id);
             if (type == null)
                 throw new ArgumentNullException(nameof(type));
 
-            NodeUI nodeUI = (NodeUI)Activator.CreateInstance(type);
+            GameObject nodeUIObject = new GameObject();
+            NodeUI nodeUI = (NodeUI)nodeUIObject.AddComponent(type);
+            nodeUI.Init(id);
             nodeDrag.InitSpawnDrag(nodeUI, spawnDrag);
             nodeUI.rootRect.localPosition = position;
 
             return nodeUI;
-        }
-
-        public void Spawn(NodeUILoadData data, bool spawnDrag)
-        {
-            if (data.id.Length > byte.MaxValue)
-            {
-                Debug.LogError("Name of node cannot exceed 255 characters!");
-
-                return;
-            }
-
-            Type type = Type.GetType("RuntimeNodeEditor.UI.Node." + data.id);
-            if (type == null)
-                throw new ArgumentNullException(nameof(type));
-
-            NodeUI nodeUI = (NodeUI)Activator.CreateInstance(type);
-            nodeUI.rootRect.localPosition = data.position;
-            nodeUI.elements.SetElements(data);
-
-            nodeDrag.InitSpawnDrag(nodeUI, spawnDrag);
         }
 
         public byte[] Save(GameObject nodesObject)
@@ -107,10 +104,12 @@ namespace RuntimeNodeEditor.UI.Node
 
             foreach (RuntimeNodeEditor.Node.Node node in nodes)
             {
-                foreach (byte b in node.nodeUI.SaveNodeUI())
+                NodeUI nodeUI = node.gameObject.GetComponent<NodeUI>();
+
+                foreach (byte b in nodeUI.SaveNodeUI())
                     bytes.Add(b);
 
-                foreach (byte b in node.nodeUI.SaveUIElements())
+                foreach (byte b in node.elements.Save())
                     bytes.Add(b);
             }
 
@@ -197,7 +196,7 @@ namespace RuntimeNodeEditor.UI.Node
 
         public void Load(NodeUILoadData data)
         {
-            Spawn(data, false);
+            OnLoadSpawn(data, false);
         }
     }
 }

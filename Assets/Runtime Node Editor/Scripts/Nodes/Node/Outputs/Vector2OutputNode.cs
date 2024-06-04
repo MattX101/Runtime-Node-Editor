@@ -35,11 +35,11 @@ namespace RuntimeNodeEditor.Node
                 y = inputs[2].connectedOutputPointer.data.floatValue;
             }
 
-            nodeUI.elements.SetInputField(
-                nodeUI.elements.inputFields[0], 
+            elements.SetInputField(
+                elements.inputFields[0], 
                 x.ToString());
-            nodeUI.elements.SetInputField(
-                nodeUI.elements.inputFields[1], 
+            elements.SetInputField(
+                elements.inputFields[1], 
                 y.ToString());
 
             wasExecuted = true;

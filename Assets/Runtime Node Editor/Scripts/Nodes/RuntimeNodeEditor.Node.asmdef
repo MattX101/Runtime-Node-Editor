@@ -1,0 +1,20 @@
+{
+    "name": "RuntimeNodeEditor.Node",
+    "rootNamespace": "",
+    "references": [
+        "GUID:e2dd76dbb2b8d5c40ab42d8325e60c41",
+        "GUID:32356a874d537a64d9bfc3c26683f7ad",
+        "GUID:a51e64d045fc8a144b8a9eef1e5ea548",
+        "GUID:6055be8ebefd69e48b49212b09b47b2f",
+        "GUID:c7160f775647e1e47b95897417aa1652"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

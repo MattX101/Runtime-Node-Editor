@@ -1,0 +1,16 @@
+{
+    "name": "RuntimeNodeEditor.CanvasInput",
+    "rootNamespace": "",
+    "references": [
+        "GUID:e2dd76dbb2b8d5c40ab42d8325e60c41"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
