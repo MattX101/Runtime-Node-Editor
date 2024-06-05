@@ -1,5 +1,6 @@
 using RuntimeNodeEditor.CanvasInput;
 using RuntimeNodeEditor.Functions.Seed;
+using RuntimeNodeEditor.Node;
 using RuntimeNodeEditor.Node.Line;
 using RuntimeNodeEditor.UI.Canvas.Node;
 using RuntimeNodeEditor.Utils.IO.Selection;
@@ -18,10 +19,13 @@ namespace RuntimeNodeEditor.UI.Canvas
         [SerializeField]
         private Camera _camera;
 
+        [Header("Scripts")]
         [SerializeField] private SeedManager _seedManager;
+        [SerializeField] private NodeExecution _nodeExecution;
         [SerializeField] private NodeUIManager _nodeUIManager;
         [SerializeField] private LinesController _linesController;
 
+        [Header("Nodes")]
         [SerializeField]
         private GameObject _nodesObject;
 
@@ -96,6 +100,8 @@ namespace RuntimeNodeEditor.UI.Canvas
 
             for (int i = 0; i < connectionArrayLength; i++)
                 position = LoadConnections(nodes, position, data);
+
+            _nodeExecution.Execute(nodes);
         }
 
         private int LoadNodes(int position, byte[] data)
