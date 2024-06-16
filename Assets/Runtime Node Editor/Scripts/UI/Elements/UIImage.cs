@@ -19,7 +19,7 @@ namespace RuntimeNodeEditor.UI.Elements
         {
             uiElement.TryGetComponent(out RawImage rawImage);
 
-            if (rawImage == null)
+            if (!rawImage)
                 return;
             
             rawImage.texture = UISettings.pointerTexture;

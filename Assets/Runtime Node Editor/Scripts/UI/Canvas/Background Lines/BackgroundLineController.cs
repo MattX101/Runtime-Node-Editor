@@ -3,23 +3,18 @@ using UnityEngine;
 
 namespace RuntimeNodeEditor.UI.Canvas.Lines
 {
-    public class BackgroundLineController
+    internal class BackgroundLineController
     {
-        private GameObject _lineObject;
+        private readonly GameObject _lineObject;
 
         private LineRenderer _lineRenderer;
-        public LineRenderer LineRenderer
-        {
-            get { return _lineRenderer; }
-        }
+        public LineRenderer LineRenderer => _lineRenderer;
 
-        private Vector3 _start;
-        private Vector3 _end;
+        private readonly float _lineWidth;
+        private readonly Vector3 _start, _end;
 
         public Vector3 offset;
-
-        private float _lineWidth;
-
+        
         public BackgroundLineController(string name, Transform parent, Vector3 start, Vector3 end, float lineWidth)
         {
             _lineObject = new GameObject();
@@ -27,26 +22,22 @@ namespace RuntimeNodeEditor.UI.Canvas.Lines
             _lineObject.name = name;
 
             _lineWidth = lineWidth;
+            
+            _start = start;
+            _end = end;
 
-            DrawLine(start, end);
+            DrawLine();
         }
 
-        private void DrawLine(Vector3 start, Vector3 end)
+        private void DrawLine()
         {
             _lineRenderer = _lineObject.AddComponent<LineRenderer>();
 
-            _start = start;
             _lineRenderer.SetPosition(0, _start);
             _lineRenderer.startWidth = _lineWidth;
 
-            _end = end;
             _lineRenderer.SetPosition(1, _end);
             _lineRenderer.endWidth = _lineWidth;
-        }
-
-        public void CreateLine(Material material, Color colour)
-        {
-            SetMaterial(material, colour);
         }
 
         public void UpdateHorizontalLine()

@@ -1,18 +1,15 @@
+using System;
 using SFB;
 using TMPro;
 using UnityEngine;
 
 namespace RuntimeNodeEditor.Utils.IO.Selection
 {
+    [Serializable]
     public class SelectFile : IOSelection
     {
         [SerializeField]
         private TMP_Text _text;
-
-        public SelectFile() : base()
-        {
-            //
-        }
 
         public void Select()
         {

@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace RuntimeNodeEditor.UI.Header
 {
-    public class TabsManager : MonoBehaviour
+    internal class TabsManager : MonoBehaviour
     {
         private Tab[] _tabs;
 

@@ -4,38 +4,38 @@ namespace RuntimeNodeEditor.Node.Pointer
 {
     public static class PointerColor
     {
-        public static readonly Color nullColor = Color.black;
-        public static readonly Color intColor = Color.red;
-        public static readonly Color floatColor = new Color(1.0f, 0.25f, 0.0f);
-        public static readonly Color vector2Color = new Color(1.0f, 0.75f, 0.0f);
-        public static readonly Color vector3Color = new Color(1.0f, 0.5f, 0.0f);
-        public static readonly Color charColor = new Color(0.25f, 0.75f, 1.0f);
-        public static readonly Color stringColor = new Color(0.0f, 0.5f, 1.0f);
-        public static readonly Color boolColor = new Color(0.375f, 0.0f, 0.75f);
-        public static readonly Color colorColor = Color.magenta;
+        private static readonly Color _nullColor = Color.black;
+        private static readonly Color _intColor = Color.red;
+        private static readonly Color _floatColor = new Color(1.0f, 0.25f, 0.0f);
+        private static readonly Color _vector2Color = new Color(1.0f, 0.75f, 0.0f);
+        private static readonly Color _vector3Color = new Color(1.0f, 0.5f, 0.0f);
+        private static readonly Color _charColor = new Color(0.25f, 0.75f, 1.0f);
+        private static readonly Color _stringColor = new Color(0.0f, 0.5f, 1.0f);
+        private static readonly Color _boolColor = new Color(0.375f, 0.0f, 0.75f);
+        private static readonly Color _colorColor = Color.magenta;
 
         public static Color PickColor(ValueType valueType)
         {
             switch (valueType)
             {
                 case ValueType.Int:
-                    return intColor;
+                    return _intColor;
                 case ValueType.Float:
-                    return floatColor;
+                    return _floatColor;
                 case ValueType.Vector2:
-                    return vector2Color;
+                    return _vector2Color;
                 case ValueType.Vector3:
-                    return vector3Color;
+                    return _vector3Color;
                 case ValueType.Char:
-                    return charColor;
+                    return _charColor;
                 case ValueType.String:
-                    return stringColor;
+                    return _stringColor;
                 case ValueType.Bool:
-                    return boolColor;
+                    return _boolColor;
                 case ValueType.Color:
-                    return colorColor;
+                    return _colorColor;
                 default:
-                    return nullColor;
+                    return _nullColor;
             }
         }
     }

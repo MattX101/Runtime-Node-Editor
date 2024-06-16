@@ -6,29 +6,18 @@ namespace RuntimeNodeEditor.Functions.UI.Component
 {
     public class ImagePreview
     {
-        private RawImage _image;
-        public RawImage Image
-        {
-            get
-            {
-                return _image;
-            }
-            set
-            {
-                _image = value;
-            }
-        }
+        public RawImage Image { get; set; }
 
         public void SetSliderInput(Slider red, Slider green, Slider blue)
         {
-            if (red == null || green == null || blue == null)
+            if (!red || !green || !blue)
             {
                 Debug.LogError("One or more of the _sliders are null");
 
                 return;
             }
 
-            _image.color = new Color(
+            Image.color = new Color(
                 red.value,
                 green.value,
                 blue.value,
@@ -55,25 +44,25 @@ namespace RuntimeNodeEditor.Functions.UI.Component
 
         private void SetR(Slider red)
         {
-            _image.color = new Color(
+            Image.color = new Color(
                 red.value,
-                _image.color.g,
-                _image.color.b, 
+                Image.color.g,
+                Image.color.b, 
                 1);
         }
         private void SetG(Slider green)
         {
-            _image.color = new Color(
-                _image.color.r, 
+            Image.color = new Color(
+                Image.color.r, 
                 green.value,
-                _image.color.b, 
+                Image.color.b, 
                 1);
         }
         private void SetB(Slider blue)
         {
-            _image.color = new Color(
-                _image.color.r,
-                _image.color.g, 
+            Image.color = new Color(
+                Image.color.r,
+                Image.color.g, 
                 blue.value, 
                 1);
         }

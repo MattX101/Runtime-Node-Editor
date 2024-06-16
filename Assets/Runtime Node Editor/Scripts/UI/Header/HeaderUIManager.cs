@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace RuntimeNodeEditor.UI.Header
 {
-    public class HeaderUIManager : MonoBehaviour
+    internal class HeaderUIManager : MonoBehaviour
     {
         private TabsManager[] _tabsManagers;
 
@@ -13,14 +13,12 @@ namespace RuntimeNodeEditor.UI.Header
 
         private Button[] _buttons;
 
-        void Awake()
+        private void Awake()
         {
             UISettings.windowSpawnParent = _windowSpawnParent;
-
-            _tabsManagers = GetComponentsInChildren<TabsManager>();
-
             UIData.nodePanel = _nodePanel;
 
+            _tabsManagers = GetComponentsInChildren<TabsManager>();
             _buttons = FindObjectsOfType<Button>();
 
             HeaderUIManagerLink.headerUIManager = this;

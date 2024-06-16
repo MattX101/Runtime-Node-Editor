@@ -11,27 +11,27 @@ namespace RuntimeNodeEditor.Node
             AddInputPointer(inputs[2]);
         }
 
-        public override void Exectute()
+        public override void Execute()
         {
             float x = 0;
             float y = 0;
 
-            if (inputs[0].connectedOutputPointer != null)
+            if (inputs[0].connectedOutputPointer)
             {
-                inputs[0].connectedOutputPointer.node.Exectute();
+                inputs[0].connectedOutputPointer.node.Execute();
 
                 x = inputs[0].connectedOutputPointer.data.vector2Value.x;
                 y = inputs[0].connectedOutputPointer.data.vector2Value.y;
             }
 
-            if (inputs[1].connectedOutputPointer != null)
+            if (inputs[1].connectedOutputPointer)
             {
-                inputs[1].connectedOutputPointer.node.Exectute();
+                inputs[1].connectedOutputPointer.node.Execute();
                 x = inputs[1].connectedOutputPointer.data.floatValue;
             }
-            if (inputs[2].connectedOutputPointer != null)
+            if (inputs[2].connectedOutputPointer)
             {
-                inputs[2].connectedOutputPointer.node.Exectute();
+                inputs[2].connectedOutputPointer.node.Execute();
                 y = inputs[2].connectedOutputPointer.data.floatValue;
             }
 

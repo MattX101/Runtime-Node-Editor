@@ -113,7 +113,8 @@ namespace RuntimeNodeEditor.UI.Elements
         private static string ProcessSliderValue(string value)
         {
             if (value.Length > 4)
-                value = value.Substring(0, 4);
+                value = value[..4];
+                //value = value.Substring(0, 4);
             else if (value.Length == 1)
                 value += ".00";
 
@@ -145,7 +146,7 @@ namespace RuntimeNodeEditor.UI.Elements
                 scale,
                 new Vector3(0, 0, -1),
                 "0.5");
-            UIText.SetFontAligment(text, TextAlignmentOptions.Center);
+            UIText.SetFontAlignment(text, TextAlignmentOptions.Center);
 
             return text;
         }

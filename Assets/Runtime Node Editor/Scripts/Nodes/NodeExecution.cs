@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace RuntimeNodeEditor.Node
@@ -7,14 +8,10 @@ namespace RuntimeNodeEditor.Node
     {
         public void Execute(Node[] nodes)
         {
-            List<Node> endNodes = new List<Node>();
-            
-            foreach (Node node in nodes)
-                if (node.endNode)
-                    endNodes.Add(node);
+            List<Node> endNodes = nodes.Where(node => node.endNode).ToList();
 
             foreach (Node endNode in endNodes)
-                endNode.Exectute();
+                endNode.Execute();
         }
     }
 }

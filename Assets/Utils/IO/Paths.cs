@@ -5,14 +5,9 @@ namespace RuntimeNodeEditor.Utils.IO
 {
     public static class Paths
     {
-        public static string CurrentDirectory
-        {
-            get => Directory.GetDirectoryRoot(Directory.GetCurrentDirectory());
-        }
-        public static string[] Drives
-        {
-            get => Directory.GetLogicalDrives();
-        }
+        public static string CurrentDirectory => Directory.GetDirectoryRoot(Directory.GetCurrentDirectory());
+
+        public static string[] Drives => Directory.GetLogicalDrives();
 
         public const Environment.SpecialFolder CommonDesktop = Environment.SpecialFolder.CommonDesktopDirectory;
         public const Environment.SpecialFolder CommonDocuments = Environment.SpecialFolder.CommonDocuments;

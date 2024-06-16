@@ -3495,7 +3495,7 @@ PrefabInstance:
     - target: {fileID: 3573399221748473874, guid: 80a2800d3e688574f98975d465eb2478, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1105068430}
+      objectReference: {fileID: 1105068431}
     - target: {fileID: 3573399221748473874, guid: 80a2800d3e688574f98975d465eb2478, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -3518,7 +3518,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3573399221748473874, guid: 80a2800d3e688574f98975d465eb2478, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: RuntimeNodeEditor.UI.Canvas.SaveSystem, RuntimeNodeEditor.UI.Canvas.Node
+      value: RuntimeNodeEditor.UI.Canvas.Node.Save.SaveSystem, RuntimeNodeEditor.UI.Canvas.Node
       objectReference: {fileID: 0}
     - target: {fileID: 3573399221748473874, guid: 80a2800d3e688574f98975d465eb2478, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -5188,7 +5188,7 @@ PrefabInstance:
     - target: {fileID: 3573399221748473874, guid: 80a2800d3e688574f98975d465eb2478, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1105068430}
+      objectReference: {fileID: 1105068431}
     - target: {fileID: 3573399221748473874, guid: 80a2800d3e688574f98975d465eb2478, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -5211,7 +5211,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3573399221748473874, guid: 80a2800d3e688574f98975d465eb2478, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: RuntimeNodeEditor.UI.Canvas.SaveSystem, RuntimeNodeEditor.UI.Canvas.Node
+      value: RuntimeNodeEditor.UI.Canvas.Node.Save.SaveSystem, RuntimeNodeEditor.UI.Canvas.Node
       objectReference: {fileID: 0}
     - target: {fileID: 3573399221748473874, guid: 80a2800d3e688574f98975d465eb2478, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -5491,7 +5491,7 @@ PrefabInstance:
     - target: {fileID: 3573399221748473874, guid: 80a2800d3e688574f98975d465eb2478, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1105068430}
+      objectReference: {fileID: 1105068431}
     - target: {fileID: 3573399221748473874, guid: 80a2800d3e688574f98975d465eb2478, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
@@ -5526,7 +5526,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3573399221748473874, guid: 80a2800d3e688574f98975d465eb2478, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: RuntimeNodeEditor.UI.Canvas.SaveSystem, RuntimeNodeEditor.UI.Canvas.Node
+      value: RuntimeNodeEditor.UI.Canvas.Node.Save.SaveSystem, RuntimeNodeEditor.UI.Canvas.Node
       objectReference: {fileID: 0}
     - target: {fileID: 3573399221748473874, guid: 80a2800d3e688574f98975d465eb2478, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
@@ -5826,7 +5826,7 @@ GameObject:
   - component: {fileID: 1105068429}
   - component: {fileID: 1105068427}
   - component: {fileID: 1105068428}
-  - component: {fileID: 1105068430}
+  - component: {fileID: 1105068431}
   m_Layer: 5
   m_Name: Scripts
   m_TagString: Untagged
@@ -5877,7 +5877,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1105068430
+--- !u!114 &1105068431
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5886,13 +5886,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1105068426}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 757a59634cb98e24ebb2f16fb8c75d32, type: 3}
+  m_Script: {fileID: 11500000, guid: e79315f4fcb38932a94a52f606f4d948, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _camera: {fileID: 519420031}
   _seedManager: {fileID: 1105068428}
   _nodeExecution: {fileID: 1105068427}
-  _nodeUIManager: {fileID: 1777772066}
+  _nodeUIOnSave: {fileID: 1777772069}
   _linesController: {fileID: 1777772067}
   _nodesObject: {fileID: 1777772063}
 --- !u!1 &1135406249
@@ -9196,6 +9196,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1777772064}
   - component: {fileID: 1777772066}
+  - component: {fileID: 1777772069}
   - component: {fileID: 1777772068}
   - component: {fileID: 1777772067}
   m_Layer: 0
@@ -9269,6 +9270,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _nodeUIManager: {fileID: 1777772066}
   _linesController: {fileID: 1777772067}
+--- !u!114 &1777772069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1777772063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 037e078290e64a96a8927be0ec09fa5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1798159167
 PrefabInstance:
   m_ObjectHideFlags: 0

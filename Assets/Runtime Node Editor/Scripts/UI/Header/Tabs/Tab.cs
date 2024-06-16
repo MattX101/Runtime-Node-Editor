@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace RuntimeNodeEditor.UI.Header
 {
-    public class Tab : MonoBehaviour
+    internal class Tab : MonoBehaviour
     {
         [SerializeField]
         private GameObject _tab;

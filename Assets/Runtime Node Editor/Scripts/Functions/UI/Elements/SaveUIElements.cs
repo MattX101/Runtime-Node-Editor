@@ -1,12 +1,13 @@
 using RuntimeNodeEditor.Functions.UI.Component;
 using System.Collections.Generic;
 using System;
+using System.Linq;
 using TMPro;
 using UnityEngine.UI;
 
 namespace RuntimeNodeEditor.Functions.UI.Elements
 {
-    public class SaveUIElements
+    internal class SaveUIElements
     {
         public byte[] Save(TMP_InputField[] inputFields, BooleanButton[] buttons, Slider[] sliders)
         {
@@ -56,7 +57,7 @@ namespace RuntimeNodeEditor.Functions.UI.Elements
             bytes.Add((byte)buttons.Length);
 
             foreach (BooleanButton button in buttons)
-                bytes.Add(button.Toggled == true ? (byte)1 : (byte)0);
+                bytes.Add(button.Toggled ? (byte)1 : (byte)0);
 
             return bytes;
         }
@@ -71,10 +72,7 @@ namespace RuntimeNodeEditor.Functions.UI.Elements
             }
 
             bytes.Add((byte)sliders.Length);
-
-            foreach (Slider slider in sliders)
-                foreach (byte b in BitConverter.GetBytes(slider.value))
-                    bytes.Add(b);
+            bytes.AddRange(sliders.SelectMany(slider => BitConverter.GetBytes(slider.value)));
 
             return bytes;
         }

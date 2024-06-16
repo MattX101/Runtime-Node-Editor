@@ -5,91 +5,73 @@ namespace RuntimeNodeEditor.Utils.IO.Selection
 {
     public class IOSelection
     {
-        private readonly static string _defualtDirectory = Paths.GetPath(Paths.Desktop);
+        private static readonly string _defaultDirectory = Paths.GetPath(Paths.Desktop);
         private readonly string _startDirectory;
 
-        private readonly bool _multiSelect = false;
-
-        public IOSelection() : this(_defualtDirectory, false) { }
-
-        public IOSelection(string startDirectory) : this(startDirectory, false) { }
-
-        public IOSelection(string startDirectory, bool multiSelect)
-        {
-            _startDirectory = startDirectory;
-            _multiSelect = multiSelect;
-        }
-
-        public string SelectFile(string extension)
+        public string SelectFile(string extension, bool multiSelect = false)
         {
             string[] paths = StandaloneFileBrowser.OpenFilePanel(
                 "Select File",
                 _startDirectory,
                 extension,
-                _multiSelect);
+                multiSelect);
 
             return GetPath(paths);
         }
-        public string SelectFile(ExtensionFilter[] extensions)
+        protected string SelectFile(ExtensionFilter[] extensions, bool multiSelect = false)
         {
-            if (extensions == null)
+            extensions ??= new ExtensionFilter[1]
             {
-                extensions = new ExtensionFilter[1] 
-                { 
-                    new ExtensionFilter("All Files", "*")
-                };
-            }
+                new("All Files", "*")
+            };
             
             string[] paths = StandaloneFileBrowser.OpenFilePanel(
                 "Select File",
                 _startDirectory,
                 extensions,
-                _multiSelect);
+                multiSelect);
 
             return GetPath(paths);
         }
 
-        public string SelectFolder()
+        protected string SelectFolder(bool multiSelect = false)
         {
             string[] paths = StandaloneFileBrowser.OpenFolderPanel(
                 "Select Folder",
                 _startDirectory,
-                _multiSelect);
+                multiSelect);
 
             return GetPath(paths);
         }
 
         private string GetPath(string[] paths)
         {
-            if (paths.Length > 0)
-            {
-                string path = paths[0];
-                Debug.Log(path);
-
-                return path;
-            }
-            else
+            if (paths.Length == 0)
             {
                 Debug.LogWarning("No valid path was selected!");
 
                 return null;
             }
+            
+            Debug.Log(paths[0]);
+
+            return paths[0];
         }
 
-        public string SaveFile(string defualtFileName, string filter)
+        public string SaveFile(string defaultFileName, string filter)
         {
             return StandaloneFileBrowser.SaveFilePanel(
                 "Save As",
-                _defualtDirectory,
-                defualtFileName,
+                _defaultDirectory,
+                defaultFileName,
                 filter);
         }
-        public string SaveFile(string defualtFileName, ExtensionFilter[] filters)
+        public string SaveFile(string defaultFileName, ExtensionFilter[] filters)
         {
             return StandaloneFileBrowser.SaveFilePanel(
                 "Save As",
-                _defualtDirectory,
-                defualtFileName,
+                _defaultDirectory,
+                defaultFileName,
                 filters);
         }
     }

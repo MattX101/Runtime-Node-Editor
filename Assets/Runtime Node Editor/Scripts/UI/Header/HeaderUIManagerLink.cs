@@ -1,6 +1,6 @@
 namespace RuntimeNodeEditor.UI.Header
 {
-    public static class HeaderUIManagerLink
+    internal static class HeaderUIManagerLink
     {
         public static HeaderUIManager headerUIManager;
     }

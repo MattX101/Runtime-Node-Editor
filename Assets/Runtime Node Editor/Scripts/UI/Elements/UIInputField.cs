@@ -19,7 +19,7 @@ namespace RuntimeNodeEditor.UI.Elements
             // Text
             TextMeshPro textText = UIText.CreateText(textArea.transform, "Text", rect.sizeDelta, new Vector3(0, 0, -1), "");
             UIText.SetTextColor(textText, new Color(0.2f, 0.2f, 0.2f, 1.0f));
-            UIText.SetFontAligment(textText, TextAlignmentOptions.Center);
+            UIText.SetFontAlignment(textText, TextAlignmentOptions.Center);
 
             textText.gameObject.AddComponent<CanvasRenderer>();
 
@@ -56,7 +56,7 @@ namespace RuntimeNodeEditor.UI.Elements
             if (inputField.text.Length == 0)
                 return;
 
-            char character = inputField.text[inputField.text.Length - 1];
+            char character = inputField.text[^1];
             inputField.text = character.ToString();
         }
     }

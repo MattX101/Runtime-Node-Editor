@@ -13,7 +13,7 @@ namespace RuntimeNodeEditor.Node
             AddOutputPointer(outputs[2]);
         }
 
-        public override void Exectute()
+        public override void Execute()
         {
             outputs[0].data.vector2Value = Vector2.zero;
 

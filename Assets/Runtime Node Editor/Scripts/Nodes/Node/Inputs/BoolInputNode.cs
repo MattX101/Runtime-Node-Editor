@@ -9,7 +9,7 @@ namespace RuntimeNodeEditor.Node
             AddOutputPointer(outputs[0]);
         }
 
-        public override void Exectute()
+        public override void Execute()
         {
             outputs[0].data.boolValue = elements.buttons[0].Toggled;
 

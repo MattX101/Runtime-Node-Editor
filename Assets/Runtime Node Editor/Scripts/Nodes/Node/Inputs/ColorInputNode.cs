@@ -13,7 +13,7 @@ namespace RuntimeNodeEditor.Node
             AddOutputPointer(outputs[3]);
         }
 
-        public override void Exectute()
+        public override void Execute()
         {
             outputs[1].data.floatValue = elements.sliders[0].value;
             outputs[2].data.floatValue = elements.sliders[1].value;

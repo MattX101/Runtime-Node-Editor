@@ -4,12 +4,25 @@ using UnityEngine;
 
 namespace RuntimeNodeEditor.UI.Canvas.Lines
 {
-    public class BackgroundLinesController
+    internal class BackgroundLinesController
     {
+        private BackgroundLinesController() { }
+
+        private static BackgroundLinesController _instance;
+        public static BackgroundLinesController Instance
+        {
+            get
+            {
+                return _instance ??= new BackgroundLinesController();
+            }
+        }
+
+        public bool Initialised = false;
+        
         private Color _lineColour;
         public Color LineColour
         {
-            set { _lineColour = value; }
+            set => _lineColour = value;
         }
         private Material _lineMaterial;
 
@@ -18,7 +31,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Lines
         private Transform _horizontalLinesParent, _verticalLinesParent;
         private List<BackgroundLineController> _horizontalLines, _verticalLines;
 
-        public BackgroundLinesController(Material lineMaterial, Vector2 windowSize, Transform horizontalLinesParent, Transform verticalLinesParent)
+        public void Init(Material lineMaterial, Vector2 windowSize, Transform horizontalLinesParent, Transform verticalLinesParent)
         {
             _lineMaterial = lineMaterial;
 
@@ -28,9 +41,11 @@ namespace RuntimeNodeEditor.UI.Canvas.Lines
             _horizontalLines = new List<BackgroundLineController>();
             _verticalLines = new List<BackgroundLineController>();
 
-            DrawLines(windowSize);
-        }
+            DrawLines(windowSize, false);
 
+            Initialised = true;
+        }
+        
         public void ManageLines(Vector2 canvasSize, Vector2 windowSize)
         {
             UpdateLines(windowSize);
@@ -45,57 +60,63 @@ namespace RuntimeNodeEditor.UI.Canvas.Lines
                 line.UpdateMaterial(_lineColour);
         }
 
-        public void DrawLines(Vector2 windowSize)
+        public void DrawLines(Vector2 windowSize, bool clearLines)
         {
+            if (clearLines)
+                DeleteAllLines();
+            
             Vector2 scaledWindowScale = windowSize * ScreenScale.scale;
 
-            DrawHorizontalLine(windowSize, 0.0f);
+            DrawHorizontalLine(windowSize.x, 0.0f);
             for (float i = Zoom.scale; i < scaledWindowScale.y; i += Zoom.scale)
             {
                 float j = i / ScreenScale.scale;
 
-                DrawHorizontalLine(windowSize, j);
-                DrawHorizontalLine(windowSize, -j);
+                DrawHorizontalLine(windowSize.x, j);
+                DrawHorizontalLine(windowSize.x, -j);
             }
 
-            DrawVerticalLine(windowSize, 0.0f);
+            DrawVerticalLine(windowSize.y, 0.0f);
             for (float i = Zoom.scale; i < scaledWindowScale.x; i += Zoom.scale)
             {
                 float j = i / ScreenScale.scale;
 
-                DrawVerticalLine(windowSize, j);
-                DrawVerticalLine(windowSize, -j);
+                DrawVerticalLine(windowSize.y, j);
+                DrawVerticalLine(windowSize.y, -j);
             }
         }
-        private void DrawHorizontalLine(Vector2 windowSize, float position)
+        private void DrawHorizontalLine(float sizeX, float position)
         {
-            Vector3 start = new Vector3(-windowSize.x, position, 999);
-            Vector3 end = new Vector3(windowSize.x, position, 999);
-
-            BackgroundLineController backgroundLineController = new BackgroundLineController(
-                "Horizontal Line",
-                _horizontalLinesParent,
-                start,
-                end,
-                0.04f);
-            backgroundLineController.CreateLine(_lineMaterial, _lineColour);
-
-            _horizontalLines.Add(backgroundLineController);
+            _horizontalLines.Add(
+                CreateLine(
+                    "Horizontal Line", 
+                    _horizontalLinesParent, 
+                    new Vector3(-sizeX, position, 999), 
+                    new Vector3(sizeX, position, 999))
+            );
         }
-        private void DrawVerticalLine(Vector2 windowSize, float position)
+        private void DrawVerticalLine(float sizeY, float position)
         {
-            Vector3 start = new Vector3(position, -windowSize.y, 999);
-            Vector3 end = new Vector3(position, windowSize.y, 999);
+            _verticalLines.Add(
+                CreateLine(
+                    "Vertical Line", 
+                    _verticalLinesParent, 
+                    new Vector3(position, -sizeY, 999), 
+                    new Vector3(position, sizeY, 999))
+                );
+        }
 
+        private BackgroundLineController CreateLine(string name, Transform parent, Vector3 start, Vector3 end)
+        {
             BackgroundLineController backgroundLineController = new BackgroundLineController(
-                "Vertical Line",
-                _verticalLinesParent,
+                name,
+                parent,
                 start,
                 end,
                 0.04f);
-            backgroundLineController.CreateLine(_lineMaterial, _lineColour);
+            backgroundLineController.SetMaterial(_lineMaterial, _lineColour);
 
-            _verticalLines.Add(backgroundLineController);
+            return backgroundLineController;
         }
 
         private void UpdateLines(Vector2 windowSize)
@@ -117,19 +138,19 @@ namespace RuntimeNodeEditor.UI.Canvas.Lines
                 _horizontalLines[i].UpdateHorizontalLine();
 
                 LineRenderer line = _horizontalLines[i].LineRenderer;
-                float bottom = line.GetPosition(0).y;
-                float top = line.GetPosition(1).y;
                 float verticalValue = line.GetPosition(0).y;
 
                 if (verticalValue < -windowSize.y || verticalValue > windowSize.y)
                 {
                     DeleteLine(_horizontalLines, i);
+                    continue;
                 }
-                else
-                {
-                    _bounds.y = bottom < _bounds.y ? bottom : _bounds.y;
-                    _bounds.w = top > _bounds.w ? top : _bounds.w;
-                }
+                
+                float bottom = line.GetPosition(0).y;
+                float top = line.GetPosition(1).y;
+                    
+                _bounds.y = bottom < _bounds.y ? bottom : _bounds.y;
+                _bounds.w = top > _bounds.w ? top : _bounds.w;
             }
         }
         private void UpdateVerticalLines(Vector2 windowSize)
@@ -140,19 +161,19 @@ namespace RuntimeNodeEditor.UI.Canvas.Lines
                 _verticalLines[i].UpdateVerticalLine();
 
                 LineRenderer line = _verticalLines[i].LineRenderer;
-                float left = line.GetPosition(0).x;
-                float right = line.GetPosition(1).x;
                 float horizontalValue = line.GetPosition(0).x;
 
                 if (horizontalValue < -windowSize.x || horizontalValue > windowSize.x)
                 {
                     DeleteLine(_verticalLines, i);
+                    continue;
                 }
-                else
-                {
-                    _bounds.x = left < _bounds.x ? left : _bounds.x;
-                    _bounds.z = right > _bounds.z ? right : _bounds.z;
-                }
+                
+                float left = line.GetPosition(0).x;
+                float right = line.GetPosition(1).x;
+                    
+                _bounds.x = left < _bounds.x ? left : _bounds.x;
+                _bounds.z = right > _bounds.z ? right : _bounds.z;
             }
         }
 
@@ -171,33 +192,36 @@ namespace RuntimeNodeEditor.UI.Canvas.Lines
         {
             position = 
                 increment ? 
-                position + (1.0f / ScreenScale.scale) : 
-                position - (1.0f / ScreenScale.scale);
+                position + 1.0f / ScreenScale.scale : 
+                position - 1.0f / ScreenScale.scale;
 
-            float value = Mathf.Abs(position) * Zoom.scale;
-            if (isVertical && value <= windowSize.x)
+            float positionAbs = Mathf.Abs(position) * Zoom.scale;
+            
+            switch (isVertical)
             {
-                DrawVerticalLine(windowSize, position);
-                AddNewLine(position, windowSize, increment, isVertical);
-            }
-            else if (!isVertical && value <= windowSize.y)
-            {
-                DrawHorizontalLine(windowSize, position);
-                AddNewLine(position, windowSize, increment, isVertical);
+                case true when positionAbs <= windowSize.x:
+                    DrawVerticalLine(windowSize.y, position);
+                    AddNewLine(position, windowSize, increment, true);
+                    break;
+                case false when positionAbs <= windowSize.y:
+                    DrawHorizontalLine(windowSize.x, position);
+                    AddNewLine(position, windowSize, increment, false);
+                    break;
             }
         }
+        
 
-        public void DeleteAllLines()
+        private void DeleteAllLines()
         {
-            for (int i = _horizontalLines.Count - 1; i >= 0; i--) DeleteLine(_horizontalLines, i);
-            for (int i = _verticalLines.Count - 1; i >= 0; i--)   DeleteLine(_verticalLines, i);
+            for (int i = 0; i < _horizontalLines.Count; i++) DeleteLine(_horizontalLines, i);
+            for (int i = 0; i < _verticalLines.Count; i++)   DeleteLine(_verticalLines, i);
         }
         private void DeleteLine(List<BackgroundLineController> lines, int i)
         {
-            GameObject lineObject = lines[i].LineRenderer.gameObject;
+            Object.Destroy(lines[i].LineRenderer.gameObject);
 
-            lines.Remove(lines[i]);
-            GameObject.Destroy(lineObject);
+            lines[i] = lines[^1];
+            lines.RemoveAt(lines.Count - 1);
         }
     }
 }

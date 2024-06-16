@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace RuntimeNodeEditor.UI.Canvas
 {
-    public class CanvasUIManager : MonoBehaviour
+    internal class CanvasUIManager : MonoBehaviour
     {
         [Header("Camera")]
         [SerializeField] private Camera _camera;
@@ -25,9 +25,7 @@ namespace RuntimeNodeEditor.UI.Canvas
 
         private Vector2 _windowSize, _windowSizeWithBorder, _canvasSize;
         private Vector3 _screenRes;
-
-        private BackgroundLinesController _backgroundLinesController;
-
+        
         public void Awake()
         {
             _screenRes = new Vector3(_camera.pixelWidth, _camera.pixelHeight, 1);
@@ -38,7 +36,7 @@ namespace RuntimeNodeEditor.UI.Canvas
             Zoom.canvasScaler = _canvasScaler;
 
             SetSizes(1.0f);
-            _backgroundLinesController = new BackgroundLinesController(
+            BackgroundLinesController.Instance.Init(
                 _lineMaterial,
                 _windowSizeWithBorder,
                 _horizontalParent,
@@ -53,7 +51,7 @@ namespace RuntimeNodeEditor.UI.Canvas
 
             UpdateCanvasData();
 
-            if (_backgroundLinesController == null)
+            if (BackgroundLinesController.Instance.Initialised == false)
                 return;
 
             MouseController.CheckMouse();
@@ -72,15 +70,14 @@ namespace RuntimeNodeEditor.UI.Canvas
                 Zoom.Reset();
 
                 SetSizes(Zoom.scale);
-                _backgroundLinesController.DeleteAllLines();
-                _backgroundLinesController.DrawLines(_windowSizeWithBorder);
+                BackgroundLinesController.Instance.DrawLines(_windowSizeWithBorder, true);
             }
             else
             {
                 SetSizes(Zoom.scale);
                 if (_cameraBackgroundColour != _camera.backgroundColor)
                     SetCanvasColor();
-                _backgroundLinesController.ManageLines(_canvasSize, _windowSizeWithBorder);
+                BackgroundLinesController.Instance.ManageLines(_canvasSize, _windowSizeWithBorder);
             }
         }
 
@@ -96,12 +93,12 @@ namespace RuntimeNodeEditor.UI.Canvas
             _camera.backgroundColor = _cameraBackgroundColour;
 
             Vector3 hsl = ColourConversion.RGBToHSL(_cameraBackgroundColour);
-            _backgroundLinesController.LineColour = ColourConversion.HSLToRGB(
+            BackgroundLinesController.Instance.LineColour = ColourConversion.HSLToRGB(
                 hsl.x,
                 hsl.y,
                 hsl.z * 0.5f);
 
-            _backgroundLinesController.UpdateLinesColour();
+            BackgroundLinesController.Instance.UpdateLinesColour();
         }
         private void UpdateCanvasData()
         {
@@ -109,21 +106,5 @@ namespace RuntimeNodeEditor.UI.Canvas
                 _canvasRect.rect.width / _canvasScaler.referenceResolution.x,
                 _canvasRect.rect.height / _canvasScaler.referenceResolution.y);
         }
-
-        /*public void Activate()
-        {
-            CanvasData.canZoom = true;
-
-            if (!(Input.GetMouseButton(0) || Input.GetMouseButton(1)))
-                CanvasData.canvasIsActive = true;
-        }
-
-        public void Deactivate()
-        {
-            CanvasData.canZoom = false;
-
-            if (!(Input.GetMouseButton(0) || Input.GetMouseButton(1)))
-                CanvasData.canvasIsActive = false;
-        }*/
     }
 }

@@ -12,11 +12,11 @@ namespace RuntimeNodeEditor.Node
             AddInputPointer(inputs[0]);
         }
 
-        public override void Exectute()
+        public override void Execute()
         {
-            if (inputs[0].connectedOutputPointer != null)
+            if (inputs[0].connectedOutputPointer)
             {
-                inputs[0].connectedOutputPointer.node.Exectute();
+                inputs[0].connectedOutputPointer.node.Execute();
                 imagePreview.Image.color = inputs[0].connectedOutputPointer.data.colorValue;
             }
 

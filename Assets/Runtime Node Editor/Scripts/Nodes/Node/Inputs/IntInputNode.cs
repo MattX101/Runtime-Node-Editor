@@ -9,7 +9,7 @@ namespace RuntimeNodeEditor.Node
             AddOutputPointer(outputs[0]);
         }
 
-        public override void Exectute()
+        public override void Execute()
         {
             outputs[0].data.intValue =
                 elements.inputFields[0].text.Length != 0 

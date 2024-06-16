@@ -56,9 +56,11 @@ namespace RuntimeNodeEditor.Node.Pointer
             if (lines == null || lines.Count == 0)
                 return;
 
-            if (CanvasData.isDraging || CanvasData.isPanning || CanvasData.isScrolling)
-                foreach (LineController line in lines)
-                    line.UpdateLinePositions();
+            if (!CanvasData.isDraging && !CanvasData.isPanning && !CanvasData.isScrolling) 
+                return;
+            
+            foreach (LineController line in lines)
+                line.UpdateLinePositions();
         }
     }
 }

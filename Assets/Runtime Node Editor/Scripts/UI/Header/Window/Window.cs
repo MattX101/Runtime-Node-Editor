@@ -3,14 +3,14 @@ using UnityEngine;
 
 namespace RuntimeNodeEditor.UI.Header
 {
-    public class Window : MonoBehaviour
+    internal class Window : MonoBehaviour
     {
         [SerializeField] 
         private Transform _parent;
 
         [SerializeField] 
         protected GameObject window;
-
+        
         public void Create()
         {
             if (UISettings.windowSpawnParent.childCount != 0)

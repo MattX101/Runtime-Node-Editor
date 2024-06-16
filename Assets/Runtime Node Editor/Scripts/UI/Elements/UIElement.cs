@@ -6,9 +6,14 @@ namespace RuntimeNodeEditor.UI.Elements
     {
         public static GameObject Create(Transform parent, string objectName, Vector2 size, Vector3 pos)
         {
-            GameObject uiElement = new GameObject();
-            uiElement.name = objectName;
-            uiElement.transform.parent = parent.transform;
+            GameObject uiElement = new()
+            {
+                name = objectName,
+                transform =
+                {
+                    parent = parent.transform
+                }
+            };
 
             RectTransform rect = uiElement.AddComponent<RectTransform>();
             rect.localScale = Vector3.one;

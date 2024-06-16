@@ -16,7 +16,7 @@ namespace RuntimeNodeEditor.Node.Line
         public OutputPointer output;
         private Vector3 endPosition;
 
-        private float _lineWidth = 0.1f;
+        private const float _lineWidth = 0.1f;
 
         public LineController(Transform parent, Material material, Vector3 start)
         {
@@ -87,8 +87,8 @@ namespace RuntimeNodeEditor.Node.Line
 
         public void DestroyLine()
         {
-            if (input != null) input.line = null;
-            if (output != null) output.lines.Remove(this);
+            if (input)  input.line = null;
+            if (output) output.lines.Remove(this);
 
             lineRenderer = null;
             Object.Destroy(lineObject);

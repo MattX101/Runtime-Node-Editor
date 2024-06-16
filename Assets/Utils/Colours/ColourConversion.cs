@@ -4,20 +4,16 @@ namespace RuntimeNodeEditor.Utils.Colour
 {
     public static class ColourConversion
     {
-        public static Vector3 RGBToHSL(Color colour)
+        public static Vector3 RGBToHSL(Color c)
         {
-            float r = colour.r;
-            float g = colour.g;
-            float b = colour.b;
-
-            float min = Mathf.Min(r, g, b);
-            float max = Mathf.Max(r, g, b);
+            float min = Mathf.Min(c.r, c.g, c.b);
+            float max = Mathf.Max(c.r, c.g, c.b);
             float diff = max - min;
 
             float hue = 0.0f;
-            if (max == r) hue = (g - b) / diff % 6;
-            else if (max == g) hue = (b - r) / diff + 2;
-            else if (max == b) hue = (r - g) / diff + 4;
+            if      (max == c.r) hue = (c.g - c.b) / diff % 6;
+            else if (max == c.g) hue = (c.b - c.r) / diff + 2;
+            else if (max == c.b) hue = (c.r - c.g) / diff + 4;
             hue *= 60;
             hue = hue < 0 ? 300 + 60 - Mathf.Abs(hue) : hue;
             hue = Mathf.Clamp(hue, 1, 359);
@@ -35,12 +31,12 @@ namespace RuntimeNodeEditor.Utils.Colour
             float m = lightness - C / 2;
 
             Color rgb = Color.black;
-            if (hue > 0 && hue <= 60) rgb = new Color(C, X, 0);
-            else if (hue > 60 && hue <= 120) rgb = new Color(X, C, 0);
-            else if (hue > 120 && hue <= 180) rgb = new Color(0, C, X);
-            else if (hue > 180 && hue <= 240) rgb = new Color(0, X, C);
-            else if (hue > 240 && hue <= 300) rgb = new Color(X, 0, C);
-            else if (hue > 300 && hue <= 360) rgb = new Color(C, 0, X);
+            if      (hue is > 0 and <= 60)    rgb = new Color(C, X, 0);
+            else if (hue is > 60 and <= 120)  rgb = new Color(X, C, 0);
+            else if (hue is > 120 and <= 180) rgb = new Color(0, C, X);
+            else if (hue is > 180 and <= 240) rgb = new Color(0, X, C);
+            else if (hue is > 240 and <= 300) rgb = new Color(X, 0, C);
+            else if (hue is > 300 and <= 360) rgb = new Color(C, 0, X);
 
             rgb.r += m;
             rgb.g += m;

@@ -40,15 +40,17 @@ namespace RuntimeNodeEditor.Node.Line
                 CreateLineOnClick();
             else if (Input.GetMouseButtonUp(0) && CanvasData.isPointing)
                 DropLine();
-            else if (_currentLineData != null)
-                _currentLineData.UpdateDraggingLine(_mousePos);
+            else
+                _currentLineData?.UpdateDraggingLine(_mousePos);
 
             if (Input.GetMouseButtonDown(1))
                 DeletePointerConnectionsOnClick();
 
-            if (_droppedLines != null && _droppedLines.Count > 0)
-                foreach (LineController line in _droppedLines)
-                    line.UpdateWidth();
+            if (_droppedLines == null || _droppedLines.Count <= 0) 
+                return;
+            
+            foreach (LineController line in _droppedLines)
+                line.UpdateWidth();
         }
 
         private void CreateLineOnClick()
@@ -56,7 +58,7 @@ namespace RuntimeNodeEditor.Node.Line
             if (!CanvasData.canPoint)
                 return;
 
-            if (_raycastHit2D.collider == null || _raycastHit2D.collider.TryGetComponent(out OutputPointer outputPointer) == false)
+            if (!_raycastHit2D.collider || _raycastHit2D.collider.TryGetComponent(out OutputPointer outputPointer) == false)
                 return;
 
             CanvasData.isPointing = true;
@@ -69,13 +71,12 @@ namespace RuntimeNodeEditor.Node.Line
         {
             _sourceMaterial.color = PointerColor.PickColor(outputPointer.valueType);
 
-            _currentLineData = new LineController(parent, _sourceMaterial, new Vector3(_mousePos.x, _mousePos.y, 100.0f));
+            _currentLineData = new(parent, _sourceMaterial, new Vector3(_mousePos.x, _mousePos.y, 100.0f));
             _currentLineData.output = outputPointer;
 
             _currentOutput = outputPointer;
 
-            if (outputPointer.lines == null)
-                outputPointer.lines = new List<LineController>();
+            outputPointer.lines ??= new List<LineController>();
             outputPointer.lines.Add(_currentLineData);
         }
 
@@ -93,12 +94,12 @@ namespace RuntimeNodeEditor.Node.Line
 
         private bool LineDropped()
         {
-            if (_raycastHit2D.collider == null)
+            if (!_raycastHit2D.collider)
                 return false;
 
-            _raycastHit2D.collider.TryGetComponent<InputPointer>(out InputPointer inputPointer);
+            _raycastHit2D.collider.TryGetComponent(out InputPointer inputPointer);
 
-            if (inputPointer == null)
+            if (!inputPointer)
                 return false;
             if (inputPointer.hasConnection || _currentOutput.valueType != inputPointer.valueType)
                 return false;
@@ -110,8 +111,7 @@ namespace RuntimeNodeEditor.Node.Line
 
         private void DropOnInputPointer(InputPointer inputPointer)
         {
-            if (_currentOutput.connectedInputPointers == null)
-                _currentOutput.connectedInputPointers = new List<InputPointer>();
+            _currentOutput.connectedInputPointers ??= new List<InputPointer>();
 
             _currentLineData.input = inputPointer;
             _currentOutput.connectedInputPointers.Add(inputPointer);
@@ -126,7 +126,7 @@ namespace RuntimeNodeEditor.Node.Line
 
         private void DeletePointerConnectionsOnClick()
         {
-            if (_raycastHit2D.collider == null || CanvasData.isPointing)
+            if (!_raycastHit2D.collider || CanvasData.isPointing)
                 return;
 
             if (_raycastHit2D.collider.TryGetComponent(out OutputPointer outputPointer))
@@ -154,7 +154,7 @@ namespace RuntimeNodeEditor.Node.Line
 
             for (int i = 0; i < copiedNode.inputs.Count; i++)
             {
-                if (copiedNode.inputs[i].connectedOutputPointer == null)
+                if (!copiedNode.inputs[i].connectedOutputPointer)
                     continue;
 
                 InputPointer newInput = newNode.inputs[i];
@@ -175,8 +175,7 @@ namespace RuntimeNodeEditor.Node.Line
 
         private void SetConnection(InputPointer input, OutputPointer output)
         {
-            if (output.connectedInputPointers == null)
-                output.connectedInputPointers = new List<InputPointer>();
+            output.connectedInputPointers ??= new List<InputPointer>();
             output.connectedInputPointers.Add(input);
 
             input.SetConnection(output);

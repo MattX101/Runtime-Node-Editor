@@ -39,7 +39,16 @@ namespace RuntimeNodeEditor.Node
             //
         }
 
-        public virtual void Exectute()
+        public void DeletePointerConnections()
+        {
+            foreach (InputPointer input in inputs)
+                input.DeleteConnection();
+
+            foreach (OutputPointer output in outputs)
+                output.DeleteConnections();
+        }
+
+        public virtual void Execute()
         {
             //
         }
@@ -48,22 +57,20 @@ namespace RuntimeNodeEditor.Node
         {
             if (endNode)
             {
-                Exectute();
+                Execute();
                 return 0;
             }
-            else
+            
+            if (outputs == null)
+                return 0;
+
+            foreach (OutputPointer output in outputs)
             {
-                if (outputs == null)
-                    return 0;
+                if (output.connectedInputPointers == null)
+                    continue;
 
-                foreach (OutputPointer output in outputs)
-                {
-                    if (output.connectedInputPointers == null)
-                        continue;
-
-                    foreach (InputPointer input in output.connectedInputPointers)
-                        input.node.MoveUp();
-                }
+                foreach (InputPointer input in output.connectedInputPointers)
+                    input.node.MoveUp();
             }
 
             return 1;

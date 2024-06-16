@@ -8,9 +8,9 @@ namespace RuntimeNodeEditor.Functions.Seed
         [NonSerialized]
         public int seed;
 
-        private int _min, _max;
+        private readonly int _min, _max;
 
-        private System.Random _rnd;
+        private readonly System.Random _rnd;
 
         public SeedManager()
         {
@@ -19,6 +19,11 @@ namespace RuntimeNodeEditor.Functions.Seed
 
             _rnd = new System.Random();
             GenerateSeed();
+        }
+
+        public SeedManager(int max)
+        {
+            _max = max;
         }
 
         public void GenerateSeed()

@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace RuntimeNodeEditor.UI.Header
 {
-    public class PreviewWindow : Window
+    internal class PreviewWindow : Window
     {
         [SerializeField] 
         private Image _togglePreviewIcon;
