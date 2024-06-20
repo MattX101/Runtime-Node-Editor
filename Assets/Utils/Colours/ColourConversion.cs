@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace RuntimeNodeEditor.Utils.Colour
+namespace Utils.Colour
 {
     public static class ColourConversion
     {

@@ -1,7 +1,7 @@
-using RuntimeNodeEditor.Node.Pointer;
+using RuntimeNodeEditor.Nodes.Pointer;
 using UnityEngine;
 
-namespace RuntimeNodeEditor.Node
+namespace RuntimeNodeEditor.Nodes.Node
 {
     public class ColorInputNode : Node
     {

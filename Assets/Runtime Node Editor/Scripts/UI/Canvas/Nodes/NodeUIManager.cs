@@ -1,8 +1,11 @@
+using RuntimeNodeEditor.Nodes.Lines;
 using RuntimeNodeEditor.UI.Canvas.Node.Components;
+using RuntimeNodeEditor.UI.Canvas.Nodes.Components;
+using RuntimeNodeEditor.UI.Canvas.Nodes.Node;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace RuntimeNodeEditor.UI.Canvas.Node
+namespace RuntimeNodeEditor.UI.Canvas.Nodes
 {
     internal class NodeUIManager : MonoBehaviour
     {
@@ -12,9 +15,12 @@ namespace RuntimeNodeEditor.UI.Canvas.Node
 
         private Camera _camera;
         private CanvasScaler _canvasScaler;
-        
+
         [SerializeField]
-        private NodeUISelection _nodeUISelection;
+        private NodeUIManager _nodeUIManager;
+
+        [SerializeField]
+        private ConnectionLines _linesController;
 
         private void Awake()
         {
@@ -27,23 +33,23 @@ namespace RuntimeNodeEditor.UI.Canvas.Node
 
         private void Update()
         {
-            _nodeUISelection.ManageNodes(_camera);
-            NodeUIDrag.ManageDrag(_camera, _canvasScaler);
+            Selection.OnUpdate(_camera, _nodeUIManager, _linesController);
+            Drag.ManageDrag(_camera, _canvasScaler);
         }
 
         public void Spawn(string id)
         {
-            InitSpawnDrag(NodeUIFactory.CreateNode(id, Vector3.zero));
+            InitSpawnDrag(Factory.CreateNode(id, Vector3.zero));
         }
-
+        
         public void Spawn(string id, Vector3 position)
         {
-            InitSpawnDrag(NodeUIFactory.CreateNode(id, position));
+            InitSpawnDrag(Factory.CreateNode(id, position));
         }
 
         public NodeUI SpawnWithReturn(string id, Vector3 position)
         {
-            NodeUI nodeUI = NodeUIFactory.CreateNode(id, position);
+            NodeUI nodeUI = Factory.CreateNode(id, position);
             InitSpawnDrag(nodeUI);
 
             return nodeUI;
@@ -51,7 +57,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Node
 
         private void InitSpawnDrag(NodeUI nodeUI)
         {
-            NodeUIDrag.InitSpawnDrag(nodeUI);
+            Drag.InitSpawnDrag(nodeUI);
         }
     }
 }

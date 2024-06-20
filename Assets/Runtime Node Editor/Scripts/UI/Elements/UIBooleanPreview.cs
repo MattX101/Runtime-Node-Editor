@@ -26,7 +26,7 @@ namespace RuntimeNodeEditor.UI.Elements
             return booleanButton;
         }
 
-        public static void AddOnValueChange(Button button, RuntimeNodeEditor.Node.Node node)
+        public static void AddOnValueChange(Button button, RuntimeNodeEditor.Nodes.Node.Node node)
         {
             button.onClick.AddListener(
                 delegate

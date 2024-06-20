@@ -1,8 +1,8 @@
-using RuntimeNodeEditor.Node.Pointer;
+using RuntimeNodeEditor.Nodes.Pointer;
 using TMPro;
 using UnityEngine;
 
-namespace RuntimeNodeEditor.Node
+namespace RuntimeNodeEditor.Nodes.Node
 {
     public class Vector3InputNode : Node
     {

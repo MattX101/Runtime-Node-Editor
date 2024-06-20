@@ -8,7 +8,7 @@ namespace RuntimeNodeEditor.Functions.UI.Component
         public Button button;
         public RawImage image;
 
-        public bool Toggled = false;
+        public bool Toggled;
 
         public void Toggle()
         {

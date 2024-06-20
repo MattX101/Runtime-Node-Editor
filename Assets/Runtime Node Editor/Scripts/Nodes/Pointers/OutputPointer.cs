@@ -1,17 +1,18 @@
 using RuntimeNodeEditor.Data;
-using RuntimeNodeEditor.Node.Line;
 using System.Collections.Generic;
+using RuntimeNodeEditor.Nodes.Line;
+using RuntimeNodeEditor.Nodes.Pointer.Data;
 
-namespace RuntimeNodeEditor.Node.Pointer
+namespace RuntimeNodeEditor.Nodes.Pointer
 {
     public class OutputPointer : Pointer
     {
         public List<InputPointer> connectedInputPointers;
-        public List<LineController> lines;
+        public List<ConnectionLine> lines;
 
         public PointerData data;
 
-        public OutputPointer(string name, Node node) : base(name, node)
+        public OutputPointer(string name, Node.Node node) : base(name, node)
         {
             valueType = ValueType.None;
         }
@@ -59,7 +60,7 @@ namespace RuntimeNodeEditor.Node.Pointer
             if (!CanvasData.isDraging && !CanvasData.isPanning && !CanvasData.isScrolling) 
                 return;
             
-            foreach (LineController line in lines)
+            foreach (ConnectionLine line in lines)
                 line.UpdateLinePositions();
         }
     }

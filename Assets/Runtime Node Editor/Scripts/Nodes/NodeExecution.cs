@@ -2,15 +2,15 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace RuntimeNodeEditor.Node
+namespace RuntimeNodeEditor.Nodes
 {
     public class NodeExecution : MonoBehaviour
     {
-        public void Execute(Node[] nodes)
+        public void Execute(Node.Node[] nodes)
         {
-            List<Node> endNodes = nodes.Where(node => node.endNode).ToList();
+            List<Node.Node> endNodes = nodes.Where(node => node.endNode).ToList();
 
-            foreach (Node endNode in endNodes)
+            foreach (Node.Node endNode in endNodes)
                 endNode.Execute();
         }
     }

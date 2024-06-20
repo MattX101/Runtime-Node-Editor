@@ -1,7 +1,7 @@
 using RuntimeNodeEditor.Functions.UI.Component;
-using RuntimeNodeEditor.Node.Pointer;
+using RuntimeNodeEditor.Nodes.Pointer;
 
-namespace RuntimeNodeEditor.Node
+namespace RuntimeNodeEditor.Nodes.Node
 {
     public class ColorOutputNode : Node
     {

@@ -1,10 +1,11 @@
-using RuntimeNodeEditor.Node;
-using RuntimeNodeEditor.Node.Pointer;
 using RuntimeNodeEditor.Functions.UI.Elements;
+using RuntimeNodeEditor.Nodes.Node;
+using RuntimeNodeEditor.Nodes.Pointer;
+using RuntimeNodeEditor.Nodes.Pointer.Data;
 using TMPro;
 using UnityEngine;
 
-namespace RuntimeNodeEditor.UI.Canvas.Node
+namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
 {
     internal class FloatOutputUI : NodeUI
     {
@@ -30,14 +31,18 @@ namespace RuntimeNodeEditor.UI.Canvas.Node
             inputs[0].node = floatOutputNode;
             inputs[0].valueType = ValueType.Float;
 
-            floatOutputNode.elements = new NodeUIElements(1, 0, 0);
-
-            floatOutputNode.elements.inputFields[0] = AddInputField(
-                inputs[0].gameObject.transform,
-                TMP_InputField.ContentType.DecimalNumber,
-                0,
-                true,
-                false);
+            floatOutputNode.elements = new NodeUIElements(1, 0, 0)
+            {
+                inputFields =
+                {
+                    [0] = AddInputField(
+                        inputs[0].gameObject.transform,
+                        TMP_InputField.ContentType.DecimalNumber,
+                        0,
+                        true,
+                        false)
+                }
+            };
 
             floatOutputNode.AddPointers(inputs, outputs);
         }

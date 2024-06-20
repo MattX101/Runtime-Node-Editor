@@ -1,9 +1,10 @@
 using RuntimeNodeEditor.Functions.UI.Elements;
-using RuntimeNodeEditor.Node;
-using RuntimeNodeEditor.Node.Pointer;
+using RuntimeNodeEditor.Nodes.Node;
+using RuntimeNodeEditor.Nodes.Pointer;
+using RuntimeNodeEditor.Nodes.Pointer.Data;
 using UnityEngine;
 
-namespace RuntimeNodeEditor.UI.Canvas.Node
+namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
 {
     internal class ColorInputUI : NodeUI
     {
@@ -43,11 +44,15 @@ namespace RuntimeNodeEditor.UI.Canvas.Node
             outputs[3].node = colorInputNode;
             outputs[3].valueType = ValueType.Float;
 
-            colorInputNode.elements = new NodeUIElements(0, 0, 3);
-
-            colorInputNode.elements.sliders[0] = AddSlider(outputs[1].transform, false);
-            colorInputNode.elements.sliders[1] = AddSlider(outputs[2].transform, false);
-            colorInputNode.elements.sliders[2] = AddSlider(outputs[3].transform, false);
+            colorInputNode.elements = new NodeUIElements(0, 0, 3)
+            {
+                sliders =
+                {
+                    [0] = AddSlider(outputs[1].transform, false),
+                    [1] = AddSlider(outputs[2].transform, false),
+                    [2] = AddSlider(outputs[3].transform, false)
+                }
+            };
 
             PreviewColor(1, 2, 3, false);
             imagePreview.UpdateNodeOnValueChange(colorInputNode.elements.sliders[0], colorInputNode.MoveUp);

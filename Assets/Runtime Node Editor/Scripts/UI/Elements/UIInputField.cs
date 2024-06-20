@@ -42,7 +42,7 @@ namespace RuntimeNodeEditor.UI.Elements
                 });
         }
 
-        public static void AddOnValueChange(TMP_InputField inputField, RuntimeNodeEditor.Node.Node node)
+        public static void AddOnValueChange(TMP_InputField inputField, RuntimeNodeEditor.Nodes.Node.Node node)
         {
             inputField.onValueChanged.AddListener(
                 delegate

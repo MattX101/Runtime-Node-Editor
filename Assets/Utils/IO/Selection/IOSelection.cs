@@ -1,7 +1,7 @@
 using SFB;
 using UnityEngine;
 
-namespace RuntimeNodeEditor.Utils.IO.Selection
+namespace Utils.IO.Selection
 {
     public class IOSelection
     {

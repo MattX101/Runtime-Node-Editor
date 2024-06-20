@@ -6,9 +6,9 @@ namespace RuntimeNodeEditor.Functions.UI.Elements
 {
     public class NodeUIElements
     {
-        public TMP_InputField[] inputFields = null;
-        public BooleanButton[] buttons = null;
-        public Slider[] sliders = null;
+        public TMP_InputField[] inputFields;
+        public BooleanButton[] buttons;
+        public Slider[] sliders;
 
         public NodeUIElements(int numOfInputsFields, int numOfBooleanButtons, int numOfSliders) 
         {
@@ -98,7 +98,7 @@ namespace RuntimeNodeEditor.Functions.UI.Elements
 
         public byte[] Save()
         {
-            return new SaveUIElements().Save(inputFields, buttons, sliders);
+            return new UIElementWriter().Save(inputFields, buttons, sliders);
         }
     }
 }

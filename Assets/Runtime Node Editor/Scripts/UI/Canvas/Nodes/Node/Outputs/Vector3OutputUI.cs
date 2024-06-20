@@ -1,10 +1,11 @@
-using RuntimeNodeEditor.Node;
-using RuntimeNodeEditor.Node.Pointer;
 using RuntimeNodeEditor.Functions.UI.Elements;
+using RuntimeNodeEditor.Nodes.Node;
+using RuntimeNodeEditor.Nodes.Pointer;
+using RuntimeNodeEditor.Nodes.Pointer.Data;
 using TMPro;
 using UnityEngine;
 
-namespace RuntimeNodeEditor.UI.Canvas.Node
+namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
 {
     internal class Vector3OutputUI : NodeUI
     {
@@ -45,26 +46,30 @@ namespace RuntimeNodeEditor.UI.Canvas.Node
             inputs[3].node = vector3OutputNode;
             inputs[3].valueType = ValueType.Float;
 
-            vector3OutputNode.elements = new NodeUIElements(3, 0, 0);
-
-            vector3OutputNode.elements.inputFields[0] = AddInputField(
-                inputs[1].gameObject.transform,
-                TMP_InputField.ContentType.DecimalNumber,
-                0,
-                true,
-                false);
-            vector3OutputNode.elements.inputFields[1] = AddInputField(
-                inputs[2].gameObject.transform,
-                TMP_InputField.ContentType.DecimalNumber,
-                0,
-                true,
-                false);
-            vector3OutputNode.elements.inputFields[2] = AddInputField(
-                inputs[3].gameObject.transform,
-                TMP_InputField.ContentType.DecimalNumber,
-                0,
-                true,
-                false);
+            vector3OutputNode.elements = new NodeUIElements(3, 0, 0)
+            {
+                inputFields =
+                {
+                    [0] = AddInputField(
+                        inputs[1].gameObject.transform,
+                        TMP_InputField.ContentType.DecimalNumber,
+                        0,
+                        true,
+                        false),
+                    [1] = AddInputField(
+                        inputs[2].gameObject.transform,
+                        TMP_InputField.ContentType.DecimalNumber,
+                        0,
+                        true,
+                        false),
+                    [2] = AddInputField(
+                        inputs[3].gameObject.transform,
+                        TMP_InputField.ContentType.DecimalNumber,
+                        0,
+                        true,
+                        false)
+                }
+            };
 
             vector3OutputNode.AddPointers(inputs, outputs);
         }

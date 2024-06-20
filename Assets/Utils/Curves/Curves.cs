@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace RuntimeNodeEditor.Utils.Curves
+namespace Utils.Curves
 {
     public static class LinearEaseCurves
     {

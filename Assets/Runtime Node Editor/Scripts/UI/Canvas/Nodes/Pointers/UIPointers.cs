@@ -1,21 +1,21 @@
-using RuntimeNodeEditor.Node.Pointer;
 using RuntimeNodeEditor.Functions.UI.Component;
 using RuntimeNodeEditor.UI.Elements;
 using System.Collections.Generic;
+using RuntimeNodeEditor.Nodes.Pointer.Data;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace RuntimeNodeEditor.UI.Canvas.Pointer
+namespace RuntimeNodeEditor.UI.Canvas.Nodes.Pointer
 {
     internal class UIPointers
     {
-        private RuntimeNodeEditor.Node.Node _node;
+        private readonly RuntimeNodeEditor.Nodes.Node.Node _node;
 
-        private List<GameObject> _inputs = new List<GameObject>();
-        private List<GameObject> _outputs = new List<GameObject>();
+        private List<GameObject> _inputs = new();
+        private List<GameObject> _outputs = new();
 
-        public UIPointers(RuntimeNodeEditor.Node.Node node)
+        public UIPointers(RuntimeNodeEditor.Nodes.Node.Node node)
         {
             _node = node;
         }

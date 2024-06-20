@@ -2,7 +2,7 @@ using System;
 using TMPro;
 using UnityEngine;
 
-namespace RuntimeNodeEditor.Utils.IO.Selection
+namespace Utils.IO.Selection
 {
     [Serializable]
     public class SelectFolder : IOSelection

@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using RuntimeNodeEditor.CanvasInput;
+using RuntimeNodeEditor.Input;
 using RuntimeNodeEditor.Functions.Seed;
-using RuntimeNodeEditor.Node;
-using RuntimeNodeEditor.Node.Line;
-using RuntimeNodeEditor.UI.Canvas.Node.Save;
-using RuntimeNodeEditor.Utils.IO.Selection;
+using RuntimeNodeEditor.Nodes;
+using RuntimeNodeEditor.Nodes.Lines;
+using RuntimeNodeEditor.UI.Canvas.Nodes.Save;
+using Utils.IO.Selection;
 using UnityEngine;
 
 namespace RuntimeNodeEditor.Save
@@ -22,15 +22,14 @@ namespace RuntimeNodeEditor.Save
         [Header("Scripts")]
         [SerializeField] private SeedManager _seedManager;
         [SerializeField] private NodeExecution _nodeExecution;
-        [SerializeField] private NodeUIOnSave _nodeUIOnSave;
-        [SerializeField] private LinesController _linesController;
+        [SerializeField] private ConnectionLines _linesController;
 
         [Header("Nodes")]
         [SerializeField]
         private GameObject _nodesObject;
 
         private const string _saveExtension = "data";
-        private List<byte> _data = new List<byte>();
+        private readonly List<byte> _data = new List<byte>();
 
         public void Save()
         {
@@ -50,10 +49,10 @@ namespace RuntimeNodeEditor.Save
         private void WriteData()
         {
             _data.Clear();
-
-            foreach (byte b in _seedManager.Save()) _data.Add(b);
-            foreach (byte b in Zoom.Save()) _data.Add(b);
-            foreach (byte b in _nodeUIOnSave.Save(_nodesObject)) _data.Add(b);
+            
+            _data.AddRange(_seedManager.Save());
+            _data.AddRange(Zoom.Save());
+            _data.AddRange(OnSave.Save(_nodesObject));
 
             File.WriteAllBytes(_saveDirectory, _data.ToArray());
         }
@@ -73,8 +72,8 @@ namespace RuntimeNodeEditor.Save
             byte[] data = File.ReadAllBytes(path);
 
             _seedManager.seed = BitConverter.ToInt32(data, position);
-            Zoom.scale = BitConverter.ToSingle(data, position + 4);
-            int numOfNodes = BitConverter.ToInt32(data, position + 8);
+            Zoom.scale = BitConverter.ToSingle(data,4);
+            int numOfNodes = BitConverter.ToInt32(data,8);
             position += 12;
 
             if (numOfNodes == 0)
@@ -83,7 +82,7 @@ namespace RuntimeNodeEditor.Save
             for (int i = 0; i < numOfNodes; i++)
                 position = LoadNodes(position, data);
 
-            RuntimeNodeEditor.Node.Node[] nodes = _nodesObject.GetComponentsInChildren<RuntimeNodeEditor.Node.Node>();
+            Nodes.Node.Node[] nodes = _nodesObject.GetComponentsInChildren<Nodes.Node.Node>();
 
             int connectionArrayLength = BitConverter.ToInt32(data, position);
             position += 4;
@@ -96,15 +95,15 @@ namespace RuntimeNodeEditor.Save
 
         private int LoadNodes(int position, byte[] data)
         {
-            NodeUILoadData nodeUIData = new NodeUILoadData(data, position);
+            LoadData nodeUIData = new LoadData(data, position);
             position = nodeUIData.endIndex;
 
-            _nodeUIOnSave.Load(nodeUIData);
+            OnSave.Load(nodeUIData);
 
             return position;
         }
 
-        private int LoadConnections(RuntimeNodeEditor.Node.Node[] nodes, int position, byte[] data)
+        private int LoadConnections(Nodes.Node.Node[] nodes, int position, byte[] data)
         {
             _linesController.Load(
                 nodes[BitConverter.ToInt32(data, position)].inputs[data[position + 4]], 

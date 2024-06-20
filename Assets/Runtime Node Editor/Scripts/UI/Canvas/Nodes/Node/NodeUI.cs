@@ -1,22 +1,20 @@
-using RuntimeNodeEditor.Node.Pointer;
 using RuntimeNodeEditor.UI.Elements;
-using RuntimeNodeEditor.UI.Canvas.Pointer;
+using RuntimeNodeEditor.UI.Canvas.Nodes.Pointer;
 using RuntimeNodeEditor.Functions.UI.Component;
-using RuntimeNodeEditor.Utils.Colour;
+using Utils.Colour;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections.Generic;
+using System.Linq;
+using RuntimeNodeEditor.Nodes.Pointer;
+using RuntimeNodeEditor.Nodes.Pointer.Data;
 
-namespace RuntimeNodeEditor.UI.Canvas.Node
+namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
 {
     internal class NodeUI : MonoBehaviour
     {
-        private string _nodeId = "NodeUI";
-        public string NodeId
-        {
-            get => _nodeId;
-        }
+        public string NodeId { get; private set; } = "NodeUI";
 
         // Root
         public GameObject root;
@@ -71,12 +69,12 @@ namespace RuntimeNodeEditor.UI.Canvas.Node
 
         public virtual void Init(string nodeId)
         {
-            _nodeId = nodeId;
+            NodeId = nodeId;
 
-            root = this.gameObject;
+            root = gameObject;
         }
 
-        public void PopulateRoot(string title)
+        protected void PopulateRoot(string title)
         {
             root.name = title;
             root.transform.parent = UISettings.nodeCanvasTransform.transform;
@@ -87,7 +85,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Node
             rect.localPosition = Vector3.zero;
         }
 
-        public void CreateNodeUI(RuntimeNodeEditor.Node.Node node, Color primaryColour, string title)
+        protected void CreateNodeUI(RuntimeNodeEditor.Nodes.Node.Node node, Color primaryColour, string title)
         {
             uIPointers = new UIPointers(node);
 
@@ -217,8 +215,10 @@ namespace RuntimeNodeEditor.UI.Canvas.Node
                 previewImageSize,
                 previewImagePos);
 
-            imagePreview = new ImagePreview();
-            imagePreview.Image = UIImage.Create(_previewImageObject, Color.black);
+            imagePreview = new ImagePreview
+            {
+                Image = UIImage.Create(_previewImageObject, Color.black)
+            };
         }
 
         protected GameObject CreatePointer(string name, ValueType valueType, int i, bool createText, bool pointerIsInput)
@@ -293,17 +293,17 @@ namespace RuntimeNodeEditor.UI.Canvas.Node
 
         public byte[] SaveNodeUI()
         {
-            List<byte> bytes = new List<byte>();
+            List<byte> bytes = new()
+            {
+                // Node ID
+                (byte)NodeId.Length
+            };
 
-            // Node ID
-            bytes.Add((byte)_nodeId.Length);
-
-            for (int i = 0; i < _nodeId.Length; i++)
-                bytes.Add((byte)_nodeId[i]);
+            bytes.AddRange(NodeId.Select(t => (byte)t));
 
             // Node Position
-            foreach (byte b in System.BitConverter.GetBytes(rootRect.localPosition.x)) bytes.Add(b);
-            foreach (byte b in System.BitConverter.GetBytes(rootRect.localPosition.y)) bytes.Add(b);
+            bytes.AddRange(System.BitConverter.GetBytes(rootRect.localPosition.x));
+            bytes.AddRange(System.BitConverter.GetBytes(rootRect.localPosition.y));
 
             return bytes.ToArray();
         }

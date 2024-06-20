@@ -1,6 +1,6 @@
-using RuntimeNodeEditor.Node.Pointer;
+using RuntimeNodeEditor.Nodes.Pointer;
 
-namespace RuntimeNodeEditor.Node
+namespace RuntimeNodeEditor.Nodes.Node
 {
     public class IntInputNode : Node
     {

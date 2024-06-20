@@ -1,7 +1,7 @@
 using System;
 using System.IO;
 
-namespace RuntimeNodeEditor.Utils.IO
+namespace Utils.IO
 {
     public static class Paths
     {

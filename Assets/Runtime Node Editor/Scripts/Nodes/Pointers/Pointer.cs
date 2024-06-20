@@ -1,14 +1,15 @@
+using RuntimeNodeEditor.Nodes.Pointer.Data;
 using UnityEngine;
 
-namespace RuntimeNodeEditor.Node.Pointer
+namespace RuntimeNodeEditor.Nodes.Pointer
 {
     public class Pointer : MonoBehaviour
     {
-        public Node node;
+        public Node.Node node;
         
         public ValueType valueType = ValueType.None;
 
-        public Pointer(string name, Node node)
+        public Pointer(string name, Node.Node node)
         {
             this.name = name;
             this.node = node;

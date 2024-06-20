@@ -1,9 +1,10 @@
-using RuntimeNodeEditor.Node;
-using RuntimeNodeEditor.Node.Pointer;
 using RuntimeNodeEditor.Functions.UI.Elements;
+using RuntimeNodeEditor.Nodes.Pointer;
+using RuntimeNodeEditor.Nodes.Node;
+using RuntimeNodeEditor.Nodes.Pointer.Data;
 using UnityEngine;
 
-namespace RuntimeNodeEditor.UI.Canvas.Node
+namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
 {
     internal class BoolOutputUI : NodeUI
     {
@@ -29,9 +30,13 @@ namespace RuntimeNodeEditor.UI.Canvas.Node
             inputs[0].node = boolOutputNode;
             inputs[0].valueType = ValueType.Bool;
 
-            boolOutputNode.elements = new NodeUIElements(0, 1, 0);
-
-            boolOutputNode.elements.buttons[0] = AddBooleanPreview(inputs[0].transform, true);
+            boolOutputNode.elements = new NodeUIElements(0, 1, 0)
+            {
+                buttons =
+                {
+                    [0] = AddBooleanPreview(inputs[0].transform, true)
+                }
+            };
 
             boolOutputNode.AddPointers(inputs, outputs);
         }

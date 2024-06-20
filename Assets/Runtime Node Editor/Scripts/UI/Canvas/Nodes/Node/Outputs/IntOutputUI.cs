@@ -1,10 +1,11 @@
-using RuntimeNodeEditor.Node;
-using RuntimeNodeEditor.Node.Pointer;
 using RuntimeNodeEditor.Functions.UI.Elements;
+using RuntimeNodeEditor.Nodes.Node;
+using RuntimeNodeEditor.Nodes.Pointer;
+using RuntimeNodeEditor.Nodes.Pointer.Data;
 using TMPro;
 using UnityEngine;
 
-namespace RuntimeNodeEditor.UI.Canvas.Node
+namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
 {
     internal class IntOutputUI : NodeUI
     {
@@ -30,14 +31,18 @@ namespace RuntimeNodeEditor.UI.Canvas.Node
             inputs[0].node = intOutputNode;
             inputs[0].valueType = ValueType.Int;
 
-            intOutputNode.elements = new NodeUIElements(1, 0, 0);
-
-            intOutputNode.elements.inputFields[0] = AddInputField(
-                inputs[0].gameObject.transform,
-                TMP_InputField.ContentType.IntegerNumber,
-                0,
-                true,
-                false);
+            intOutputNode.elements = new NodeUIElements(1, 0, 0)
+            {
+                inputFields =
+                {
+                    [0] = AddInputField(
+                        inputs[0].gameObject.transform,
+                        TMP_InputField.ContentType.IntegerNumber,
+                        0,
+                        true,
+                        false)
+                }
+            };
 
             intOutputNode.AddPointers(inputs, outputs);
         }

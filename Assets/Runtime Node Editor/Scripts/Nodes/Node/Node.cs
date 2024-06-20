@@ -1,17 +1,18 @@
 using System.Collections.Generic;
+using System.Linq;
 using RuntimeNodeEditor.Functions.UI.Elements;
-using RuntimeNodeEditor.Node.Pointer;
+using RuntimeNodeEditor.Nodes.Pointer;
 using UnityEngine;
 
-namespace RuntimeNodeEditor.Node
+namespace RuntimeNodeEditor.Nodes.Node
 {
     public class Node : MonoBehaviour
     {
-        protected bool wasExecuted = false;
-        public bool endNode = false;
+        protected bool wasExecuted;
+        public bool endNode;
 
-        public List<InputPointer> inputs = new List<InputPointer>();
-        public List<OutputPointer> outputs = new List<OutputPointer>();
+        public List<InputPointer> inputs = new();
+        public List<OutputPointer> outputs = new();
 
         public NodeUIElements elements;
 
@@ -20,7 +21,7 @@ namespace RuntimeNodeEditor.Node
             //
         }
 
-        public void ResetExecution()
+        protected void ResetExecution()
         {
             wasExecuted = false;
         }
@@ -64,14 +65,8 @@ namespace RuntimeNodeEditor.Node
             if (outputs == null)
                 return 0;
 
-            foreach (OutputPointer output in outputs)
-            {
-                if (output.connectedInputPointers == null)
-                    continue;
-
-                foreach (InputPointer input in output.connectedInputPointers)
-                    input.node.MoveUp();
-            }
+            foreach (var input in outputs.Where(output => output.connectedInputPointers != null).SelectMany(output => output.connectedInputPointers))
+                input.node.MoveUp();
 
             return 1;
         }

@@ -1,16 +1,17 @@
-using RuntimeNodeEditor.Node.Line;
+using RuntimeNodeEditor.Nodes.Line;
+using RuntimeNodeEditor.Nodes.Pointer.Data;
 
-namespace RuntimeNodeEditor.Node.Pointer
+namespace RuntimeNodeEditor.Nodes.Pointer
 {
     public class InputPointer : Pointer
     {
         public OutputPointer connectedOutputPointer;
 
-        public LineController line;
+        public ConnectionLine line;
 
         public bool hasConnection = false;
 
-        public InputPointer(string name, Node node) : base(name, node)
+        public InputPointer(string name, Node.Node node) : base(name, node)
         {
             valueType = ValueType.None;
         }

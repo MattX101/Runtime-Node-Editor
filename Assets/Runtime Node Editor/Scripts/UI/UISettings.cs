@@ -13,7 +13,7 @@ namespace RuntimeNodeEditor.UI
         public const float borderSize = 5.0f;
 
         public const float pointerSize = 30.0f;
-        public static readonly float inputFieldHeight = pointerSize;
+        public const float inputFieldHeight = pointerSize;
 
         public const float sliderWidth = 150.0f, sliderHandleWidth = 20.0f;
         public const float sliderTextFieldWidth = 45.0f;

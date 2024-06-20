@@ -3,7 +3,7 @@ using SFB;
 using TMPro;
 using UnityEngine;
 
-namespace RuntimeNodeEditor.Utils.IO.Selection
+namespace Utils.IO.Selection
 {
     [Serializable]
     public class SelectFile : IOSelection
