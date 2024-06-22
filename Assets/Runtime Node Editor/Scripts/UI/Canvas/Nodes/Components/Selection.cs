@@ -8,22 +8,22 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Components
 {
     internal static class Selection
     {
-        private static RuntimeNodeEditor.Nodes.Node.Node _currentNode, _previousNode, _copiedNode;
-        private static bool _currentCopyIsCut = false;
+        private static RuntimeNodeEditor.Nodes.Node.Node _currentNode, _copiedNode;
+        private static bool _currentCopyIsCut;
 
-        public static void OnUpdate(Camera camera, NodeUIManager nodeUIManager, ConnectionLines linesController)
+        public static void OnUpdate(NodeUIManager nodeUIManager, NodeConnectionLines connectionLines)
         {
-            MangeSelection(camera);
-            KeyboardInput(nodeUIManager, linesController);
+            MangeSelection();
+            KeyboardInput(nodeUIManager, connectionLines);
         }
 
-        private static void MangeSelection(Camera camera)
+        private static void MangeSelection()
         {
             if (!UnityEngine.Input.GetMouseButtonDown(0))
                 return;
             
             RaycastHit2D hit2D = Physics2D.Raycast(
-                MouseController.GetMouseWorldPosition(camera),
+                MouseController.MouseWorldPosition,
                 Vector2.zero
                 );
 
@@ -41,12 +41,12 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Components
             Deselect();
         }
 
-        private static void KeyboardInput(NodeUIManager nodeUIManager, ConnectionLines linesController)
+        private static void KeyboardInput(NodeUIManager nodeUIManager, NodeConnectionLines connectionLines)
         {
             if (UnityEngine.Input.GetKey(KeyCode.LeftControl))
                 if      (UnityEngine.Input.GetKeyDown(KeyCode.C)) Copy(false);
                 else if (UnityEngine.Input.GetKeyDown(KeyCode.X)) Copy(true);
-                else if (UnityEngine.Input.GetKeyDown(KeyCode.V)) Paste(nodeUIManager, linesController);
+                else if (UnityEngine.Input.GetKeyDown(KeyCode.V)) Paste(nodeUIManager, connectionLines);
 
             if (UnityEngine.Input.GetKeyDown(KeyCode.Delete))
                 Delete(_currentNode);
@@ -57,7 +57,6 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Components
             if (_currentNode)
                 _currentNode.GetComponent<NodeUI>().SetPrimaryColor();
 
-            _previousNode = _currentNode;
             _currentNode = node;
             
             _currentNode.GetComponent<NodeUI>().ToggleSelectColor();
@@ -66,9 +65,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Components
         {
             if (!_currentNode)
                 return;
-
-            _previousNode = _currentNode;
-
+            
             _currentNode.GetComponent<NodeUI>().SetPrimaryColor();
             _currentNode = null;
         }
@@ -82,7 +79,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Components
             _currentCopyIsCut = cut;
         }
 
-        private static void Paste(NodeUIManager nodeUIManager, ConnectionLines linesController)
+        private static void Paste(NodeUIManager nodeUIManager, NodeConnectionLines connectionLines)
         {
             if (!_copiedNode)
                 return;
@@ -92,8 +89,8 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Components
 
             RuntimeNodeEditor.Nodes.Node.Node newNode = newNodeUI.root.GetComponent<RuntimeNodeEditor.Nodes.Node.Node>();
 
-            newNode.elements.SetElements(_copiedNode.elements);
-            linesController.Paste(_copiedNode, newNode);
+            newNode.Elements.SetElements(_copiedNode.Elements);
+            connectionLines.Paste(_copiedNode, newNode);
 
             if (_currentCopyIsCut)
             {
@@ -108,7 +105,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Components
             if (!_currentNode)
                 return;
 
-            if (CanvasData.isPointing || CanvasData.isDraging || CanvasData.isPanning || CanvasData.isScrolling)
+            if (CanvasData.IsPointing || CanvasData.IsDragging || CanvasData.IsPanning || CanvasData.IsScrolling)
                 return;
 
             node.DeletePointerConnections();

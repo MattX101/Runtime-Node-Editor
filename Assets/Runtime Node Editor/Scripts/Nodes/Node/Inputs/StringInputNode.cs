@@ -11,16 +11,16 @@ namespace RuntimeNodeEditor.Nodes.Node
 
         public override void Execute()
         {
-            outputs[0].data.stringValue = elements.inputFields[0].text;
+            outputs[0].Data.StringValue = Elements.InputFields[0].text;
 
-            wasExecuted = true;
+            WasExecuted = true;
         }
 
         public override void Reset()
         {
             ResetExecution();
 
-            outputs[0].data.stringValue = "";
+            outputs[0].Data.StringValue = "";
         }
     }
 }

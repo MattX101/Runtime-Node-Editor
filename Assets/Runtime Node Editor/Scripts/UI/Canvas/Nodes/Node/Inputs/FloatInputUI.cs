@@ -16,9 +16,9 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
             PopulateRoot("Float");
             FloatInputNode floatInputNode = root.AddComponent<FloatInputNode>();
 
-            numOfInputs = 0;
+            NumOfInputs = 0;
             outputs = new OutputPointer[1];
-            numOfOutputs = outputs.Length;
+            NumOfOutputs = outputs.Length;
 
             drawBodyImage = false;
             interactablePreview = true;
@@ -32,9 +32,9 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
             outputs[0].node = floatInputNode;
             outputs[0].valueType = ValueType.Float;
 
-            floatInputNode.elements = new NodeUIElements(1, 0, 0)
+            floatInputNode.Elements = new NodeUIElements(1, 0, 0)
             {
-                inputFields =
+                InputFields =
                 {
                     [0] = AddInputField(
                         outputs[0].gameObject.transform,

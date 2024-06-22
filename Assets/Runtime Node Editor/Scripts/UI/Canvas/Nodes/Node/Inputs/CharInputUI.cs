@@ -17,9 +17,9 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
             PopulateRoot("Char");
             CharInputNode charInputNode = root.AddComponent<CharInputNode>();
 
-            numOfInputs = 0;
+            NumOfInputs = 0;
             outputs = new OutputPointer[1];
-            numOfOutputs = outputs.Length;
+            NumOfOutputs = outputs.Length;
 
             drawBodyImage = false;
             interactablePreview = true;
@@ -33,9 +33,9 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
             outputs[0].node = charInputNode;
             outputs[0].valueType = ValueType.Char;
 
-            charInputNode.elements = new NodeUIElements(1, 0, 0)
+            charInputNode.Elements = new NodeUIElements(1, 0, 0)
             {
-                inputFields =
+                InputFields =
                 {
                     [0] = AddInputField(
                         outputs[0].gameObject.transform,
@@ -46,7 +46,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
                 }
             };
 
-            UIInputField.SetSingleCharacterInputField(charInputNode.elements.inputFields[0]);
+            UIInputField.SetSingleCharacterInputField(charInputNode.Elements.InputFields[0]);
 
             charInputNode.AddPointers(inputs, outputs);
         }

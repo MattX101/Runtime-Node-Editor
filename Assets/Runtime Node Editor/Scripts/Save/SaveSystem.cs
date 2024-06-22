@@ -14,22 +14,19 @@ namespace RuntimeNodeEditor.Save
     internal class SaveSystem : MonoBehaviour
     {
         private readonly IOSelection _iOSelection = new();
-        private string _saveDirectory = null;
-        
-        [SerializeField]
-        private Camera _camera;
+        private string _saveDirectory;
 
         [Header("Scripts")]
-        [SerializeField] private SeedManager _seedManager;
-        [SerializeField] private NodeExecution _nodeExecution;
-        [SerializeField] private ConnectionLines _linesController;
+        [SerializeField] private SeedManager seedManager;
+        [SerializeField] private NodeExecution nodeExecution;
+        [SerializeField] private NodeConnectionLines linesController;
 
         [Header("Nodes")]
         [SerializeField]
-        private GameObject _nodesObject;
+        private GameObject nodesObject;
 
-        private const string _saveExtension = "data";
-        private readonly List<byte> _data = new List<byte>();
+        private const string SaveExtension = "data";
+        private readonly List<byte> _data = new();
 
         public void Save()
         {
@@ -41,7 +38,7 @@ namespace RuntimeNodeEditor.Save
 
         public void SaveAs()
         {
-            _saveDirectory = _iOSelection.SaveFile("Save", _saveExtension);
+            _saveDirectory = _iOSelection.SaveFile("Save", SaveExtension);
 
             WriteData();
         }
@@ -50,16 +47,16 @@ namespace RuntimeNodeEditor.Save
         {
             _data.Clear();
             
-            _data.AddRange(_seedManager.Save());
+            _data.AddRange(seedManager.Save());
             _data.AddRange(Zoom.Save());
-            _data.AddRange(OnSave.Save(_nodesObject));
+            _data.AddRange(OnSave.Save(nodesObject));
 
             File.WriteAllBytes(_saveDirectory, _data.ToArray());
         }
         
         public void Load()
         {
-            string path = _iOSelection.SelectFile(_saveExtension);
+            string path = _iOSelection.SelectFile(SaveExtension);
 
             if (path == null)
             {
@@ -71,8 +68,8 @@ namespace RuntimeNodeEditor.Save
             int position = 0;
             byte[] data = File.ReadAllBytes(path);
 
-            _seedManager.seed = BitConverter.ToInt32(data, position);
-            Zoom.scale = BitConverter.ToSingle(data,4);
+            seedManager.Seed = BitConverter.ToInt32(data, position);
+            Zoom.Scale = BitConverter.ToSingle(data,4);
             int numOfNodes = BitConverter.ToInt32(data,8);
             position += 12;
 
@@ -82,7 +79,7 @@ namespace RuntimeNodeEditor.Save
             for (int i = 0; i < numOfNodes; i++)
                 position = LoadNodes(position, data);
 
-            Nodes.Node.Node[] nodes = _nodesObject.GetComponentsInChildren<Nodes.Node.Node>();
+            Nodes.Node.Node[] nodes = nodesObject.GetComponentsInChildren<Nodes.Node.Node>();
 
             int connectionArrayLength = BitConverter.ToInt32(data, position);
             position += 4;
@@ -90,13 +87,13 @@ namespace RuntimeNodeEditor.Save
             for (int i = 0; i < connectionArrayLength; i++)
                 position = LoadConnections(nodes, position, data);
 
-            _nodeExecution.Execute(nodes);
+            nodeExecution.Execute(nodes);
         }
 
         private int LoadNodes(int position, byte[] data)
         {
             LoadData nodeUIData = new LoadData(data, position);
-            position = nodeUIData.endIndex;
+            position = nodeUIData.EndIndex;
 
             OnSave.Load(nodeUIData);
 
@@ -105,11 +102,11 @@ namespace RuntimeNodeEditor.Save
 
         private int LoadConnections(Nodes.Node.Node[] nodes, int position, byte[] data)
         {
-            _linesController.Load(
+            linesController.Load(
                 nodes[BitConverter.ToInt32(data, position)].inputs[data[position + 4]], 
                 nodes[BitConverter.ToInt32(data, position + 5)].outputs[data[position + 9]]);
 
-            return position += 10;
+            return position + 10;
         }
     }
 }

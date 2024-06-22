@@ -1,6 +1,5 @@
 using RuntimeNodeEditor.Functions.UI.Component;
 using RuntimeNodeEditor.UI.Elements;
-using System.Collections.Generic;
 using RuntimeNodeEditor.Nodes.Pointer.Data;
 using TMPro;
 using UnityEngine;
@@ -12,9 +11,6 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Pointer
     {
         private readonly RuntimeNodeEditor.Nodes.Node.Node _node;
 
-        private List<GameObject> _inputs = new();
-        private List<GameObject> _outputs = new();
-
         public UIPointers(RuntimeNodeEditor.Nodes.Node.Node node)
         {
             _node = node;
@@ -23,11 +19,6 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Pointer
         public GameObject CreatePointer(string name, GameObject parent, ValueType valueType, int i, bool createText, bool pointerIsInput)
         {
             GameObject uiElement = AddPointer(name, parent, valueType, i, createText, pointerIsInput);
-            
-            if (pointerIsInput)
-                _inputs.Add(uiElement);
-            else
-                _outputs.Add(uiElement);
 
             return uiElement;
         }
@@ -37,7 +28,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Pointer
             GameObject uiElement = UIElement.Create(
                 parent.transform,
                 name,
-                new Vector2(UISettings.pointerSize, UISettings.pointerSize),
+                new Vector2(UISettings.PointerSize, UISettings.PointerSize),
                 CalcualtePosition(
                     parent.GetComponent<RectTransform>(),
                     pointerIsInput, 
@@ -55,12 +46,12 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Pointer
 
         private Vector3 CalcualtePosition(RectTransform rect, bool isInput, int i)
         {
-            float posX = rect.sizeDelta.x + UISettings.borderSize * 2;
+            float posX = rect.sizeDelta.x + UISettings.BorderSize * 2;
             posX = isInput ? -posX : posX;
             posX /= 2;
 
-            float posY = (rect.sizeDelta.y - UISettings.pointerSize) / 2;
-            posY -= i * (UISettings.pointerSize + UISettings.pointerPadding);
+            float posY = (rect.sizeDelta.y - UISettings.PointerSize) / 2;
+            posY -= i * (UISettings.PointerSize + UISettings.PointerPadding);
 
             return new Vector3(posX, posY, 0.0f);
         }
@@ -100,10 +91,10 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Pointer
             TMP_InputField inputField = UIInputField.Create(parent, contentType, interactable);
             UIInputField.AddOnValueChange(inputField, _node);
 
-            float posX = (UISettings.nodeWidth + UISettings.pointerSize) / 2;
-            posX -= UISettings.borderSize;
+            float posX = (UISettings.NodeWidth + UISettings.PointerSize) / 2;
+            posX -= UISettings.BorderSize;
             posX = !pointerIsInput ? -posX : posX;
-            float posY = i * -UISettings.inputFieldHeight;
+            float posY = i * -UISettings.InputFieldHeight;
 
             inputField.gameObject.transform.localPosition = new Vector3(posX, posY, -1);
 
@@ -113,11 +104,11 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Pointer
         public BooleanButton AddBooleanPreview(Transform parent, bool pointerIsInput)
         {
             BooleanButton button = UIBooleanPreview.Create(parent, !pointerIsInput);
-            UIBooleanPreview.AddOnValueChange(button.button, _node);
+            UIBooleanPreview.AddOnValueChange(button.Button, _node);
 
-            float posX = UISettings.pointerSize * 1.5f;
+            float posX = UISettings.PointerSize * 1.5f;
             posX = pointerIsInput ? posX : -posX;
-            button.button.gameObject.transform.localPosition = new Vector3(posX, 0, -1);
+            button.Button.gameObject.transform.localPosition = new Vector3(posX, 0, -1);
 
             return button;
         }
@@ -130,10 +121,10 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Pointer
             float posX = sliderObject.transform.localPosition.x;
             if (pointerIsInput)
             {
-                posX += UISettings.nodeWidth;
-                posX += UISettings.sliderTextFieldWidth;
-                posX += UISettings.borderSize;
-                posX += UISettings.pointerSize * 1.5f;
+                posX += UISettings.NodeWidth;
+                posX += UISettings.SliderTextFieldWidth;
+                posX += UISettings.BorderSize;
+                posX += UISettings.PointerSize * 1.5f;
             }
             sliderObject.transform.localPosition = new Vector3(posX, 0, -1);
 

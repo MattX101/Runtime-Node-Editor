@@ -6,7 +6,7 @@ namespace RuntimeNodeEditor.Functions.Seed
     public class SeedManager : MonoBehaviour
     {
         [NonSerialized]
-        public int seed;
+        public int Seed;
 
         private readonly int _min, _max;
 
@@ -28,12 +28,12 @@ namespace RuntimeNodeEditor.Functions.Seed
 
         public void GenerateSeed()
         {
-            seed = _rnd.Next(_min, _max);
+            Seed = _rnd.Next(_min, _max);
         }
 
         public byte[] Save()
         {
-            return BitConverter.GetBytes(seed);
+            return BitConverter.GetBytes(Seed);
         }
     }
 }

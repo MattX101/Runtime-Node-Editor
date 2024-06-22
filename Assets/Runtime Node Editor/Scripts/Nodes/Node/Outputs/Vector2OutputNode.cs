@@ -20,29 +20,29 @@ namespace RuntimeNodeEditor.Nodes.Node
             {
                 inputs[0].connectedOutputPointer.node.Execute();
 
-                x = inputs[0].connectedOutputPointer.data.vector2Value.x;
-                y = inputs[0].connectedOutputPointer.data.vector2Value.y;
+                x = inputs[0].connectedOutputPointer.Data.Vector2Value.x;
+                y = inputs[0].connectedOutputPointer.Data.Vector2Value.y;
             }
 
             if (inputs[1].connectedOutputPointer)
             {
                 inputs[1].connectedOutputPointer.node.Execute();
-                x = inputs[1].connectedOutputPointer.data.floatValue;
+                x = inputs[1].connectedOutputPointer.Data.FloatValue;
             }
             if (inputs[2].connectedOutputPointer)
             {
                 inputs[2].connectedOutputPointer.node.Execute();
-                y = inputs[2].connectedOutputPointer.data.floatValue;
+                y = inputs[2].connectedOutputPointer.Data.FloatValue;
             }
 
-            elements.SetInputField(
-                elements.inputFields[0], 
+            Elements.SetInputField(
+                Elements.InputFields[0], 
                 x.ToString());
-            elements.SetInputField(
-                elements.inputFields[1], 
+            Elements.SetInputField(
+                Elements.InputFields[1], 
                 y.ToString());
 
-            wasExecuted = true;
+            WasExecuted = true;
         }
 
         public override void Reset()

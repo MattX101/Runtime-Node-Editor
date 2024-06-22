@@ -16,42 +16,42 @@ namespace RuntimeNodeEditor.Nodes.Node
 
         public override void Execute()
         {
-            outputs[0].data.vector2Value = Vector3.zero;
+            outputs[0].Data.Vector2Value = Vector3.zero;
 
-            TMP_InputField xField = elements.inputFields[0];
-            TMP_InputField yField = elements.inputFields[1];
-            TMP_InputField zField = elements.inputFields[2];
+            TMP_InputField xField = Elements.InputFields[0];
+            TMP_InputField yField = Elements.InputFields[1];
+            TMP_InputField zField = Elements.InputFields[2];
 
             if (xField.text.Length != 0)
             {
                 float x = float.Parse(xField.text);
 
-                outputs[1].data.floatValue = x;
-                outputs[0].data.vector3Value.x = x;
+                outputs[1].Data.FloatValue = x;
+                outputs[0].Data.Vector3Value.x = x;
             }
             if (yField.text.Length != 0)
             {
                 float y = float.Parse(yField.text);
 
-                outputs[2].data.floatValue = y;
-                outputs[0].data.vector3Value.y = y;
+                outputs[2].Data.FloatValue = y;
+                outputs[0].Data.Vector3Value.y = y;
             }
             if (zField.text.Length != 0)
             {
                 float z = float.Parse(zField.text);
 
-                outputs[3].data.floatValue = z;
-                outputs[0].data.vector3Value.z = z;
+                outputs[3].Data.FloatValue = z;
+                outputs[0].Data.Vector3Value.z = z;
             }
 
-            wasExecuted = true;
+            WasExecuted = true;
         }
 
         public override void Reset()
         {
             ResetExecution();
 
-            outputs[0].data.vector3Value = Vector3.zero;
+            outputs[0].Data.Vector3Value = Vector3.zero;
         }
     }
 }

@@ -7,9 +7,9 @@ namespace RuntimeNodeEditor.Nodes.Pointer
     {
         public OutputPointer connectedOutputPointer;
 
-        public ConnectionLine line;
+        public NodeConnectionLine Line;
 
-        public bool hasConnection = false;
+        public bool hasConnection;
 
         public InputPointer(string name, Node.Node node) : base(name, node)
         {
@@ -24,10 +24,10 @@ namespace RuntimeNodeEditor.Nodes.Pointer
 
         public void DeleteConnection()
         {
-            if (line == null)
+            if (Line == null)
                 return;
 
-            line.DestroyLine();
+            Line.DestroyLine();
 
             hasConnection = false;
 

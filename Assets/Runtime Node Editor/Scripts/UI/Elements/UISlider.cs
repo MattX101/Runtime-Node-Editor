@@ -14,7 +14,7 @@ namespace RuntimeNodeEditor.UI.Elements
                 "Slider Element",
                 Vector2.zero,
                 new Vector3(
-                    -UISettings.nodeWidth + UISettings.borderSize, 
+                    -UISettings.NodeWidth + UISettings.BorderSize, 
                     0, 
                     -1)
                 );
@@ -27,14 +27,14 @@ namespace RuntimeNodeEditor.UI.Elements
         private static void CreateBackground(Transform parent)
         {
             // Background
-            float scaleX = UISettings.nodeWidth;
-            scaleX -= UISettings.pointerSize / 2;
-            scaleX -= UISettings.borderSize * 4;
+            float scaleX = UISettings.NodeWidth;
+            scaleX -= UISettings.PointerSize / 2;
+            scaleX -= UISettings.BorderSize * 4;
 
             GameObject background = UIElement.Create(
                 parent,
                 "Background",
-                new Vector2(scaleX, UISettings.pointerSize),
+                new Vector2(scaleX, UISettings.PointerSize),
                 new Vector3(scaleX / 2, 0, 0));
 
             RawImage backgroundImage = background.AddComponent<RawImage>();
@@ -64,16 +64,16 @@ namespace RuntimeNodeEditor.UI.Elements
         private static Slider CreateSliderComponent(Transform parent)
         {
             // Slider
-            float scaleX = UISettings.nodeWidth;
-            scaleX -= UISettings.pointerSize / 2;
-            scaleX -= UISettings.sliderHandleWidth;
-            scaleX -= UISettings.sliderTextFieldWidth;
-            scaleX -= UISettings.borderSize * 2;
+            float scaleX = UISettings.NodeWidth;
+            scaleX -= UISettings.PointerSize / 2;
+            scaleX -= UISettings.SliderHandleWidth;
+            scaleX -= UISettings.SliderTextFieldWidth;
+            scaleX -= UISettings.BorderSize * 2;
 
             GameObject sliderObject = UIElement.Create(
                 parent,
                 "Slider",
-                new Vector2(scaleX, UISettings.pointerSize),
+                new Vector2(scaleX, UISettings.PointerSize),
                 new Vector3(scaleX / 2, 0, 0));
 
             // Fill
@@ -89,8 +89,8 @@ namespace RuntimeNodeEditor.UI.Elements
             GameObject handle = UIElement.Create(
                 sliderObject.transform,
                 "Handle",
-                new Vector2(UISettings.sliderHandleWidth, 0),
-                new Vector3(UISettings.sliderHandleWidth / 2, 0, 0));
+                new Vector2(UISettings.SliderHandleWidth, 0),
+                new Vector3(UISettings.SliderHandleWidth / 2, 0, 0));
 
             RawImage handleImage = UIImage.Create(handle, Color.white);
 
@@ -112,24 +112,29 @@ namespace RuntimeNodeEditor.UI.Elements
 
         private static string ProcessSliderValue(string value)
         {
-            if (value.Length > 4)
-                value = value[..4];
+            switch (value.Length)
+            {
+                case > 4:
+                    value = value[..4];
+                    break;
                 //value = value.Substring(0, 4);
-            else if (value.Length == 1)
-                value += ".00";
+                case 1:
+                    value += ".00";
+                    break;
+            }
 
             return value;
         }
 
         private static TextMeshPro CreateTextField(Transform parent)
         {
-            Vector2 scale = new Vector2(UISettings.sliderTextFieldWidth, UISettings.pointerSize);
+            Vector2 scale = new Vector2(UISettings.SliderTextFieldWidth, UISettings.PointerSize);
 
             // Text Field
-            float posX = UISettings.nodeWidth;
-            posX += UISettings.pointerSize / 4;
-            posX -= UISettings.sliderTextFieldWidth;
-            posX -= UISettings.borderSize * 2;
+            float posX = UISettings.NodeWidth;
+            posX += UISettings.PointerSize / 4;
+            posX -= UISettings.SliderTextFieldWidth;
+            posX -= UISettings.BorderSize * 2;
 
             GameObject valuePreviewObject = UIElement.Create(
                 parent,

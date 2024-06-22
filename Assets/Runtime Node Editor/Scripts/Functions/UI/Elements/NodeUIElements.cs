@@ -6,15 +6,15 @@ namespace RuntimeNodeEditor.Functions.UI.Elements
 {
     public class NodeUIElements
     {
-        public TMP_InputField[] inputFields;
-        public BooleanButton[] buttons;
-        public Slider[] sliders;
+        public readonly TMP_InputField[] InputFields;
+        public readonly BooleanButton[] Buttons;
+        public readonly Slider[] Sliders;
 
         public NodeUIElements(int numOfInputsFields, int numOfBooleanButtons, int numOfSliders) 
         {
-            inputFields = new TMP_InputField[numOfInputsFields];
-            buttons = new BooleanButton[numOfBooleanButtons];
-            sliders = new Slider[numOfSliders];
+            InputFields = new TMP_InputField[numOfInputsFields];
+            Buttons = new BooleanButton[numOfBooleanButtons];
+            Sliders = new Slider[numOfSliders];
         }
 
         public void SetElements(string[] texts, bool[] booleans, float[] values)
@@ -25,9 +25,9 @@ namespace RuntimeNodeEditor.Functions.UI.Elements
         }
         public void SetElements(NodeUIElements elementsToCopy)
         {
-            SetInputFields(elementsToCopy.inputFields);
-            SetBooleans(elementsToCopy.buttons);
-            SetSliders(elementsToCopy.sliders);
+            SetInputFields(elementsToCopy.InputFields);
+            SetBooleans(elementsToCopy.Buttons);
+            SetSliders(elementsToCopy.Sliders);
         }
 
         public void SetInputField(TMP_InputField inputField, string value)
@@ -37,19 +37,19 @@ namespace RuntimeNodeEditor.Functions.UI.Elements
 
         private void SetInputFields(string[] values)
         {
-            if (inputFields == null)
+            if (InputFields == null)
                 return;
 
-            for (int i = 0; i < inputFields.Length; i++)
-                SetInputField(inputFields[i], values[i]);
+            for (int i = 0; i < InputFields.Length; i++)
+                SetInputField(InputFields[i], values[i]);
         }
         private void SetInputFields(TMP_InputField[] values)
         {
-            if (inputFields == null)
+            if (InputFields == null)
                 return;
 
-            for (int i = 0; i < inputFields.Length; i++)
-                SetInputField(inputFields[i], values[i].text);
+            for (int i = 0; i < InputFields.Length; i++)
+                SetInputField(InputFields[i], values[i].text);
         }
 
         public void SetBoolean(BooleanButton booleanButton, bool value)
@@ -59,19 +59,19 @@ namespace RuntimeNodeEditor.Functions.UI.Elements
 
         private void SetBooleans(bool[] values)
         {
-            if (buttons == null)
+            if (Buttons == null)
                 return;
 
-            for (int i = 0; i < buttons.Length; i++)
-                SetBoolean(buttons[i], values[i]);
+            for (int i = 0; i < Buttons.Length; i++)
+                SetBoolean(Buttons[i], values[i]);
         }
         private void SetBooleans(BooleanButton[] values)
         {
-            if (buttons == null)
+            if (Buttons == null)
                 return;
 
-            for (int i = 0; i < buttons.Length; i++)
-                SetBoolean(buttons[i], values[i].Toggled);
+            for (int i = 0; i < Buttons.Length; i++)
+                SetBoolean(Buttons[i], values[i].Toggled);
         }
 
         public void SetSlider(Slider slider, float value)
@@ -81,24 +81,24 @@ namespace RuntimeNodeEditor.Functions.UI.Elements
 
         private void SetSliders(float[] values)
         {
-            if (sliders == null)
+            if (Sliders == null)
                 return;
 
-            for (int i = 0; i < sliders.Length; i++)
-                SetSlider(sliders[i], values[i]);
+            for (int i = 0; i < Sliders.Length; i++)
+                SetSlider(Sliders[i], values[i]);
         }
         private void SetSliders(Slider[] values)
         {
-            if (sliders == null)
+            if (Sliders == null)
                 return;
 
-            for (int i = 0; i < sliders.Length; i++)
-                SetSlider(sliders[i], values[i].value);
+            for (int i = 0; i < Sliders.Length; i++)
+                SetSlider(Sliders[i], values[i].value);
         }
 
         public byte[] Save()
         {
-            return new UIElementWriter().Save(inputFields, buttons, sliders);
+            return new UIElementWriter().Save(InputFields, Buttons, Sliders);
         }
     }
 }

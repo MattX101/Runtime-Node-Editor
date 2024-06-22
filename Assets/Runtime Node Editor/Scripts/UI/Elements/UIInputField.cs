@@ -8,7 +8,7 @@ namespace RuntimeNodeEditor.UI.Elements
         public static TMP_InputField Create(Transform parent, TMP_InputField.ContentType contentType, bool interactable)
         {
             // Root
-            GameObject root = UIElement.Create(parent, "Input Field", new Vector2(UISettings.nodeWidth - UISettings.pointerSize, UISettings.inputFieldHeight), Vector3.zero);
+            GameObject root = UIElement.Create(parent, "Input Field", new Vector2(UISettings.NodeWidth - UISettings.PointerSize, UISettings.InputFieldHeight), Vector3.zero);
             RectTransform rect = root.GetComponent<RectTransform>();
             UIImage.Create(root, Color.white);
 

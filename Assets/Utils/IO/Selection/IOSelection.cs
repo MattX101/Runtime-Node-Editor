@@ -5,7 +5,7 @@ namespace Utils.IO.Selection
 {
     public class IOSelection
     {
-        private static readonly string _defaultDirectory = Paths.GetPath(Paths.Desktop);
+        private static readonly string DefaultDirectory = Paths.GetPath(Paths.Desktop);
         private readonly string _startDirectory;
 
         public string SelectFile(string extension, bool multiSelect = false)
@@ -62,7 +62,7 @@ namespace Utils.IO.Selection
         {
             return StandaloneFileBrowser.SaveFilePanel(
                 "Save As",
-                _defaultDirectory,
+                DefaultDirectory,
                 defaultFileName,
                 filter);
         }
@@ -70,7 +70,7 @@ namespace Utils.IO.Selection
         {
             return StandaloneFileBrowser.SaveFilePanel(
                 "Save As",
-                _defaultDirectory,
+                DefaultDirectory,
                 defaultFileName,
                 filters);
         }

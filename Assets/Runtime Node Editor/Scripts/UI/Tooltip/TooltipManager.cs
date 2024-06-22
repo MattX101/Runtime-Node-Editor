@@ -9,20 +9,20 @@ namespace RuntimeNodeEditor.UI.Tooltip
     {
         private TabsManager[] _tabsManagers;
 
-        [SerializeField] private Transform _windowSpawnParent;
-        [SerializeField] private GameObject _nodePanel;
+        [SerializeField] private Transform windowSpawnParent;
+        [SerializeField] private GameObject nodePanel;
 
         private Button[] _buttons;
 
         private void Awake()
         {
-            UISettings.windowSpawnParent = _windowSpawnParent;
-            UIData.nodePanel = _nodePanel;
+            UISettings.WindowSpawnParent = windowSpawnParent;
+            UIData.NodePanel = nodePanel;
 
             _tabsManagers = GetComponentsInChildren<TabsManager>();
             _buttons = FindObjectsOfType<Button>();
 
-            LinkToTooltip.tooltipManager = this;
+            LinkToTooltip.TooltipManager = this;
         }
 
         public void HideTabs()

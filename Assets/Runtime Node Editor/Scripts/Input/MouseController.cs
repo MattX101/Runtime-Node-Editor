@@ -5,32 +5,21 @@ namespace RuntimeNodeEditor.Input
 {
     public static class MouseController
     {
-        public static void CheckMouse()
+        public static Vector2 MouseWorldPosition => CanvasData.Camera.ScreenToWorldPoint(UnityEngine.Input.mousePosition);
+        public static Vector2 MouseViewportPosition => CanvasData.Camera.ScreenToViewportPoint(UnityEngine.Input.mousePosition);
+        public static Vector2 MousePositionRelativeToCenter => GetMousePositionRelativeToCenter();
+        
+        private static Vector2 GetMousePositionRelativeToCenter()
         {
-            CanvasData.canDrag = UnityEngine.Input.GetMouseButtonUp(0);
-        }
+            Vector2 mousePos = MouseViewportPosition;
 
-        public static Vector2 GetMouseWorldPosition(Camera camera)
-        {
-            return camera.ScreenToWorldPoint(UnityEngine.Input.mousePosition);
-        }
+            mousePos.x *= CanvasData.CanvasScaler.referenceResolution.x;
+            mousePos.x -= CanvasData.CanvasScaler.referenceResolution.x / 2.0f;
+            mousePos.x *= CanvasData.CanvasScale.x;
 
-        public static Vector2 GetMouseViewportPosition(Camera camera)
-        {
-            return camera.ScreenToViewportPoint(UnityEngine.Input.mousePosition);
-        }
-
-        public static Vector2 GetMousePositionRelativeToCenter(Camera camera, Vector2 resolution)
-        {
-            Vector2 mousePos = GetMouseViewportPosition(camera);
-
-            mousePos.x *= resolution.x;
-            mousePos.x -= resolution.x / 2.0f;
-            mousePos.x *= CanvasData.canvasScale.x;
-
-            mousePos.y *= resolution.y;
-            mousePos.y -= resolution.y / 2.0f;
-            mousePos.y *= CanvasData.canvasScale.y;
+            mousePos.y *= CanvasData.CanvasScaler.referenceResolution.y;
+            mousePos.y -= CanvasData.CanvasScaler.referenceResolution.y / 2.0f;
+            mousePos.y *= CanvasData.CanvasScale.y;
 
             return mousePos;
         }

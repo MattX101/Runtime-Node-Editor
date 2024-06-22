@@ -8,9 +8,9 @@ namespace RuntimeNodeEditor.Nodes.Pointer
     public class OutputPointer : Pointer
     {
         public List<InputPointer> connectedInputPointers;
-        public List<ConnectionLine> lines;
+        public List<NodeConnectionLine> Lines;
 
-        public PointerData data;
+        public PointerData Data;
 
         public OutputPointer(string name, Node.Node node) : base(name, node)
         {
@@ -19,7 +19,7 @@ namespace RuntimeNodeEditor.Nodes.Pointer
 
         private void Awake()
         {
-            data = new PointerData();
+            Data = new PointerData();
         }
 
         private void Update()
@@ -43,7 +43,7 @@ namespace RuntimeNodeEditor.Nodes.Pointer
 
         private void DeleteConnection(int i)
         {
-            lines[i].DestroyLine();
+            Lines[i].DestroyLine();
 
             connectedInputPointers[i].hasConnection = false;
             connectedInputPointers[i].connectedOutputPointer = null;
@@ -54,13 +54,13 @@ namespace RuntimeNodeEditor.Nodes.Pointer
 
         private void UpdateLines()
         {
-            if (lines == null || lines.Count == 0)
+            if (Lines == null || Lines.Count == 0)
                 return;
 
-            if (!CanvasData.isDraging && !CanvasData.isPanning && !CanvasData.isScrolling) 
+            if (!CanvasData.IsDragging && !CanvasData.IsPanning && !CanvasData.IsScrolling) 
                 return;
             
-            foreach (ConnectionLine line in lines)
+            foreach (NodeConnectionLine line in Lines)
                 line.UpdateLinePositions();
         }
     }

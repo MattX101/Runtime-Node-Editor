@@ -27,7 +27,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Save
             foreach (RuntimeNodeEditor.Nodes.Node.Node node in nodes)
             {
                 bytes.AddRange(node.gameObject.GetComponent<NodeUI>().SaveNodeUI());
-                bytes.AddRange(node.elements.Save());
+                bytes.AddRange(node.Elements.Save());
             }
             
             bytes.AddRange(SaveNodeConnections(nodes));
@@ -111,13 +111,13 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Save
 
         public static void Load(LoadData data)
         {
-            NodeUI nodeUI = Factory.CreateNode(data.id, data.position);
+            NodeUI nodeUI = Factory.CreateNode(data.ID, data.Position);
             RuntimeNodeEditor.Nodes.Node.Node node = nodeUI.gameObject.GetComponent<RuntimeNodeEditor.Nodes.Node.Node>();
 
-            if (node.elements == null)
+            if (node.Elements == null)
                 return;
 
-            node.elements.SetElements(data.Texts, data.Booleans, data.Values);
+            node.Elements.SetElements(data.Texts, data.Booleans, data.Values);
         }
     }
 }

@@ -8,13 +8,13 @@ namespace RuntimeNodeEditor.Nodes.Node
 {
     public class Node : MonoBehaviour
     {
-        protected bool wasExecuted;
+        protected bool WasExecuted;
         public bool endNode;
 
         public List<InputPointer> inputs = new();
         public List<OutputPointer> outputs = new();
 
-        public NodeUIElements elements;
+        public NodeUIElements Elements;
 
         public virtual void Reset()
         {
@@ -23,7 +23,7 @@ namespace RuntimeNodeEditor.Nodes.Node
 
         protected void ResetExecution()
         {
-            wasExecuted = false;
+            WasExecuted = false;
         }
 
         protected void AddInputPointer(InputPointer inputPointer)

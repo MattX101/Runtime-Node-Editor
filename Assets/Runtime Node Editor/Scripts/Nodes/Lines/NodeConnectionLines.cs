@@ -1,97 +1,97 @@
 using RuntimeNodeEditor.Data;
 using RuntimeNodeEditor.Nodes.Pointer;
 using System.Collections.Generic;
+using RuntimeNodeEditor.Input;
 using RuntimeNodeEditor.Nodes.Line;
 using RuntimeNodeEditor.Nodes.Pointer.Data;
 using UnityEngine;
 
 namespace RuntimeNodeEditor.Nodes.Lines
 {
-    public class ConnectionLines : MonoBehaviour
+    public class NodeConnectionLines : MonoBehaviour
     {
         public Transform parent;
-
-        [SerializeField] private Camera _camera;
-
+        
         private Vector2 _mousePos;
         private RaycastHit2D _raycastHit2D;
 
-        private ConnectionLine _currentLineData;
-        private List<ConnectionLine> _droppedLines;
+        private NodeConnectionLine _currentConnectionLine;
+        private List<NodeConnectionLine> _droppedLines;
 
-        private OutputPointer _currentOutput;
-
-        [SerializeField] private Material _sourceMaterial;
+        private OutputPointer _currentOutputPointer;
+        
+        [SerializeField] private Material sourceMaterial;
 
         private void Awake()
         {
-            _droppedLines = new List<ConnectionLine>();
+            _droppedLines = new List<NodeConnectionLine>();
         }
 
         private void Update()
         {
-            if (!(CanvasData.canvasIsActive || UIData.tabOpened || UIData.windowOpened))
+            if (UIData.NodesCanvasIsActive)
                 return;
 
             _raycastHit2D = Physics2D.Raycast(_mousePos, Vector2.zero);
-
-            _mousePos = UnityEngine.Input.mousePosition;
-            _mousePos = _camera.ScreenToWorldPoint(_mousePos);
+            
+            _mousePos = MouseController.MouseWorldPosition;
 
             if (UnityEngine.Input.GetMouseButtonDown(0))
                 CreateLineOnClick();
-            else if (UnityEngine.Input.GetMouseButtonUp(0) && CanvasData.isPointing)
+            else if (UnityEngine.Input.GetMouseButtonUp(0) && CanvasData.IsPointing)
                 DropLine();
             else
-                _currentLineData?.UpdateDraggingLine(_mousePos);
+                _currentConnectionLine?.UpdateDraggingLine(_mousePos);
 
             if (UnityEngine.Input.GetMouseButtonDown(1))
                 DeletePointerConnectionsOnClick();
 
-            if (_droppedLines == null || _droppedLines.Count <= 0) 
+            if (_droppedLines is not { Count: > 0 }) 
                 return;
             
-            foreach (ConnectionLine line in _droppedLines)
+            foreach (NodeConnectionLine line in _droppedLines)
                 line.UpdateWidth();
         }
 
         private void CreateLineOnClick()
         {
-            if (!CanvasData.canPoint)
+            if (!CanvasData.CanPoint)
                 return;
 
             if (!_raycastHit2D.collider || _raycastHit2D.collider.TryGetComponent(out OutputPointer outputPointer) == false)
                 return;
 
-            CanvasData.isPointing = true;
-            CanvasData.canPoint = false;
+            CanvasData.IsPointing = true;
+            CanvasData.CanPoint = false;
 
             CreateLine(outputPointer);
         }
 
         private void CreateLine(OutputPointer outputPointer)
         {
-            _sourceMaterial.color = PointerColor.PickColor(outputPointer.valueType);
+            sourceMaterial.color = PointerColor.PickColor(outputPointer.valueType);
 
-            _currentLineData = new(parent, _sourceMaterial, new Vector3(_mousePos.x, _mousePos.y, 100.0f));
-            _currentLineData.output = outputPointer;
+            _currentConnectionLine = new NodeConnectionLine(parent, sourceMaterial, new Vector3(_mousePos.x, _mousePos.y, 100.0f))
+            {
+                Output = outputPointer
+            };
 
-            _currentOutput = outputPointer;
+            _currentOutputPointer = outputPointer;
 
-            outputPointer.lines ??= new List<ConnectionLine>();
-            outputPointer.lines.Add(_currentLineData);
+            outputPointer.Lines ??= new List<NodeConnectionLine>();
+            outputPointer.Lines.Add(_currentConnectionLine);
         }
 
         private void DropLine()
         {
             if (!LineDropped())
-                _currentLineData.DestroyLine();
+                _currentConnectionLine.DestroyLine();
 
-            CanvasData.isPointing = false;
-            CanvasData.canPoint = true;
+            CanvasData.IsPointing = false;
+            CanvasData.CanPoint = true;
 
-            _currentLineData = null;
-            _currentOutput = null;
+            _currentConnectionLine = null;
+            _currentOutputPointer = null;
         }
 
         private bool LineDropped()
@@ -103,7 +103,7 @@ namespace RuntimeNodeEditor.Nodes.Lines
 
             if (!inputPointer)
                 return false;
-            if (inputPointer.hasConnection || _currentOutput.valueType != inputPointer.valueType)
+            if (inputPointer.hasConnection || _currentOutputPointer.valueType != inputPointer.valueType)
                 return false;
 
             DropOnInputPointer(inputPointer);
@@ -113,22 +113,22 @@ namespace RuntimeNodeEditor.Nodes.Lines
 
         private void DropOnInputPointer(InputPointer inputPointer)
         {
-            _currentOutput.connectedInputPointers ??= new List<InputPointer>();
+            _currentOutputPointer.connectedInputPointers ??= new List<InputPointer>();
 
-            _currentLineData.input = inputPointer;
-            _currentOutput.connectedInputPointers.Add(inputPointer);
+            _currentConnectionLine.Input = inputPointer;
+            _currentOutputPointer.connectedInputPointers.Add(inputPointer);
 
-            inputPointer.SetConnection(_currentOutput);
-            inputPointer.line = _currentLineData;
+            inputPointer.SetConnection(_currentOutputPointer);
+            inputPointer.Line = _currentConnectionLine;
 
-            _droppedLines.Add(_currentLineData);
+            _droppedLines.Add(_currentConnectionLine);
 
-            _currentOutput.node.MoveUp();
+            _currentOutputPointer.node.MoveUp();
         }
 
         private void DeletePointerConnectionsOnClick()
         {
-            if (!_raycastHit2D.collider || CanvasData.isPointing)
+            if (!_raycastHit2D.collider || CanvasData.IsPointing)
                 return;
 
             if (_raycastHit2D.collider.TryGetComponent(out OutputPointer outputPointer))
@@ -139,13 +139,13 @@ namespace RuntimeNodeEditor.Nodes.Lines
 
         private void DeleteOutputConnections(OutputPointer outputPointer)
         {
-            foreach (ConnectionLine line in outputPointer.lines)
+            foreach (NodeConnectionLine line in outputPointer.Lines)
                 _droppedLines.Remove(line);
             outputPointer.DeleteConnections();
         }
         private void DeleteInputConnections(InputPointer inputPointer)
         {
-            _droppedLines.Remove(inputPointer.line);
+            _droppedLines.Remove(inputPointer.Line);
             inputPointer.DeleteConnection();
         }
 
@@ -165,14 +165,14 @@ namespace RuntimeNodeEditor.Nodes.Lines
                 SetConnection(newInput, output);
             }
 
-            _currentLineData = null;
+            _currentConnectionLine = null;
         }
 
         public void Load(InputPointer input, OutputPointer output)
         {
             SetConnection(input, output);
 
-            _currentLineData = null;
+            _currentConnectionLine = null;
         }
 
         private void SetConnection(InputPointer input, OutputPointer output)
@@ -183,10 +183,10 @@ namespace RuntimeNodeEditor.Nodes.Lines
             input.SetConnection(output);
             CreateLine(output);
 
-            input.line = _currentLineData;
-            _currentLineData.input = input;
+            input.Line = _currentConnectionLine;
+            _currentConnectionLine.Input = input;
 
-            _droppedLines.Add(_currentLineData);
+            _droppedLines.Add(_currentConnectionLine);
         }
     }
 }

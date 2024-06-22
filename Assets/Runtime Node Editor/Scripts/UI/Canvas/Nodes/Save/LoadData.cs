@@ -5,20 +5,15 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Save
 {
     public class LoadData
     {
-        public readonly string id;
+        public readonly string ID;
 
-        public readonly Vector3 position;
+        public readonly Vector3 Position;
 
-        private string[] _texts;
-        public string[] Texts => _texts;
+        public string[] Texts { get; private set; }
+        public bool[] Booleans { get; private set; }
+        public float[] Values  { get; private set; }
 
-        private bool[] _booleans;
-        public bool[] Booleans => _booleans;
-
-        private float[] _values;
-        public float[] Values => _values;
-
-        public readonly int endIndex;
+        public readonly int EndIndex;
 
         public LoadData(byte[] data, int index)
         {
@@ -26,10 +21,10 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Save
             index++;
 
             for (int j = 0; j < length; j++)
-                id += (char)data[index + j];
+                ID += (char)data[index + j];
             index += length;
 
-            position = new Vector3(
+            Position = new Vector3(
                 BitConverter.ToSingle(data, index),
                 BitConverter.ToSingle(data, index + 4),
                 0);
@@ -38,7 +33,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Save
             index = LoadInputFields(data, index);
             index = LoadBooleans(data, index);
             index = LoadSliders(data, index);
-            endIndex = index;
+            EndIndex = index;
         }
 
         private int LoadInputFields(byte[] data, int index)
@@ -49,9 +44,9 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Save
             if (numOfInputFields == 0)
                 return index;
 
-            _texts = new string[numOfInputFields];
+            Texts = new string[numOfInputFields];
 
-            for (int i = 0; i < _texts.Length; i++)
+            for (int i = 0; i < Texts.Length; i++)
             {
                 byte lengthOfInputField = data[index];
                 index++;
@@ -60,8 +55,8 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Save
                     continue;
 
                 for (int j = 0; j < lengthOfInputField; j++)
-                    _texts[i] += (char)data[index + j];
-                index += _texts[i].Length;
+                    Texts[i] += (char)data[index + j];
+                index += Texts[i].Length;
             }
 
             return index;
@@ -75,10 +70,10 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Save
             if (numOfBooleans == 0)
                 return index;
 
-            _booleans = new bool[numOfBooleans];
+            Booleans = new bool[numOfBooleans];
 
-            for (int i = 0; i < _booleans.Length; i++, index++)
-                _booleans[i] = data[index] == 1 ? true : false;
+            for (int i = 0; i < Booleans.Length; i++, index++)
+                Booleans[i] = data[index] == 1 ? true : false;
 
             return index;
         }
@@ -91,10 +86,10 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Save
             if (numOfSliders == 0)
                 return index;
 
-            _values = new float[numOfSliders];
+            Values = new float[numOfSliders];
 
-            for (int i = 0; i < _values.Length; i++, index += 4)
-                _values[i] = BitConverter.ToSingle(data, index);
+            for (int i = 0; i < Values.Length; i++, index += 4)
+                Values[i] = BitConverter.ToSingle(data, index);
 
             return index;
         }

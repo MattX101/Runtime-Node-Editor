@@ -5,7 +5,7 @@ namespace RuntimeNodeEditor.Nodes.Node
 {
     public class ColorOutputNode : Node
     {
-        public ImagePreview imagePreview;
+        public ImagePreview ImagePreview;
 
         public override void AddPointers(InputPointer[] inputs, OutputPointer[] outputs)
         {
@@ -17,10 +17,10 @@ namespace RuntimeNodeEditor.Nodes.Node
             if (inputs[0].connectedOutputPointer)
             {
                 inputs[0].connectedOutputPointer.node.Execute();
-                imagePreview.Image.color = inputs[0].connectedOutputPointer.data.colorValue;
+                ImagePreview.Image.color = inputs[0].connectedOutputPointer.Data.ColorValue;
             }
 
-            wasExecuted = true;
+            WasExecuted = true;
         }
 
         public override void Reset()

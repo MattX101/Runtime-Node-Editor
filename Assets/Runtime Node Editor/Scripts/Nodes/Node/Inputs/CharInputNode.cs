@@ -11,19 +11,19 @@ namespace RuntimeNodeEditor.Nodes.Node
 
         public override void Execute()
         {
-            outputs[0].data.charValue =
-                elements.inputFields[0].text.Length != 0 ?
-                elements.inputFields[0].text[0] : 
+            outputs[0].Data.CharValue =
+                Elements.InputFields[0].text.Length != 0 ?
+                Elements.InputFields[0].text[0] : 
                 ' ';
 
-            wasExecuted = true;
+            WasExecuted = true;
         }
 
         public override void Reset()
         {
             ResetExecution();
 
-            outputs[0].data.charValue = ' ';
+            outputs[0].Data.CharValue = ' ';
         }
     }
 }

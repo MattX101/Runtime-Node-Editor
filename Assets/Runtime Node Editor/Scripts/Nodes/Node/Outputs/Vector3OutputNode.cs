@@ -22,38 +22,38 @@ namespace RuntimeNodeEditor.Nodes.Node
             {
                 inputs[0].connectedOutputPointer.node.Execute();
 
-                x = inputs[0].connectedOutputPointer.data.vector3Value.x;
-                y = inputs[0].connectedOutputPointer.data.vector3Value.y;
-                z = inputs[0].connectedOutputPointer.data.vector3Value.z;
+                x = inputs[0].connectedOutputPointer.Data.Vector3Value.x;
+                y = inputs[0].connectedOutputPointer.Data.Vector3Value.y;
+                z = inputs[0].connectedOutputPointer.Data.Vector3Value.z;
             }
 
             if (inputs[1].connectedOutputPointer)
             {
                 inputs[1].connectedOutputPointer.node.Execute();
-                x = inputs[1].connectedOutputPointer.data.floatValue;
+                x = inputs[1].connectedOutputPointer.Data.FloatValue;
             }
             if (inputs[2].connectedOutputPointer)
             {
                 inputs[2].connectedOutputPointer.node.Execute();
-                y = inputs[2].connectedOutputPointer.data.floatValue;
+                y = inputs[2].connectedOutputPointer.Data.FloatValue;
             }
             if (inputs[3].connectedOutputPointer)
             {
                 inputs[3].connectedOutputPointer.node.Execute();
-                z = inputs[3].connectedOutputPointer.data.floatValue;
+                z = inputs[3].connectedOutputPointer.Data.FloatValue;
             }
 
-            elements.SetInputField(
-                elements.inputFields[0],
+            Elements.SetInputField(
+                Elements.InputFields[0],
                 x.ToString());
-            elements.SetInputField(
-                elements.inputFields[1],
+            Elements.SetInputField(
+                Elements.InputFields[1],
                 y.ToString());
-            elements.SetInputField(
-                elements.inputFields[2],
+            Elements.SetInputField(
+                Elements.InputFields[2],
                 z.ToString());
 
-            wasExecuted = true;
+            WasExecuted = true;
         }
 
         public override void Reset()

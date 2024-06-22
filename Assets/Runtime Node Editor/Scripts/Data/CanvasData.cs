@@ -1,20 +1,21 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace RuntimeNodeEditor.Data
 {
     public static class CanvasData
     {
-        public static Vector2 canvasScale;
+        public static Camera Camera;
+        
+        public static CanvasScaler CanvasScaler;
+        
+        public static Vector2 CanvasScale;
 
-        public static bool canDrag = true;
-        public static bool canPoint = true;
-        public static bool canZoom = true;
+        public static bool CanPoint = true;
 
-        public static bool isPointing = false;
-        public static bool isDraging = false;
-        public static bool isPanning = false;
-        public static bool isScrolling = false;
-
-        public static bool canvasIsActive = true;
+        public static bool IsPointing = false;
+        public static bool IsDragging = false;
+        public static bool IsPanning = false;
+        public static bool IsScrolling = false;
     }
 }

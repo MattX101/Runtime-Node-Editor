@@ -16,14 +16,14 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
             colorOutputNode.endNode = true;
 
             inputs = new InputPointer[1];
-            numOfInputs = inputs.Length;
-            numOfOutputs = 0;
+            NumOfInputs = inputs.Length;
+            NumOfOutputs = 0;
 
             drawBodyImage = false;
             togglePreviewImage = true;
 
             CreateNodeUI(colorOutputNode, Color.gray, "Color");
-            colorOutputNode.imagePreview = imagePreview;
+            colorOutputNode.ImagePreview = ImagePreview;
 
             inputs[0] = CreatePointer("Color", ValueType.Color, 0, false, true).AddComponent<InputPointer>();
             inputs[0].name = "Color";

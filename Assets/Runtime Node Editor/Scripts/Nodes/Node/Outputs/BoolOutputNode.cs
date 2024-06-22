@@ -14,12 +14,12 @@ namespace RuntimeNodeEditor.Nodes.Node
             if (inputs[0].connectedOutputPointer)
             {
                 inputs[0].connectedOutputPointer.node.Execute();
-                elements.SetBoolean(
-                    elements.buttons[0], 
-                    inputs[0].connectedOutputPointer.data.boolValue);
+                Elements.SetBoolean(
+                    Elements.Buttons[0], 
+                    inputs[0].connectedOutputPointer.Data.BoolValue);
             }
 
-            wasExecuted = true;
+            WasExecuted = true;
         }
 
         public override void Reset()

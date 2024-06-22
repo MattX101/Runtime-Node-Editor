@@ -11,16 +11,16 @@ namespace RuntimeNodeEditor.Nodes.Node
 
         public override void Execute()
         {
-            outputs[0].data.boolValue = elements.buttons[0].Toggled;
+            outputs[0].Data.BoolValue = Elements.Buttons[0].Toggled;
 
-            wasExecuted = true;
+            WasExecuted = true;
         }
 
         public override void Reset()
         {
             ResetExecution();
 
-            outputs[0].data.boolValue = false;
+            outputs[0].Data.BoolValue = false;
         }
     }
 }

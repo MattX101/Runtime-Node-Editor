@@ -14,12 +14,12 @@ namespace RuntimeNodeEditor.Nodes.Node
             if (inputs[0].connectedOutputPointer)
             {
                 inputs[0].connectedOutputPointer.node.Execute();
-                elements.SetInputField(
-                    elements.inputFields[0], 
-                    inputs[0].connectedOutputPointer.data.floatValue.ToString());
+                Elements.SetInputField(
+                    Elements.InputFields[0], 
+                    inputs[0].connectedOutputPointer.Data.FloatValue.ToString());
             }
 
-            wasExecuted = true;
+            WasExecuted = true;
         }
 
         public override void Reset()

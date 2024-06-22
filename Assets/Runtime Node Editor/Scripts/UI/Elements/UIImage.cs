@@ -22,7 +22,7 @@ namespace RuntimeNodeEditor.UI.Elements
             if (!rawImage)
                 return;
             
-            rawImage.texture = UISettings.pointerTexture;
+            rawImage.texture = UISettings.PointerTexture;
         }
 
         public static void Toggle(bool isToggled, GameObject previewImage)

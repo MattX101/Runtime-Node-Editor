@@ -15,34 +15,34 @@ namespace RuntimeNodeEditor.Nodes.Node
 
         public override void Execute()
         {
-            outputs[0].data.vector2Value = Vector2.zero;
+            outputs[0].Data.Vector2Value = Vector2.zero;
 
-            TMP_InputField xField = elements.inputFields[0];
-            TMP_InputField yField = elements.inputFields[1];
+            TMP_InputField xField = Elements.InputFields[0];
+            TMP_InputField yField = Elements.InputFields[1];
 
             if (xField.text.Length != 0)
             {
                 float x = float.Parse(xField.text);
 
-                outputs[1].data.floatValue = x;
-                outputs[0].data.vector2Value.x = x;
+                outputs[1].Data.FloatValue = x;
+                outputs[0].Data.Vector2Value.x = x;
             }
             if (yField.text.Length != 0)
             {
                 float y = float.Parse(yField.text);
 
-                outputs[2].data.floatValue = y;
-                outputs[0].data.vector2Value.y = y;
+                outputs[2].Data.FloatValue = y;
+                outputs[0].Data.Vector2Value.y = y;
             }
 
-            wasExecuted = true;
+            WasExecuted = true;
         }
 
         public override void Reset()
         {
             ResetExecution();
 
-            outputs[0].data.vector2Value = Vector2.zero;
+            outputs[0].Data.Vector2Value = Vector2.zero;
         }
     }
 }

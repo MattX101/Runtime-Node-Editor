@@ -2,7 +2,6 @@ using RuntimeNodeEditor.Data;
 using RuntimeNodeEditor.Input;
 using RuntimeNodeEditor.UI.Canvas.Nodes.Node;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace RuntimeNodeEditor.UI.Canvas.Nodes.Components
 {
@@ -11,29 +10,27 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Components
         private static NodeUI _hover;
         private static NodeUI _selectedNodeUI;
 
-        private static bool _dragOnSpawn = false;
-
-        private static Vector3 _distanceFromCenter;
-
-        public static void ManageDrag(Camera camera, CanvasScaler canvasScaler)
+        private static bool _dragOnSpawn;
+        
+        public static void ManageDrag()
         {
-            if (!CanvasData.canvasIsActive || UIData.tabOpened || UIData.windowOpened)
+            if (UIData.NodesCanvasIsActive)
                 return;
 
             if (_dragOnSpawn)
             {
-                SpawnDrag(camera, canvasScaler);
+                SpawnDrag();
             }
             else
             {
-                OnClick(camera, canvasScaler);
+                OnClick();
                 OnClickRelease();
 
-                OnHover(camera);
-                OnHoverLeave(camera);
+                OnHover();
+                OnHoverLeave();
 
-                if (_selectedNodeUI && CanvasData.isDraging)
-                    DragNode(camera, canvasScaler);
+                if (_selectedNodeUI && CanvasData.IsDragging)
+                    DragNode();
             }
         }
 
@@ -42,24 +39,23 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Components
             _selectedNodeUI = nodeUI;
             _dragOnSpawn = true;
 
-            CanvasData.isDraging = true;
-            CanvasData.canDrag = false;
+            CanvasData.IsDragging = true;
         }
-        private static void SpawnDrag(Camera camera, CanvasScaler canvasScaler)
+        private static void SpawnDrag()
         {
-            DragNode(camera, canvasScaler);
+            DragNode();
 
             if (UnityEngine.Input.GetMouseButtonDown(0))
                 ValidateDrop();
         }
 
-        private static void OnClick(Camera camera, CanvasScaler canvasScaler)
+        private static void OnClick()
         {
             if (!UnityEngine.Input.GetMouseButtonDown(0))
                 return;
 
             _selectedNodeUI = SelectNodeUI(Physics2D.Raycast(
-                    MouseController.GetMouseWorldPosition(camera),
+                    MouseController.MouseWorldPosition,
                     Vector2.zero)
                     );
 
@@ -68,12 +64,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Components
 
             _selectedNodeUI.BlockRaycasts(false);
 
-            CanvasData.isDraging = true;
-            CanvasData.canDrag = false;
-
-            Vector3 mousePos = MouseController.GetMousePositionRelativeToCenter(camera, canvasScaler.referenceResolution);
-            Vector3 nodeLocalPos = _selectedNodeUI.rootRect.localPosition;
-            _distanceFromCenter = mousePos - nodeLocalPos - (Pan.positionFromOrigin / Zoom.scale);
+            CanvasData.IsDragging = true;
         }
 
         private static void OnClickRelease()
@@ -84,10 +75,10 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Components
             ValidateDrop();
         }
 
-        private static void OnHover(Camera camera)
+        private static void OnHover()
         {
             NodeUI newNodeUI = SelectNodeUI(Physics2D.Raycast(
-                MouseController.GetMouseWorldPosition(camera),
+                MouseController.MouseWorldPosition,
                 Vector2.zero)
                 );
 
@@ -101,12 +92,12 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Components
             _hover.SetAlpha(0.5f);
         }
 
-        private static void OnHoverLeave(Camera camera)
+        private static void OnHoverLeave()
         {
             if (!_hover)
                 return;
 
-            if (SelectNodeUI(Physics2D.Raycast(MouseController.GetMouseWorldPosition(camera), Vector2.zero)) != null)
+            if (SelectNodeUI(Physics2D.Raycast(MouseController.MouseWorldPosition, Vector2.zero)))
                 return;
 
             _hover.SetAlpha(1.0f);
@@ -130,15 +121,11 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Components
             _dragOnSpawn = false;
         }
 
-        private static void DragNode(Camera camera, CanvasScaler canvasScaler)
+        private static void DragNode()
         {
-            Vector3 mousePos = MouseController.GetMousePositionRelativeToCenter(camera, canvasScaler.referenceResolution);
-            Vector3 nodePos = mousePos - (Pan.positionFromOrigin / Zoom.scale);
-
-            _selectedNodeUI.rootRect.localPosition = new Vector3(
-                nodePos.x - _distanceFromCenter.x,
-                nodePos.y - _distanceFromCenter.y,
-                _selectedNodeUI.rootRect.localPosition.z);
+            _selectedNodeUI.rootRect.localPosition = 
+                (Vector3)MouseController.MousePositionRelativeToCenter 
+                - Pan.PositionFromOrigin / Zoom.Scale;
         }
 
         private static void ValidateDrop()
@@ -153,10 +140,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Components
             _selectedNodeUI.BlockRaycasts(true);
 
             _dragOnSpawn = false;
-            CanvasData.isDraging = false;
-            CanvasData.canDrag = true;
-
-            _distanceFromCenter = Vector3.zero;
+            CanvasData.IsDragging = false;
 
             _selectedNodeUI = null;
         }

@@ -15,9 +15,9 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
             PopulateRoot("Color");
             ColorInputNode colorInputNode = root.AddComponent<ColorInputNode>();
 
-            numOfInputs = 0;
+            NumOfInputs = 0;
             outputs = new OutputPointer[4];
-            numOfOutputs = outputs.Length;
+            NumOfOutputs = outputs.Length;
 
             drawBodyImage = false;
             togglePreviewImage = true;
@@ -44,9 +44,9 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
             outputs[3].node = colorInputNode;
             outputs[3].valueType = ValueType.Float;
 
-            colorInputNode.elements = new NodeUIElements(0, 0, 3)
+            colorInputNode.Elements = new NodeUIElements(0, 0, 3)
             {
-                sliders =
+                Sliders =
                 {
                     [0] = AddSlider(outputs[1].transform, false),
                     [1] = AddSlider(outputs[2].transform, false),
@@ -55,9 +55,9 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
             };
 
             PreviewColor(1, 2, 3, false);
-            imagePreview.UpdateNodeOnValueChange(colorInputNode.elements.sliders[0], colorInputNode.MoveUp);
-            imagePreview.UpdateNodeOnValueChange(colorInputNode.elements.sliders[1], colorInputNode.MoveUp);
-            imagePreview.UpdateNodeOnValueChange(colorInputNode.elements.sliders[2], colorInputNode.MoveUp);
+            ImagePreview.UpdateNodeOnValueChange(colorInputNode.Elements.Sliders[0], colorInputNode.MoveUp);
+            ImagePreview.UpdateNodeOnValueChange(colorInputNode.Elements.Sliders[1], colorInputNode.MoveUp);
+            ImagePreview.UpdateNodeOnValueChange(colorInputNode.Elements.Sliders[2], colorInputNode.MoveUp);
 
             colorInputNode.AddPointers(inputs, outputs);
         }

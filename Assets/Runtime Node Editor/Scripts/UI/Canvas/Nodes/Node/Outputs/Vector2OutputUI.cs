@@ -18,8 +18,8 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
             vector2OutputNode.endNode = true;
 
             inputs = new InputPointer[3];
-            numOfInputs = inputs.Length;
-            numOfOutputs = 0;
+            NumOfInputs = inputs.Length;
+            NumOfOutputs = 0;
 
             drawBodyImage = false;
             interactablePreview = true;
@@ -42,9 +42,9 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
             inputs[2].node = vector2OutputNode;
             inputs[2].valueType = ValueType.Float;
 
-            vector2OutputNode.elements = new NodeUIElements(2, 0, 0)
+            vector2OutputNode.Elements = new NodeUIElements(2, 0, 0)
             {
-                inputFields =
+                InputFields =
                 {
                     [0] = AddInputField(
                         inputs[1].gameObject.transform,

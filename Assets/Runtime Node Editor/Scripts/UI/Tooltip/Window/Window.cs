@@ -6,14 +6,11 @@ namespace RuntimeNodeEditor.UI.Tooltip.Window
     internal class Window : MonoBehaviour
     {
         [SerializeField] 
-        private Transform _parent;
-
-        [SerializeField] 
         protected GameObject window;
         
         public void Create()
         {
-            if (UISettings.windowSpawnParent.childCount != 0)
+            if (UISettings.WindowSpawnParent.childCount != 0)
                 return;
 
             Manage(true);
@@ -26,10 +23,10 @@ namespace RuntimeNodeEditor.UI.Tooltip.Window
 
         private void Manage(bool windowIsOpen)
         {
-            UIData.windowOpened = windowIsOpen;
+            UIData.WindowOpened = windowIsOpen;
 
             if (windowIsOpen) 
-                Instantiate(window, UISettings.windowSpawnParent);
+                Instantiate(window, UISettings.WindowSpawnParent);
             else 
                 Destroy(gameObject);
 
@@ -38,8 +35,8 @@ namespace RuntimeNodeEditor.UI.Tooltip.Window
 
         private void Toggle()
         {
-            LinkToTooltip.tooltipManager.ToggleButtons(!UIData.windowOpened);
-            UIData.nodePanel.SetActive(UIData.windowOpened);
+            LinkToTooltip.TooltipManager.ToggleButtons(!UIData.WindowOpened);
+            UIData.NodePanel.SetActive(UIData.WindowOpened);
         }
     }
 }

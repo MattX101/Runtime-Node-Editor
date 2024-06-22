@@ -18,8 +18,8 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
             charOutputNode.endNode = true;
 
             inputs = new InputPointer[1];
-            numOfInputs = inputs.Length;
-            numOfOutputs = 0;
+            NumOfInputs = inputs.Length;
+            NumOfOutputs = 0;
 
             drawBodyImage = false;
             toggleInputField = true;
@@ -31,9 +31,9 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
             inputs[0].node = charOutputNode;
             inputs[0].valueType = ValueType.Char;
 
-            charOutputNode.elements = new NodeUIElements(1, 0, 0)
+            charOutputNode.Elements = new NodeUIElements(1, 0, 0)
             {
-                inputFields =
+                InputFields =
                 {
                     [0] = AddInputField(
                         inputs[0].gameObject.transform,

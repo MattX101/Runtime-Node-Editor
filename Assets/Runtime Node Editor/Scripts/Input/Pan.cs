@@ -8,70 +8,70 @@ namespace RuntimeNodeEditor.Input
     {
         private static Vector2 _lastFrameMousePos;
 
-        public static Vector3 pan, positionFromOrigin;
+        public static Vector3 Offset, PositionFromOrigin;
 
-        public static RectTransform nodesRect;
+        public static RectTransform NodesRect;
 
         public static void PanCanvas(Camera camera)
         {
-            pan = Vector3.zero;
+            Offset = Vector3.zero;
 
-            if (CanvasData.isDraging || CanvasData.isPointing)
+            if (CanvasData.IsDragging || CanvasData.IsPointing)
                 return;
 
-            Vector2 mousePos = MouseController.GetMouseWorldPosition(camera);
+            Vector2 mousePos = MouseController.MouseWorldPosition;
 
             if (UnityEngine.Input.GetMouseButton(1) == false)
             {
-                CanvasData.isPanning = false;
+                CanvasData.IsPanning = false;
                 _lastFrameMousePos = mousePos;
 
                 return;
             }
 
-            CanvasData.isPanning = true;
+            CanvasData.IsPanning = true;
 
             float x = Mathf.Clamp(mousePos.x - _lastFrameMousePos.x, -1, 1);
             float y = Mathf.Clamp(mousePos.y - _lastFrameMousePos.y, -1, 1);
 
-            nodesRect.position = new Vector3(
-                nodesRect.position.x + x,
-                nodesRect.position.y + y,
-                nodesRect.position.z);
+            NodesRect.position = new Vector3(
+                NodesRect.position.x + x,
+                NodesRect.position.y + y,
+                NodesRect.position.z);
 
-            pan = new Vector3(x, y, 0);
+            Offset = new Vector3(x, y, 0);
 
-            positionFromOrigin = new Vector3(
+            PositionFromOrigin = new Vector3(
                 camera.pixelWidth / 2,
                 camera.pixelHeight / 2,
                 0);
-            positionFromOrigin -= camera.WorldToScreenPoint(-nodesRect.position);
+            PositionFromOrigin -= camera.WorldToScreenPoint(-NodesRect.position);
 
             _lastFrameMousePos = mousePos;
         }
 
         public static void UpdatePositionFromOrigin()
         {
-            positionFromOrigin /= Zoom.scale;
+            PositionFromOrigin /= Zoom.Scale;
         }
 
         public static void Reset()
         {
-            CanvasData.isPanning = false;
+            CanvasData.IsPanning = false;
 
             _lastFrameMousePos = Vector2.zero;
 
-            pan = Vector3.zero;
-            positionFromOrigin = Vector3.zero;
+            Offset = Vector3.zero;
+            PositionFromOrigin = Vector3.zero;
 
-            nodesRect.position = new Vector3(0, 0, nodesRect.position.z);
+            NodesRect.position = new Vector3(0, 0, NodesRect.position.z);
         }
 
         public static byte[] Save()
         {
-            byte[] x = BitConverter.GetBytes(positionFromOrigin.x);
-            byte[] y = BitConverter.GetBytes(positionFromOrigin.y);
-            byte[] z = BitConverter.GetBytes(positionFromOrigin.z);
+            byte[] x = BitConverter.GetBytes(PositionFromOrigin.x);
+            byte[] y = BitConverter.GetBytes(PositionFromOrigin.y);
+            byte[] z = BitConverter.GetBytes(PositionFromOrigin.z);
 
             byte[] bytes = new byte[12];
 

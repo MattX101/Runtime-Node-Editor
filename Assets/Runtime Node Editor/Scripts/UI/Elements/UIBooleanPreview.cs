@@ -12,10 +12,10 @@ namespace RuntimeNodeEditor.UI.Elements
             BooleanButton booleanButton = new BooleanButton();
 
             RawImage image = UIImage.Create(root, Color.red);
-            booleanButton.image = image;
+            booleanButton.Image = image;
 
             Button button = root.AddComponent<Button>();
-            booleanButton.button = button;
+            booleanButton.Button = button;
 
             button.transition = Selectable.Transition.None;
             button.onClick.AddListener(() => booleanButton.Toggle());
@@ -26,7 +26,7 @@ namespace RuntimeNodeEditor.UI.Elements
             return booleanButton;
         }
 
-        public static void AddOnValueChange(Button button, RuntimeNodeEditor.Nodes.Node.Node node)
+        public static void AddOnValueChange(Button button, Nodes.Node.Node node)
         {
             button.onClick.AddListener(
                 delegate

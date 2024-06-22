@@ -8,11 +8,11 @@ namespace Utils.IO.Selection
     public class SelectFolder : IOSelection
     {
         [SerializeField]
-        private TMP_Text _text;
+        private TMP_Text text;
 
         public void Select()
         {
-            _text.text = SelectFolder();
+            text.text = SelectFolder();
         }
     }
 }

@@ -16,9 +16,9 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
             PopulateRoot("Vector 3");
             Vector3InputNode vector3InputNode = root.AddComponent<Vector3InputNode>();
 
-            numOfInputs = 0;
+            NumOfInputs = 0;
             outputs = new OutputPointer[4];
-            numOfOutputs = outputs.Length;
+            NumOfOutputs = outputs.Length;
 
             drawBodyImage = false;
             interactablePreview = true;
@@ -45,9 +45,9 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
             outputs[3].node = vector3InputNode;
             outputs[3].valueType = ValueType.Float;
 
-            vector3InputNode.elements = new NodeUIElements(3, 0, 0)
+            vector3InputNode.Elements = new NodeUIElements(3, 0, 0)
             {
-                inputFields =
+                InputFields =
                 {
                     [0] = AddInputField(
                         outputs[1].gameObject.transform,

@@ -9,17 +9,16 @@ namespace Utils.IO.Selection
     public class SelectFile : IOSelection
     {
         [SerializeField]
-        private TMP_Text _text;
+        private TMP_Text text;
 
         public void Select()
         {
-            ExtensionFilter[] filters = new[]
-            {
-                new ExtensionFilter("All", "*"),
-                new ExtensionFilter("Text", "txt")
+            ExtensionFilter[] filters = {
+                new("All", "*"),
+                new("Text", "txt")
             };
 
-            _text.text = SelectFile(filters);
+            text.text = SelectFile(filters);
         }
     }
 }

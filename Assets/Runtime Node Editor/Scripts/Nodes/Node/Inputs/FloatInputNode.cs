@@ -11,19 +11,19 @@ namespace RuntimeNodeEditor.Nodes.Node
 
         public override void Execute()
         {
-            outputs[0].data.floatValue =
-                elements.inputFields[0].text.Length != 0
-                ? float.Parse(elements.inputFields[0].text)
+            outputs[0].Data.FloatValue =
+                Elements.InputFields[0].text.Length != 0
+                ? float.Parse(Elements.InputFields[0].text)
                 : 0.0f;
 
-            wasExecuted = true;
+            WasExecuted = true;
         }
 
         public override void Reset()
         {
             ResetExecution();
 
-            outputs[0].data.floatValue = 0.0f;
+            outputs[0].Data.FloatValue = 0.0f;
         }
     }
 }

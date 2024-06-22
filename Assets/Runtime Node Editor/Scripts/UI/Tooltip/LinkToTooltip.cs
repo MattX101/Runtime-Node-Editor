@@ -2,6 +2,6 @@ namespace RuntimeNodeEditor.UI.Tooltip
 {
     internal static class LinkToTooltip
     {
-        public static TooltipManager tooltipManager;
+        public static TooltipManager TooltipManager;
     }
 }

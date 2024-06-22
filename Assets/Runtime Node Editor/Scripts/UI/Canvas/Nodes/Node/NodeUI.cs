@@ -45,15 +45,15 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
         private GameObject _outputs;
 
         private GameObject _previewImageObject;
-        public ImagePreview imagePreview;
+        protected ImagePreview ImagePreview;
 
         // In/Out Pointers
-        protected int numOfInputs, numOfOutputs;
+        protected int NumOfInputs, NumOfOutputs;
 
         public InputPointer[] inputs;
         public OutputPointer[] outputs;
 
-        protected UIPointers uIPointers;
+        private UIPointers _uiPointers;
 
         // Input Field
         public bool toggleInputField = false;
@@ -77,7 +77,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
         protected void PopulateRoot(string title)
         {
             root.name = title;
-            root.transform.parent = UISettings.nodeCanvasTransform.transform;
+            root.transform.parent = UISettings.NodeCanvasTransform.transform;
 
             RectTransform rect = root.AddComponent<RectTransform>();
             rect.localScale = Vector3.one;
@@ -87,19 +87,19 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
 
         protected void CreateNodeUI(RuntimeNodeEditor.Nodes.Node.Node node, Color primaryColour, string title)
         {
-            uIPointers = new UIPointers(node);
+            _uiPointers = new UIPointers(node);
 
-            int count = numOfInputs > numOfOutputs ? numOfInputs : numOfOutputs;
-            _bodyHeight = count * UISettings.pointerSize;
-            _bodyHeight += (count - 1) * UISettings.pointerPadding;
-            _bodyHeight += UISettings.borderSize;
+            int count = NumOfInputs > NumOfOutputs ? NumOfInputs : NumOfOutputs;
+            _bodyHeight = count * UISettings.PointerSize;
+            _bodyHeight += (count - 1) * UISettings.PointerPadding;
+            _bodyHeight += UISettings.BorderSize;
 
             // Colours
             Vector3 primaryHSL = ColourConversion.RGBToHSL(primaryColour);
             _primaryColor = ColourConversion.HSLToRGB(primaryHSL.x, primaryHSL.y, primaryHSL.z * 0.5f);
 
             // Root element
-            root.transform.SetParent(UISettings.nodeCanvasTransform);
+            root.transform.SetParent(UISettings.NodeCanvasTransform);
             _rootImage = root.AddComponent<RawImage>();
             SetPrimaryColor();
             _canvasGroup = root.AddComponent<CanvasGroup>();
@@ -107,15 +107,15 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
             rootRect = root.GetComponent<RectTransform>();
 
             rootRect.sizeDelta = new Vector2(
-                UISettings.nodeWidth,
-                UISettings.headerHeight + _bodyHeight);
+                UISettings.NodeWidth,
+                UISettings.HeaderHeight + _bodyHeight);
 
             if (togglePreviewImage) 
-                rootRect.sizeDelta = new Vector2(rootRect.sizeDelta.x, rootRect.sizeDelta.y + UISettings.previewSize);
+                rootRect.sizeDelta = new Vector2(rootRect.sizeDelta.x, rootRect.sizeDelta.y + UISettings.PreviewSize);
 
-            _borderX2 = UISettings.borderSize * 2;
+            _borderX2 = UISettings.BorderSize * 2;
             _sizeX = rootRect.sizeDelta.x - _borderX2;
-            _sizeY = UISettings.headerHeight - _borderX2;
+            _sizeY = UISettings.HeaderHeight - _borderX2;
 
             _rootSize = new Vector2(_sizeX, _sizeY);
 
@@ -159,8 +159,8 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
 
         private void AddBody(Color bodyHSL)
         {
-            _bodySize = new Vector2(_sizeX, rootRect.sizeDelta.y - UISettings.headerHeight - UISettings.borderSize);
-            Vector3 bodyPos = new Vector3(0, (-UISettings.headerHeight + UISettings.borderSize) / 2, 0);
+            _bodySize = new Vector2(_sizeX, rootRect.sizeDelta.y - UISettings.HeaderHeight - UISettings.BorderSize);
+            Vector3 bodyPos = new Vector3(0, (-UISettings.HeaderHeight + UISettings.BorderSize) / 2, 0);
 
             _body = UIElement.Create(
                 root.transform,
@@ -194,7 +194,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
         private void AddCollision(GameObject gameObject)
         {
             BoxCollider2D boxCollider = gameObject.AddComponent<BoxCollider2D>();
-            boxCollider.offset = new Vector2(0, (_bodySize.y + UISettings.borderSize) / 2);
+            boxCollider.offset = new Vector2(0, (_bodySize.y + UISettings.BorderSize) / 2);
             boxCollider.size = _rootSize;
         }
 
@@ -203,10 +203,10 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
             if (!togglePreviewImage)
                 return;
 
-            float size = UISettings.previewSize - UISettings.previewImageMargin;
+            float size = UISettings.PreviewSize - UISettings.PreviewImageMargin;
 
             Vector2 previewImageSize = new Vector2(size, size);
-            float posY = (rootRect.sizeDelta.y - size - UISettings.previewImageMargin) / 2 - UISettings.headerHeight - _bodyHeight;
+            float posY = (rootRect.sizeDelta.y - size - UISettings.PreviewImageMargin) / 2 - UISettings.HeaderHeight - _bodyHeight;
             Vector3 previewImagePos = new Vector3(0.0f, posY, 0.0f);
 
             _previewImageObject = UIElement.Create(
@@ -215,7 +215,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
                 previewImageSize,
                 previewImagePos);
 
-            imagePreview = new ImagePreview
+            ImagePreview = new ImagePreview
             {
                 Image = UIImage.Create(_previewImageObject, Color.black)
             };
@@ -223,7 +223,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
 
         protected GameObject CreatePointer(string name, ValueType valueType, int i, bool createText, bool pointerIsInput)
         {
-            return uIPointers.CreatePointer(
+            return _uiPointers.CreatePointer(
                 name,
                 pointerIsInput ? _inputs : _outputs, 
                 valueType, 
@@ -234,7 +234,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
 
         protected TMP_InputField AddInputField(Transform parent, TMP_InputField.ContentType contentType, int i, bool pointerIsInput, bool interactable)
         {
-            return uIPointers.AddInputField(
+            return _uiPointers.AddInputField(
                 parent, 
                 contentType, 
                 i, 
@@ -244,12 +244,12 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
 
         protected BooleanButton AddBooleanPreview(Transform parent, bool pointerIsInput)
         {
-            return uIPointers.AddBooleanPreview(parent, pointerIsInput);
+            return _uiPointers.AddBooleanPreview(parent, pointerIsInput);
         }
 
         protected Slider AddSlider(Transform parent, bool pointerIsInput)
         {
-            return uIPointers.AddSlider(parent, pointerIsInput);
+            return _uiPointers.AddSlider(parent, pointerIsInput);
         }
 
         protected void PreviewColor(int a, int b, int c, bool pointersAreInput)
@@ -257,16 +257,16 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
             if (!togglePreviewImage)
                 return;
 
-            if (imagePreview == null)
+            if (ImagePreview == null)
                 AddPreviewImage();
 
             if (pointersAreInput)
-                imagePreview.SetSliderInput(
+                ImagePreview.SetSliderInput(
                     inputs[a].gameObject.GetComponentInChildren<Slider>(),
                     inputs[b].gameObject.GetComponentInChildren<Slider>(),
                     inputs[c].gameObject.GetComponentInChildren<Slider>());
             else
-                imagePreview.SetSliderInput(
+                ImagePreview.SetSliderInput(
                     outputs[a].gameObject.GetComponentInChildren<Slider>(),
                     outputs[b].gameObject.GetComponentInChildren<Slider>(),
                     outputs[c].gameObject.GetComponentInChildren<Slider>());

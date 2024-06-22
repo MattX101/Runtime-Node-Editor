@@ -11,9 +11,9 @@ namespace Utils.Colour
             float diff = max - min;
 
             float hue = 0.0f;
-            if      (max == c.r) hue = (c.g - c.b) / diff % 6;
-            else if (max == c.g) hue = (c.b - c.r) / diff + 2;
-            else if (max == c.b) hue = (c.r - c.g) / diff + 4;
+            if      (Mathf.Approximately(max, c.r)) hue = (c.g - c.b) / diff % 6;
+            else if (Mathf.Approximately(max, c.g)) hue = (c.b - c.r) / diff + 2;
+            else if (Mathf.Approximately(max, c.b)) hue = (c.r - c.g) / diff + 4;
             hue *= 60;
             hue = hue < 0 ? 300 + 60 - Mathf.Abs(hue) : hue;
             hue = Mathf.Clamp(hue, 1, 359);

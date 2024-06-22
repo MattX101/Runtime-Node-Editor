@@ -6,7 +6,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.Components
 {
     internal static class Factory
     {
-        private const string nodeNamespace = "RuntimeNodeEditor.UI.Canvas.Nodes.Node.";
+        private const string NodeNamespace = "RuntimeNodeEditor.UI.Canvas.Nodes.Node.";
         
         public static NodeUI CreateNode(string id, Vector3 position)
         {
@@ -17,7 +17,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.Components
                 return null;
             }
 
-            Type type = Type.GetType(nodeNamespace + id);
+            Type type = Type.GetType(NodeNamespace + id);
             if (type == null)
                 throw new ArgumentNullException(nameof(type));
 

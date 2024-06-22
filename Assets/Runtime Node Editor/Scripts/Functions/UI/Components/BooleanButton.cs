@@ -5,8 +5,8 @@ namespace RuntimeNodeEditor.Functions.UI.Component
 {
     public class BooleanButton
     {
-        public Button button;
-        public RawImage image;
+        public Button Button;
+        public RawImage Image;
 
         public bool Toggled;
 
@@ -17,11 +17,11 @@ namespace RuntimeNodeEditor.Functions.UI.Component
 
         public void Toggle(bool toggle)
         {
-            image.color = toggle ? Color.green : Color.red;
+            Image.color = toggle ? Color.green : Color.red;
             Toggled = toggle;
 
-            if (!button.interactable)
-                image.color *= 0.75f;
+            if (!Button.interactable)
+                Image.color *= 0.75f;
         }
     }
 }

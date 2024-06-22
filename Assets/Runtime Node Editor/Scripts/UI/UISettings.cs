@@ -4,22 +4,22 @@ namespace RuntimeNodeEditor.UI
 {
     public static class UISettings
     {
-        public const float nodeWidth = 240.0f;
-        public const float headerHeight = 60.0f;
-        public const float previewSize = nodeWidth;
-        public const float previewImageMargin = 0.0f;
-        public const float pointerPadding = 5.0f;
+        public const float NodeWidth = 240.0f;
+        public const float HeaderHeight = 60.0f;
+        public const float PreviewSize = NodeWidth;
+        public const float PreviewImageMargin = 0.0f;
+        public const float PointerPadding = 5.0f;
 
-        public const float borderSize = 5.0f;
+        public const float BorderSize = 5.0f;
 
-        public const float pointerSize = 30.0f;
-        public const float inputFieldHeight = pointerSize;
+        public const float PointerSize = 30.0f;
+        public const float InputFieldHeight = PointerSize;
 
-        public const float sliderWidth = 150.0f, sliderHandleWidth = 20.0f;
-        public const float sliderTextFieldWidth = 45.0f;
+        public const float SliderWidth = 150.0f, SliderHandleWidth = 20.0f;
+        public const float SliderTextFieldWidth = 45.0f;
 
-        public static Transform nodeCanvasTransform, windowSpawnParent;
+        public static Transform NodeCanvasTransform, WindowSpawnParent;
 
-        public static Texture2D pointerTexture;
+        public static Texture2D PointerTexture;
     }
 }

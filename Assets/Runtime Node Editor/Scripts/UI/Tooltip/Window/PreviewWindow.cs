@@ -7,7 +7,7 @@ namespace RuntimeNodeEditor.UI.Tooltip.Window
     internal class PreviewWindow : Window
     {
         [SerializeField] 
-        private Image _togglePreviewIcon;
+        private Image togglePreviewIcon;
 
         private void Awake()
         {
@@ -16,12 +16,12 @@ namespace RuntimeNodeEditor.UI.Tooltip.Window
 
         public void Toggle()
         {
-            if (UIData.windowOpened)
+            if (UIData.WindowOpened)
                 return;
 
             window.SetActive(!window.activeSelf);
 
-            _togglePreviewIcon.color =
+            togglePreviewIcon.color =
                 window.activeSelf ?
                 Color.white :
                 InActiveIconColor();
@@ -31,7 +31,7 @@ namespace RuntimeNodeEditor.UI.Tooltip.Window
         {
             window.SetActive(false);
 
-            _togglePreviewIcon.color = InActiveIconColor();
+            togglePreviewIcon.color = InActiveIconColor();
         }
 
         private Color InActiveIconColor()

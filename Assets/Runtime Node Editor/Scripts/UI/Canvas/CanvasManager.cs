@@ -10,58 +10,58 @@ namespace RuntimeNodeEditor.UI.Canvas
     internal class CanvasManager : MonoBehaviour
     {
         [Header("Camera")]
-        [SerializeField] private Camera _camera;
-        [SerializeField] private Color _cameraBackgroundColour;
+        [SerializeField] private Camera camera;
+        [SerializeField] private Color cameraBackgroundColour;
 
         [Header("Canvas")]
-        [SerializeField] private CanvasScaler _canvasScaler;
-        [SerializeField] private RectTransform _nodesRect, _canvasRect;
+        [SerializeField] private CanvasScaler canvasScaler;
+        [SerializeField] private RectTransform nodesRect, canvasRect;
 
         [Header("Lines")]
-        [SerializeField] private Transform _verticalParent;
-        [SerializeField] private Transform _horizontalParent;
+        [SerializeField] private Transform verticalParent;
+        [SerializeField] private Transform horizontalParent;
 
-        [SerializeField] private Material _lineMaterial;
+        [SerializeField] private Material lineMaterial;
 
         private Vector2 _windowSize, _windowSizeWithBorder, _canvasSize;
         private Vector3 _screenRes;
         
         public void Awake()
         {
-            _screenRes = new Vector3(_camera.pixelWidth, _camera.pixelHeight, 1);
+            CanvasData.Camera = camera;
+            CanvasData.CanvasScaler = canvasScaler;
+            
+            _screenRes = new Vector3(camera.pixelWidth, camera.pixelHeight, 1);
 
-            ScreenScale.CalculateScale(_camera.pixelWidth);
+            ScreenScale.CalculateScale(camera.pixelWidth);
 
-            Pan.nodesRect = _nodesRect;
-            Zoom.canvasScaler = _canvasScaler;
+            Pan.NodesRect = nodesRect;
 
             SetSizes(1.0f);
-            BackgroundLines.Instance.Init(
-                _lineMaterial,
+            CanvasBackgroundLines.Instance.Init(
+                lineMaterial,
                 _windowSizeWithBorder,
-                _horizontalParent,
-                _verticalParent);
-            SetCanvasColor();
+                horizontalParent,
+                verticalParent);
+            UpdateData();
         }
 
         private void Update()
         {
-            if (!CanvasData.canvasIsActive || UIData.tabOpened || UIData.windowOpened)
+            if (UIData.NodesCanvasIsActive)
                 return;
 
-            UpdateCanvasData();
+            UpdateData();
 
-            if (BackgroundLines.Instance.Initialised == false)
+            if (CanvasBackgroundLines.Instance.Initialised == false)
                 return;
 
-            MouseController.CheckMouse();
-
-            Pan.PanCanvas(_camera);
+            Pan.PanCanvas(camera);
             Zoom.ZoomCanvas();
 
-            ScreenScale.CalculateScale(_camera.pixelWidth);
+            ScreenScale.CalculateScale(camera.pixelWidth);
 
-            Vector3 updatedScreenRes = new Vector3(_camera.pixelWidth, _camera.pixelHeight, 1);
+            Vector3 updatedScreenRes = new Vector3(camera.pixelWidth, camera.pixelHeight, 1);
             if (_screenRes != updatedScreenRes)
             {
                 _screenRes = updatedScreenRes;
@@ -69,42 +69,42 @@ namespace RuntimeNodeEditor.UI.Canvas
                 Pan.Reset();
                 Zoom.Reset();
 
-                SetSizes(Zoom.scale);
-                BackgroundLines.Instance.DrawLines(_windowSizeWithBorder, true);
+                SetSizes(Zoom.Scale);
+                CanvasBackgroundLines.Instance.DrawLines(_windowSizeWithBorder);
             }
             else
             {
-                SetSizes(Zoom.scale);
-                if (_cameraBackgroundColour != _camera.backgroundColor)
-                    SetCanvasColor();
-                BackgroundLines.Instance.ManageLines(_canvasSize, _windowSizeWithBorder);
+                SetSizes(Zoom.Scale);
+                if (cameraBackgroundColour != camera.backgroundColor)
+                    SetColor();
+                CanvasBackgroundLines.Instance.ManageLines(_canvasSize, _windowSizeWithBorder);
             }
         }
 
         private void SetSizes(float zoom)
         {
-            _windowSize = _camera.ScreenToWorldPoint(new Vector3(_camera.pixelWidth, _camera.pixelHeight, 1));
-            _windowSizeWithBorder = new Vector3(_windowSize.x + (zoom * 5), _windowSize.y + (zoom * 5));
-            _canvasSize = _camera.ScreenToWorldPoint(new Vector3(_canvasRect.rect.width, _canvasRect.rect.height, 1));
+            _windowSize = camera.ScreenToWorldPoint(new Vector3(camera.pixelWidth, camera.pixelHeight, 1));
+            _windowSizeWithBorder = new Vector3(_windowSize.x + zoom * 5, _windowSize.y + zoom * 5);
+            _canvasSize = camera.ScreenToWorldPoint(new Vector3(canvasRect.rect.width, canvasRect.rect.height, 1));
         }
 
-        private void SetCanvasColor()
+        private void SetColor()
         {
-            _camera.backgroundColor = _cameraBackgroundColour;
+            camera.backgroundColor = cameraBackgroundColour;
 
-            Vector3 hsl = ColourConversion.RGBToHSL(_cameraBackgroundColour);
-            BackgroundLines.Instance.LineColour = ColourConversion.HSLToRGB(
+            Vector3 hsl = ColourConversion.RGBToHSL(cameraBackgroundColour);
+            CanvasBackgroundLines.Instance.LineColour = ColourConversion.HSLToRGB(
                 hsl.x,
                 hsl.y,
                 hsl.z * 0.5f);
 
-            BackgroundLines.Instance.UpdateLinesColour();
+            CanvasBackgroundLines.Instance.UpdateLinesColour();
         }
-        private void UpdateCanvasData()
+        
+        private void UpdateData()
         {
-            CanvasData.canvasScale = new Vector2(
-                _canvasRect.rect.width / _canvasScaler.referenceResolution.x,
-                _canvasRect.rect.height / _canvasScaler.referenceResolution.y);
+            CanvasData.CanvasScale = new Vector2(canvasRect.rect.width, canvasRect.rect.height);
+            CanvasData.CanvasScale /= canvasScaler.referenceResolution;
         }
     }
 }

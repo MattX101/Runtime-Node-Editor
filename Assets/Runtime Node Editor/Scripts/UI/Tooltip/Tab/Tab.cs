@@ -6,7 +6,7 @@ namespace RuntimeNodeEditor.UI.Tooltip.Tab
     internal class Tab : MonoBehaviour
     {
         [SerializeField]
-        private GameObject _tab;
+        private GameObject tab;
 
         private TabsManager _tabsManagers;
 
@@ -17,7 +17,7 @@ namespace RuntimeNodeEditor.UI.Tooltip.Tab
 
         public void Show()
         {
-            if (UIData.windowOpened)
+            if (UIData.WindowOpened)
                 return;
 
             _tabsManagers.HideTabs();
@@ -32,8 +32,8 @@ namespace RuntimeNodeEditor.UI.Tooltip.Tab
 
         private void Toggle(bool toggle)
         {
-            _tab.SetActive(toggle);
-            UIData.tabOpened = toggle;
+            tab.SetActive(toggle);
+            UIData.TabOpened = toggle;
         }
     }
 }

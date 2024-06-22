@@ -15,24 +15,24 @@ namespace RuntimeNodeEditor.Nodes.Node
 
         public override void Execute()
         {
-            outputs[1].data.floatValue = elements.sliders[0].value;
-            outputs[2].data.floatValue = elements.sliders[1].value;
-            outputs[3].data.floatValue = elements.sliders[2].value;
+            outputs[1].Data.FloatValue = Elements.Sliders[0].value;
+            outputs[2].Data.FloatValue = Elements.Sliders[1].value;
+            outputs[3].Data.FloatValue = Elements.Sliders[2].value;
             
-            outputs[0].data.colorValue = 
+            outputs[0].Data.ColorValue = 
                 new Color(
-                    outputs[1].data.floatValue,
-                    outputs[2].data.floatValue,
-                    outputs[3].data.floatValue);
+                    outputs[1].Data.FloatValue,
+                    outputs[2].Data.FloatValue,
+                    outputs[3].Data.FloatValue);
 
-            wasExecuted = true;
+            WasExecuted = true;
         }
 
         public override void Reset()
         {
             ResetExecution();
 
-            outputs[0].data.colorValue = Color.black;
+            outputs[0].Data.ColorValue = Color.black;
         }
     }
 }

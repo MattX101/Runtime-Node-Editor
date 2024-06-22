@@ -17,8 +17,8 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
             boolOutputNode.endNode = true;
 
             inputs = new InputPointer[1];
-            numOfInputs = inputs.Length;
-            numOfOutputs = 0;
+            NumOfInputs = inputs.Length;
+            NumOfOutputs = 0;
 
             drawBodyImage = false;
             interactablePreview = true;
@@ -30,9 +30,9 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
             inputs[0].node = boolOutputNode;
             inputs[0].valueType = ValueType.Bool;
 
-            boolOutputNode.elements = new NodeUIElements(0, 1, 0)
+            boolOutputNode.Elements = new NodeUIElements(0, 1, 0)
             {
-                buttons =
+                Buttons =
                 {
                     [0] = AddBooleanPreview(inputs[0].transform, true)
                 }
