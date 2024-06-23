@@ -14,7 +14,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Components
         
         public static void ManageDrag()
         {
-            if (UIData.NodesCanvasIsActive)
+            if (UIData.TabOrWindowOpened)
                 return;
 
             if (_dragOnSpawn)

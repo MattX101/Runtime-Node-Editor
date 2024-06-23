@@ -10,6 +10,9 @@ namespace RuntimeNodeEditor.UI.Tooltip.Window
         
         public void Create()
         {
+            if (CanvasData.NodesCanvasIsActive)
+                return;
+            
             if (UISettings.WindowSpawnParent.childCount != 0)
                 return;
 

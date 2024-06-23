@@ -16,6 +16,9 @@ namespace RuntimeNodeEditor.UI.Tooltip.Window
 
         public void Toggle()
         {
+            if (CanvasData.NodesCanvasIsActive)
+                return;
+            
             if (UIData.WindowOpened)
                 return;
 

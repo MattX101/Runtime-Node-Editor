@@ -17,6 +17,9 @@ namespace RuntimeNodeEditor.UI.Tooltip.Tab
 
         public void Show()
         {
+            if (CanvasData.NodesCanvasIsActive)
+                return;
+            
             if (UIData.WindowOpened)
                 return;
 

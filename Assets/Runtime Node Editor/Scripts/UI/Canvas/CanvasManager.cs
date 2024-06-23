@@ -48,7 +48,7 @@ namespace RuntimeNodeEditor.UI.Canvas
 
         private void Update()
         {
-            if (UIData.NodesCanvasIsActive)
+            if (UIData.TabOrWindowOpened)
                 return;
 
             UpdateData();

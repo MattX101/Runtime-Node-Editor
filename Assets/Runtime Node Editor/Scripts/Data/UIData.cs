@@ -8,6 +8,6 @@ namespace RuntimeNodeEditor.Data
         
         public static GameObject NodePanel;
         
-        public static bool NodesCanvasIsActive => TabOpened || WindowOpened;
+        public static bool TabOrWindowOpened => TabOpened || WindowOpened;
     }
 }

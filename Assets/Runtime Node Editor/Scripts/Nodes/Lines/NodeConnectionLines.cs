@@ -29,7 +29,7 @@ namespace RuntimeNodeEditor.Nodes.Lines
 
         private void Update()
         {
-            if (UIData.NodesCanvasIsActive)
+            if (UIData.TabOrWindowOpened)
                 return;
 
             _raycastHit2D = Physics2D.Raycast(_mousePos, Vector2.zero);
