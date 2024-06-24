@@ -19,7 +19,7 @@ namespace RuntimeNodeEditor.Save
         [Header("Scripts")]
         [SerializeField] private SeedManager seedManager;
         [SerializeField] private NodeExecution nodeExecution;
-        [SerializeField] private NodeConnectionLines linesController;
+        [SerializeField] private NodeConnectionLines nodeConnections;
 
         [Header("Nodes")]
         [SerializeField]
@@ -49,6 +49,7 @@ namespace RuntimeNodeEditor.Save
             
             _data.AddRange(seedManager.Save());
             _data.AddRange(Zoom.Save());
+            _data.AddRange(Pan.Save());
             _data.AddRange(OnSave.Save(nodesObject));
 
             File.WriteAllBytes(_saveDirectory, _data.ToArray());
@@ -69,9 +70,20 @@ namespace RuntimeNodeEditor.Save
             byte[] data = File.ReadAllBytes(path);
 
             seedManager.Seed = BitConverter.ToInt32(data, position);
-            Zoom.Scale = BitConverter.ToSingle(data,4);
-            int numOfNodes = BitConverter.ToInt32(data,8);
+            position += 4;
+            
+            Zoom.Load(BitConverter.ToSingle(data, position));
+            position += 4;
+            
+            Pan.Load(
+                BitConverter.ToSingle(data, position), 
+                BitConverter.ToSingle(data,position + 4)
+                );
+            // 3 float, 12 bytes
             position += 12;
+            
+            int numOfNodes = BitConverter.ToInt32(data,position);
+            position += 4;
 
             if (numOfNodes == 0)
                 return;
@@ -85,8 +97,9 @@ namespace RuntimeNodeEditor.Save
             position += 4;
 
             for (int i = 0; i < connectionArrayLength; i++)
-                position = LoadConnections(nodes, position, data);
-
+                position = LoadConnection(nodes, position, data);
+            nodeConnections.UpdateLinesOnLoad();
+            
             nodeExecution.Execute(nodes);
         }
 
@@ -100,12 +113,12 @@ namespace RuntimeNodeEditor.Save
             return position;
         }
 
-        private int LoadConnections(Nodes.Node.Node[] nodes, int position, byte[] data)
+        private int LoadConnection(Nodes.Node.Node[] nodes, int position, byte[] data)
         {
-            linesController.Load(
+            nodeConnections.Load(
                 nodes[BitConverter.ToInt32(data, position)].inputs[data[position + 4]], 
                 nodes[BitConverter.ToInt32(data, position + 5)].outputs[data[position + 9]]);
-
+            
             return position + 10;
         }
     }

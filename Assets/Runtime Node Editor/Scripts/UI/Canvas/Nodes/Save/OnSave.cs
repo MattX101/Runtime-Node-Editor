@@ -27,6 +27,16 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Save
             foreach (RuntimeNodeEditor.Nodes.Node.Node node in nodes)
             {
                 bytes.AddRange(node.gameObject.GetComponent<NodeUI>().SaveNodeUI());
+
+                if (node.Elements == null)
+                {
+                    bytes.Add(0);
+                    bytes.Add(0);
+                    bytes.Add(0);
+                    
+                    continue;
+                }
+                
                 bytes.AddRange(node.Elements.Save());
             }
             

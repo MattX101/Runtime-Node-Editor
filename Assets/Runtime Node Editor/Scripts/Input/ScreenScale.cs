@@ -1,4 +1,5 @@
 using System;
+using RuntimeNodeEditor.Data;
 
 namespace RuntimeNodeEditor.Input
 {
@@ -6,9 +7,9 @@ namespace RuntimeNodeEditor.Input
     {
         public static float Scale;
 
-        public static void CalculateScale(int screenWidth)
+        public static void CalculateScale()
         {
-            Scale = screenWidth / 1000.0f;
+            Scale = CanvasData.Camera.pixelWidth / 1000.0f;
         }
 
         public static byte[] Save()

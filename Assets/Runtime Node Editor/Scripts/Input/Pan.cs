@@ -12,7 +12,7 @@ namespace RuntimeNodeEditor.Input
 
         public static RectTransform NodesRect;
 
-        public static void PanCanvas(Camera camera)
+        public static void PanCanvas()
         {
             Offset = Vector3.zero;
 
@@ -34,6 +34,13 @@ namespace RuntimeNodeEditor.Input
             float x = Mathf.Clamp(mousePos.x - _lastFrameMousePos.x, -1, 1);
             float y = Mathf.Clamp(mousePos.y - _lastFrameMousePos.y, -1, 1);
 
+            CalculatePan(x, y);
+
+            _lastFrameMousePos = mousePos;
+        }
+
+        private static void CalculatePan(float x, float y)
+        {
             NodesRect.position = new Vector3(
                 NodesRect.position.x + x,
                 NodesRect.position.y + y,
@@ -42,12 +49,10 @@ namespace RuntimeNodeEditor.Input
             Offset = new Vector3(x, y, 0);
 
             PositionFromOrigin = new Vector3(
-                camera.pixelWidth / 2,
-                camera.pixelHeight / 2,
+                CanvasData.Camera.pixelWidth / 2,
+                CanvasData.Camera.pixelHeight / 2,
                 0);
-            PositionFromOrigin -= camera.WorldToScreenPoint(-NodesRect.position);
-
-            _lastFrameMousePos = mousePos;
+            PositionFromOrigin -= CanvasData.Camera.WorldToScreenPoint(-NodesRect.position);
         }
 
         public static void UpdatePositionFromOrigin()
@@ -69,9 +74,9 @@ namespace RuntimeNodeEditor.Input
 
         public static byte[] Save()
         {
-            byte[] x = BitConverter.GetBytes(PositionFromOrigin.x);
-            byte[] y = BitConverter.GetBytes(PositionFromOrigin.y);
-            byte[] z = BitConverter.GetBytes(PositionFromOrigin.z);
+            byte[] x = BitConverter.GetBytes(NodesRect.position.x / Zoom.Scale);
+            byte[] y = BitConverter.GetBytes(NodesRect.position.y / Zoom.Scale);
+            byte[] z = BitConverter.GetBytes(NodesRect.position.z / Zoom.Scale);
 
             byte[] bytes = new byte[12];
 
@@ -83,6 +88,11 @@ namespace RuntimeNodeEditor.Input
             }
 
             return bytes;
+        }
+
+        public static void Load(float x, float y)
+        {
+            CalculatePan(x, y);
         }
     }
 }

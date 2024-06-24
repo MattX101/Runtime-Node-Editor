@@ -47,20 +47,39 @@ namespace RuntimeNodeEditor.Nodes.Line
 
         public void UpdateDraggingLine(Vector3 endPosition)
         {
-            this._endPosition = new Vector3(endPosition.x, endPosition.y, 100.0f);
+            _endPosition = new Vector3(endPosition.x, endPosition.y, 100.0f);
 
-            SetNumberOfPoints(this._endPosition);
+            SetNumberOfPoints(_endPosition);
 
-            _lineRenderer.SetPosition(_lineRenderer.positionCount - 1, new Vector3(this._endPosition.x, this._endPosition.y, 100.0f));
+            _lineRenderer.SetPosition(_lineRenderer.positionCount - 1, new Vector3(_endPosition.x, _endPosition.y, 100.0f));
 
-            UpdatePointsPositions(_startPosition, this._endPosition);
+            UpdatePointsPositions(_startPosition, _endPosition);
         }
 
         public void UpdateLinePositions()
         {
+            SetPositions();
+            UpdatePoints();
+        }
+
+        public void UpdateLinePositionsOnLoad()
+        {
+            SetPositions();
+            
+            _startPosition *= Zoom.Scale;
+            _endPosition *= Zoom.Scale;
+
+            UpdatePoints();
+        }
+
+        private void SetPositions()
+        {
             _startPosition = Output.transform.position;
             _endPosition = Input.transform.position;
+        }
 
+        private void UpdatePoints()
+        {
             SetNumberOfPoints(_endPosition);
 
             _lineRenderer.SetPosition(0, _endPosition);

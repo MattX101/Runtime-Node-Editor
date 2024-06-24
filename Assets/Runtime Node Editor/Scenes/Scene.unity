@@ -6103,7 +6103,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   seedManager: {fileID: 1105068428}
   nodeExecution: {fileID: 1105068427}
-  linesController: {fileID: 1777772067}
+  nodeConnections: {fileID: 1777772067}
   nodesObject: {fileID: 1777772063}
 --- !u!1 &1135406249
 GameObject:

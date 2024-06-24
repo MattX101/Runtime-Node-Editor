@@ -33,7 +33,7 @@ namespace RuntimeNodeEditor.UI.Canvas
             
             _screenRes = new Vector3(camera.pixelWidth, camera.pixelHeight, 1);
 
-            ScreenScale.CalculateScale(camera.pixelWidth);
+            ScreenScale.CalculateScale();
 
             Pan.NodesRect = nodesRect;
 
@@ -56,10 +56,10 @@ namespace RuntimeNodeEditor.UI.Canvas
             if (CanvasBackgroundLines.Instance.Initialised == false)
                 return;
 
-            Pan.PanCanvas(camera);
+            Pan.PanCanvas();
             Zoom.ZoomCanvas();
 
-            ScreenScale.CalculateScale(camera.pixelWidth);
+            ScreenScale.CalculateScale();
 
             Vector3 updatedScreenRes = new Vector3(camera.pixelWidth, camera.pixelHeight, 1);
             if (_screenRes != updatedScreenRes)

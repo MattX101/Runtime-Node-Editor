@@ -21,7 +21,7 @@ namespace RuntimeNodeEditor.Nodes.Lines
         private OutputPointer _currentOutputPointer;
         
         [SerializeField] private Material sourceMaterial;
-
+        
         private void Awake()
         {
             _droppedLines = new List<NodeConnectionLine>();
@@ -187,6 +187,15 @@ namespace RuntimeNodeEditor.Nodes.Lines
             _currentConnectionLine.Input = input;
 
             _droppedLines.Add(_currentConnectionLine);
+        }
+        
+        public void UpdateLinesOnLoad()
+        {
+            foreach (NodeConnectionLine line in _droppedLines)
+            {
+                line.UpdateLinePositionsOnLoad();
+                line.UpdateWidth();
+            }
         }
     }
 }

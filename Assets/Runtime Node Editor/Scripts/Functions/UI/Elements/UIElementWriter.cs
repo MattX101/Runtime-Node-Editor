@@ -22,7 +22,7 @@ namespace RuntimeNodeEditor.Functions.UI.Elements
 
         private List<byte> SaveInputFields(List<byte> bytes, TMP_InputField[] inputFields)
         {
-            if (inputFields == null)
+            if (inputFields.Length == 0)
             {
                 bytes.Add(0);
 
@@ -46,7 +46,7 @@ namespace RuntimeNodeEditor.Functions.UI.Elements
 
         private List<byte> SaveBooleanButtons(List<byte> bytes, BooleanButton[] buttons)
         {
-            if (buttons == null)
+            if (buttons.Length == 0)
             {
                 bytes.Add(0);
 
@@ -61,7 +61,7 @@ namespace RuntimeNodeEditor.Functions.UI.Elements
 
         private List<byte> SaveSliders(List<byte> bytes, Slider[] sliders)
         {
-            if (sliders == null)
+            if (sliders.Length == 0)
             {
                 bytes.Add(0);
 
