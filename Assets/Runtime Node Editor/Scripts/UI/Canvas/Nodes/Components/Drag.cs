@@ -11,6 +11,8 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Components
         private static NodeUI _selectedNodeUI;
 
         private static bool _dragOnSpawn;
+
+        private static Vector3 _distanceFromMouseToNodeCenter = Vector3.zero;
         
         public static void ManageDrag()
         {
@@ -65,12 +67,16 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Components
             _selectedNodeUI.BlockRaycasts(false);
 
             CanvasData.IsDragging = true;
+
+            _distanceFromMouseToNodeCenter = (Vector3)MouseController.MousePositionRelativeToCenter - _selectedNodeUI.rootRect.localPosition;
         }
 
         private static void OnClickRelease()
         {
             if (!UnityEngine.Input.GetMouseButtonUp(0))
                 return;
+
+            _distanceFromMouseToNodeCenter = Vector3.zero;
 
             ValidateDrop();
         }
@@ -120,11 +126,11 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Components
             _selectedNodeUI = null;
             _dragOnSpawn = false;
         }
-
+        
         private static void DragNode()
         {
             _selectedNodeUI.rootRect.localPosition = 
-                (Vector3)MouseController.MousePositionRelativeToCenter 
+                (Vector3)MouseController.MousePositionRelativeToCenter - _distanceFromMouseToNodeCenter 
                 - Pan.PositionFromOrigin / Zoom.Scale;
         }
 
