@@ -1,5 +1,6 @@
 using RuntimeNodeEditor.Data;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace RuntimeNodeEditor.Input
@@ -74,25 +75,39 @@ namespace RuntimeNodeEditor.Input
 
         public static byte[] Save()
         {
-            byte[] x = BitConverter.GetBytes(NodesRect.position.x / Zoom.Scale);
-            byte[] y = BitConverter.GetBytes(NodesRect.position.y / Zoom.Scale);
-            byte[] z = BitConverter.GetBytes(NodesRect.position.z / Zoom.Scale);
+            List<byte> data = new();
+            
+            data.AddRange(BitConverter.GetBytes(NodesRect.position.x / Zoom.Scale));
+            data.AddRange(BitConverter.GetBytes(NodesRect.position.y / Zoom.Scale));
+            
+            data.AddRange(BitConverter.GetBytes(Offset.x));
+            data.AddRange(BitConverter.GetBytes(Offset.y));
+            
+            data.AddRange(BitConverter.GetBytes(PositionFromOrigin.x));
+            data.AddRange(BitConverter.GetBytes(PositionFromOrigin.y));
 
-            byte[] bytes = new byte[12];
-
-            for (int i = 0; i < 4; i++)
-            {
-                bytes[i] = x[i];
-                bytes[i + 4] = y[i];
-                bytes[i + 8] = z[i];
-            }
-
-            return bytes;
+            return data.ToArray();
         }
 
-        public static void Load(float x, float y)
-        {
+        public static int LoadNodesRectPosition(float x, float y)
+        { 
             CalculatePan(x, y);
+
+            return 8;
+        }
+
+        public static int LoadOffset(float x, float y)
+        {
+            Offset = new Vector3(x, y, 0);
+
+            return 8;
+        }
+        
+        public static int LoadPositionFromOrigin(float x, float y)
+        {
+            PositionFromOrigin = new Vector3(x, y, 0);
+
+            return 8;
         }
     }
 }

@@ -72,15 +72,11 @@ namespace RuntimeNodeEditor.Save
             seedManager.Seed = BitConverter.ToInt32(data, position);
             position += 4;
             
-            Zoom.Load(BitConverter.ToSingle(data, position));
-            position += 4;
+            position += Zoom.Load(BitConverter.ToSingle(data, position));
             
-            Pan.Load(
-                BitConverter.ToSingle(data, position), 
-                BitConverter.ToSingle(data,position + 4)
-                );
-            // 3 float, 12 bytes
-            position += 12;
+            position += Pan.LoadNodesRectPosition(BitConverter.ToSingle(data, position), BitConverter.ToSingle(data,position + 4));
+            position += Pan.LoadOffset(BitConverter.ToSingle(data, position), BitConverter.ToSingle(data,position + 4));
+            position += Pan.LoadPositionFromOrigin(BitConverter.ToSingle(data, position), BitConverter.ToSingle(data,position + 4));
             
             int numOfNodes = BitConverter.ToInt32(data,position);
             position += 4;

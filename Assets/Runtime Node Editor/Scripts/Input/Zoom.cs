@@ -30,7 +30,6 @@ namespace RuntimeNodeEditor.Input
         {
             CanvasData.CanvasScaler.scaleFactor = Scale;
 
-            //Pan.Reset();
             Pan.UpdatePositionFromOrigin();
         }
 
@@ -47,11 +46,13 @@ namespace RuntimeNodeEditor.Input
             return BitConverter.GetBytes(Scale);
         }
 
-        public static void Load(float scale)
+        public static int Load(float scale)
         {
             Scale = scale;
             
             CalculateScale();
+
+            return 4;
         }
     }
 }
