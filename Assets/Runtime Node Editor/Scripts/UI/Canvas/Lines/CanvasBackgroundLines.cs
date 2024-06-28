@@ -1,6 +1,6 @@
 using RuntimeNodeEditor.Input;
-using System.Collections.Generic;
 using RuntimeNodeEditor.UI.Canvas.Line;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace RuntimeNodeEditor.UI.Canvas.Lines
@@ -46,7 +46,13 @@ namespace RuntimeNodeEditor.UI.Canvas.Lines
 
             Initialised = true;
         }
-        
+
+        public void Reset(Vector2 windowSize)
+        {
+            DeleteAllLines();
+            DrawLines(windowSize);
+        }
+
         public void ManageLines(Vector2 canvasSize, Vector2 windowSize)
         {
             UpdateLines(windowSize);
@@ -211,11 +217,17 @@ namespace RuntimeNodeEditor.UI.Canvas.Lines
             }
         }
         
-
         private void DeleteAllLines()
         {
-            for (int i = 0; i < _horizontalLines.Count; i++) DeleteLine(_horizontalLines, i);
-            for (int i = 0; i < _verticalLines.Count; i++)   DeleteLine(_verticalLines, i);
+            for (int i = _horizontalLines.Count - 1; i >= 0; i--) DeleteLine(_horizontalLines, _horizontalLines[i]);
+            for (int i = _verticalLines.Count - 1; i >= 0; i--)   DeleteLine(_verticalLines, _verticalLines[i]);
+        }
+
+        private void DeleteLine(List<CanvasBackgroundLine> lines, CanvasBackgroundLine line)
+        {
+            Object.Destroy(line.LineRenderer.gameObject);
+
+            lines.Remove(line);
         }
         private void DeleteLine(List<CanvasBackgroundLine> lines, int i)
         {

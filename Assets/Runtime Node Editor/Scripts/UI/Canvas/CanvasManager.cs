@@ -81,6 +81,13 @@ namespace RuntimeNodeEditor.UI.Canvas
             }
         }
 
+        public void Reset()
+        {
+            UpdateData();
+
+            CanvasBackgroundLines.Instance.Reset(_windowSizeWithBorder);
+        }
+
         private void SetSizes(float zoom)
         {
             _windowSize = camera.ScreenToWorldPoint(new Vector3(camera.pixelWidth, camera.pixelHeight, 1));
