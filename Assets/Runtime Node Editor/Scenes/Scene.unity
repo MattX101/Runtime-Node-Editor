@@ -6087,6 +6087,7 @@ GameObject:
   - component: {fileID: 1105068427}
   - component: {fileID: 1105068428}
   - component: {fileID: 1105068431}
+  - component: {fileID: 1105068432}
   m_Layer: 5
   m_Name: Scripts
   m_TagString: Untagged
@@ -6153,6 +6154,18 @@ MonoBehaviour:
   nodeExecution: {fileID: 1105068427}
   nodeConnections: {fileID: 1777772067}
   nodesObject: {fileID: 1777772063}
+--- !u!114 &1105068432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1105068426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ea66f0174f52f64aa92aab7ae4a9aa7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1135406249
 GameObject:
   m_ObjectHideFlags: 0
@@ -6541,10 +6554,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3573399221748473874, guid: 80a2800d3e688574f98975d465eb2478, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3573399221748473874, guid: 80a2800d3e688574f98975d465eb2478, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3573399221748473874, guid: 80a2800d3e688574f98975d465eb2478, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3573399221748473874, guid: 80a2800d3e688574f98975d465eb2478, type: 3}
@@ -6552,7 +6569,15 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1410947204}
     - target: {fileID: 3573399221748473874, guid: 80a2800d3e688574f98975d465eb2478, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1105068432}
+    - target: {fileID: 3573399221748473874, guid: 80a2800d3e688574f98975d465eb2478, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3573399221748473874, guid: 80a2800d3e688574f98975d465eb2478, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3573399221748473874, guid: 80a2800d3e688574f98975d465eb2478, type: 3}
@@ -6560,11 +6585,23 @@ PrefabInstance:
       value: Hide
       objectReference: {fileID: 0}
     - target: {fileID: 3573399221748473874, guid: 80a2800d3e688574f98975d465eb2478, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: Exit
+      objectReference: {fileID: 0}
+    - target: {fileID: 3573399221748473874, guid: 80a2800d3e688574f98975d465eb2478, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: RuntimeNodeEditor.UI.Interface.Tab, RuntimeNodeEditor
       objectReference: {fileID: 0}
     - target: {fileID: 3573399221748473874, guid: 80a2800d3e688574f98975d465eb2478, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: RuntimeNodeEditor.Functions.Exit.ExitApp, RuntimeNodeEditor.Functions
+      objectReference: {fileID: 0}
+    - target: {fileID: 3573399221748473874, guid: 80a2800d3e688574f98975d465eb2478, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3573399221748473874, guid: 80a2800d3e688574f98975d465eb2478, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 3757512136519278473, guid: 80a2800d3e688574f98975d465eb2478, type: 3}
