@@ -2,6 +2,7 @@ using RuntimeNodeEditor.Input;
 using RuntimeNodeEditor.Nodes.Pointer;
 using Utils.Curves;
 using UnityEngine;
+using RuntimeNodeEditor.Nodes.Lines;
 
 namespace RuntimeNodeEditor.Nodes.Line
 {
@@ -111,8 +112,12 @@ namespace RuntimeNodeEditor.Nodes.Line
 
         public void DestroyLine()
         {
-            if (Input)  Input.Line = null;
-            if (Output) Output.Lines.Remove(this);
+            LinesData.OnNodeDelete(this);
+
+            if (Input)
+                Input.Line = null;
+            if (Output)
+                Output.Lines.Remove(this);
 
             _lineRenderer = null;
             Object.Destroy(_lineObject);

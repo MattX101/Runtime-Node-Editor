@@ -16,16 +16,10 @@ namespace RuntimeNodeEditor.Nodes.Lines
         private RaycastHit2D _raycastHit2D;
 
         private NodeConnectionLine _currentConnectionLine;
-        private List<NodeConnectionLine> _droppedLines;
 
         private OutputPointer _currentOutputPointer;
         
         [SerializeField] private Material sourceMaterial;
-        
-        private void Awake()
-        {
-            _droppedLines = new List<NodeConnectionLine>();
-        }
 
         private void Update()
         {
@@ -44,12 +38,12 @@ namespace RuntimeNodeEditor.Nodes.Lines
                 _currentConnectionLine?.UpdateDraggingLine(_mousePos);
 
             if (UnityEngine.Input.GetMouseButtonDown(1))
-                DeletePointerConnectionsOnClick();
+                LinesData.DeletePointerConnectionsOnClick(_raycastHit2D);
 
-            if (_droppedLines is not { Count: > 0 }) 
+            if (LinesData.DroppedLines is not { Count: > 0 }) 
                 return;
             
-            foreach (NodeConnectionLine line in _droppedLines)
+            foreach (NodeConnectionLine line in LinesData.DroppedLines)
                 line.UpdateWidth();
         }
 
@@ -121,32 +115,9 @@ namespace RuntimeNodeEditor.Nodes.Lines
             inputPointer.SetConnection(_currentOutputPointer);
             inputPointer.Line = _currentConnectionLine;
 
-            _droppedLines.Add(_currentConnectionLine);
+            LinesData.DroppedLines.Add(_currentConnectionLine);
 
             _currentOutputPointer.node.MoveUp();
-        }
-
-        private void DeletePointerConnectionsOnClick()
-        {
-            if (!_raycastHit2D.collider || CanvasData.IsPointing)
-                return;
-
-            if (_raycastHit2D.collider.TryGetComponent(out OutputPointer outputPointer))
-                DeleteOutputConnections(outputPointer);
-            else if (_raycastHit2D.collider.TryGetComponent(out InputPointer inputPointer))
-                DeleteInputConnections(inputPointer);
-        }
-
-        private void DeleteOutputConnections(OutputPointer outputPointer)
-        {
-            foreach (NodeConnectionLine line in outputPointer.Lines)
-                _droppedLines.Remove(line);
-            outputPointer.DeleteConnections();
-        }
-        private void DeleteInputConnections(InputPointer inputPointer)
-        {
-            _droppedLines.Remove(inputPointer.Line);
-            inputPointer.DeleteConnection();
         }
 
         public void Paste(Node.Node copiedNode, Node.Node newNode)
@@ -186,12 +157,12 @@ namespace RuntimeNodeEditor.Nodes.Lines
             input.Line = _currentConnectionLine;
             _currentConnectionLine.Input = input;
 
-            _droppedLines.Add(_currentConnectionLine);
+            LinesData.DroppedLines.Add(_currentConnectionLine);
         }
         
         public void UpdateLinesOnLoad()
         {
-            foreach (NodeConnectionLine line in _droppedLines)
+            foreach (NodeConnectionLine line in LinesData.DroppedLines)
             {
                 line.UpdateLinePositionsOnLoad();
                 line.UpdateWidth();

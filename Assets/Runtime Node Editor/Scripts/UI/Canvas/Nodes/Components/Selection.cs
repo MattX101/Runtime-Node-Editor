@@ -61,6 +61,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Components
             
             _currentNode.GetComponent<NodeUI>().ToggleSelectColor();
         }
+
         private static void Deselect()
         {
             if (!_currentNode)
@@ -100,13 +101,16 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Components
             }
         }
 
-        private static void Delete(RuntimeNodeEditor.Nodes.Node.Node node)
+        public static void Delete(RuntimeNodeEditor.Nodes.Node.Node node, bool ignoreChecks = false)
         {
-            if (!_currentNode)
-                return;
+            if (!ignoreChecks)
+            {
+                if (!_currentNode)
+                    return;
 
-            if (CanvasData.IsPointing || CanvasData.IsDragging || CanvasData.IsPanning || CanvasData.IsScrolling)
-                return;
+                if (CanvasData.IsPointing || CanvasData.IsDragging || CanvasData.IsPanning || CanvasData.IsScrolling)
+                    return;
+            }
 
             node.DeletePointerConnections();
 

@@ -66,8 +66,10 @@ namespace RuntimeNodeEditor.Save
                 return;
             }
 
+            _saveDirectory = path;
+
             int position = 0;
-            byte[] data = File.ReadAllBytes(path);
+            byte[] data = File.ReadAllBytes(_saveDirectory);
 
             seedManager.Seed = BitConverter.ToInt32(data, position);
             position += 4;

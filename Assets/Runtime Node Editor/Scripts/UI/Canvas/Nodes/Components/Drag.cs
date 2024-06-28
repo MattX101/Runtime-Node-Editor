@@ -68,7 +68,10 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Components
 
             CanvasData.IsDragging = true;
 
-            _distanceFromMouseToNodeCenter = (Vector3)MouseController.MousePositionRelativeToCenter - _selectedNodeUI.rootRect.localPosition;
+            _distanceFromMouseToNodeCenter = 
+                (Vector3)MouseController.MousePositionRelativeToCenter 
+                - _selectedNodeUI.rootRect.localPosition 
+                - Pan.PositionFromOriginZoomed;
         }
 
         private static void OnClickRelease()
@@ -130,8 +133,9 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Components
         private static void DragNode()
         {
             _selectedNodeUI.rootRect.localPosition = 
-                (Vector3)MouseController.MousePositionRelativeToCenter - _distanceFromMouseToNodeCenter 
-                - Pan.PositionFromOrigin / Zoom.Scale;
+                (Vector3)MouseController.MousePositionRelativeToCenter 
+                - _distanceFromMouseToNodeCenter 
+                - Pan.PositionFromOriginZoomed;
         }
 
         private static void ValidateDrop()

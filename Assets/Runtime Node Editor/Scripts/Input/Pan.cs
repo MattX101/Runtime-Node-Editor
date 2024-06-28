@@ -9,7 +9,9 @@ namespace RuntimeNodeEditor.Input
     {
         private static Vector2 _lastFrameMousePos;
 
-        public static Vector3 Offset, PositionFromOrigin;
+        private static Vector3 Offset, PositionFromOrigin;
+        public static Vector3 OffsetZoomed => Offset / Zoom.Scale;
+        public static Vector3 PositionFromOriginZoomed => PositionFromOrigin / Zoom.Scale;
 
         public static RectTransform NodesRect;
 
@@ -54,11 +56,6 @@ namespace RuntimeNodeEditor.Input
                 CanvasData.Camera.pixelHeight / 2,
                 0);
             PositionFromOrigin -= CanvasData.Camera.WorldToScreenPoint(-NodesRect.position);
-        }
-
-        public static void UpdatePositionFromOrigin()
-        {
-            PositionFromOrigin /= Zoom.Scale;
         }
 
         public static void Reset()

@@ -135,7 +135,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Lines
         {
             for (int i = _horizontalLines.Count - 1; i >= 0; i--)
             {
-                _horizontalLines[i].Offset -= Pan.Offset / Zoom.Scale;
+                _horizontalLines[i].Offset -= Pan.OffsetZoomed;
                 _horizontalLines[i].UpdateHorizontalLine();
 
                 LineRenderer line = _horizontalLines[i].LineRenderer;
@@ -158,7 +158,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Lines
         {
             for (int i = _verticalLines.Count - 1; i >= 0; i--)
             {
-                _verticalLines[i].Offset -= Pan.Offset / Zoom.Scale;
+                _verticalLines[i].Offset -= Pan.OffsetZoomed;
                 _verticalLines[i].UpdateVerticalLine();
 
                 LineRenderer line = _verticalLines[i].LineRenderer;

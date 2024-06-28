@@ -18,6 +18,6 @@ namespace RuntimeNodeEditor.Data
         public static bool IsPanning = false;
         public static bool IsScrolling = false;
         
-        public static bool NodesCanvasIsActive =>  IsPointing || IsDragging || IsPanning || IsScrolling;
+        public static bool NodesCanvasIsActive => IsPointing || IsDragging || IsPanning || IsScrolling;
     }
 }

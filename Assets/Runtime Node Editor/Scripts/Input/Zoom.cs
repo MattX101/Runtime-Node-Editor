@@ -29,8 +29,6 @@ namespace RuntimeNodeEditor.Input
         private static void CalculateScale()
         {
             CanvasData.CanvasScaler.scaleFactor = Scale;
-
-            Pan.UpdatePositionFromOrigin();
         }
 
         public static void Reset()

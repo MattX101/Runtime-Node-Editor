@@ -1,3 +1,4 @@
+using RuntimeNodeEditor.Input;
 using RuntimeNodeEditor.Nodes.Lines;
 using RuntimeNodeEditor.UI.Canvas.Node.Components;
 using RuntimeNodeEditor.UI.Canvas.Nodes.Components;
@@ -13,6 +14,8 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes
         [SerializeField] private Texture2D pointerTexture;
 
         [SerializeField] private NodeConnectionLines connectionLines;
+
+        [SerializeField] private GameObject nodesObject;
         
         private void Awake()
         {
@@ -47,6 +50,15 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes
         private void InitSpawnDrag(NodeUI nodeUI)
         {
             Drag.InitSpawnDrag(nodeUI);
+        }
+
+        public void ClearCanvas()
+        {
+            Pan.Reset();
+            Zoom.Reset();
+
+            foreach (RuntimeNodeEditor.Nodes.Node.Node node in GetComponentsInChildren<RuntimeNodeEditor.Nodes.Node.Node>())
+                Selection.Delete(node, true);
         }
     }
 }
