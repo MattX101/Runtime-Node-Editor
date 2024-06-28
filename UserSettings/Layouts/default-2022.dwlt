@@ -119,7 +119,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 87
+  controlID: 39
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -343,7 +343,7 @@ MonoBehaviour:
     m_HSlider: 0
     m_VSlider: 0
     m_IgnoreScrollWheelUntilClicked: 0
-    m_EnableMouseInput: 1
+    m_EnableMouseInput: 0
     m_EnableSliderZoomHorizontal: 0
     m_EnableSliderZoomVertical: 0
     m_UniformScale: 1
@@ -411,9 +411,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 56ebffff
+      m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 08fbffff
+      m_ExpandedIDs: cacaffff06cbffffd0dfffff82faffff1afbffff766200008a620000b4630000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -904,7 +904,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Runtime Node Editor/Scripts/UI/Canvas/Nodes
+    - Assets/Runtime Node Editor/Scripts/Functions
     m_Globs: []
     m_OriginalText: 
     m_ImportLogFlags: 0
@@ -912,16 +912,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 96
   m_LastFolders:
-  - Assets/Runtime Node Editor/Scripts/UI/Canvas/Nodes
+  - Assets/Runtime Node Editor/Scripts/Functions
   m_LastFoldersGridSize: 96
   m_LastProjectPath: C:\Users\xmwin\Stuff\Projects\Unity\Runtime Node Editor
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 20}
-    m_SelectedIDs: 92790000
-    m_LastClickedID: 31122
-    m_ExpandedIDs: 000000004a7900005a79000094790000967900009879000000ca9a3bffffff7f
+    m_SelectedIDs: 96790000
+    m_LastClickedID: 31126
+    m_ExpandedIDs: 000000004a790000507900008a7900008e79000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -974,8 +974,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 38220000
-    m_LastClickedInstanceID: 8760
+    m_SelectedInstanceIDs: 
+    m_LastClickedInstanceID: 0
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c6230000c05200002a6500002c62000000000000bc630000
     m_RenameOverlay:

@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 
 namespace RuntimeNodeEditor.Functions.Exit
@@ -6,7 +7,11 @@ namespace RuntimeNodeEditor.Functions.Exit
     {
         public void Exit()
         {
+#if UNITY_EDITOR
+            EditorApplication.ExitPlaymode();
+#else
             Application.Quit();
+#endif
         }
     }
 }
