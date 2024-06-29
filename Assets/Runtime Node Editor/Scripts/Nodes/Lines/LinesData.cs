@@ -6,11 +6,19 @@ using UnityEngine;
 
 namespace RuntimeNodeEditor.Nodes.Lines
 {
-    public static class LinesData
+    internal static class LinesData
     {
-        public static List<NodeConnectionLine> DroppedLines = new();
+        private static List<NodeConnectionLine> DroppedLines = new();
+        public static NodeConnectionLine[] DroppedLinesArray => DroppedLines.ToArray();
 
-        public static void OnNodeDelete(NodeConnectionLine line)
+        public static bool NotNullOrEmpty => DroppedLines is not { Count: > 0 };
+
+        public static void Add(NodeConnectionLine line)
+        {
+            DroppedLines.Add(line);
+        }
+
+        public static void Remove(NodeConnectionLine line)
         {
             DroppedLines.Remove(line);
         }
@@ -29,13 +37,13 @@ namespace RuntimeNodeEditor.Nodes.Lines
         private static void DeleteOutputConnections(OutputPointer outputPointer)
         {
             foreach (NodeConnectionLine line in outputPointer.Lines)
-                DroppedLines.Remove(line);
+                Remove(line);
             outputPointer.DeleteConnections();
         }
 
         private static void DeleteInputConnection(InputPointer inputPointer)
         {
-            DroppedLines.Remove(inputPointer.Line);
+            Remove(inputPointer.Line);
             inputPointer.DeleteConnection();
         }
     }

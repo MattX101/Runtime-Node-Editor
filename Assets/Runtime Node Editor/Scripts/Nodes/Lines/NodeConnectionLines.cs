@@ -1,9 +1,9 @@
 using RuntimeNodeEditor.Data;
-using RuntimeNodeEditor.Nodes.Pointer;
-using System.Collections.Generic;
 using RuntimeNodeEditor.Input;
 using RuntimeNodeEditor.Nodes.Line;
+using RuntimeNodeEditor.Nodes.Pointer;
 using RuntimeNodeEditor.Nodes.Pointer.Data;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace RuntimeNodeEditor.Nodes.Lines
@@ -40,11 +40,20 @@ namespace RuntimeNodeEditor.Nodes.Lines
             if (UnityEngine.Input.GetMouseButtonDown(1))
                 LinesData.DeletePointerConnectionsOnClick(_raycastHit2D);
 
-            if (LinesData.DroppedLines is not { Count: > 0 }) 
+            if (LinesData.NotNullOrEmpty) 
                 return;
             
-            foreach (NodeConnectionLine line in LinesData.DroppedLines)
+            foreach (NodeConnectionLine line in LinesData.DroppedLinesArray)
                 line.UpdateWidth();
+        }
+
+        public void Reset()
+        {
+            _currentConnectionLine = null;
+            _currentOutputPointer = null;
+
+            for (int i = LinesData.DroppedLinesArray.Length - 1; i >= 0; i--)
+                LinesData.DroppedLinesArray[i].DestroyLine();
         }
 
         private void CreateLineOnClick()
@@ -115,7 +124,7 @@ namespace RuntimeNodeEditor.Nodes.Lines
             inputPointer.SetConnection(_currentOutputPointer);
             inputPointer.Line = _currentConnectionLine;
 
-            LinesData.DroppedLines.Add(_currentConnectionLine);
+            LinesData.Add(_currentConnectionLine);
 
             _currentOutputPointer.node.MoveUp();
         }
@@ -157,12 +166,12 @@ namespace RuntimeNodeEditor.Nodes.Lines
             input.Line = _currentConnectionLine;
             _currentConnectionLine.Input = input;
 
-            LinesData.DroppedLines.Add(_currentConnectionLine);
+            LinesData.Add(_currentConnectionLine);
         }
         
         public void UpdateLinesOnLoad()
         {
-            foreach (NodeConnectionLine line in LinesData.DroppedLines)
+            foreach (NodeConnectionLine line in LinesData.DroppedLinesArray)
             {
                 line.UpdateLinePositionsOnLoad();
                 line.UpdateWidth();

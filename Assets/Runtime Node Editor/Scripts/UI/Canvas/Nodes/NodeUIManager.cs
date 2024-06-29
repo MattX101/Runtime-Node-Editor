@@ -29,6 +29,15 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes
             Drag.ManageDrag();
         }
 
+        public void Reset()
+        {
+            Pan.Reset();
+            Zoom.Reset();
+
+            foreach (RuntimeNodeEditor.Nodes.Node.Node node in GetComponentsInChildren<RuntimeNodeEditor.Nodes.Node.Node>())
+                Selection.Delete(node, true);
+        }
+
         public void Spawn(string id)
         {
             InitSpawnDrag(Factory.CreateNode(id, Vector3.zero));
@@ -50,15 +59,6 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes
         private void InitSpawnDrag(NodeUI nodeUI)
         {
             Drag.InitSpawnDrag(nodeUI);
-        }
-
-        public void ClearCanvas()
-        {
-            Pan.Reset();
-            Zoom.Reset();
-
-            foreach (RuntimeNodeEditor.Nodes.Node.Node node in GetComponentsInChildren<RuntimeNodeEditor.Nodes.Node.Node>())
-                Selection.Delete(node, true);
         }
     }
 }

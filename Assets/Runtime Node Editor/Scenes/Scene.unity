@@ -3829,7 +3829,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3573399221748473874, guid: 80a2800d3e688574f98975d465eb2478, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: ClearCanvas
+      value: Reset
       objectReference: {fileID: 0}
     - target: {fileID: 3573399221748473874, guid: 80a2800d3e688574f98975d465eb2478, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
@@ -5385,7 +5385,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3573399221748473874, guid: 80a2800d3e688574f98975d465eb2478, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3573399221748473874, guid: 80a2800d3e688574f98975d465eb2478, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -5400,6 +5400,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3573399221748473874, guid: 80a2800d3e688574f98975d465eb2478, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3573399221748473874, guid: 80a2800d3e688574f98975d465eb2478, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1410947204}
@@ -5409,6 +5413,10 @@ PrefabInstance:
       objectReference: {fileID: 1777772066}
     - target: {fileID: 3573399221748473874, guid: 80a2800d3e688574f98975d465eb2478, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 1809428003}
+    - target: {fileID: 3573399221748473874, guid: 80a2800d3e688574f98975d465eb2478, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Target
       value: 
       objectReference: {fileID: 1105068431}
     - target: {fileID: 3573399221748473874, guid: 80a2800d3e688574f98975d465eb2478, type: 3}
@@ -5424,15 +5432,23 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3573399221748473874, guid: 80a2800d3e688574f98975d465eb2478, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3573399221748473874, guid: 80a2800d3e688574f98975d465eb2478, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: Hide
       objectReference: {fileID: 0}
     - target: {fileID: 3573399221748473874, guid: 80a2800d3e688574f98975d465eb2478, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: ClearCanvas
+      value: Reset
       objectReference: {fileID: 0}
     - target: {fileID: 3573399221748473874, guid: 80a2800d3e688574f98975d465eb2478, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: Reset
+      objectReference: {fileID: 0}
+    - target: {fileID: 3573399221748473874, guid: 80a2800d3e688574f98975d465eb2478, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
       value: Load
       objectReference: {fileID: 0}
     - target: {fileID: 3573399221748473874, guid: 80a2800d3e688574f98975d465eb2478, type: 3}
@@ -5445,7 +5461,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3573399221748473874, guid: 80a2800d3e688574f98975d465eb2478, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
-      value: RuntimeNodeEditor.UI.Canvas.Node.Save.SaveSystem, RuntimeNodeEditor.UI.Canvas.Node
+      value: RuntimeNodeEditor.UI.Canvas.CanvasManager, RuntimeNodeEditor.UI.Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 3573399221748473874, guid: 80a2800d3e688574f98975d465eb2478, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_TargetAssemblyTypeName
+      value: RuntimeNodeEditor.Save.SaveSystem, RuntimeNodeEditor.Save
       objectReference: {fileID: 0}
     - target: {fileID: 3573399221748473874, guid: 80a2800d3e688574f98975d465eb2478, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -5457,6 +5477,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3573399221748473874, guid: 80a2800d3e688574f98975d465eb2478, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3573399221748473874, guid: 80a2800d3e688574f98975d465eb2478, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 3757512136519278473, guid: 80a2800d3e688574f98975d465eb2478, type: 3}

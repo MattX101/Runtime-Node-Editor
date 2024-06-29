@@ -94,6 +94,7 @@ namespace RuntimeNodeEditor.Save
             int connectionArrayLength = BitConverter.ToInt32(data, position);
             position += 4;
 
+            nodeConnections.Reset();
             for (int i = 0; i < connectionArrayLength; i++)
                 position = LoadConnection(nodes, position, data);
             nodeConnections.UpdateLinesOnLoad();
