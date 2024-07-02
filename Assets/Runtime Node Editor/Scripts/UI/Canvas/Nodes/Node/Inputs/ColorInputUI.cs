@@ -1,7 +1,7 @@
-using RuntimeNodeEditor.Functions.UI.Elements;
 using RuntimeNodeEditor.Nodes.Node;
 using RuntimeNodeEditor.Nodes.Pointer;
 using RuntimeNodeEditor.Nodes.Pointer.Data;
+using RuntimeNodeEditor.Functions.UI.Elements;
 using UnityEngine;
 
 namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
@@ -13,53 +13,36 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
             base.Init(nodeId);
 
             PopulateRoot("Color");
-            ColorInputNode colorInputNode = root.AddComponent<ColorInputNode>();
+            ColorInputNode node = root.AddComponent<ColorInputNode>();
 
-            NumOfInputs = 0;
-            outputs = new OutputPointer[4];
-            NumOfOutputs = outputs.Length;
+            NumOfOutputs = 4;
 
             drawBodyImage = false;
             togglePreviewImage = true;
 
-            CreateNodeUI(colorInputNode, Color.gray, "Color");
+            CreateNodeUI(node, Color.gray, "Color");
 
-            outputs[0] = CreatePointer("Color", ValueType.Color, 0, false, false).AddComponent<OutputPointer>();
-            outputs[0].name = "Color";
-            outputs[0].node = colorInputNode;
-            outputs[0].valueType = ValueType.Color;
+            node.AddPointer(CreatePointer("Color", ValueType.Color, 0).AddComponent<OutputPointer>(), ValueType.Color);
 
-            outputs[1] = CreatePointer("Red", ValueType.Float, 1, false, false).AddComponent<OutputPointer>();
-            outputs[1].name = "Red";
-            outputs[1].node = colorInputNode;
-            outputs[1].valueType = ValueType.Float;
+            node.AddPointer(CreatePointer("Red", ValueType.Float, 1).AddComponent<OutputPointer>(), ValueType.Float);
+            node.AddPointer(CreatePointer("Green", ValueType.Float, 2).AddComponent<OutputPointer>(), ValueType.Float);
+            node.AddPointer(CreatePointer("Blue", ValueType.Float, 3).AddComponent<OutputPointer>(), ValueType.Float);
 
-            outputs[2] = CreatePointer("Green", ValueType.Float, 2, false, false).AddComponent<OutputPointer>();
-            outputs[2].name = "Green";
-            outputs[2].node = colorInputNode;
-            outputs[2].valueType = ValueType.Float;
-
-            outputs[3] = CreatePointer("Blue", ValueType.Float, 3, false, false).AddComponent<OutputPointer>();
-            outputs[3].name = "Blue";
-            outputs[3].node = colorInputNode;
-            outputs[3].valueType = ValueType.Float;
-
-            colorInputNode.Elements = new NodeUIElements(0, 0, 3)
+            node.Elements = new NodeUIElements(0, 0, 3)
             {
                 Sliders =
                 {
-                    [0] = AddSlider(outputs[1].transform, false),
-                    [1] = AddSlider(outputs[2].transform, false),
-                    [2] = AddSlider(outputs[3].transform, false)
+                    [0] = AddSlider(node.outputs[1].transform),
+                    [1] = AddSlider(node.outputs[2].transform),
+                    [2] = AddSlider(node.outputs[3].transform)
                 }
             };
 
-            PreviewColor(1, 2, 3, false);
-            ImagePreview.UpdateNodeOnValueChange(colorInputNode.Elements.Sliders[0], colorInputNode.MoveUp);
-            ImagePreview.UpdateNodeOnValueChange(colorInputNode.Elements.Sliders[1], colorInputNode.MoveUp);
-            ImagePreview.UpdateNodeOnValueChange(colorInputNode.Elements.Sliders[2], colorInputNode.MoveUp);
-
-            colorInputNode.AddPointers(inputs, outputs);
+            PreviewColor(node.Elements.Sliders[0], node.Elements.Sliders[1], node.Elements.Sliders[2]);
+            
+            ImagePreview.UpdateNodeOnValueChange(node.Elements.Sliders[0], node.MoveUp);
+            ImagePreview.UpdateNodeOnValueChange(node.Elements.Sliders[1], node.MoveUp);
+            ImagePreview.UpdateNodeOnValueChange(node.Elements.Sliders[2], node.MoveUp);
         }
     }
 }

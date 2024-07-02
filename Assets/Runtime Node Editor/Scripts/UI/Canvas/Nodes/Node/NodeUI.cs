@@ -1,14 +1,13 @@
+using RuntimeNodeEditor.Nodes.Pointer.Data;
 using RuntimeNodeEditor.UI.Elements;
 using RuntimeNodeEditor.UI.Canvas.Nodes.Pointer;
 using RuntimeNodeEditor.Functions.UI.Component;
 using Utils.Colour;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 using System.Collections.Generic;
 using System.Linq;
-using RuntimeNodeEditor.Nodes.Pointer;
-using RuntimeNodeEditor.Nodes.Pointer.Data;
+using TMPro;
 
 namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
 {
@@ -48,10 +47,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
         protected ImagePreview ImagePreview;
 
         // In/Out Pointers
-        protected int NumOfInputs, NumOfOutputs;
-
-        public InputPointer[] inputs;
-        public OutputPointer[] outputs;
+        protected int NumOfInputs = 0, NumOfOutputs = 0;
 
         private UIPointers _uiPointers;
 
@@ -119,11 +115,8 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
 
             _rootSize = new Vector2(_sizeX, _sizeY);
 
-            AddHeader(
-                ColourConversion.HSLToRGB(primaryHSL.x, primaryHSL.y, primaryHSL.z * 0.75f), 
-                title);
-            AddBody(
-                ColourConversion.HSLToRGB(primaryHSL.x, primaryHSL.y * 0.5f, primaryHSL.z));
+            AddHeader(ColourConversion.HSLToRGB(primaryHSL.x, primaryHSL.y, primaryHSL.z * 0.75f), title);
+            AddBody(ColourConversion.HSLToRGB(primaryHSL.x, primaryHSL.y * 0.5f, primaryHSL.z));
 
             AddCollision(root);
         }
@@ -221,38 +214,38 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
             };
         }
 
-        protected GameObject CreatePointer(string name, ValueType valueType, int i, bool createText, bool pointerIsInput)
+        protected GameObject CreatePointer(string name, ValueType valueType, int layer, bool pointerIsInput = false, bool createText = false)
         {
             return _uiPointers.CreatePointer(
                 name,
                 pointerIsInput ? _inputs : _outputs, 
-                valueType, 
-                i, 
-                createText,
-                pointerIsInput);
+                valueType,
+                layer,
+                pointerIsInput,
+                createText);
         }
 
-        protected TMP_InputField AddInputField(Transform parent, TMP_InputField.ContentType contentType, int i, bool pointerIsInput, bool interactable)
+        protected TMP_InputField AddInputField(Transform parent, TMP_InputField.ContentType contentType, bool pointerIsInput = false, bool interactable = true, int layer = 0)
         {
             return _uiPointers.AddInputField(
                 parent, 
-                contentType, 
-                i, 
-                pointerIsInput, 
-                interactable);
+                contentType,
+                pointerIsInput,
+                interactable,
+                layer);
         }
 
-        protected BooleanButton AddBooleanPreview(Transform parent, bool pointerIsInput)
+        protected BooleanButton AddBooleanPreview(Transform parent, bool pointerIsInput = false)
         {
             return _uiPointers.AddBooleanPreview(parent, pointerIsInput);
         }
 
-        protected Slider AddSlider(Transform parent, bool pointerIsInput)
+        protected Slider AddSlider(Transform parent, bool pointerIsInput = false)
         {
             return _uiPointers.AddSlider(parent, pointerIsInput);
         }
 
-        protected void PreviewColor(int a, int b, int c, bool pointersAreInput)
+        protected void PreviewColor(Slider r, Slider g, Slider b)
         {
             if (!togglePreviewImage)
                 return;
@@ -260,16 +253,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
             if (ImagePreview == null)
                 AddPreviewImage();
 
-            if (pointersAreInput)
-                ImagePreview.SetSliderInput(
-                    inputs[a].gameObject.GetComponentInChildren<Slider>(),
-                    inputs[b].gameObject.GetComponentInChildren<Slider>(),
-                    inputs[c].gameObject.GetComponentInChildren<Slider>());
-            else
-                ImagePreview.SetSliderInput(
-                    outputs[a].gameObject.GetComponentInChildren<Slider>(),
-                    outputs[b].gameObject.GetComponentInChildren<Slider>(),
-                    outputs[c].gameObject.GetComponentInChildren<Slider>());
+            ImagePreview.SetSliderInput(r, g, b);
         }
 
         public void ToggleSelectColor()

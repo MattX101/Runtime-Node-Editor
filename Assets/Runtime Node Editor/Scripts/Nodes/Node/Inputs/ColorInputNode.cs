@@ -1,18 +1,9 @@
-using RuntimeNodeEditor.Nodes.Pointer;
 using UnityEngine;
 
 namespace RuntimeNodeEditor.Nodes.Node
 {
     public class ColorInputNode : Node
     {
-        public override void AddPointers(InputPointer[] inputs, OutputPointer[] outputs)
-        {
-            AddOutputPointer(outputs[0]);
-            AddOutputPointer(outputs[1]);
-            AddOutputPointer(outputs[2]);
-            AddOutputPointer(outputs[3]);
-        }
-
         public override void Execute()
         {
             outputs[1].Data.FloatValue = Elements.Sliders[0].value;

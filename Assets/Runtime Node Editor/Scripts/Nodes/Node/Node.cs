@@ -1,7 +1,8 @@
+using RuntimeNodeEditor.Nodes.Pointer;
+using RuntimeNodeEditor.Nodes.Pointer.Data;
+using RuntimeNodeEditor.Functions.UI.Elements;
 using System.Collections.Generic;
 using System.Linq;
-using RuntimeNodeEditor.Functions.UI.Elements;
-using RuntimeNodeEditor.Nodes.Pointer;
 using UnityEngine;
 
 namespace RuntimeNodeEditor.Nodes.Node
@@ -11,8 +12,8 @@ namespace RuntimeNodeEditor.Nodes.Node
         protected bool WasExecuted;
         public bool endNode;
 
-        public List<InputPointer> inputs = new();
-        public List<OutputPointer> outputs = new();
+        public readonly List<InputPointer> inputs = new();
+        public readonly List<OutputPointer> outputs = new();
 
         public NodeUIElements Elements;
 
@@ -26,18 +27,19 @@ namespace RuntimeNodeEditor.Nodes.Node
             WasExecuted = false;
         }
 
-        protected void AddInputPointer(InputPointer inputPointer)
+        public void AddPointer(InputPointer inputPointer, ValueType valueType)
         {
+            inputPointer.node = this;
+            inputPointer.valueType = valueType;
+
             inputs.Add(inputPointer);
         }
-        protected void AddOutputPointer(OutputPointer outputPointer)
+        public void AddPointer(OutputPointer outputPointer, ValueType valueType)
         {
-            outputs.Add(outputPointer);
-        }
+            outputPointer.node = this;
+            outputPointer.valueType = valueType;
 
-        public virtual void AddPointers(InputPointer[] inputs, OutputPointer[] outputs)
-        {
-            //
+            outputs.Add(outputPointer);
         }
 
         public void DeletePointerConnections()

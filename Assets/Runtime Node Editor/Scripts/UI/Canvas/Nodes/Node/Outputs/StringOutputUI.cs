@@ -1,9 +1,9 @@
-using RuntimeNodeEditor.Functions.UI.Elements;
 using RuntimeNodeEditor.Nodes.Node;
 using RuntimeNodeEditor.Nodes.Pointer;
 using RuntimeNodeEditor.Nodes.Pointer.Data;
-using TMPro;
+using RuntimeNodeEditor.Functions.UI.Elements;
 using UnityEngine;
+using TMPro;
 
 namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
 {
@@ -14,37 +14,29 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
             base.Init(nodeId);
 
             PopulateRoot("String");
-            StringOutputNode stringOutputNode = root.AddComponent<StringOutputNode>();
-            stringOutputNode.endNode = true;
+            StringOutputNode node = root.AddComponent<StringOutputNode>();
+            node.endNode = true;
             
-            inputs = new InputPointer[1];
-            NumOfInputs = inputs.Length;
-            NumOfOutputs = 0;
+            NumOfInputs = 1;
 
             drawBodyImage = false;
             toggleInputField = true;
 
-            CreateNodeUI(stringOutputNode, Color.gray, "String");
+            CreateNodeUI(node, Color.gray, "String");
 
-            inputs[0] = CreatePointer("In", ValueType.String, 0, false, true).AddComponent<InputPointer>();
-            inputs[0].name = "In";
-            inputs[0].node = stringOutputNode;
-            inputs[0].valueType = ValueType.String;
+            node.AddPointer(CreatePointer("In", ValueType.String, 0, true).AddComponent<InputPointer>(), ValueType.String);
 
-            stringOutputNode.Elements = new NodeUIElements(1, 0, 0)
+            node.Elements = new NodeUIElements(1, 0, 0)
             {
                 InputFields =
                 {
                     [0] = AddInputField(
-                        inputs[0].gameObject.transform,
+                        node.inputs[0].gameObject.transform,
                         TMP_InputField.ContentType.IntegerNumber,
-                        0,
                         true,
                         false)
                 }
             };
-
-            stringOutputNode.AddPointers(inputs, outputs);
         }
     }
 }

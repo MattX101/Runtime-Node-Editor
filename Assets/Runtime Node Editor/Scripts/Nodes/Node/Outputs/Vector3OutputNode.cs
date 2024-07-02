@@ -1,17 +1,7 @@
-using RuntimeNodeEditor.Nodes.Pointer;
-
 namespace RuntimeNodeEditor.Nodes.Node
 {
     public class Vector3OutputNode : Node
     {
-        public override void AddPointers(InputPointer[] inputs, OutputPointer[] outputs)
-        {
-            AddInputPointer(inputs[0]);
-            AddInputPointer(inputs[1]);
-            AddInputPointer(inputs[2]);
-            AddInputPointer(inputs[3]);
-        }
-
         public override void Execute()
         {
             float x = 0;

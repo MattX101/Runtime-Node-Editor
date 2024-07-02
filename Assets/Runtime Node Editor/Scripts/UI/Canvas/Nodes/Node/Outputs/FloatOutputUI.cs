@@ -1,9 +1,9 @@
-using RuntimeNodeEditor.Functions.UI.Elements;
 using RuntimeNodeEditor.Nodes.Node;
 using RuntimeNodeEditor.Nodes.Pointer;
 using RuntimeNodeEditor.Nodes.Pointer.Data;
-using TMPro;
+using RuntimeNodeEditor.Functions.UI.Elements;
 using UnityEngine;
+using TMPro;
 
 namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
 {
@@ -14,37 +14,29 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
             base.Init(nodeId);
 
             PopulateRoot("Float");
-            FloatOutputNode floatOutputNode = root.AddComponent<FloatOutputNode>();
-            floatOutputNode.endNode = true;
+            FloatOutputNode node = root.AddComponent<FloatOutputNode>();
+            node.endNode = true;
 
-            inputs = new InputPointer[1];
-            NumOfInputs = inputs.Length;
-            NumOfOutputs = 0;
+            NumOfInputs = 1;
 
             drawBodyImage = false;
             toggleInputField = true;
 
-            CreateNodeUI(floatOutputNode, Color.gray, "Float");
+            CreateNodeUI(node, Color.gray, "Float");
 
-            inputs[0] = CreatePointer("In", ValueType.Float, 0, false, true).AddComponent<InputPointer>();
-            inputs[0].name = "In";
-            inputs[0].node = floatOutputNode;
-            inputs[0].valueType = ValueType.Float;
+            node.AddPointer(CreatePointer("In", ValueType.Float, 0, true).AddComponent<InputPointer>(), ValueType.Float);
 
-            floatOutputNode.Elements = new NodeUIElements(1, 0, 0)
+            node.Elements = new NodeUIElements(1, 0, 0)
             {
                 InputFields =
                 {
                     [0] = AddInputField(
-                        inputs[0].gameObject.transform,
+                        node.inputs[0].gameObject.transform,
                         TMP_InputField.ContentType.DecimalNumber,
-                        0,
                         true,
                         false)
                 }
             };
-
-            floatOutputNode.AddPointers(inputs, outputs);
         }
     }
 }

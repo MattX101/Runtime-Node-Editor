@@ -1,9 +1,9 @@
-using RuntimeNodeEditor.Functions.UI.Elements;
 using RuntimeNodeEditor.Nodes.Node;
 using RuntimeNodeEditor.Nodes.Pointer;
 using RuntimeNodeEditor.Nodes.Pointer.Data;
-using TMPro;
+using RuntimeNodeEditor.Functions.UI.Elements;
 using UnityEngine;
+using TMPro;
 
 namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
 {
@@ -14,63 +14,32 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
             base.Init(nodeId);
 
             PopulateRoot("Vector 3");
-            Vector3InputNode vector3InputNode = root.AddComponent<Vector3InputNode>();
+            Vector3InputNode node = root.AddComponent<Vector3InputNode>();
 
-            NumOfInputs = 0;
-            outputs = new OutputPointer[4];
-            NumOfOutputs = outputs.Length;
+            NumOfOutputs = 4;
 
             drawBodyImage = false;
             interactablePreview = true;
             toggleInputField = true;
             isInput = true;
 
-            CreateNodeUI(vector3InputNode, Color.gray, "Vector 3");
+            CreateNodeUI(node, Color.gray, "Vector 3");
 
-            outputs[0] = CreatePointer("Out", ValueType.Vector3, 0, false, false).AddComponent<OutputPointer>();
-            outputs[0].name = "Out";
-            outputs[0].node = vector3InputNode;
-            outputs[0].valueType = ValueType.Vector3;
+            node.AddPointer(CreatePointer("Out", ValueType.Vector3, 0).AddComponent<OutputPointer>(), ValueType.Vector3);
 
-            outputs[1] = CreatePointer("X", ValueType.Float, 1, false, false).AddComponent<OutputPointer>();
-            outputs[1].name = "X";
-            outputs[1].node = vector3InputNode;
-            outputs[1].valueType = ValueType.Float;
-            outputs[2] = CreatePointer("Y", ValueType.Float, 2, false, false).AddComponent<OutputPointer>();
-            outputs[2].name = "Y";
-            outputs[2].node = vector3InputNode;
-            outputs[2].valueType = ValueType.Float;
-            outputs[3] = CreatePointer("Z", ValueType.Float, 3, false, false).AddComponent<OutputPointer>();
-            outputs[3].name = "Z";
-            outputs[3].node = vector3InputNode;
-            outputs[3].valueType = ValueType.Float;
+            node.AddPointer(CreatePointer("X", ValueType.Float, 1).AddComponent<OutputPointer>(), ValueType.Float);
+            node.AddPointer(CreatePointer("Y", ValueType.Float, 2).AddComponent<OutputPointer>(), ValueType.Float);
+            node.AddPointer(CreatePointer("Z", ValueType.Float, 3).AddComponent<OutputPointer>(), ValueType.Float);
 
-            vector3InputNode.Elements = new NodeUIElements(3, 0, 0)
+            node.Elements = new NodeUIElements(3, 0, 0)
             {
                 InputFields =
                 {
-                    [0] = AddInputField(
-                        outputs[1].gameObject.transform,
-                        TMP_InputField.ContentType.DecimalNumber,
-                        0,
-                        false,
-                        true),
-                    [1] = AddInputField(
-                        outputs[2].gameObject.transform,
-                        TMP_InputField.ContentType.DecimalNumber,
-                        0,
-                        false,
-                        true),
-                    [2] = AddInputField(
-                        outputs[3].gameObject.transform,
-                        TMP_InputField.ContentType.DecimalNumber,
-                        0,
-                        false,
-                        true)
+                    [0] = AddInputField(node.outputs[1].gameObject.transform, TMP_InputField.ContentType.DecimalNumber),
+                    [1] = AddInputField(node.outputs[2].gameObject.transform, TMP_InputField.ContentType.DecimalNumber),
+                    [2] = AddInputField(node.outputs[3].gameObject.transform, TMP_InputField.ContentType.DecimalNumber)
                 }
             };
-
-            vector3InputNode.AddPointers(inputs, outputs);
         }
     }
 }

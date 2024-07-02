@@ -1,14 +1,7 @@
-using RuntimeNodeEditor.Nodes.Pointer;
-
 namespace RuntimeNodeEditor.Nodes.Node
 {
     public class StringOutputNode : Node
     {
-        public override void AddPointers(InputPointer[] inputs, OutputPointer[] outputs)
-        {
-            AddInputPointer(inputs[0]);
-        }
-
         public override void Execute()
         {
             if (inputs[0].connectedOutputPointer)

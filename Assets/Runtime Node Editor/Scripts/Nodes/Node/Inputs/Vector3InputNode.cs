@@ -1,19 +1,10 @@
-using RuntimeNodeEditor.Nodes.Pointer;
-using TMPro;
 using UnityEngine;
+using TMPro;
 
 namespace RuntimeNodeEditor.Nodes.Node
 {
     public class Vector3InputNode : Node
     {
-        public override void AddPointers(InputPointer[] inputs, OutputPointer[] outputs)
-        {
-            AddOutputPointer(outputs[0]);
-            AddOutputPointer(outputs[1]);
-            AddOutputPointer(outputs[2]);
-            AddOutputPointer(outputs[3]);
-        }
-
         public override void Execute()
         {
             outputs[0].Data.Vector2Value = Vector3.zero;

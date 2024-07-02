@@ -9,9 +9,8 @@ namespace RuntimeNodeEditor.Nodes.Pointer
         
         public ValueType valueType = ValueType.None;
 
-        public Pointer(string name, Node.Node node)
+        public Pointer(Node.Node node)
         {
-            this.name = name;
             this.node = node;
         }
 

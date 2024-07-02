@@ -11,7 +11,7 @@ namespace RuntimeNodeEditor.Nodes.Pointer
 
         public bool hasConnection;
 
-        public InputPointer(string name, Node.Node node) : base(name, node)
+        public InputPointer(Node.Node node) : base(node)
         {
             valueType = ValueType.None;
         }

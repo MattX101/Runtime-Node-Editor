@@ -1,10 +1,10 @@
-using RuntimeNodeEditor.Functions.UI.Elements;
 using RuntimeNodeEditor.Nodes.Node;
 using RuntimeNodeEditor.Nodes.Pointer;
 using RuntimeNodeEditor.Nodes.Pointer.Data;
 using RuntimeNodeEditor.UI.Elements;
-using TMPro;
+using RuntimeNodeEditor.Functions.UI.Elements;
 using UnityEngine;
+using TMPro;
 
 namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
 {
@@ -15,40 +15,28 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
             base.Init(nodeId);
 
             PopulateRoot("Char");
-            CharInputNode charInputNode = root.AddComponent<CharInputNode>();
+            CharInputNode node = root.AddComponent<CharInputNode>();
 
-            NumOfInputs = 0;
-            outputs = new OutputPointer[1];
-            NumOfOutputs = outputs.Length;
+            NumOfOutputs = 1;
 
             drawBodyImage = false;
             interactablePreview = true;
             toggleInputField = true;
             isInput = true;
 
-            CreateNodeUI(charInputNode, Color.gray, "Char");
+            CreateNodeUI(node, Color.gray, "Char");
 
-            outputs[0] = CreatePointer("Out", ValueType.Char, 0, false, false).AddComponent<OutputPointer>();
-            outputs[0].name = "Out";
-            outputs[0].node = charInputNode;
-            outputs[0].valueType = ValueType.Char;
+            node.AddPointer(CreatePointer("Out", ValueType.Char, 0).AddComponent<OutputPointer>(), ValueType.Char);
 
-            charInputNode.Elements = new NodeUIElements(1, 0, 0)
+            node.Elements = new NodeUIElements(1, 0, 0)
             {
                 InputFields =
                 {
-                    [0] = AddInputField(
-                        outputs[0].gameObject.transform,
-                        TMP_InputField.ContentType.Name,
-                        0,
-                        false,
-                        true)
+                    [0] = AddInputField(node.outputs[0].gameObject.transform, TMP_InputField.ContentType.Name)
                 }
             };
 
-            UIInputField.SetSingleCharacterInputField(charInputNode.Elements.InputFields[0]);
-
-            charInputNode.AddPointers(inputs, outputs);
+            UIInputField.SetSingleCharacterInputField(node.Elements.InputFields[0]);
         }
     }
 }

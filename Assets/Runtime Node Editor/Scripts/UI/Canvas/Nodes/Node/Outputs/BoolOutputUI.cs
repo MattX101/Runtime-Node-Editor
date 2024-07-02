@@ -1,7 +1,7 @@
-using RuntimeNodeEditor.Functions.UI.Elements;
-using RuntimeNodeEditor.Nodes.Pointer;
 using RuntimeNodeEditor.Nodes.Node;
+using RuntimeNodeEditor.Nodes.Pointer;
 using RuntimeNodeEditor.Nodes.Pointer.Data;
+using RuntimeNodeEditor.Functions.UI.Elements;
 using UnityEngine;
 
 namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
@@ -13,32 +13,25 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
             base.Init(nodeId);
 
             PopulateRoot("Bool");
-            BoolOutputNode boolOutputNode = root.AddComponent<BoolOutputNode>();
-            boolOutputNode.endNode = true;
+            BoolOutputNode node = root.AddComponent<BoolOutputNode>();
+            node.endNode = true;
 
-            inputs = new InputPointer[1];
-            NumOfInputs = inputs.Length;
-            NumOfOutputs = 0;
+            NumOfInputs = 1;
 
             drawBodyImage = false;
             interactablePreview = true;
 
-            CreateNodeUI(boolOutputNode, Color.gray, "Bool");
+            CreateNodeUI(node, Color.gray, "Bool");
 
-            inputs[0] = CreatePointer("In", ValueType.Bool, 0, false, true).AddComponent<InputPointer>();
-            inputs[0].name = "In";
-            inputs[0].node = boolOutputNode;
-            inputs[0].valueType = ValueType.Bool;
+            node.AddPointer(CreatePointer("In", ValueType.Bool, 0, false, true).AddComponent<InputPointer>(), ValueType.Bool);
 
-            boolOutputNode.Elements = new NodeUIElements(0, 1, 0)
+            node.Elements = new NodeUIElements(0, 1, 0)
             {
                 Buttons =
                 {
-                    [0] = AddBooleanPreview(inputs[0].transform, true)
+                    [0] = AddBooleanPreview(node.inputs[0].transform, true)
                 }
             };
-
-            boolOutputNode.AddPointers(inputs, outputs);
         }
     }
 }

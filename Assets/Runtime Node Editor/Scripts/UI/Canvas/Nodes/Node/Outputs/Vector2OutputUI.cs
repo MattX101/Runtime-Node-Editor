@@ -1,9 +1,9 @@
-using RuntimeNodeEditor.Functions.UI.Elements;
 using RuntimeNodeEditor.Nodes.Node;
 using RuntimeNodeEditor.Nodes.Pointer;
 using RuntimeNodeEditor.Nodes.Pointer.Data;
-using TMPro;
+using RuntimeNodeEditor.Functions.UI.Elements;
 using UnityEngine;
+using TMPro;
 
 namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
 {
@@ -14,54 +14,39 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
             base.Init(nodeId);
 
             PopulateRoot("Vector 2");
-            Vector2OutputNode vector2OutputNode = root.AddComponent<Vector2OutputNode>();
-            vector2OutputNode.endNode = true;
+            Vector2OutputNode node = root.AddComponent<Vector2OutputNode>();
+            node.endNode = true;
 
-            inputs = new InputPointer[3];
-            NumOfInputs = inputs.Length;
-            NumOfOutputs = 0;
+            NumOfInputs = 3;
 
             drawBodyImage = false;
             interactablePreview = true;
             toggleInputField = true;
             isInput = true;
 
-            CreateNodeUI(vector2OutputNode, Color.gray, "Vector 2");
+            CreateNodeUI(node, Color.gray, "Vector 2");
 
-            inputs[0] = CreatePointer("In", ValueType.Vector2, 0, false, true).AddComponent<InputPointer>();
-            inputs[0].name = "In";
-            inputs[0].node = vector2OutputNode;
-            inputs[0].valueType = ValueType.Vector2;
+            node.AddPointer(CreatePointer("In", ValueType.Vector2, 0, true).AddComponent<InputPointer>(), ValueType.Vector2);
 
-            inputs[1] = CreatePointer("X", ValueType.Float, 1, false, true).AddComponent<InputPointer>();
-            inputs[1].name = "X";
-            inputs[1].node = vector2OutputNode;
-            inputs[1].valueType = ValueType.Float;
-            inputs[2] = CreatePointer("Y", ValueType.Float, 2, false, true).AddComponent<InputPointer>();
-            inputs[2].name = "Y";
-            inputs[2].node = vector2OutputNode;
-            inputs[2].valueType = ValueType.Float;
+            node.AddPointer(CreatePointer("X", ValueType.Float, 1, true).AddComponent<InputPointer>(), ValueType.Float);
+            node.AddPointer(CreatePointer("Y", ValueType.Float, 2, true).AddComponent<InputPointer>(), ValueType.Float);
 
-            vector2OutputNode.Elements = new NodeUIElements(2, 0, 0)
+            node.Elements = new NodeUIElements(2, 0, 0)
             {
                 InputFields =
                 {
                     [0] = AddInputField(
-                        inputs[1].gameObject.transform,
+                        node.inputs[1].gameObject.transform,
                         TMP_InputField.ContentType.DecimalNumber,
-                        0,
                         true,
                         false),
                     [1] = AddInputField(
-                        inputs[2].gameObject.transform,
+                        node.inputs[2].gameObject.transform,
                         TMP_InputField.ContentType.DecimalNumber,
-                        0,
                         true,
                         false)
                 }
             };
-
-            vector2OutputNode.AddPointers(inputs, outputs);
         }
     }
 }

@@ -12,7 +12,7 @@ namespace RuntimeNodeEditor.Nodes.Pointer
 
         public PointerData Data;
 
-        public OutputPointer(string name, Node.Node node) : base(name, node)
+        public OutputPointer(Node.Node node) : base(node)
         {
             valueType = ValueType.None;
         }

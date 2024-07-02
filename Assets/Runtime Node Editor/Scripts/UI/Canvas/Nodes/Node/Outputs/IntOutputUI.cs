@@ -1,9 +1,9 @@
-using RuntimeNodeEditor.Functions.UI.Elements;
 using RuntimeNodeEditor.Nodes.Node;
 using RuntimeNodeEditor.Nodes.Pointer;
 using RuntimeNodeEditor.Nodes.Pointer.Data;
-using TMPro;
+using RuntimeNodeEditor.Functions.UI.Elements;
 using UnityEngine;
+using TMPro;
 
 namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
 {
@@ -14,37 +14,29 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
             base.Init(nodeId);
 
             PopulateRoot("Int");
-            IntOutputNode intOutputNode = root.AddComponent<IntOutputNode>();
-            intOutputNode.endNode = true;
+            IntOutputNode node = root.AddComponent<IntOutputNode>();
+            node.endNode = true;
 
-            inputs = new InputPointer[1];
-            NumOfInputs = inputs.Length;
-            NumOfOutputs = 0;
+            NumOfInputs = 1;
 
             drawBodyImage = false;
             toggleInputField = true;
 
-            CreateNodeUI(intOutputNode, Color.gray, "Int");
+            CreateNodeUI(node, Color.gray, "Int");
 
-            inputs[0] = CreatePointer("In", ValueType.Int, 0, false, true).AddComponent<InputPointer>();
-            inputs[0].name = "In";
-            inputs[0].node = intOutputNode;
-            inputs[0].valueType = ValueType.Int;
+            node.AddPointer(CreatePointer("In", ValueType.Int, 0, true).AddComponent<InputPointer>(), ValueType.Int);
 
-            intOutputNode.Elements = new NodeUIElements(1, 0, 0)
+            node.Elements = new NodeUIElements(1, 0, 0)
             {
                 InputFields =
                 {
                     [0] = AddInputField(
-                        inputs[0].gameObject.transform,
+                        node.inputs[0].gameObject.transform,
                         TMP_InputField.ContentType.IntegerNumber,
-                        0,
                         true,
                         false)
                 }
             };
-
-            intOutputNode.AddPointers(inputs, outputs);
         }
     }
 }
