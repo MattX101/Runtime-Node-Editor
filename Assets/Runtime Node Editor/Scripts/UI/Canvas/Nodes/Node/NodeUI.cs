@@ -234,6 +234,15 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
                 interactable,
                 layer);
         }
+        protected TMP_InputField AddHalfInputField(Transform parent, TMP_InputField.ContentType contentType, bool pointerIsInput = false, bool interactable = true, int layer = 0)
+        {
+            return _uiPointers.AddHalfInputField(
+                parent,
+                contentType,
+                pointerIsInput,
+                interactable,
+                layer);
+        }
 
         protected BooleanButton AddBooleanPreview(Transform parent, bool pointerIsInput = false)
         {

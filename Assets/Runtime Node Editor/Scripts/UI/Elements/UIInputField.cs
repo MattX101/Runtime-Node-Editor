@@ -5,10 +5,15 @@ namespace RuntimeNodeEditor.UI.Elements
 {
     public static class UIInputField
     {
-        public static TMP_InputField Create(Transform parent, TMP_InputField.ContentType contentType, bool interactable)
+        public static TMP_InputField Create(Transform parent, TMP_InputField.ContentType contentType, bool interactable = true, bool halfSize = false)
         {
+            float width = halfSize ? UISettings.NodeWidth / 2 : UISettings.NodeWidth;
+            Vector2 size = new Vector2(width - UISettings.PointerSize, UISettings.InputFieldHeight);
+
+            float posX = halfSize ? 0 : UISettings.NodeWidth / 2;
+
             // Root
-            GameObject root = UIElement.Create(parent, "Input Field", new Vector2(UISettings.NodeWidth - UISettings.PointerSize, UISettings.InputFieldHeight), Vector3.zero);
+            GameObject root = UIElement.Create(parent, "Input Field", size, Vector3.zero);
             RectTransform rect = root.GetComponent<RectTransform>();
             UIImage.Create(root, Color.white);
 
@@ -42,7 +47,7 @@ namespace RuntimeNodeEditor.UI.Elements
                 });
         }
 
-        public static void AddOnValueChange(TMP_InputField inputField, RuntimeNodeEditor.Nodes.Node.Node node)
+        public static void AddOnValueChange(TMP_InputField inputField, Nodes.Node.Node node)
         {
             inputField.onValueChanged.AddListener(
                 delegate

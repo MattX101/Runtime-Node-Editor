@@ -30,7 +30,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
             {
                 InputFields =
                 {
-                    [0] = AddInputField(
+                    [0] = AddHalfInputField(
                         node.inputs[0].gameObject.transform,
                         TMP_InputField.ContentType.Name,
                         true,

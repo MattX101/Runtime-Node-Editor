@@ -93,6 +93,20 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Pointer
 
             return inputField;
         }
+        public TMP_InputField AddHalfInputField(Transform parent, TMP_InputField.ContentType contentType, bool pointerIsInput = false, bool interactable = true, int layer = 0)
+        {
+            TMP_InputField inputField = UIInputField.Create(parent, contentType, interactable, true);
+            UIInputField.AddOnValueChange(inputField, _node);
+
+            float posX = ((UISettings.NodeWidth / 2) + UISettings.PointerSize) / 2;
+            posX -= UISettings.BorderSize;
+            posX = !pointerIsInput ? -posX : posX;
+            float posY = layer * -UISettings.InputFieldHeight;
+
+            inputField.gameObject.transform.localPosition = new Vector3(posX, posY, -1);
+
+            return inputField;
+        }
 
         public BooleanButton AddBooleanPreview(Transform parent, bool pointerIsInput = false)
         {
