@@ -108,9 +108,9 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Pointer
             return inputField;
         }
 
-        public BooleanButton AddBooleanPreview(Transform parent, bool pointerIsInput = false)
+        public BooleanButton AddBooleanPreview(Transform parent, bool pointerIsInput = false, bool interactable = false)
         {
-            BooleanButton button = UIBooleanPreview.Create(parent, !pointerIsInput);
+            BooleanButton button = UIBooleanPreview.Create(parent, interactable);
             UIBooleanPreview.AddOnValueChange(button.Button, _node);
 
             float posX = UISettings.PointerSize * 1.5f;

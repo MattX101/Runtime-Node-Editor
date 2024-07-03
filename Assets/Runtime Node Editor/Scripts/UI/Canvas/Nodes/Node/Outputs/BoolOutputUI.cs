@@ -2,7 +2,6 @@ using RuntimeNodeEditor.Nodes.Node;
 using RuntimeNodeEditor.Nodes.Pointer;
 using RuntimeNodeEditor.Nodes.Pointer.Data;
 using RuntimeNodeEditor.Functions.UI.Elements;
-using UnityEngine;
 
 namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
 {
@@ -21,9 +20,9 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
             drawBodyImage = false;
             interactablePreview = true;
 
-            CreateNodeUI(node, Color.gray, "Bool");
+            CreateNodeUI(node, NodeColor.Default, "Bool");
 
-            node.AddPointer(CreatePointer("In", ValueType.Bool, 0, false, true).AddComponent<InputPointer>(), ValueType.Bool);
+            node.AddPointer(CreatePointer("In", ValueType.Bool, 0, true).AddComponent<InputPointer>(), ValueType.Bool);
 
             node.Elements = new NodeUIElements(0, 1, 0)
             {

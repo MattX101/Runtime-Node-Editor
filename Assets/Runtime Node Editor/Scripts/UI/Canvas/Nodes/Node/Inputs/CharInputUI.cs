@@ -3,7 +3,6 @@ using RuntimeNodeEditor.Nodes.Pointer;
 using RuntimeNodeEditor.Nodes.Pointer.Data;
 using RuntimeNodeEditor.UI.Elements;
 using RuntimeNodeEditor.Functions.UI.Elements;
-using UnityEngine;
 using TMPro;
 
 namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
@@ -24,7 +23,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
             toggleInputField = true;
             isInput = true;
 
-            CreateNodeUI(node, Color.gray, "Char");
+            CreateNodeUI(node, NodeColor.Default, "Char");
 
             node.AddPointer(CreatePointer("Out", ValueType.Char, 0).AddComponent<OutputPointer>(), ValueType.Char);
 

@@ -6,7 +6,7 @@ namespace RuntimeNodeEditor.UI.Elements
 {
     public static class UIBooleanPreview
     {
-        public static BooleanButton Create(Transform parent, bool interactable)
+        public static BooleanButton Create(Transform parent, bool interactable = false)
         {
             GameObject root = UIElement.Create(parent, "Boolean Preview", Vector2.one * 30, Vector3.zero);
             BooleanButton booleanButton = new BooleanButton();

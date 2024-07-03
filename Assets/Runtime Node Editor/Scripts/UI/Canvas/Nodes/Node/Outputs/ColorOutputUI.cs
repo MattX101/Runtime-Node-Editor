@@ -1,7 +1,6 @@
 using RuntimeNodeEditor.Nodes.Node;
 using RuntimeNodeEditor.Nodes.Pointer;
 using RuntimeNodeEditor.Nodes.Pointer.Data;
-using UnityEngine;
 
 namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
 {
@@ -21,7 +20,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
             drawBodyImage = false;
             togglePreviewImage = true;
 
-            CreateNodeUI(node, Color.gray, "Color");
+            CreateNodeUI(node, NodeColor.Default, "Color");
             node.ImagePreview = ImagePreview;
 
             node.AddPointer(CreatePointer("Color", ValueType.Color, 0, true).AddComponent<InputPointer>(), ValueType.Color);

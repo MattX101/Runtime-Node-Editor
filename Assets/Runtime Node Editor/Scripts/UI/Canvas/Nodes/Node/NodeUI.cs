@@ -244,9 +244,9 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
                 layer);
         }
 
-        protected BooleanButton AddBooleanPreview(Transform parent, bool pointerIsInput = false)
+        protected BooleanButton AddBooleanPreview(Transform parent, bool pointerIsInput = false, bool interactable = false)
         {
-            return _uiPointers.AddBooleanPreview(parent, pointerIsInput);
+            return _uiPointers.AddBooleanPreview(parent, pointerIsInput, interactable);
         }
 
         protected Slider AddSlider(Transform parent, bool pointerIsInput = false)

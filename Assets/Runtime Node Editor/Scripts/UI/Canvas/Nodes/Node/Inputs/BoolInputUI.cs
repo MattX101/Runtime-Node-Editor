@@ -2,7 +2,6 @@ using RuntimeNodeEditor.Nodes.Node;
 using RuntimeNodeEditor.Nodes.Pointer;
 using RuntimeNodeEditor.Nodes.Pointer.Data;
 using RuntimeNodeEditor.Functions.UI.Elements;
-using UnityEngine;
 
 namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
 {
@@ -21,7 +20,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
             interactablePreview = true;
             isInput = true;
             
-            CreateNodeUI(node, Color.gray, "Bool");
+            CreateNodeUI(node, NodeColor.Default, "Bool");
 
             node.AddPointer(CreatePointer("Out", ValueType.Bool, 0).AddComponent<OutputPointer>(), ValueType.Bool);
 
@@ -29,7 +28,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
             {
                 Buttons =
                 {
-                    [0] = AddBooleanPreview(node.outputs[0].transform)
+                    [0] = AddBooleanPreview(node.outputs[0].transform, false, true)
                 }
             };
         }
