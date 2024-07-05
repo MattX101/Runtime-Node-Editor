@@ -2,6 +2,7 @@ using RuntimeNodeEditor.Nodes.Node;
 using RuntimeNodeEditor.Nodes.Pointer;
 using RuntimeNodeEditor.Nodes.Pointer.Data;
 using RuntimeNodeEditor.Functions.UI.Elements;
+using RuntimeNodeEditor.UI.Elements;
 
 namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
 {
@@ -11,9 +12,10 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
         {
             base.Init(nodeId);
 
-            PopulateRoot("NAND");
-            NANDNode node = root.AddComponent<NANDNode>();
+            PopulateRoot("Logic Gate");
+            LogicGateNode node = root.AddComponent<LogicGateNode>();
 
+            NumOfLayers = 1;
             NumOfInputs = 2;
             NumOfOutputs = 1;
 
@@ -21,12 +23,15 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
             interactablePreview = true;
             isInput = true;
 
-            CreateNodeUI(node, NodeColor.LogicGate, "NAND");
+            CreateNodeUI(node, NodeColor.LogicGate, "Logic Gate");
 
-            node.AddPointer(CreatePointer("In A", ValueType.Bool, 0, true).AddComponent<InputPointer>(), ValueType.Bool);
-            node.AddPointer(CreatePointer("In B", ValueType.Bool, 1, true).AddComponent<InputPointer>(), ValueType.Bool);
+            node.dropdown.Context = 2;
+            node.dropdown = UIDropdown.Create(CreateLayer("Dropdown", 0), node, node.gates, node.gates[node.dropdown.Context]);
 
-            node.AddPointer(CreatePointer("Out", ValueType.Bool, 0).AddComponent<OutputPointer>(), ValueType.Bool);
+            node.AddPointer(CreatePointer("In A", ValueType.Bool, 1, true).AddComponent<InputPointer>(), ValueType.Bool);
+            node.AddPointer(CreatePointer("In B", ValueType.Bool, 2, true).AddComponent<InputPointer>(), ValueType.Bool);
+
+            node.AddPointer(CreatePointer("Out", ValueType.Bool, 1).AddComponent<OutputPointer>(), ValueType.Bool);
 
             node.Elements = new NodeUIElements(0, 3, 0)
             {
