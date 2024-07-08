@@ -3,14 +3,15 @@ using RuntimeNodeEditor.Nodes.Pointer;
 using RuntimeNodeEditor.Nodes.Pointer.Data;
 using RuntimeNodeEditor.Functions.UI.Elements;
 using RuntimeNodeEditor.UI.Elements;
+using Utils.StringParameterExtractor;
 
 namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
 {
-    internal class ORUI : NodeUI
+    internal class LogicGateUI : NodeUI
     {
         public override void Init(string nodeId)
         {
-            base.Init(nodeId);
+            base.Init(StringParameterExtractor.ExtractBase(nodeId));
 
             PopulateRoot("Logic Gate");
             LogicGateNode node = root.AddComponent<LogicGateNode>();
@@ -25,7 +26,16 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
 
             CreateNodeUI(node, NodeColor.LogicGate, "Logic Gate");
 
-            node.dropdown.Context = 1;
+            string[] parameters = StringParameterExtractor.ExtractParameters(nodeId);
+            if (parameters == null)
+            {
+                parameters = new string[1]
+                {
+                    "0"
+                };
+            }
+
+            node.dropdown.Context = StringParameterExtractor.ExtractInt(parameters[0]);
             node.dropdown = UIDropdown.Create(CreateLayer("Dropdown", 0), node, node.gates, node.gates[node.dropdown.Context]);
 
             node.AddPointer(CreatePointer("In A", ValueType.Bool, 1, true).AddComponent<InputPointer>(), ValueType.Bool);
