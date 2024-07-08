@@ -21,14 +21,14 @@ namespace RuntimeNodeEditor.UI.Elements
             button.targetGraphic = rootImage;
 
             // Title
-            TextMeshPro title = UIElement.Create(root.transform, "Label", new Vector2(width, UISettings.PointerSize), new Vector3(0, 0, -1)).AddComponent<TextMeshPro>();
-            title.text = defualt;
-            title.color = Color.black;
-            title.enableAutoSizing = true;
-            title.fontSizeMin = 18;
-            title.fontSizeMax = 300;
-            title.fontStyle = FontStyles.Bold;
-            title.alignment = TextAlignmentOptions.Center;
+            dropdown.Text = UIElement.Create(root.transform, "Label", new Vector2(width, UISettings.PointerSize), new Vector3(0, 0, -1)).AddComponent<TextMeshPro>();
+            dropdown.Text.text = defualt;
+            dropdown.Text.color = Color.black;
+            dropdown.Text.enableAutoSizing = true;
+            dropdown.Text.fontSizeMin = 18;
+            dropdown.Text.fontSizeMax = 300;
+            dropdown.Text.fontStyle = FontStyles.Bold;
+            dropdown.Text.alignment = TextAlignmentOptions.Center;
 
             // Panel
             GameObject panel = UIElement.Create(root.transform, "Panel", Vector2.one, new Vector3(0, -UISettings.PointerSize / 2, 0));
@@ -43,7 +43,6 @@ namespace RuntimeNodeEditor.UI.Elements
                 AddOption(
                     panel,
                     dropdown,
-                    title,
                     elements[i],
                     (i * -UISettings.PointerSize) - halfSize,
                     width,
@@ -61,7 +60,7 @@ namespace RuntimeNodeEditor.UI.Elements
             return dropdown;
         }
 
-        private static void AddOption(GameObject parent, Functions.UI.Component.Dropdown dropdown, TextMeshPro context, string text, float posY, float width, int i, Nodes.Node.Node node)
+        private static void AddOption(GameObject parent, Functions.UI.Component.Dropdown dropdown, string text, float posY, float width, int i, Nodes.Node.Node node)
         {
             // Toggle
             GameObject optionObject = UIElement.Create(parent.transform, "Option - " + text, new Vector2(width, UISettings.PointerSize), new Vector3(0, posY, 0));
@@ -89,7 +88,7 @@ namespace RuntimeNodeEditor.UI.Elements
                 delegate
                 {
                     parent.SetActive(false);
-                    context.text = text;
+                    dropdown.Text.text = text;
                     dropdown.Context = i;
                     node.MoveUp();
                 });

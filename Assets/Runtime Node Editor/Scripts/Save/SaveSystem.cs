@@ -87,7 +87,7 @@ namespace RuntimeNodeEditor.Save
                 return;
 
             for (int i = 0; i < numOfNodes; i++)
-                position = LoadNodes(position, data);
+                position = LoadNode(position, data);
 
             Nodes.Node.Node[] nodes = nodesObject.GetComponentsInChildren<Nodes.Node.Node>();
 
@@ -102,7 +102,7 @@ namespace RuntimeNodeEditor.Save
             nodeExecution.Execute(nodes);
         }
 
-        private int LoadNodes(int position, byte[] data)
+        private int LoadNode(int position, byte[] data)
         {
             LoadData nodeUIData = new LoadData(data, position);
             position = nodeUIData.EndIndex;

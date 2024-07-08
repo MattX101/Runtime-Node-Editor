@@ -1,5 +1,3 @@
-using RuntimeNodeEditor.Functions.UI.Component;
-
 namespace RuntimeNodeEditor.Nodes.Node
 {
     public class LogicGateNode : Node
@@ -13,8 +11,6 @@ namespace RuntimeNodeEditor.Nodes.Node
             "XOR",
             "XNOR",
         };
-
-        public Dropdown dropdown = new Dropdown();
 
         public override void Execute()
         {
@@ -35,7 +31,7 @@ namespace RuntimeNodeEditor.Nodes.Node
             }
 
             bool result = false;
-            switch (dropdown.Context)
+            switch (Elements.Dropdowns[0].Context)
             {
                 case 0:
                     result = AND(a, b);

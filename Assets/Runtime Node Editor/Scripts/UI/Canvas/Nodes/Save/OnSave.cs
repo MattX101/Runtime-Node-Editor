@@ -127,7 +127,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Save
             if (node.Elements == null)
                 return;
 
-            node.Elements.SetElements(data.Texts, data.Booleans, data.Values);
+            node.Elements.SetElements(data.Texts, data.Booleans, data.Values, data.DropdownContext, data.DropdownText);
         }
     }
 }

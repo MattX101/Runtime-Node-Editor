@@ -9,9 +9,12 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Save
 
         public readonly Vector3 Position;
 
-        public string[] Texts { get; private set; }
+        public string[] Texts  { get; private set; }
         public bool[] Booleans { get; private set; }
         public float[] Values  { get; private set; }
+        
+        public int[] DropdownContext   { get; private set; }
+        public string[] DropdownText   { get; private set; }
 
         public readonly int EndIndex;
 
@@ -33,6 +36,8 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Save
             index = LoadInputFields(data, index);
             index = LoadBooleans(data, index);
             index = LoadSliders(data, index);
+            index = LoadDropdowns(data, index);
+
             EndIndex = index;
         }
 
@@ -90,6 +95,34 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Save
 
             for (int i = 0; i < Values.Length; i++, index += 4)
                 Values[i] = BitConverter.ToSingle(data, index);
+
+            return index;
+        }
+
+        private int LoadDropdowns(byte[] data, int index)
+        {
+            byte numOfDropdowns = data[index];
+            index++;
+
+            if (numOfDropdowns == 0)
+                return index;
+
+            DropdownContext = new int[numOfDropdowns];
+            DropdownText = new string[numOfDropdowns];
+
+            for (int i = 0; i < numOfDropdowns; i++)
+            {
+                DropdownContext[i] = BitConverter.ToInt32(data, index);
+                index += 4;
+
+                int textLength = BitConverter.ToInt32(data, index);
+                index += 4;
+
+                DropdownText[i] = "";
+                for (int j = 0; j < textLength; j++)
+                    DropdownText[i] += (char)data[index + j];
+                index += textLength;
+            }
 
             return index;
         }

@@ -35,21 +35,27 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
                 };
             }
 
-            node.dropdown.Context = StringParameterExtractor.ExtractInt(parameters[0]);
-            node.dropdown = UIDropdown.Create(CreateLayer("Dropdown", 0), node, node.gates, node.gates[node.dropdown.Context]);
-
             node.AddPointer(CreatePointer("In A", ValueType.Bool, 1, true).AddComponent<InputPointer>(), ValueType.Bool);
             node.AddPointer(CreatePointer("In B", ValueType.Bool, 2, true).AddComponent<InputPointer>(), ValueType.Bool);
 
             node.AddPointer(CreatePointer("Out", ValueType.Bool, 1).AddComponent<OutputPointer>(), ValueType.Bool);
 
-            node.Elements = new NodeUIElements(0, 3, 0)
+            node.Elements = new NodeUIElements(0, 3, 0, 1)
             {
                 Buttons =
                 {
                     [0] = AddBooleanPreview(node.inputs[0].transform, true),
                     [1] = AddBooleanPreview(node.inputs[1].transform, true),
                     [2] = AddBooleanPreview(node.outputs[0].transform)
+                },
+                Dropdowns =
+                {
+                    [0] = UIDropdown.Create(
+                        CreateLayer("Dropdown", 0), 
+                        node, 
+                        node.gates, 
+                        node.gates[StringParameterExtractor.ExtractInt(parameters[0])]
+                        )
                 }
             };
         }
