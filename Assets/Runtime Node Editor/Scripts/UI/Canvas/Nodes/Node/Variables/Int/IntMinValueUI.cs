@@ -18,8 +18,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
             drawBodyImage = false;
             isInput = true;
 
-            CreateNodeUI(null, NodeColor.Default, "Int - Min Value");
-
+            CreateNodeUI(node, NodeColor.Default, "Int - Min Value");
             node.AddPointer(CreatePointer("Out", ValueType.Int, 0).AddComponent<OutputPointer>(), ValueType.Int);
         }
     }

@@ -2,6 +2,7 @@ using RuntimeNodeEditor.Nodes.Node;
 using RuntimeNodeEditor.Nodes.Pointer;
 using RuntimeNodeEditor.Nodes.Pointer.Data;
 using RuntimeNodeEditor.Functions.UI.Elements;
+using Utils.StringParameterExtractor;
 
 namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
 {
@@ -9,7 +10,8 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
     {
         public override void Init(string nodeId)
         {
-            base.Init(nodeId);
+            //base.Init(nodeId);
+            base.Init(StringParameterExtractor.ExtractBase(nodeId));
 
             PopulateRoot("Color");
             ColorInputNode node = root.AddComponent<ColorInputNode>();
@@ -42,6 +44,14 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
             ImagePreview.UpdateNodeOnValueChange(node.Elements.Sliders[0], node.MoveUp);
             ImagePreview.UpdateNodeOnValueChange(node.Elements.Sliders[1], node.MoveUp);
             ImagePreview.UpdateNodeOnValueChange(node.Elements.Sliders[2], node.MoveUp);
+
+            string[] parameters = StringParameterExtractor.ExtractParameters(nodeId);
+            if (parameters != null)
+            {
+                node.Elements.SetSlider(node.Elements.Sliders[0], StringParameterExtractor.ExtractFloat(parameters[0]));
+                node.Elements.SetSlider(node.Elements.Sliders[1], StringParameterExtractor.ExtractFloat(parameters[1]));
+                node.Elements.SetSlider(node.Elements.Sliders[2], StringParameterExtractor.ExtractFloat(parameters[2]));
+            }
         }
     }
 }

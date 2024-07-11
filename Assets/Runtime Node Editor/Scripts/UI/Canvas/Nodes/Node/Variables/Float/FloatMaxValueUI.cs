@@ -18,7 +18,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
             drawBodyImage = false;
             isInput = true;
 
-            CreateNodeUI(null, NodeColor.Default, "Float - Max Value");
+            CreateNodeUI(node, NodeColor.Default, "Float - Max Value");
             node.AddPointer(CreatePointer("Out", ValueType.Float, 0).AddComponent<OutputPointer>(), ValueType.Float);
         }
     }
