@@ -231,22 +231,24 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
                 createText);
         }
 
-        protected TMP_InputField AddInputField(Transform parent, TMP_InputField.ContentType contentType, bool pointerIsInput = false, bool interactable = true, int layer = 0)
+        protected TMP_InputField AddInputField(Transform parent, TMP_InputField.ContentType contentType, bool pointerIsInput = false, bool interactable = true, bool shorten = false, int layer = 0)
         {
             return _uiPointers.AddInputField(
                 parent, 
                 contentType,
                 pointerIsInput,
                 interactable,
+                shorten,
                 layer);
         }
-        protected TMP_InputField AddHalfInputField(Transform parent, TMP_InputField.ContentType contentType, bool pointerIsInput = false, bool interactable = true, int layer = 0)
+        protected TMP_InputField AddHalfInputField(Transform parent, TMP_InputField.ContentType contentType, bool pointerIsInput = false, bool interactable = true, bool shorten = false, int layer = 0)
         {
             return _uiPointers.AddHalfInputField(
                 parent,
                 contentType,
                 pointerIsInput,
                 interactable,
+                shorten,
                 layer);
         }
 

@@ -5,12 +5,12 @@ namespace RuntimeNodeEditor.UI.Elements
 {
     public static class UIInputField
     {
-        public static TMP_InputField Create(Transform parent, TMP_InputField.ContentType contentType, bool interactable = true, bool halfSize = false)
+        public static TMP_InputField Create(Transform parent, TMP_InputField.ContentType contentType, bool interactable = true, bool shorten = false, bool halfSize = false)
         {
             float width = halfSize ? UISettings.NodeWidth / 2 : UISettings.NodeWidth;
-            Vector2 size = new Vector2(width - UISettings.PointerSize, UISettings.InputFieldHeight);
-
-            float posX = halfSize ? 0 : UISettings.NodeWidth / 2;
+            Vector2 size = new Vector2(
+                shorten ? width - UISettings.PointerSize * 1.5f : width - UISettings.PointerSize, 
+                UISettings.InputFieldHeight);
 
             // Root
             GameObject root = UIElement.Create(parent, "Input Field", size, Vector3.zero);

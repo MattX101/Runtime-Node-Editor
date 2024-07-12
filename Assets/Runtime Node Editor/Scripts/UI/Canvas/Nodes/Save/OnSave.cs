@@ -1,9 +1,9 @@
-using System;
-using System.Collections.Generic;
 using RuntimeNodeEditor.Nodes.Pointer;
 using RuntimeNodeEditor.UI.Canvas.Node.Components;
 using RuntimeNodeEditor.UI.Canvas.Nodes.Node;
 using UnityEngine;
+using System;
+using System.Collections.Generic;
 
 namespace RuntimeNodeEditor.UI.Canvas.Nodes.Save
 {
@@ -29,13 +29,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Save
                 bytes.AddRange(node.gameObject.GetComponent<NodeUI>().SaveNodeUI());
 
                 if (node.Elements == null)
-                {
-                    bytes.Add(0);
-                    bytes.Add(0);
-                    bytes.Add(0);
-                    
-                    continue;
-                }
+                    node.Elements = new Functions.UI.Elements.NodeUIElements();
                 
                 bytes.AddRange(node.Elements.Save());
             }

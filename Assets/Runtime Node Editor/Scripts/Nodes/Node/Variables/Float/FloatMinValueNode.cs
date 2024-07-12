@@ -11,8 +11,6 @@ namespace RuntimeNodeEditor.Nodes.Node
         public override void Reset()
         {
             ResetExecution();
-
-            outputs[0].Data.FloatValue = 0;
         }
     }
 }
