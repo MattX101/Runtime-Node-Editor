@@ -31,7 +31,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
                 {
                     [0] = AddInputField(
                         node.inputs[0].gameObject.transform,
-                        TMP_InputField.ContentType.IntegerNumber,
+                        TMP_InputField.ContentType.Standard,
                         true,
                         false)
                 }

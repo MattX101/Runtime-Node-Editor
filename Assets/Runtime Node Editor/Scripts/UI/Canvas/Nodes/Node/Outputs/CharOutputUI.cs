@@ -31,7 +31,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
                 {
                     [0] = AddHalfInputField(
                         node.inputs[0].gameObject.transform,
-                        TMP_InputField.ContentType.Name,
+                        TMP_InputField.ContentType.Standard,
                         true,
                         false)
                 }

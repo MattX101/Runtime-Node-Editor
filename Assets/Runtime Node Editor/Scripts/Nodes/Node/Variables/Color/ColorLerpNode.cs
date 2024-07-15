@@ -31,7 +31,7 @@ namespace RuntimeNodeEditor.Nodes.Node
             }
 
             outputs[0].Data.ColorValue = Color.Lerp(a, b, t);
-            ImagePreview.Image.color = inputs[0].connectedOutputPointer.Data.ColorValue;
+            ImagePreview.Image.color = outputs[0].Data.ColorValue;
 
             WasExecuted = true;
         }
