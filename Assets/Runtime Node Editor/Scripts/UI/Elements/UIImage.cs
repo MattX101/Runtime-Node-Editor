@@ -15,14 +15,14 @@ namespace RuntimeNodeEditor.UI.Elements
             return rawImage;
         }
 
-        public static void AssignTexture(GameObject uiElement)
+        public static void AssignTexture(GameObject uiElement, Texture2D texture)
         {
             uiElement.TryGetComponent(out RawImage rawImage);
 
             if (!rawImage)
                 return;
             
-            rawImage.texture = UISettings.PointerTexture;
+            rawImage.texture = texture;
         }
 
         public static void Toggle(bool isToggled, GameObject previewImage)

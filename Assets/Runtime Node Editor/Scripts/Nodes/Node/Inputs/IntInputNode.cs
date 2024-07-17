@@ -4,7 +4,7 @@ namespace RuntimeNodeEditor.Nodes.Node
     {
         public override void Execute()
         {
-            outputs[0].Data.INTValue =
+            outputs[0].Data.IntValue =
                 Elements.InputFields[0].text.Length != 0 
                 ? int.Parse(Elements.InputFields[0].text) 
                 : 0;
@@ -16,7 +16,7 @@ namespace RuntimeNodeEditor.Nodes.Node
         {
             ResetExecution();
 
-            outputs[0].Data.INTValue = 0;
+            outputs[0].Data.IntValue = 0;
         }
     }
 }

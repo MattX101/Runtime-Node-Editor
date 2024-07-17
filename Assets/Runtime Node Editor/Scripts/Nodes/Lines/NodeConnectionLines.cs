@@ -106,27 +106,53 @@ namespace RuntimeNodeEditor.Nodes.Lines
 
             if (!inputPointer)
                 return false;
-            if (inputPointer.hasConnection || _currentOutputPointer.valueType != inputPointer.valueType)
+
+            if (_currentOutputPointer.valueType != inputPointer.valueType)
                 return false;
 
-            DropOnInputPointer(inputPointer);
+            if (inputPointer.allowsMultipleConnection)
+            {
+                if (inputPointer.connectedOutputPointers != null)
+                    foreach (OutputPointer output in inputPointer.connectedOutputPointers)
+                        if (_currentOutputPointer == output)
+                            return false;
+
+                DropOnMultiConnectInputPointer(inputPointer);
+            }
+            else
+            {
+                if (!inputPointer.hasConnection)
+                    DropOnInputPointer(inputPointer);
+            }
+
+            LinesData.Add(_currentConnectionLine);
+            _currentOutputPointer.node.MoveUp();
 
             return true;
         }
 
         private void DropOnInputPointer(InputPointer inputPointer)
         {
-            _currentOutputPointer.connectedInputPointers ??= new List<InputPointer>();
-
-            _currentConnectionLine.Input = inputPointer;
-            _currentOutputPointer.connectedInputPointers.Add(inputPointer);
+            SetConnectionInput(inputPointer);
 
             inputPointer.SetConnection(_currentOutputPointer);
             inputPointer.Line = _currentConnectionLine;
+        }
 
-            LinesData.Add(_currentConnectionLine);
+        private void DropOnMultiConnectInputPointer(InputPointer inputPointer)
+        {
+            SetConnectionInput(inputPointer);
 
-            _currentOutputPointer.node.MoveUp();
+            inputPointer.connectedOutputPointers ??= new List<OutputPointer>();
+            inputPointer.SetMultiConnection(_currentOutputPointer);
+            inputPointer.Line = _currentConnectionLine;
+        }
+
+        private void SetConnectionInput(InputPointer inputPointer)
+        {
+            _currentOutputPointer.connectedInputPointers ??= new List<InputPointer>();
+            _currentOutputPointer.connectedInputPointers.Add(inputPointer);
+            _currentConnectionLine.Input = inputPointer;
         }
 
         public void Paste(Node.Node copiedNode, Node.Node newNode)

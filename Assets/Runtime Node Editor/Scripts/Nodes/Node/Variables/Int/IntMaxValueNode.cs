@@ -4,7 +4,7 @@ namespace RuntimeNodeEditor.Nodes.Node
     {
         public override void Execute()
         {
-            outputs[0].Data.INTValue = int.MaxValue;
+            outputs[0].Data.IntValue = int.MaxValue;
             WasExecuted = true;
         }
 

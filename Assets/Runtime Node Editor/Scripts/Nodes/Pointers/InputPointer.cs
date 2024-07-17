@@ -1,15 +1,17 @@
 using RuntimeNodeEditor.Nodes.Line;
 using RuntimeNodeEditor.Nodes.Pointer.Data;
+using System.Collections.Generic;
 
 namespace RuntimeNodeEditor.Nodes.Pointer
 {
     public class InputPointer : Pointer
     {
         public OutputPointer connectedOutputPointer;
+        public List<OutputPointer> connectedOutputPointers = null;
 
         public NodeConnectionLine Line;
 
-        public bool hasConnection;
+        public bool hasConnection, allowsMultipleConnection;
 
         public InputPointer(Node.Node node) : base(node)
         {
@@ -20,6 +22,12 @@ namespace RuntimeNodeEditor.Nodes.Pointer
         {
             hasConnection = true;
             connectedOutputPointer = outputPointer;
+        }
+
+        public void SetMultiConnection(OutputPointer outputPointer)
+        {
+            hasConnection = true;
+            connectedOutputPointers.Add(outputPointer);
         }
 
         public void DeleteConnection()

@@ -16,7 +16,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Pointer
             _node = node;
         }
 
-        public GameObject CreatePointer(string name, GameObject parent, ValueType valueType, int layer, bool pointerIsInput = false, bool createText = false)
+        public GameObject CreatePointer(string name, GameObject parent, ValueType valueType, Texture2D texture, int layer, bool pointerIsInput = false, bool createText = false)
         {
             GameObject uiElement = UIElement.Create(
                 parent.transform,
@@ -27,7 +27,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Pointer
                     pointerIsInput,
                     layer));
 
-            AddImage(uiElement, valueType);
+            AddImage(uiElement, valueType, texture);
 
             if (createText)
                 AddText(uiElement, name, pointerIsInput);
@@ -49,10 +49,10 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Pointer
             return new Vector3(posX, posY, 0.0f);
         }
 
-        private void AddImage(GameObject uiElement, ValueType valueType)
+        private void AddImage(GameObject uiElement, ValueType valueType, Texture2D texture)
         {
             UIImage.Create(uiElement, PickPointerColor(valueType));
-            UIImage.AssignTexture(uiElement);
+            UIImage.AssignTexture(uiElement, texture);
         }
 
         private void AddText(GameObject uiElement, string name, bool isInput)

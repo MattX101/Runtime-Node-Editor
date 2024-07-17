@@ -9,7 +9,7 @@ namespace RuntimeNodeEditor.Nodes.Node
                 inputs[0].connectedOutputPointer.node.Execute();
                 Elements.SetInputField(
                     Elements.InputFields[0],
-                    inputs[0].connectedOutputPointer.Data.INTValue.ToString());
+                    inputs[0].connectedOutputPointer.Data.IntValue.ToString());
             }
 
             WasExecuted = true;

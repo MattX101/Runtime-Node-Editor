@@ -226,6 +226,29 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
                 name,
                 pointerIsInput ? _inputs : _outputs, 
                 valueType,
+                UISettings.PointerTexture,
+                layer,
+                pointerIsInput,
+                createText);
+        }
+        protected GameObject CreateArrayPointer(string name, ValueType valueType, int layer, bool pointerIsInput = false, bool createText = false)
+        {
+            return _uiPointers.CreatePointer(
+                name,
+                pointerIsInput ? _inputs : _outputs,
+                valueType,
+                UISettings.ArrayPointerTexture,
+                layer,
+                pointerIsInput,
+                createText);
+        }
+        protected GameObject CreateValueInsertPointer(string name, ValueType valueType, int layer, bool pointerIsInput = false, bool createText = false)
+        {
+            return _uiPointers.CreatePointer(
+                name,
+                pointerIsInput ? _inputs : _outputs,
+                valueType,
+                UISettings.ValueInsertPointerTexture,
                 layer,
                 pointerIsInput,
                 createText);

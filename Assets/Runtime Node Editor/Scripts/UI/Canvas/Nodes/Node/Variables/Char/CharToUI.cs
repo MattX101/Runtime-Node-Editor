@@ -22,8 +22,6 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
             NumOfOutputs = 1;
 
             drawBodyImage = false;
-            interactablePreview = true;
-            isInput = true;
 
             CreateNodeUI(node, NodeColor.Default, "Char To");
 

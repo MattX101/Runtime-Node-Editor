@@ -1,0 +1,28 @@
+using RuntimeNodeEditor.Nodes.Node;
+using RuntimeNodeEditor.Nodes.Pointer;
+using RuntimeNodeEditor.Nodes.Pointer.Data;
+
+namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
+{
+    internal class ColorFlatArrayUI : NodeUI
+    {
+        public override void Init(string nodeId)
+        {
+            base.Init(nodeId);
+
+            PopulateRoot("Color Flat Array");
+            ColorFlatArrayNode node = root.AddComponent<ColorFlatArrayNode>();
+
+            NumOfInputs = 1;
+            NumOfOutputs = 1;
+
+            drawBodyImage = false;
+
+            CreateNodeUI(node, NodeColor.Array, "Color");
+
+            node.AddPointer(CreateValueInsertPointer("In", ValueType.Color, 0, true).AddComponent<InputPointer>(), ValueType.Color, true);
+
+            node.AddPointer(CreatePointer("Out", ValueType.Color, 0).AddComponent<OutputPointer>(), ValueType.Color);
+        }
+    }
+}
