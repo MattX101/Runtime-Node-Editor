@@ -1,3 +1,5 @@
+using RuntimeNodeEditor.Nodes.Pointer.Value;
+
 namespace RuntimeNodeEditor.Nodes.Node
 {
     public class CharIsNode : Node
@@ -21,7 +23,7 @@ namespace RuntimeNodeEditor.Nodes.Node
             if (inputs[0].connectedOutputPointer)
             {
                 inputs[0].connectedOutputPointer.node.Execute();
-                c = inputs[0].connectedOutputPointer.Data.CharValue;
+                c = PointerValue.GetChar(inputs[0].connectedOutputPointer);
             }
 
             bool result = false;
@@ -57,9 +59,9 @@ namespace RuntimeNodeEditor.Nodes.Node
                 default:
                     break;
             }
-            outputs[0].Data.BoolValue = result;
 
-            Elements.SetBoolean(Elements.Buttons[0], outputs[0].Data.BoolValue);
+            outputs[0].Data.BoolValue = result;
+            Elements.SetBoolean(Elements.Buttons[0], result);
 
             WasExecuted = true;
         }

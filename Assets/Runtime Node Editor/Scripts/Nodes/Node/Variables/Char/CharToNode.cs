@@ -1,3 +1,5 @@
+using RuntimeNodeEditor.Nodes.Pointer.Value;
+
 namespace RuntimeNodeEditor.Nodes.Node
 {
     public class CharToNode : Node
@@ -14,7 +16,7 @@ namespace RuntimeNodeEditor.Nodes.Node
             if (inputs[0].connectedOutputPointer)
             {
                 inputs[0].connectedOutputPointer.node.Execute();
-                c = inputs[0].connectedOutputPointer.Data.CharValue;
+                c = PointerValue.GetChar(inputs[0].connectedOutputPointer);
 
                 switch (Elements.Dropdowns[0].Context)
                 {
@@ -30,8 +32,7 @@ namespace RuntimeNodeEditor.Nodes.Node
             }
 
             outputs[0].Data.CharValue = c;
-
-            Elements.SetInputField(Elements.InputFields[0], outputs[0].Data.CharValue.ToString());
+            Elements.SetInputField(Elements.InputFields[0], c.ToString());
 
             WasExecuted = true;
         }

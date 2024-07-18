@@ -1,3 +1,4 @@
+using RuntimeNodeEditor.Nodes.Pointer.Value;
 using UnityEngine;
 
 namespace RuntimeNodeEditor.Nodes.Pointer.Data

@@ -2,6 +2,7 @@ using RuntimeNodeEditor.Data;
 using System.Collections.Generic;
 using RuntimeNodeEditor.Nodes.Line;
 using RuntimeNodeEditor.Nodes.Pointer.Data;
+using RuntimeNodeEditor.Nodes.Pointer.Value;
 
 namespace RuntimeNodeEditor.Nodes.Pointer
 {

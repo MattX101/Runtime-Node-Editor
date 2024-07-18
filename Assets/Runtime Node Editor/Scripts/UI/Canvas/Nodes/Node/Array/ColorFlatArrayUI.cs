@@ -1,6 +1,6 @@
 using RuntimeNodeEditor.Nodes.Node;
 using RuntimeNodeEditor.Nodes.Pointer;
-using RuntimeNodeEditor.Nodes.Pointer.Data;
+using RuntimeNodeEditor.Nodes.Pointer.Value;
 
 namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
 {

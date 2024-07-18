@@ -1,3 +1,5 @@
+using RuntimeNodeEditor.Nodes.Pointer.Value;
+
 namespace RuntimeNodeEditor.Nodes.Node
 {
     public class FloatOutputNode : Node
@@ -8,8 +10,8 @@ namespace RuntimeNodeEditor.Nodes.Node
             {
                 inputs[0].connectedOutputPointer.node.Execute();
                 Elements.SetInputField(
-                    Elements.InputFields[0], 
-                    inputs[0].connectedOutputPointer.Data.FloatValue.ToString());
+                    Elements.InputFields[0],
+                    PointerValue.GetFloat(inputs[0].connectedOutputPointer).ToString());
             }
 
             WasExecuted = true;

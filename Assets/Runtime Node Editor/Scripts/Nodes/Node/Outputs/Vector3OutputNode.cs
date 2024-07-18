@@ -1,47 +1,45 @@
+using RuntimeNodeEditor.Nodes.Pointer.Value;
+using UnityEngine;
+
 namespace RuntimeNodeEditor.Nodes.Node
 {
     public class Vector3OutputNode : Node
     {
         public override void Execute()
         {
-            float x = 0;
-            float y = 0;
-            float z = 0;
+            Vector3 v = Vector3.zero;
 
             if (inputs[0].connectedOutputPointer)
             {
                 inputs[0].connectedOutputPointer.node.Execute();
-
-                x = inputs[0].connectedOutputPointer.Data.Vector3Value.x;
-                y = inputs[0].connectedOutputPointer.Data.Vector3Value.y;
-                z = inputs[0].connectedOutputPointer.Data.Vector3Value.z;
+                v = PointerValue.GetVector3(inputs[0].connectedOutputPointer);
             }
 
             if (inputs[1].connectedOutputPointer)
             {
                 inputs[1].connectedOutputPointer.node.Execute();
-                x = inputs[1].connectedOutputPointer.Data.FloatValue;
+                v.x = PointerValue.GetFloat(inputs[1].connectedOutputPointer);
             }
             if (inputs[2].connectedOutputPointer)
             {
                 inputs[2].connectedOutputPointer.node.Execute();
-                y = inputs[2].connectedOutputPointer.Data.FloatValue;
+                v.y = PointerValue.GetFloat(inputs[2].connectedOutputPointer);
             }
             if (inputs[3].connectedOutputPointer)
             {
                 inputs[3].connectedOutputPointer.node.Execute();
-                z = inputs[3].connectedOutputPointer.Data.FloatValue;
+                v.z = PointerValue.GetFloat(inputs[3].connectedOutputPointer);
             }
 
             Elements.SetInputField(
                 Elements.InputFields[0],
-                x.ToString());
+                v.x.ToString());
             Elements.SetInputField(
                 Elements.InputFields[1],
-                y.ToString());
+                v.y.ToString());
             Elements.SetInputField(
                 Elements.InputFields[2],
-                z.ToString());
+                v.z.ToString());
 
             WasExecuted = true;
         }

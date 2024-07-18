@@ -1,4 +1,5 @@
 using RuntimeNodeEditor.Nodes.Pointer.Data;
+using RuntimeNodeEditor.Nodes.Pointer.Value;
 using RuntimeNodeEditor.Functions.UI.Component;
 using RuntimeNodeEditor.UI.Elements;
 using UnityEngine;

@@ -1,7 +1,7 @@
 using RuntimeNodeEditor.Functions.UI.Elements;
 using RuntimeNodeEditor.Nodes.Node;
 using RuntimeNodeEditor.Nodes.Pointer;
-using RuntimeNodeEditor.Nodes.Pointer.Data;
+using RuntimeNodeEditor.Nodes.Pointer.Value;
 using TMPro;
 
 namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node

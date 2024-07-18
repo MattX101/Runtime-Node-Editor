@@ -1,3 +1,5 @@
+using RuntimeNodeEditor.Nodes.Pointer.Value;
+
 namespace RuntimeNodeEditor.Nodes.Node
 {
     public class LogicGateNode : Node
@@ -18,16 +20,16 @@ namespace RuntimeNodeEditor.Nodes.Node
             if (inputs[0].connectedOutputPointer)
             {
                 inputs[0].connectedOutputPointer.node.Execute();
-                Elements.SetBoolean(Elements.Buttons[0], inputs[0].connectedOutputPointer.Data.BoolValue);
-                a = inputs[0].connectedOutputPointer.Data.BoolValue;
+                a = PointerValue.GetBool(inputs[0].connectedOutputPointer);
+                Elements.SetBoolean(Elements.Buttons[0], a);
             }
 
             bool b = false;
             if (inputs[1].connectedOutputPointer)
             {
                 inputs[1].connectedOutputPointer.node.Execute();
-                Elements.SetBoolean(Elements.Buttons[1], inputs[1].connectedOutputPointer.Data.BoolValue);
-                b = inputs[1].connectedOutputPointer.Data.BoolValue;
+                b = PointerValue.GetBool(inputs[1].connectedOutputPointer);
+                Elements.SetBoolean(Elements.Buttons[1], b);
             }
 
             bool result = false;
@@ -54,8 +56,8 @@ namespace RuntimeNodeEditor.Nodes.Node
                 default:
                     break;
             }
-            outputs[0].Data.BoolValue = result;
 
+            outputs[0].Data.BoolValue = result;
             Elements.SetBoolean(Elements.Buttons[2], outputs[0].Data.BoolValue);
 
             WasExecuted = true;

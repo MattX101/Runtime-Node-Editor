@@ -1,3 +1,4 @@
+using RuntimeNodeEditor.Nodes.Pointer.Value;
 using UnityEngine;
 
 namespace RuntimeNodeEditor.Nodes.Node
@@ -11,14 +12,14 @@ namespace RuntimeNodeEditor.Nodes.Node
             if (inputs[0].connectedOutputPointer)
             {
                 inputs[0].connectedOutputPointer.node.Execute();
-                a = inputs[0].connectedOutputPointer.Data.Vector3Value;
+                a = PointerValue.GetVector3(inputs[0].connectedOutputPointer);
             }
 
             Vector3 b = Vector3.zero;
             if (inputs[1].connectedOutputPointer)
             {
                 inputs[1].connectedOutputPointer.node.Execute();
-                b = inputs[1].connectedOutputPointer.Data.Vector3Value;
+                b = PointerValue.GetVector3(inputs[1].connectedOutputPointer);
             }
 
             outputs[0].Data.Vector3Value = Vector3.Reflect(a, b);

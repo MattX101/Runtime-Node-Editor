@@ -1,4 +1,5 @@
 using RuntimeNodeEditor.Functions.UI.Component;
+using RuntimeNodeEditor.Nodes.Pointer.Value;
 
 namespace RuntimeNodeEditor.Nodes.Node
 {
@@ -11,7 +12,7 @@ namespace RuntimeNodeEditor.Nodes.Node
             if (inputs[0].connectedOutputPointer)
             {
                 inputs[0].connectedOutputPointer.node.Execute();
-                ImagePreview.Image.color = inputs[0].connectedOutputPointer.Data.ColorValue;
+                ImagePreview.Image.color = PointerValue.GetColor(inputs[0].connectedOutputPointer);
             }
 
             WasExecuted = true;

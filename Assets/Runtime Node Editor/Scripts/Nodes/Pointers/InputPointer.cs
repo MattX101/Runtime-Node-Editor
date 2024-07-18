@@ -1,5 +1,5 @@
 using RuntimeNodeEditor.Nodes.Line;
-using RuntimeNodeEditor.Nodes.Pointer.Data;
+using RuntimeNodeEditor.Nodes.Pointer.Value;
 using System.Collections.Generic;
 
 namespace RuntimeNodeEditor.Nodes.Pointer

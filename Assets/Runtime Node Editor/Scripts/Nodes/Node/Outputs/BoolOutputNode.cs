@@ -1,3 +1,5 @@
+using RuntimeNodeEditor.Nodes.Pointer.Value;
+
 namespace RuntimeNodeEditor.Nodes.Node
 {
     public class BoolOutputNode : Node
@@ -8,8 +10,8 @@ namespace RuntimeNodeEditor.Nodes.Node
             {
                 inputs[0].connectedOutputPointer.node.Execute();
                 Elements.SetBoolean(
-                    Elements.Buttons[0], 
-                    inputs[0].connectedOutputPointer.Data.BoolValue);
+                    Elements.Buttons[0],
+                    PointerValue.GetBool(inputs[0].connectedOutputPointer));
             }
 
             WasExecuted = true;

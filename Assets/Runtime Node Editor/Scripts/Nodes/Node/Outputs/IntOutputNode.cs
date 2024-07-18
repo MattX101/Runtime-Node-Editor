@@ -1,3 +1,5 @@
+using RuntimeNodeEditor.Nodes.Pointer.Value;
+
 namespace RuntimeNodeEditor.Nodes.Node
 {
     public class IntOutputNode : Node
@@ -9,7 +11,7 @@ namespace RuntimeNodeEditor.Nodes.Node
                 inputs[0].connectedOutputPointer.node.Execute();
                 Elements.SetInputField(
                     Elements.InputFields[0],
-                    inputs[0].connectedOutputPointer.Data.IntValue.ToString());
+                    PointerValue.GetInt(inputs[0].connectedOutputPointer).ToString());
             }
 
             WasExecuted = true;

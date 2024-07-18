@@ -3,6 +3,7 @@ using RuntimeNodeEditor.Input;
 using RuntimeNodeEditor.Nodes.Line;
 using RuntimeNodeEditor.Nodes.Pointer;
 using RuntimeNodeEditor.Nodes.Pointer.Data;
+using RuntimeNodeEditor.Nodes.Pointer.Value;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -107,7 +108,7 @@ namespace RuntimeNodeEditor.Nodes.Lines
             if (!inputPointer)
                 return false;
 
-            if (_currentOutputPointer.valueType != inputPointer.valueType)
+            if (!PointerValue.CheckCompatibility(inputPointer.valueType, _currentOutputPointer.valueType))
                 return false;
 
             if (inputPointer.allowsMultipleConnection)
@@ -121,8 +122,10 @@ namespace RuntimeNodeEditor.Nodes.Lines
             }
             else
             {
-                if (!inputPointer.hasConnection)
-                    DropOnInputPointer(inputPointer);
+                if (inputPointer.hasConnection)
+                    return false;
+                
+                DropOnInputPointer(inputPointer);
             }
 
             LinesData.Add(_currentConnectionLine);

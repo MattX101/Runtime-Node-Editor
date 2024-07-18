@@ -1,3 +1,4 @@
+using RuntimeNodeEditor.Nodes.Pointer.Value;
 using UnityEngine;
 
 namespace RuntimeNodeEditor.Nodes.Node
@@ -10,11 +11,10 @@ namespace RuntimeNodeEditor.Nodes.Node
             if (inputs[0].connectedOutputPointer)
             {
                 inputs[0].connectedOutputPointer.node.Execute();
-                a = inputs[0].connectedOutputPointer.Data.Vector2Value;
+                a = PointerValue.GetVector2(inputs[0].connectedOutputPointer);
             }
             
             outputs[0].Data.FloatValue = Vector2.SqrMagnitude(a);
-
             Elements.SetInputField(Elements.InputFields[0], outputs[0].Data.FloatValue.ToString());
 
             WasExecuted = true;
