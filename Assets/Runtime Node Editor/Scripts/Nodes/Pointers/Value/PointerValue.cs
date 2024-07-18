@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace RuntimeNodeEditor.Nodes.Pointer.Value
 {
-    public static class PointerValue
+    internal static class PointerValue
     {
         private static List<ValueType>[] _compatiableValues = new List<ValueType>[]
         {

@@ -27,18 +27,20 @@ namespace RuntimeNodeEditor.Nodes.Node
             WasExecuted = false;
         }
 
-        public void AddPointer(InputPointer inputPointer, ValueType valueType, bool allowMultipleConnections = false)
+        public void AddPointer(InputPointer inputPointer, ValueType valueType, Pointer.Type.PointerType pointerType = Pointer.Type.PointerType.Single, bool allowMultipleConnections = false)
         {
             inputPointer.node = this;
             inputPointer.valueType = valueType;
+            inputPointer.pointerType = pointerType;
             inputPointer.allowsMultipleConnection = allowMultipleConnections;   
 
             inputs.Add(inputPointer);
         }
-        public void AddPointer(OutputPointer outputPointer, ValueType valueType)
+        public void AddPointer(OutputPointer outputPointer, ValueType valueType, Pointer.Type.PointerType pointerType = Pointer.Type.PointerType.Single)
         {
             outputPointer.node = this;
             outputPointer.valueType = valueType;
+            outputPointer.pointerType = pointerType;
 
             outputs.Add(outputPointer);
         }

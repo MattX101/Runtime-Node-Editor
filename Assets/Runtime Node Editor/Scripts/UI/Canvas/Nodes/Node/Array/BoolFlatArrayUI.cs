@@ -1,5 +1,6 @@
 using RuntimeNodeEditor.Nodes.Node;
 using RuntimeNodeEditor.Nodes.Pointer;
+using RuntimeNodeEditor.Nodes.Pointer.Type;
 using RuntimeNodeEditor.Nodes.Pointer.Value;
 
 namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
@@ -20,7 +21,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
 
             CreateNodeUI(node, NodeColor.Array, "Bool");
 
-            node.AddPointer(CreateValueInsertPointer("In", ValueType.Bool, 0, true).AddComponent<InputPointer>(), ValueType.Bool, true);
+            node.AddPointer(CreateValueInsertPointer("In", ValueType.Bool, 0, true).AddComponent<InputPointer>(), ValueType.Bool, PointerType.ArrayInsert, true);
 
             node.AddPointer(CreatePointer("Out", ValueType.Bool, 0).AddComponent<OutputPointer>(), ValueType.Bool);
         }

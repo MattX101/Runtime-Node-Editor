@@ -8,6 +8,7 @@ namespace RuntimeNodeEditor.Nodes.Pointer
         public Node.Node node;
         
         public ValueType valueType = ValueType.None;
+        public Type.PointerType pointerType = Type.PointerType.None;
 
         public Pointer(Node.Node node)
         {
