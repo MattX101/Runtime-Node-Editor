@@ -22,7 +22,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
             
             CreateNodeUI(node, NodeColor.Default, "Bool");
 
-            node.AddPointer(CreatePointer("Out", ValueType.Bool, 0).AddComponent<OutputPointer>(), ValueType.Bool);
+            node.AddPointer(CreatePointer("Out", ValueType.Bool, 0).AddComponent<BoolOutputPointer>(), ValueType.Bool);
 
             node.Elements = new NodeUIElements(0, 1, 0)
             {

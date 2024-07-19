@@ -58,31 +58,38 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Save
 
                 for (int inputPointerIndex = 0; inputPointerIndex < nodes[nodeIndex].inputs.Count; inputPointerIndex++)
                 {
-                    if (nodes[nodeIndex].inputs[inputPointerIndex].connectedOutputPointer == null)
-                        continue;
+                    if (nodes[nodeIndex].inputs[inputPointerIndex].TryGetComponent(out SingleConnectionInputPointer single))
+                    {
+                        if (single.connectedOutputPointer == null)
+                            continue;
 
-                    int connectedOutputNode = FindNode(
-                        nodes,
-                        nodes[nodeIndex].inputs[inputPointerIndex].connectedOutputPointer.node);
+                        int connectedOutputNode = FindNode(
+                            nodes,
+                            single.connectedOutputPointer.node);
 
-                    if (connectedOutputNode == -1)
-                        continue;
+                        if (connectedOutputNode == -1)
+                            continue;
 
-                    int connectedOutputIndex = FindPointer(
-                        nodes,
-                        connectedOutputNode,
-                        nodes[nodeIndex].inputs[inputPointerIndex].connectedOutputPointer);
+                        int connectedOutputIndex = FindPointer(
+                            nodes,
+                            connectedOutputNode,
+                            single.connectedOutputPointer);
 
-                    if (connectedOutputIndex == -1)
-                        continue;
+                        if (connectedOutputIndex == -1)
+                            continue;
 
-                    count++;
+                        count++;
 
-                    bytes.AddRange(BitConverter.GetBytes(nodeIndex));
-                    bytes.Add((byte)inputPointerIndex);
+                        bytes.AddRange(BitConverter.GetBytes(nodeIndex));
+                        bytes.Add((byte)inputPointerIndex);
 
-                    bytes.AddRange(BitConverter.GetBytes(connectedOutputNode));
-                    bytes.Add((byte)connectedOutputIndex);
+                        bytes.AddRange(BitConverter.GetBytes(connectedOutputNode));
+                        bytes.Add((byte)connectedOutputIndex);
+                    }
+                    else
+                    {
+                        // Save multi connections
+                    }
                 }
             }
 

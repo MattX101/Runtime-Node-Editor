@@ -65,9 +65,9 @@ namespace RuntimeNodeEditor.Nodes.Pointer.Value
         {
             return output.valueType switch
             {
-                ValueType.Int => output.Data.IntValue,
-                ValueType.Float => (int)output.Data.FloatValue,
-                _ => 3
+                ValueType.Int => output.GetComponent<IntOutputPointer>().value,
+                ValueType.Float => (int)output.GetComponent<FloatOutputPointer>().value,
+                _ => 0
             };
         }
 
@@ -75,48 +75,48 @@ namespace RuntimeNodeEditor.Nodes.Pointer.Value
         {
             return output.valueType switch
             {
-                ValueType.Float => output.Data.FloatValue,
-                ValueType.Int => (float)output.Data.IntValue,
-                _ => 3.0f
+                ValueType.Float => output.GetComponent<FloatOutputPointer>().value,
+                ValueType.Int => output.GetComponent<IntOutputPointer>().value,
+                _ => 0.0f
             };
         }
 
         public static bool GetBool(OutputPointer output)
         {
-            return output.Data.BoolValue;
+            return output.GetComponent<BoolOutputPointer>().value;
         }
 
         public static char GetChar(OutputPointer output)
         {
-            return output.Data.CharValue;
+            return output.GetComponent<CharOutputPointer>().value;
         }
 
         public static string GetString(OutputPointer output)
         {
             return output.valueType switch
             {
-                ValueType.String => output.Data.StringValue,
-                ValueType.Int => output.Data.IntValue.ToString(),
-                ValueType.Float => output.Data.FloatValue.ToString(),
-                ValueType.Bool => output.Data.BoolValue.ToString(),
-                ValueType.Char => output.Data.CharValue.ToString(),
+                ValueType.String => output.GetComponent<StringOutputPointer>().value,
+                ValueType.Int => output.GetComponent<IntOutputPointer>().value.ToString(),
+                ValueType.Float => output.GetComponent<FloatOutputPointer>().value.ToString(),
+                ValueType.Bool => output.GetComponent<BoolOutputPointer>().value.ToString(),
+                ValueType.Char => output.GetComponent<CharOutputPointer>().value.ToString(),
                 _ => ""
             };
         }
 
         public static Color GetColor(OutputPointer output)
         {
-            return output.Data.ColorValue; 
+            return output.GetComponent<ColorOutputPointer>().value; 
         }
 
         public static Vector2 GetVector2(OutputPointer output)
         {
             return output.valueType switch
             {
-                ValueType.Vector2 => output.Data.Vector2Value,
-                ValueType.Int => new Vector2(output.Data.IntValue, output.Data.IntValue),
-                ValueType.Float => new Vector2(output.Data.FloatValue, output.Data.FloatValue),
-                ValueType.Vector3 => new Vector2(output.Data.Vector3Value.x, output.Data.Vector3Value.y),
+                ValueType.Vector2 => output.GetComponent<Vector2OutputPointer>().value,
+                ValueType.Int => new Vector2(output.GetComponent<IntOutputPointer>().value, output.GetComponent<IntOutputPointer>().value),
+                ValueType.Float => new Vector2(output.GetComponent<FloatOutputPointer>().value, output.GetComponent<FloatOutputPointer>().value),
+                ValueType.Vector3 => new Vector2(output.GetComponent<Vector3OutputPointer>().value.x, output.GetComponent<Vector3OutputPointer>().value.y),
                 _ => Vector2.zero
             };
         }
@@ -125,10 +125,10 @@ namespace RuntimeNodeEditor.Nodes.Pointer.Value
         {
             return output.valueType switch
             {
-                ValueType.Vector3 => output.Data.Vector3Value,
-                ValueType.Int => new Vector3(output.Data.IntValue, output.Data.IntValue, output.Data.IntValue),
-                ValueType.Float => new Vector3(output.Data.FloatValue, output.Data.FloatValue, output.Data.FloatValue),
-                ValueType.Vector2 => new Vector3(output.Data.Vector2Value.x, output.Data.Vector2Value.y, 0),
+                ValueType.Vector3 => output.GetComponent<Vector3OutputPointer>().value,
+                ValueType.Int => new Vector3(output.GetComponent<IntOutputPointer>().value, output.GetComponent<IntOutputPointer>().value, output.GetComponent<IntOutputPointer>().value),
+                ValueType.Float => new Vector3(output.GetComponent<FloatOutputPointer>().value, output.GetComponent<FloatOutputPointer>().value, output.GetComponent<FloatOutputPointer>().value),
+                ValueType.Vector2 => new Vector3(output.GetComponent<Vector2OutputPointer>().value.x, output.GetComponent<Vector2OutputPointer>().value.y, 0),
                 _ => Vector3.zero
             };
         }

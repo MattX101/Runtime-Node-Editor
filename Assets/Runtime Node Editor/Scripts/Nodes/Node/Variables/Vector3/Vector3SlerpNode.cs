@@ -1,3 +1,4 @@
+using RuntimeNodeEditor.Nodes.Pointer;
 using RuntimeNodeEditor.Nodes.Pointer.Value;
 using UnityEngine;
 
@@ -8,37 +9,46 @@ namespace RuntimeNodeEditor.Nodes.Node
         public override void Execute()
         {
             Vector3 a = Vector3.zero;
-            if (inputs[0].connectedOutputPointer)
+            if (inputs[0].TryGetComponent(out SingleConnectionInputPointer inputA))
             {
-                inputs[0].connectedOutputPointer.node.Execute();
-                a = PointerValue.GetVector3(inputs[0].connectedOutputPointer);
+                if (inputA.connectedOutputPointer)
+                {
+                    inputA.connectedOutputPointer.node.Execute();
+                    a = PointerValue.GetVector3(inputA.connectedOutputPointer);
+                }
             }
 
             Vector3 b = Vector3.zero;
-            if (inputs[1].connectedOutputPointer)
+            if (inputs[1].TryGetComponent(out SingleConnectionInputPointer inputB))
             {
-                inputs[1].connectedOutputPointer.node.Execute();
-                b = PointerValue.GetVector3(inputs[1].connectedOutputPointer);
+                if (inputB.connectedOutputPointer)
+                {
+                    inputB.connectedOutputPointer.node.Execute();
+                    b = PointerValue.GetVector3(inputB.connectedOutputPointer);
+                }
             }
 
             float t = 0.5f;
-            if (inputs[2].connectedOutputPointer)
+            if (inputs[2].TryGetComponent(out SingleConnectionInputPointer inputT))
             {
-                inputs[2].connectedOutputPointer.node.Execute();
-                t = PointerValue.GetFloat(inputs[2].connectedOutputPointer);
+                if (inputT.connectedOutputPointer)
+                {
+                    inputT.connectedOutputPointer.node.Execute();
+                    t = PointerValue.GetFloat(inputT.connectedOutputPointer);
+                }
             }
 
-            outputs[0].Data.Vector3Value = Vector3.Slerp(a, b, t);
+            outputs[0].GetComponent<Vector3OutputPointer>().value = Vector3.Slerp(a, b, t);
 
             Elements.SetInputField(
                 Elements.InputFields[0],
-                outputs[0].Data.Vector3Value.x.ToString());
+                outputs[0].GetComponent<Vector3OutputPointer>().value.x.ToString());
             Elements.SetInputField(
                 Elements.InputFields[1],
-                outputs[0].Data.Vector3Value.y.ToString());
+                outputs[0].GetComponent<Vector3OutputPointer>().value.y.ToString());
             Elements.SetInputField(
                 Elements.InputFields[2],
-                outputs[0].Data.Vector3Value.z.ToString());
+                outputs[0].GetComponent<Vector3OutputPointer>().value.z.ToString());
 
             WasExecuted = true;
         }
@@ -46,7 +56,7 @@ namespace RuntimeNodeEditor.Nodes.Node
         public override void Reset()
         {
             ResetExecution();
-            outputs[0].Data.Vector3Value = Vector3.zero;
+            outputs[0].GetComponent<Vector3OutputPointer>().value = Vector3.zero;
         }
     }
 }

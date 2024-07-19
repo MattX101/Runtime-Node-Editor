@@ -23,10 +23,10 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
 
             CreateNodeUI(node, NodeColor.Default, "Reflect");
 
-            node.AddPointer(CreatePointer("In A", ValueType.Vector2, 0, true).AddComponent<InputPointer>(), ValueType.Vector2);
-            node.AddPointer(CreatePointer("In B", ValueType.Vector2, 1, true).AddComponent<InputPointer>(), ValueType.Vector2);
+            node.AddPointer(CreatePointer("In A", ValueType.Vector2, 0, true).AddComponent<SingleConnectionInputPointer>(), ValueType.Vector2);
+            node.AddPointer(CreatePointer("In B", ValueType.Vector2, 1, true).AddComponent<SingleConnectionInputPointer>(), ValueType.Vector2);
 
-            node.AddPointer(CreatePointer("Out", ValueType.Vector2, 0).AddComponent<OutputPointer>(), ValueType.Vector2);
+            node.AddPointer(CreatePointer("Out", ValueType.Vector2, 0).AddComponent<Vector2OutputPointer>(), ValueType.Vector2);
             
             node.Elements = new NodeUIElements(2, 0, 0)
             {

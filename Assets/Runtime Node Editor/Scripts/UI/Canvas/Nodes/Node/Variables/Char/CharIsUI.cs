@@ -33,9 +33,9 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
                 };
             }
 
-            node.AddPointer(CreatePointer("In", ValueType.Char, 1, true).AddComponent<InputPointer>(), ValueType.Char);
+            node.AddPointer(CreatePointer("In", ValueType.Char, 1, true).AddComponent<SingleConnectionInputPointer>(), ValueType.Char);
 
-            node.AddPointer(CreatePointer("Out", ValueType.Bool, 1).AddComponent<OutputPointer>(), ValueType.Bool);
+            node.AddPointer(CreatePointer("Out", ValueType.Bool, 1).AddComponent<CharOutputPointer>(), ValueType.Bool);
 
             node.Elements = new NodeUIElements(0, 1, 0, 1)
             {

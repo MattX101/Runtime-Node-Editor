@@ -1,10 +1,12 @@
+using RuntimeNodeEditor.Nodes.Pointer;
+
 namespace RuntimeNodeEditor.Nodes.Node
 {
     public class BoolInputNode : Node
     {
         public override void Execute()
         {
-            outputs[0].Data.BoolValue = Elements.Buttons[0].Toggled;
+            outputs[0].GetComponent<BoolOutputPointer>().value = Elements.Buttons[0].Toggled;
 
             WasExecuted = true;
         }
@@ -13,7 +15,7 @@ namespace RuntimeNodeEditor.Nodes.Node
         {
             ResetExecution();
 
-            outputs[0].Data.BoolValue = false;
+            outputs[0].GetComponent<BoolOutputPointer>().Reset();
         }
     }
 }

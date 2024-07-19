@@ -25,11 +25,11 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
 
             CreateNodeUI(node, NodeColor.Default, "Vector 3");
 
-            node.AddPointer(CreatePointer("In", ValueType.Vector3, 0, true).AddComponent<InputPointer>(), ValueType.Vector3);
+            node.AddPointer(CreatePointer("In", ValueType.Vector3, 0, true).AddComponent<SingleConnectionInputPointer>(), ValueType.Vector3);
 
-            node.AddPointer(CreatePointer("X", ValueType.Float, 1, true).AddComponent<InputPointer>(), ValueType.Float);
-            node.AddPointer(CreatePointer("Y", ValueType.Float, 2, true).AddComponent<InputPointer>(), ValueType.Float);
-            node.AddPointer(CreatePointer("Z", ValueType.Float, 3, true).AddComponent<InputPointer>(), ValueType.Float);
+            node.AddPointer(CreatePointer("X", ValueType.Float, 1, true).AddComponent<SingleConnectionInputPointer>(), ValueType.Float);
+            node.AddPointer(CreatePointer("Y", ValueType.Float, 2, true).AddComponent<SingleConnectionInputPointer>(), ValueType.Float);
+            node.AddPointer(CreatePointer("Z", ValueType.Float, 3, true).AddComponent<SingleConnectionInputPointer>(), ValueType.Float);
 
             node.Elements = new NodeUIElements(3, 0, 0)
             {

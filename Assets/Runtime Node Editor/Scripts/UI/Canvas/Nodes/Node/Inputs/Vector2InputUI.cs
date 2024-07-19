@@ -24,10 +24,10 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
 
             CreateNodeUI(node, NodeColor.Default, "Vector 2");
 
-            node.AddPointer(CreatePointer("Out", ValueType.Vector2, 0).AddComponent<OutputPointer>(), ValueType.Vector2);
+            node.AddPointer(CreatePointer("Out", ValueType.Vector2, 0).AddComponent<Vector2OutputPointer>(), ValueType.Vector2);
 
-            node.AddPointer(CreatePointer("X", ValueType.Float, 1).AddComponent<OutputPointer>(), ValueType.Float);
-            node.AddPointer(CreatePointer("Y", ValueType.Float, 2).AddComponent<OutputPointer>(), ValueType.Float);
+            node.AddPointer(CreatePointer("X", ValueType.Float, 1).AddComponent<FloatOutputPointer>(), ValueType.Float);
+            node.AddPointer(CreatePointer("Y", ValueType.Float, 2).AddComponent<FloatOutputPointer>(), ValueType.Float);
 
             node.Elements = new NodeUIElements(2, 0, 0)
             {

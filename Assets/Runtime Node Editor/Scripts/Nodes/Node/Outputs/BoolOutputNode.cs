@@ -1,3 +1,4 @@
+using RuntimeNodeEditor.Nodes.Pointer;
 using RuntimeNodeEditor.Nodes.Pointer.Value;
 
 namespace RuntimeNodeEditor.Nodes.Node
@@ -6,12 +7,15 @@ namespace RuntimeNodeEditor.Nodes.Node
     {
         public override void Execute()
         {
-            if (inputs[0].connectedOutputPointer)
+            if (inputs[0].TryGetComponent(out SingleConnectionInputPointer input))
             {
-                inputs[0].connectedOutputPointer.node.Execute();
-                Elements.SetBoolean(
-                    Elements.Buttons[0],
-                    PointerValue.GetBool(inputs[0].connectedOutputPointer));
+                if (input.connectedOutputPointer)
+                {
+                    input.connectedOutputPointer.node.Execute();
+                    Elements.SetBoolean(
+                        Elements.Buttons[0],
+                        PointerValue.GetBool(input.connectedOutputPointer));
+                }
             }
 
             WasExecuted = true;

@@ -32,7 +32,6 @@ namespace RuntimeNodeEditor.Nodes.Node
             inputPointer.node = this;
             inputPointer.valueType = valueType;
             inputPointer.pointerType = pointerType;
-            inputPointer.allowsMultipleConnection = allowMultipleConnections;   
 
             inputs.Add(inputPointer);
         }
@@ -48,7 +47,22 @@ namespace RuntimeNodeEditor.Nodes.Node
         public void DeletePointerConnections()
         {
             foreach (InputPointer input in inputs)
-                input.DeleteConnection();
+            {
+                //input.DeleteConnection();
+
+                if (input.TryGetComponent(out SingleConnectionInputPointer single))
+                {
+                    single.DeleteConnection();
+                }
+                else if (input.TryGetComponent(out MultiConnectionInputPointer multi))
+                {
+                    //
+                }
+                else
+                {
+                    continue;
+                }
+            }
 
             foreach (OutputPointer output in outputs)
                 output.DeleteConnections();

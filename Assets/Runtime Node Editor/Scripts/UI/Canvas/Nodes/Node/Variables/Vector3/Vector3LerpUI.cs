@@ -24,11 +24,11 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
 
             CreateNodeUI(node, NodeColor.Default, "Lerp");
 
-            node.AddPointer(CreatePointer("In A", ValueType.Vector3, 0, true).AddComponent<InputPointer>(), ValueType.Vector3);
-            node.AddPointer(CreatePointer("In B", ValueType.Vector3, 1, true).AddComponent<InputPointer>(), ValueType.Vector3);
-            node.AddPointer(CreatePointer("Time", ValueType.Float, 2, true).AddComponent<InputPointer>(), ValueType.Float);
+            node.AddPointer(CreatePointer("In A", ValueType.Vector3, 0, true).AddComponent<SingleConnectionInputPointer>(), ValueType.Vector3);
+            node.AddPointer(CreatePointer("In B", ValueType.Vector3, 1, true).AddComponent<SingleConnectionInputPointer>(), ValueType.Vector3);
+            node.AddPointer(CreatePointer("Time", ValueType.Float, 2, true).AddComponent<SingleConnectionInputPointer>(), ValueType.Float);
             
-            node.AddPointer(CreatePointer("Out", ValueType.Vector3, 0).AddComponent<OutputPointer>(), ValueType.Vector3);
+            node.AddPointer(CreatePointer("Out", ValueType.Vector3, 0).AddComponent<Vector3OutputPointer>(), ValueType.Vector3);
 
             node.Elements = new NodeUIElements(3)
             {

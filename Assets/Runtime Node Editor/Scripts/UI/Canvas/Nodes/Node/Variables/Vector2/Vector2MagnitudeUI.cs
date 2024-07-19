@@ -23,8 +23,8 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
 
             CreateNodeUI(node, NodeColor.Default, "Magnitude");
 
-            node.AddPointer(CreatePointer("In", ValueType.Vector2, 0, true).AddComponent<InputPointer>(), ValueType.Vector2);
-            node.AddPointer(CreatePointer("Out", ValueType.Float, 0).AddComponent<OutputPointer>(), ValueType.Float);
+            node.AddPointer(CreatePointer("In", ValueType.Vector2, 0, true).AddComponent<SingleConnectionInputPointer>(), ValueType.Vector2);
+            node.AddPointer(CreatePointer("Out", ValueType.Float, 0).AddComponent<FloatOutputPointer>(), ValueType.Float);
 
             node.Elements = new NodeUIElements(1, 0, 0)
             {

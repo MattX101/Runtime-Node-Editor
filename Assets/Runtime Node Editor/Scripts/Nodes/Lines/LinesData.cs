@@ -3,6 +3,7 @@ using RuntimeNodeEditor.Nodes.Line;
 using RuntimeNodeEditor.Nodes.Pointer;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Windows;
 
 namespace RuntimeNodeEditor.Nodes.Lines
 {
@@ -43,8 +44,16 @@ namespace RuntimeNodeEditor.Nodes.Lines
 
         private static void DeleteInputConnection(InputPointer inputPointer)
         {
-            Remove(inputPointer.Line);
-            inputPointer.DeleteConnection();
+            if (inputPointer.TryGetComponent(out SingleConnectionInputPointer single))
+            {
+                Remove(inputPointer.Line);
+                single.DeleteConnection();
+            }
+            else if (inputPointer.TryGetComponent(out MultiConnectionInputPointer multi))
+            {
+                //Remove(inputPointer.Line);
+                //
+            }
         }
     }
 }

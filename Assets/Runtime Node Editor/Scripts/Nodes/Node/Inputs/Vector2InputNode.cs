@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using RuntimeNodeEditor.Nodes.Pointer;
 
 namespace RuntimeNodeEditor.Nodes.Node
 {
@@ -7,24 +8,24 @@ namespace RuntimeNodeEditor.Nodes.Node
     {
         public override void Execute()
         {
-            outputs[0].Data.Vector2Value = Vector2.zero;
+            outputs[0].GetComponent<Vector2OutputPointer>().value = Vector2.zero;
 
             TMP_InputField xField = Elements.InputFields[0];
-            TMP_InputField yField = Elements.InputFields[1];
-
             if (xField.text.Length != 0)
             {
                 float x = float.Parse(xField.text);
 
-                outputs[1].Data.FloatValue = x;
-                outputs[0].Data.Vector2Value.x = x;
+                outputs[1].GetComponent<FloatOutputPointer>().value = x;
+                outputs[0].GetComponent<Vector2OutputPointer>().value.x = x;
             }
+
+            TMP_InputField yField = Elements.InputFields[1];
             if (yField.text.Length != 0)
             {
                 float y = float.Parse(yField.text);
 
-                outputs[2].Data.FloatValue = y;
-                outputs[0].Data.Vector2Value.y = y;
+                outputs[2].GetComponent<FloatOutputPointer>().value = y;
+                outputs[0].GetComponent<Vector2OutputPointer>().value.y = y;
             }
 
             WasExecuted = true;
@@ -34,7 +35,7 @@ namespace RuntimeNodeEditor.Nodes.Node
         {
             ResetExecution();
 
-            outputs[0].Data.Vector2Value = Vector2.zero;
+            outputs[0].GetComponent<Vector2OutputPointer>().Reset();
         }
     }
 }

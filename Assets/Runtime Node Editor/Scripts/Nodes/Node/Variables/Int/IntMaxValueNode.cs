@@ -1,10 +1,12 @@
+using RuntimeNodeEditor.Nodes.Pointer;
+
 namespace RuntimeNodeEditor.Nodes.Node
 {
     public class IntMaxValueNode : Node
     {
         public override void Execute()
         {
-            outputs[0].Data.IntValue = int.MaxValue;
+            outputs[0].GetComponent<IntOutputPointer>().value = int.MaxValue;
             WasExecuted = true;
         }
 

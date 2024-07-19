@@ -19,7 +19,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
             isInput = true;
 
             CreateNodeUI(node, NodeColor.Default, "Float - Epsilon");
-            node.AddPointer(CreatePointer("Out", ValueType.Float, 0).AddComponent<OutputPointer>(), ValueType.Float);
+            node.AddPointer(CreatePointer("Out", ValueType.Float, 0).AddComponent<FloatOutputPointer>(), ValueType.Float);
         }
     }
 }

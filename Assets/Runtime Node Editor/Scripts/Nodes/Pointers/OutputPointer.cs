@@ -1,7 +1,7 @@
 using RuntimeNodeEditor.Data;
 using System.Collections.Generic;
 using RuntimeNodeEditor.Nodes.Line;
-using RuntimeNodeEditor.Nodes.Pointer.Data;
+//using RuntimeNodeEditor.Nodes.Pointer.Data;
 using RuntimeNodeEditor.Nodes.Pointer.Value;
 
 namespace RuntimeNodeEditor.Nodes.Pointer
@@ -11,17 +11,17 @@ namespace RuntimeNodeEditor.Nodes.Pointer
         public List<InputPointer> connectedInputPointers;
         public List<NodeConnectionLine> Lines;
 
-        public PointerData Data;
+        //public PointerData Data;
 
         public OutputPointer(Node.Node node) : base(node)
         {
             valueType = ValueType.None;
         }
 
-        private void Awake()
+        /*private void Awake()
         {
             Data = new PointerData();
-        }
+        }*/
 
         private void Update()
         {
@@ -42,18 +42,30 @@ namespace RuntimeNodeEditor.Nodes.Pointer
                 DeleteConnection(i);
         }
 
-        private void DeleteConnection(int i)
+        protected void DeleteConnection(int i)
         {
-            Lines[i].DestroyLine();
+            if (connectedInputPointers[i].TryGetComponent(out SingleConnectionInputPointer single))
+            {
+                Lines[i].DestroyLine();
 
-            connectedInputPointers[i].hasConnection = false;
-            connectedInputPointers[i].connectedOutputPointer = null;
+                single.hasConnection = false;
+                single.connectedOutputPointer = null;
+            }
+            else if (connectedInputPointers[i].TryGetComponent(out MultiConnectionInputPointer multi))
+            {
+                // Delete connections
+            }
+            else
+            {
+                return;
+            }
+
             connectedInputPointers[i].node.MoveUp();
 
             connectedInputPointers.RemoveAt(i);
         }
 
-        private void UpdateLines()
+        protected void UpdateLines()
         {
             if (Lines == null || Lines.Count == 0)
                 return;

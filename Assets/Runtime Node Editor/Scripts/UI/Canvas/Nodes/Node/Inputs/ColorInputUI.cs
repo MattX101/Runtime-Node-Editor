@@ -10,7 +10,6 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
     {
         public override void Init(string nodeId)
         {
-            //base.Init(nodeId);
             base.Init(StringParameterExtractor.ExtractBase(nodeId));
 
             PopulateRoot("Color");
@@ -23,11 +22,11 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
 
             CreateNodeUI(node, NodeColor.Default, "Color");
 
-            node.AddPointer(CreatePointer("Color", ValueType.Color, 0).AddComponent<OutputPointer>(), ValueType.Color);
+            node.AddPointer(CreatePointer("Color", ValueType.Color, 0).AddComponent<ColorOutputPointer>(), ValueType.Color);
 
-            node.AddPointer(CreatePointer("Red", ValueType.Float, 1).AddComponent<OutputPointer>(), ValueType.Float);
-            node.AddPointer(CreatePointer("Green", ValueType.Float, 2).AddComponent<OutputPointer>(), ValueType.Float);
-            node.AddPointer(CreatePointer("Blue", ValueType.Float, 3).AddComponent<OutputPointer>(), ValueType.Float);
+            node.AddPointer(CreatePointer("Red", ValueType.Float, 1).AddComponent<FloatOutputPointer>(), ValueType.Float);
+            node.AddPointer(CreatePointer("Green", ValueType.Float, 2).AddComponent<FloatOutputPointer>(), ValueType.Float);
+            node.AddPointer(CreatePointer("Blue", ValueType.Float, 3).AddComponent<FloatOutputPointer>(), ValueType.Float);
 
             node.Elements = new NodeUIElements(0, 0, 3)
             {

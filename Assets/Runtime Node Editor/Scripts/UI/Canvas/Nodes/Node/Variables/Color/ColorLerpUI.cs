@@ -22,11 +22,11 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
             CreateNodeUI(node, NodeColor.Default, "Color Lerp");
             node.ImagePreview = ImagePreview;
 
-            node.AddPointer(CreatePointer("Color 1", ValueType.Color, 0, true).AddComponent<InputPointer>(), ValueType.Color);
-            node.AddPointer(CreatePointer("Color 2", ValueType.Color, 1, true).AddComponent<InputPointer>(), ValueType.Color);
-            node.AddPointer(CreatePointer("Time", ValueType.Float, 2, true).AddComponent<InputPointer>(), ValueType.Float);
+            node.AddPointer(CreatePointer("Color 1", ValueType.Color, 0, true).AddComponent<SingleConnectionInputPointer>(), ValueType.Color);
+            node.AddPointer(CreatePointer("Color 2", ValueType.Color, 1, true).AddComponent<SingleConnectionInputPointer>(), ValueType.Color);
+            node.AddPointer(CreatePointer("Time", ValueType.Float, 2, true).AddComponent<SingleConnectionInputPointer>(), ValueType.Float);
 
-            node.AddPointer(CreatePointer("Out", ValueType.Color, 0).AddComponent<OutputPointer>(), ValueType.Color);
+            node.AddPointer(CreatePointer("Out", ValueType.Color, 0).AddComponent<ColorOutputPointer>(), ValueType.Color);
         }
     }
 }

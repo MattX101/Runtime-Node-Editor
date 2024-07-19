@@ -1,3 +1,4 @@
+using RuntimeNodeEditor.Nodes.Pointer;
 using RuntimeNodeEditor.Nodes.Pointer.Value;
 
 namespace RuntimeNodeEditor.Nodes.Node
@@ -17,19 +18,25 @@ namespace RuntimeNodeEditor.Nodes.Node
         public override void Execute()
         {
             bool a = false;
-            if (inputs[0].connectedOutputPointer)
+            if (inputs[0].TryGetComponent(out SingleConnectionInputPointer inputA))
             {
-                inputs[0].connectedOutputPointer.node.Execute();
-                a = PointerValue.GetBool(inputs[0].connectedOutputPointer);
-                Elements.SetBoolean(Elements.Buttons[0], a);
+                if (inputA.connectedOutputPointer)
+                {
+                    inputA.connectedOutputPointer.node.Execute();
+                    a = PointerValue.GetBool(inputA.connectedOutputPointer);
+                    Elements.SetBoolean(Elements.Buttons[0], a);
+                }
             }
 
             bool b = false;
-            if (inputs[1].connectedOutputPointer)
+            if (inputs[1].TryGetComponent(out SingleConnectionInputPointer inputB))
             {
-                inputs[1].connectedOutputPointer.node.Execute();
-                b = PointerValue.GetBool(inputs[1].connectedOutputPointer);
-                Elements.SetBoolean(Elements.Buttons[1], b);
+                if (inputB.connectedOutputPointer)
+                {
+                    inputB.connectedOutputPointer.node.Execute();
+                    b = PointerValue.GetBool(inputB.connectedOutputPointer);
+                    Elements.SetBoolean(Elements.Buttons[1], b);
+                }
             }
 
             bool result = false;
@@ -57,8 +64,8 @@ namespace RuntimeNodeEditor.Nodes.Node
                     break;
             }
 
-            outputs[0].Data.BoolValue = result;
-            Elements.SetBoolean(Elements.Buttons[2], outputs[0].Data.BoolValue);
+            outputs[0].GetComponent<BoolOutputPointer>().value = result;
+            Elements.SetBoolean(Elements.Buttons[2], result);
 
             WasExecuted = true;
         }
@@ -67,7 +74,7 @@ namespace RuntimeNodeEditor.Nodes.Node
         {
             ResetExecution();
 
-            outputs[0].Data.BoolValue = false;
+            outputs[0].GetComponent<BoolOutputPointer>().Reset();
         }
 
         private bool AND(bool a, bool b)   { return a && b; }

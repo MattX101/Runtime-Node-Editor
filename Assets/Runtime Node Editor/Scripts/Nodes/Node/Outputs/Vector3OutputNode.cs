@@ -1,3 +1,4 @@
+using RuntimeNodeEditor.Nodes.Pointer;
 using RuntimeNodeEditor.Nodes.Pointer.Value;
 using UnityEngine;
 
@@ -9,26 +10,38 @@ namespace RuntimeNodeEditor.Nodes.Node
         {
             Vector3 v = Vector3.zero;
 
-            if (inputs[0].connectedOutputPointer)
+            if (inputs[0].TryGetComponent(out SingleConnectionInputPointer inputV))
             {
-                inputs[0].connectedOutputPointer.node.Execute();
-                v = PointerValue.GetVector3(inputs[0].connectedOutputPointer);
+                if (inputV.connectedOutputPointer)
+                {
+                    inputV.connectedOutputPointer.node.Execute();
+                    v = PointerValue.GetVector3(inputV.connectedOutputPointer);
+                }
             }
 
-            if (inputs[1].connectedOutputPointer)
+            if (inputs[1].TryGetComponent(out SingleConnectionInputPointer inputX))
             {
-                inputs[1].connectedOutputPointer.node.Execute();
-                v.x = PointerValue.GetFloat(inputs[1].connectedOutputPointer);
+                if (inputX.connectedOutputPointer)
+                {
+                    inputX.connectedOutputPointer.node.Execute();
+                    v.x = PointerValue.GetFloat(inputX.connectedOutputPointer);
+                }
             }
-            if (inputs[2].connectedOutputPointer)
+            if (inputs[2].TryGetComponent(out SingleConnectionInputPointer inputY))
             {
-                inputs[2].connectedOutputPointer.node.Execute();
-                v.y = PointerValue.GetFloat(inputs[2].connectedOutputPointer);
+                if (inputY.connectedOutputPointer)
+                {
+                    inputY.connectedOutputPointer.node.Execute();
+                    v.y = PointerValue.GetFloat(inputY.connectedOutputPointer);
+                }
             }
-            if (inputs[3].connectedOutputPointer)
+            if (inputs[3].TryGetComponent(out SingleConnectionInputPointer inputZ))
             {
-                inputs[3].connectedOutputPointer.node.Execute();
-                v.z = PointerValue.GetFloat(inputs[3].connectedOutputPointer);
+                if (inputZ.connectedOutputPointer)
+                {
+                    inputZ.connectedOutputPointer.node.Execute();
+                    v.z = PointerValue.GetFloat(inputZ.connectedOutputPointer);
+                }
             }
 
             Elements.SetInputField(

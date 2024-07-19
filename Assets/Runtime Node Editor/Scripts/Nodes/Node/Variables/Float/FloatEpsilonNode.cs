@@ -1,10 +1,12 @@
+using RuntimeNodeEditor.Nodes.Pointer;
+
 namespace RuntimeNodeEditor.Nodes.Node
 {
     public class FloatEpsilonNode : Node
     {
         public override void Execute()
         {
-            outputs[0].Data.FloatValue = float.Epsilon;
+            outputs[0].GetComponent<FloatOutputPointer>().value = float.Epsilon;
             WasExecuted = true;
         }
 

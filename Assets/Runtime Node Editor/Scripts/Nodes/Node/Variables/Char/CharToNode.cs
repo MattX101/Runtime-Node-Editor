@@ -1,3 +1,4 @@
+using RuntimeNodeEditor.Nodes.Pointer;
 using RuntimeNodeEditor.Nodes.Pointer.Value;
 
 namespace RuntimeNodeEditor.Nodes.Node
@@ -13,25 +14,28 @@ namespace RuntimeNodeEditor.Nodes.Node
         public override void Execute()
         {
             char c = ' ';
-            if (inputs[0].connectedOutputPointer)
+            if (inputs[0].TryGetComponent(out SingleConnectionInputPointer input))
             {
-                inputs[0].connectedOutputPointer.node.Execute();
-                c = PointerValue.GetChar(inputs[0].connectedOutputPointer);
-
-                switch (Elements.Dropdowns[0].Context)
+                if (input.connectedOutputPointer)
                 {
-                    case 0:
-                        c = ToLower(c);
-                        break;
-                    case 1:
-                        c = ToUpper(c);
-                        break;
-                    default:
-                        break;
+                    input.connectedOutputPointer.node.Execute();
+                    c = PointerValue.GetChar(input.connectedOutputPointer);
+
+                    switch (Elements.Dropdowns[0].Context)
+                    {
+                        case 0:
+                            c = ToLower(c);
+                            break;
+                        case 1:
+                            c = ToUpper(c);
+                            break;
+                        default:
+                            break;
+                    }
                 }
             }
 
-            outputs[0].Data.CharValue = c;
+            outputs[0].GetComponent<CharOutputPointer>().value = c;
             Elements.SetInputField(Elements.InputFields[0], c.ToString());
 
             WasExecuted = true;
@@ -41,7 +45,7 @@ namespace RuntimeNodeEditor.Nodes.Node
         {
             ResetExecution();
 
-            outputs[0].Data.CharValue = ' ';
+            outputs[0].GetComponent<CharOutputPointer>().value = ' ';
         }
 
         private char ToLower(char c) { return char.ToLower(c); }

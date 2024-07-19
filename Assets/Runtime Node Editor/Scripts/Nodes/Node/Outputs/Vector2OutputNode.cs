@@ -1,3 +1,4 @@
+using RuntimeNodeEditor.Nodes.Pointer;
 using RuntimeNodeEditor.Nodes.Pointer.Value;
 using UnityEngine;
 
@@ -9,21 +10,30 @@ namespace RuntimeNodeEditor.Nodes.Node
         {
             Vector2 v = Vector2.zero;
 
-            if (inputs[0].connectedOutputPointer)
+            if (inputs[0].TryGetComponent(out SingleConnectionInputPointer inputV))
             {
-                inputs[0].connectedOutputPointer.node.Execute();
-                v = PointerValue.GetVector2(inputs[0].connectedOutputPointer);
+                if (inputV.connectedOutputPointer)
+                {
+                    inputV.connectedOutputPointer.node.Execute();
+                    v = PointerValue.GetVector2(inputV.connectedOutputPointer);
+                }
             }
 
-            if (inputs[1].connectedOutputPointer)
+            if (inputs[1].TryGetComponent(out SingleConnectionInputPointer inputX))
             {
-                inputs[1].connectedOutputPointer.node.Execute();
-                v.x = PointerValue.GetFloat(inputs[1].connectedOutputPointer);
+                if (inputX.connectedOutputPointer)
+                {
+                    inputX.connectedOutputPointer.node.Execute();
+                    v.x = PointerValue.GetFloat(inputX.connectedOutputPointer);
+                }
             }
-            if (inputs[2].connectedOutputPointer)
+            if (inputs[2].TryGetComponent(out SingleConnectionInputPointer inputY))
             {
-                inputs[2].connectedOutputPointer.node.Execute();
-                v.y = PointerValue.GetFloat(inputs[2].connectedOutputPointer);
+                if (inputY.connectedOutputPointer)
+                {
+                    inputY.connectedOutputPointer.node.Execute();
+                    v.y = PointerValue.GetFloat(inputY.connectedOutputPointer);
+                }
             }
 
             Elements.SetInputField(

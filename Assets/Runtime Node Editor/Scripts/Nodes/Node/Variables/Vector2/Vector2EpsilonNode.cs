@@ -1,3 +1,4 @@
+using RuntimeNodeEditor.Nodes.Pointer;
 using UnityEngine;
 
 namespace RuntimeNodeEditor.Nodes.Node
@@ -6,7 +7,7 @@ namespace RuntimeNodeEditor.Nodes.Node
     {
         public override void Execute()
         {
-            outputs[0].Data.Vector2Value = new Vector2(float.Epsilon, float.Epsilon);
+            outputs[0].GetComponent<Vector2OutputPointer>().value = new Vector2(float.Epsilon, float.Epsilon);
             WasExecuted = true;
         }
 

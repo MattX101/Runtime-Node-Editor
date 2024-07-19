@@ -1,3 +1,4 @@
+using RuntimeNodeEditor.Nodes.Pointer;
 using UnityEngine;
 
 namespace RuntimeNodeEditor.Nodes.Node
@@ -6,15 +7,15 @@ namespace RuntimeNodeEditor.Nodes.Node
     {
         public override void Execute()
         {
-            outputs[1].Data.FloatValue = Elements.Sliders[0].value;
-            outputs[2].Data.FloatValue = Elements.Sliders[1].value;
-            outputs[3].Data.FloatValue = Elements.Sliders[2].value;
-            
-            outputs[0].Data.ColorValue = 
+            outputs[1].GetComponent<FloatOutputPointer>().value = Elements.Sliders[0].value;
+            outputs[2].GetComponent<FloatOutputPointer>().value = Elements.Sliders[1].value;
+            outputs[3].GetComponent<FloatOutputPointer>().value = Elements.Sliders[2].value;
+
+            outputs[0].GetComponent<ColorOutputPointer>().value =
                 new Color(
-                    outputs[1].Data.FloatValue,
-                    outputs[2].Data.FloatValue,
-                    outputs[3].Data.FloatValue);
+                    Elements.Sliders[0].value,
+                    Elements.Sliders[1].value,
+                    Elements.Sliders[2].value);
 
             WasExecuted = true;
         }
@@ -23,7 +24,7 @@ namespace RuntimeNodeEditor.Nodes.Node
         {
             ResetExecution();
 
-            outputs[0].Data.ColorValue = Color.black;
+            outputs[0].GetComponent<ColorOutputPointer>().Reset();
         }
     }
 }

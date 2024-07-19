@@ -1,3 +1,4 @@
+using RuntimeNodeEditor.Nodes.Pointer;
 using RuntimeNodeEditor.Nodes.Pointer.Value;
 
 namespace RuntimeNodeEditor.Nodes.Node
@@ -20,10 +21,13 @@ namespace RuntimeNodeEditor.Nodes.Node
         public override void Execute()
         {
             char c = ' ';
-            if (inputs[0].connectedOutputPointer)
+            if (inputs[0].TryGetComponent(out SingleConnectionInputPointer input))
             {
-                inputs[0].connectedOutputPointer.node.Execute();
-                c = PointerValue.GetChar(inputs[0].connectedOutputPointer);
+                if (input.connectedOutputPointer)
+                {
+                    input.connectedOutputPointer.node.Execute();
+                    c = PointerValue.GetChar(input.connectedOutputPointer);
+                }
             }
 
             bool result = false;
@@ -60,7 +64,7 @@ namespace RuntimeNodeEditor.Nodes.Node
                     break;
             }
 
-            outputs[0].Data.BoolValue = result;
+            outputs[0].GetComponent<BoolOutputPointer>().value = result;
             Elements.SetBoolean(Elements.Buttons[0], result);
 
             WasExecuted = true;
@@ -70,7 +74,7 @@ namespace RuntimeNodeEditor.Nodes.Node
         {
             ResetExecution();
 
-            outputs[0].Data.BoolValue = false;
+            outputs[0].GetComponent<BoolOutputPointer>().value = false;
         }
 
         private bool IsLower(char c) { return char.IsLower(c); }

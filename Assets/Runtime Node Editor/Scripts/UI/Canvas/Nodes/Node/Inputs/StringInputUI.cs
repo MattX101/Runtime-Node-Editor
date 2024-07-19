@@ -24,7 +24,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
 
             CreateNodeUI(node, NodeColor.Default, "String");
 
-            node.AddPointer(CreatePointer("Out", ValueType.String, 0).AddComponent<OutputPointer>(), ValueType.String);
+            node.AddPointer(CreatePointer("Out", ValueType.String, 0).AddComponent<StringOutputPointer>(), ValueType.String);
 
             node.Elements = new NodeUIElements(1, 0, 0)
             {

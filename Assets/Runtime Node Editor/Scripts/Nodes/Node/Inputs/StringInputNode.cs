@@ -1,10 +1,12 @@
+using RuntimeNodeEditor.Nodes.Pointer;
+
 namespace RuntimeNodeEditor.Nodes.Node
 {
     public class StringInputNode : Node
     {
         public override void Execute()
         {
-            outputs[0].Data.StringValue = Elements.InputFields[0].text;
+            outputs[0].GetComponent<StringOutputPointer>().value = Elements.InputFields[0].text;
 
             WasExecuted = true;
         }
@@ -13,7 +15,7 @@ namespace RuntimeNodeEditor.Nodes.Node
         {
             ResetExecution();
 
-            outputs[0].Data.StringValue = "";
+            outputs[0].GetComponent<StringOutputPointer>().Reset();
         }
     }
 }

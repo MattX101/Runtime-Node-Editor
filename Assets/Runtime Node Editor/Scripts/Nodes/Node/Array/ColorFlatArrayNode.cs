@@ -1,4 +1,5 @@
 using RuntimeNodeEditor.Nodes.Pointer;
+using RuntimeNodeEditor.Nodes.Pointer.Value;
 using UnityEngine;
 
 namespace RuntimeNodeEditor.Nodes.Node
@@ -7,10 +8,13 @@ namespace RuntimeNodeEditor.Nodes.Node
     {
         public override void Execute()
         {
-            foreach (OutputPointer output in inputs[0].connectedOutputPointers)
+            if (inputs[0].TryGetComponent(out MultiConnectionInputPointer multiInput))
             {
-                output.node.Execute();
-                Debug.Log(output.Data.ColorValue);
+                foreach (OutputPointer output in multiInput.connectedOutputPointers)
+                {
+                    output.node.Execute();
+                    Debug.Log(PointerValue.GetColor(output));
+                }
             }
 
             WasExecuted = true;
