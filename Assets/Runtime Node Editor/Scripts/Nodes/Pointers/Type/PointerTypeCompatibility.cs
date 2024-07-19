@@ -6,9 +6,9 @@ namespace RuntimeNodeEditor.Nodes.Pointer.Type
     {
         private static List<PointerType>[] _compatiableTypes = new List<PointerType>[]
         {
-            new List<PointerType> { PointerType.Single }, // single
-            new List<PointerType> { PointerType.Array }, // array
-            new List<PointerType> { PointerType.Single }, // array insert
+            new List<PointerType> { PointerType.Variable }, // Variable
+            new List<PointerType> { PointerType.Array },    // Array
+            new List<PointerType> { PointerType.Variable }, // Array insert
         };
 
         public static bool CheckCompatibility(PointerType input, PointerType output)
@@ -19,7 +19,7 @@ namespace RuntimeNodeEditor.Nodes.Pointer.Type
             int index = -1;
             switch (input)
             {
-                case PointerType.Single:
+                case PointerType.Variable:
                     index = 0;
                     break;
                 case PointerType.Array:

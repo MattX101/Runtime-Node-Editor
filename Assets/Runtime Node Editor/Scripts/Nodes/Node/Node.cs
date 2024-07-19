@@ -27,7 +27,7 @@ namespace RuntimeNodeEditor.Nodes.Node
             WasExecuted = false;
         }
 
-        public void AddPointer(InputPointer inputPointer, ValueType valueType, Pointer.Type.PointerType pointerType = Pointer.Type.PointerType.Single, bool allowMultipleConnections = false)
+        public void AddPointer(InputPointer inputPointer, ValueType valueType, Pointer.Type.PointerType pointerType = Pointer.Type.PointerType.Variable, bool allowMultipleConnections = false)
         {
             inputPointer.node = this;
             inputPointer.valueType = valueType;
@@ -35,7 +35,7 @@ namespace RuntimeNodeEditor.Nodes.Node
 
             inputs.Add(inputPointer);
         }
-        public void AddPointer(OutputPointer outputPointer, ValueType valueType, Pointer.Type.PointerType pointerType = Pointer.Type.PointerType.Single)
+        public void AddPointer(OutputPointer outputPointer, ValueType valueType, Pointer.Type.PointerType pointerType = Pointer.Type.PointerType.Variable)
         {
             outputPointer.node = this;
             outputPointer.valueType = valueType;

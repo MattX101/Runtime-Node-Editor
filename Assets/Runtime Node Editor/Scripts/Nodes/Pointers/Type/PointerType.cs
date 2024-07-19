@@ -3,7 +3,7 @@ namespace RuntimeNodeEditor.Nodes.Pointer.Type
     public enum PointerType
     {
         None,
-        Single,
+        Variable,
         Array,
         ArrayInsert
     };
