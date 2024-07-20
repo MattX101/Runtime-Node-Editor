@@ -7,8 +7,8 @@ namespace RuntimeNodeEditor.Nodes.Pointer.Type
         private static List<PointerType>[] _compatiableTypes = new List<PointerType>[]
         {
             new List<PointerType> { PointerType.Variable }, // Variable
-            new List<PointerType> { PointerType.Array },    // Array
-            new List<PointerType> { PointerType.Variable }, // Array insert
+            new List<PointerType> { PointerType.Array }, // Array
+            new List<PointerType> { PointerType.Variable, PointerType.Array }, // Array insert
         };
 
         public static bool CheckCompatibility(PointerType input, PointerType output)
