@@ -27,7 +27,7 @@ namespace RuntimeNodeEditor.Nodes.Node
             WasExecuted = false;
         }
 
-        public void AddPointer(InputPointer inputPointer, ValueType valueType, Pointer.Type.PointerType pointerType = Pointer.Type.PointerType.Variable, bool allowMultipleConnections = false)
+        public void AddPointer(InputPointer inputPointer, ValueType valueType, Pointer.Type.PointerType pointerType = Pointer.Type.PointerType.Variable)
         {
             inputPointer.node = this;
             inputPointer.valueType = valueType;

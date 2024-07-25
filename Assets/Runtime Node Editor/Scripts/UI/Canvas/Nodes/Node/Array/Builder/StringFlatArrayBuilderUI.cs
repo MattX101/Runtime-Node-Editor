@@ -21,7 +21,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
 
             CreateNodeUI(node, NodeColor.Array, "String");
 
-            node.AddPointer(CreateValueInsertPointer("In", ValueType.String, 0, true).AddComponent<MultiConnectionInputPointer>(), ValueType.String, PointerType.ArrayInsert, true);
+            node.AddPointer(CreateValueInsertPointer("In", ValueType.String, 0, true).AddComponent<MultiConnectionInputPointer>(), ValueType.String, PointerType.ArrayInsert);
 
             node.AddPointer(CreateArrayPointer("Out", ValueType.String, 0).AddComponent<StringArrayOutputPointer>(), ValueType.String, PointerType.Array);
         }

@@ -74,7 +74,7 @@ namespace RuntimeNodeEditor.Nodes.Node
         {
             ResetExecution();
 
-            outputs[0].GetComponent<BoolOutputPointer>().value = false;
+            outputs[0].GetComponent<BoolOutputPointer>().Reset();
         }
 
         private bool IsLower(char c) { return char.IsLower(c); }

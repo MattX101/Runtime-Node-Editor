@@ -45,7 +45,7 @@ namespace RuntimeNodeEditor.Nodes.Node
         {
             ResetExecution();
 
-            outputs[0].GetComponent<CharOutputPointer>().value = ' ';
+            outputs[0].GetComponent<CharOutputPointer>().Reset();
         }
 
         private char ToLower(char c) { return char.ToLower(c); }

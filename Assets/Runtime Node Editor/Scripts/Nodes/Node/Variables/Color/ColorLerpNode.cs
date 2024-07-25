@@ -51,7 +51,7 @@ namespace RuntimeNodeEditor.Nodes.Node
         {
             ResetExecution();
 
-            outputs[0].GetComponent<ColorOutputPointer>().value = Color.black;
+            outputs[0].GetComponent<ColorOutputPointer>().Reset();
         }
     }
 }
