@@ -7,10 +7,13 @@ namespace RuntimeNodeEditor.UI.Elements
     {
         public static TMP_InputField Create(Transform parent, TMP_InputField.ContentType contentType, bool interactable = true, bool shorten = false, bool halfSize = false)
         {
-            float width = halfSize ? UISettings.NodeWidth / 2 : UISettings.NodeWidth;
-            Vector2 size = new Vector2(
-                shorten ? width - UISettings.PointerSize * 1.5f : width - UISettings.PointerSize, 
-                UISettings.InputFieldHeight);
+            float width = UISettings.NodeWidth;
+            width /= halfSize ? 2 : 1;
+            width -= UISettings.PointerSize / 2;
+            if (shorten && !halfSize)
+                width -= UISettings.PointerSize / 2;
+            width -= UISettings.PointerPadding * 2;
+            Vector2 size = new Vector2(width,  UISettings.InputFieldHeight);
 
             // Root
             GameObject root = UIElement.Create(parent, "Input Field", size, Vector3.zero);
@@ -23,7 +26,7 @@ namespace RuntimeNodeEditor.UI.Elements
 
             // Text
             TextMeshPro textText = UIText.CreateText(textArea.transform, "Text", rect.sizeDelta, new Vector3(0, 0, -1), "");
-            UIText.SetTextColor(textText, new Color(0.2f, 0.2f, 0.2f, 1.0f));
+            UIText.SetTextColor(textText, Color.white * 0.2f);
             UIText.SetFontAlignment(textText, TextAlignmentOptions.Center);
 
             textText.gameObject.AddComponent<CanvasRenderer>();

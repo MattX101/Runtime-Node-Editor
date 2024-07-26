@@ -85,13 +85,10 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Pointer
             TMP_InputField inputField = UIInputField.Create(parent, contentType, interactable, shorten);
             UIInputField.AddOnValueChange(inputField, _node);
 
-            float posX = (UISettings.NodeWidth + UISettings.PointerSize) / 2;
-            posX -= UISettings.BorderSize;
+            float posX = UISettings.NodeWidth / 2;
+            posX += UISettings.PointerSize / 4;
             if (shorten)
-            {
-                posX -= UISettings.PointerSize / 2;
-                posX += UISettings.PointerPadding;
-            }
+                posX -= UISettings.PointerSize / 4;
             posX = !pointerIsInput ? -posX : posX;
             float posY = layer * -(UISettings.InputFieldHeight + UISettings.PointerPadding);
 
@@ -104,14 +101,8 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Pointer
             TMP_InputField inputField = UIInputField.Create(parent, contentType, interactable, shorten, true);
             UIInputField.AddOnValueChange(inputField, _node);
 
-            float posX = ((UISettings.NodeWidth / 2) + UISettings.PointerSize) / 2;
-            posX -= UISettings.BorderSize;
-            posX += UISettings.PointerPadding;
-            if (shorten)
-            {
-                posX -= UISettings.PointerSize / 2;
-                posX += UISettings.PointerPadding;
-            }
+            float posX = UISettings.NodeWidth / 4;
+            posX += UISettings.PointerSize / 4;
             posX = !pointerIsInput ? -posX : posX;
             float posY = layer * -(UISettings.InputFieldHeight + UISettings.PointerPadding);
 
