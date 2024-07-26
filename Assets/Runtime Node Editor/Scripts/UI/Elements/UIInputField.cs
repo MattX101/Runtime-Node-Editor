@@ -26,7 +26,7 @@ namespace RuntimeNodeEditor.UI.Elements
 
             // Text
             TextMeshPro textText = UIText.CreateText(textArea.transform, "Text", rect.sizeDelta, new Vector3(0, 0, -1), "");
-            UIText.SetTextColor(textText, Color.white * 0.2f);
+            UIText.SetTextColor(textText, new Color(0.2f, 0.2f, 0.2f, 1.0f));
             UIText.SetFontAlignment(textText, TextAlignmentOptions.Center);
 
             textText.gameObject.AddComponent<CanvasRenderer>();
