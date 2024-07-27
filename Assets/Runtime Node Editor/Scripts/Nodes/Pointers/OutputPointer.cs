@@ -1,8 +1,7 @@
 using RuntimeNodeEditor.Data;
-using System.Collections.Generic;
 using RuntimeNodeEditor.Nodes.Line;
-//using RuntimeNodeEditor.Nodes.Pointer.Data;
 using RuntimeNodeEditor.Nodes.Pointer.Value;
+using System.Collections.Generic;
 
 namespace RuntimeNodeEditor.Nodes.Pointer
 {
@@ -11,17 +10,10 @@ namespace RuntimeNodeEditor.Nodes.Pointer
         public List<InputPointer> connectedInputPointers;
         public List<NodeConnectionLine> Lines;
 
-        //public PointerData Data;
-
         public OutputPointer(Node.Node node) : base(node)
         {
             valueType = ValueType.None;
         }
-
-        /*private void Awake()
-        {
-            Data = new PointerData();
-        }*/
 
         private void Update()
         {
@@ -46,23 +38,16 @@ namespace RuntimeNodeEditor.Nodes.Pointer
         {
             if (connectedInputPointers[i].TryGetComponent(out SingleConnectionInputPointer single))
             {
-                Lines[i].DestroyLine();
-
-                single.hasConnection = false;
-                single.connectedOutputPointer = null;
+                single.DeleteConnection();
             }
             else if (connectedInputPointers[i].TryGetComponent(out MultiConnectionInputPointer multi))
             {
-                // Delete connections
+                multi.DeleteConnection(this, Lines[i]);
             }
             else
             {
                 return;
             }
-
-            connectedInputPointers[i].node.MoveUp();
-
-            connectedInputPointers.RemoveAt(i);
         }
 
         protected void UpdateLines()

@@ -90,7 +90,8 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Components
 
             RuntimeNodeEditor.Nodes.Node.Node newNode = newNodeUI.root.GetComponent<RuntimeNodeEditor.Nodes.Node.Node>();
 
-            newNode.Elements.SetElements(_copiedNode.Elements);
+            if (newNode.Elements != null)
+                newNode.Elements.SetElements(_copiedNode.Elements);
             connectionLines.Paste(_copiedNode, newNode);
 
             if (_currentCopyIsCut)

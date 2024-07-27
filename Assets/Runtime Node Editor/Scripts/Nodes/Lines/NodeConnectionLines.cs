@@ -7,7 +7,6 @@ using RuntimeNodeEditor.Nodes.Pointer.Type;
 using RuntimeNodeEditor.Nodes.Pointer.Value;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Windows;
 
 namespace RuntimeNodeEditor.Nodes.Lines
 {
@@ -146,8 +145,7 @@ namespace RuntimeNodeEditor.Nodes.Lines
         {
             SetConnectionInput(inputPointer);
 
-            inputPointer.SetConnection(_currentOutputPointer);
-            inputPointer.Line = _currentConnectionLine;
+            inputPointer.SetConnection(_currentOutputPointer, _currentConnectionLine);
         }
 
         private void DropOnMultiConnectInputPointer(MultiConnectionInputPointer inputPointer)
@@ -155,14 +153,14 @@ namespace RuntimeNodeEditor.Nodes.Lines
             SetConnectionInput(inputPointer);
 
             inputPointer.connectedOutputPointers ??= new List<OutputPointer>();
-            inputPointer.SetMultiConnection(_currentOutputPointer);
-            inputPointer.Line = _currentConnectionLine;
+            inputPointer.SetMultiConnection(_currentOutputPointer, _currentConnectionLine);
         }
 
         private void SetConnectionInput(InputPointer inputPointer)
         {
             _currentOutputPointer.connectedInputPointers ??= new List<InputPointer>();
             _currentOutputPointer.connectedInputPointers.Add(inputPointer);
+
             _currentConnectionLine.Input = inputPointer;
         }
 
@@ -175,17 +173,23 @@ namespace RuntimeNodeEditor.Nodes.Lines
             {
                 if (copiedNode.inputs[i].TryGetComponent(out MultiConnectionInputPointer multi))
                 {
-                    // Paste multi connections
+                    if (multi.connectedOutputPointers == null)
+                        continue;
+
+                    foreach (OutputPointer outputPointer in multi.connectedOutputPointers)
+                    {
+                        if (!outputPointer)
+                            continue;
+
+                        SetConnection(newNode.inputs[i], outputPointer);
+                    }
                 }
                 else if (copiedNode.inputs[i].TryGetComponent(out SingleConnectionInputPointer single))
                 {
                     if (!single.connectedOutputPointer)
                         continue;
 
-                    InputPointer newInput = newNode.inputs[i];
-                    OutputPointer output = single.connectedOutputPointer;
-
-                    SetConnection(newInput, output);
+                    SetConnection(newNode.inputs[i], single.connectedOutputPointer);
                 }
                 else
                 {
@@ -210,25 +214,25 @@ namespace RuntimeNodeEditor.Nodes.Lines
                 output.connectedInputPointers ??= new List<InputPointer>();
                 output.connectedInputPointers.Add(input);
 
-                multi.SetMultiConnection(output);
+                CreateLine(output);
+
+                multi.SetMultiConnection(output, _currentConnectionLine);
             }
             else if (input.TryGetComponent(out SingleConnectionInputPointer single))
             {
                 output.connectedInputPointers ??= new List<InputPointer>();
                 output.connectedInputPointers.Add(input);
 
-                single.SetConnection(output);
+                CreateLine(output);
+
+                single.SetConnection(output, _currentConnectionLine);
             }
             else
             {
                 return;
             }
 
-            CreateLine(output);
-
-            input.Line = _currentConnectionLine;
             _currentConnectionLine.Input = input;
-
             LinesData.Add(_currentConnectionLine);
         }
         

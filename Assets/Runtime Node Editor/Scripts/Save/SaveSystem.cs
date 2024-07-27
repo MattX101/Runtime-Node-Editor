@@ -95,8 +95,25 @@ namespace RuntimeNodeEditor.Save
             position += 4;
 
             nodeConnections.Reset();
+
             for (int i = 0; i < connectionArrayLength; i++)
-                position = LoadConnection(nodes, position, data);
+            {
+                byte inputConnectionType = data[position];
+                position++;
+
+                switch (inputConnectionType)
+                {
+                    case 0:
+                        position = LoadConnection(nodes, position, data);
+                        break;
+                    case 1:
+                        position = LoadConnections(nodes, position, data);
+                        break;
+                    default:
+                        break;
+                }
+            }
+
             nodeConnections.UpdateLinesOnLoad();
             
             nodeExecution.Execute(nodes);
@@ -119,6 +136,23 @@ namespace RuntimeNodeEditor.Save
                 nodes[BitConverter.ToInt32(data, position + 5)].outputs[data[position + 9]]);
             
             return position + 10;
+        }
+
+        private int LoadConnections(Nodes.Node.Node[] nodes, int position, byte[] data)
+        {
+            int numOfConnections = BitConverter.ToInt32(data, position);
+            position += 4;
+
+            for (int i = 0; i < numOfConnections; i++)
+            {
+                nodeConnections.Load(
+                    nodes[BitConverter.ToInt32(data, position)].inputs[data[position + 4]],
+                    nodes[BitConverter.ToInt32(data, position + 5)].outputs[data[position + 9]]);
+
+                position += 10;
+            }
+
+            return position;
         }
     }
 }

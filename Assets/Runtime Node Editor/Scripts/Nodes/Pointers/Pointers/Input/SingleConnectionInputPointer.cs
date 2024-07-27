@@ -1,8 +1,12 @@
+using RuntimeNodeEditor.Nodes.Line;
+
 namespace RuntimeNodeEditor.Nodes.Pointer
 {
     public class SingleConnectionInputPointer : InputPointer
     {
         public OutputPointer connectedOutputPointer;
+        private NodeConnectionLine line;
+        public NodeConnectionLine Line => line;
 
         public bool hasConnection = false;
 
@@ -11,18 +15,25 @@ namespace RuntimeNodeEditor.Nodes.Pointer
             //
         }
 
-        public void SetConnection(OutputPointer outputPointer)
+        public void Destroy()
+        {
+            line = null;
+        }
+
+        public void SetConnection(OutputPointer outputPointer, NodeConnectionLine line)
         {
             hasConnection = true;
             connectedOutputPointer = outputPointer;
+
+            this.line = line;
         }
 
         public void DeleteConnection()
         {
-            if (Line == null)
+            if (line == null)
                 return;
 
-            Line.DestroyLine();
+            line.DestroyLine();
 
             hasConnection = false;
 

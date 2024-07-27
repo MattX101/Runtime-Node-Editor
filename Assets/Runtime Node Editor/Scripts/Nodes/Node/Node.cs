@@ -48,15 +48,13 @@ namespace RuntimeNodeEditor.Nodes.Node
         {
             foreach (InputPointer input in inputs)
             {
-                //input.DeleteConnection();
-
                 if (input.TryGetComponent(out SingleConnectionInputPointer single))
                 {
                     single.DeleteConnection();
                 }
                 else if (input.TryGetComponent(out MultiConnectionInputPointer multi))
                 {
-                    //
+                    multi.DeleteConnections();
                 }
                 else
                 {

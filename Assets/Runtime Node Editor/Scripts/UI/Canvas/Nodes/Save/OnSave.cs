@@ -60,35 +60,24 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Save
                 {
                     if (nodes[nodeIndex].inputs[inputPointerIndex].TryGetComponent(out SingleConnectionInputPointer single))
                     {
-                        if (single.connectedOutputPointer == null)
-                            continue;
+                        bytes.Add(0);
 
-                        int connectedOutputNode = FindNode(
-                            nodes,
-                            single.connectedOutputPointer.node);
-
-                        if (connectedOutputNode == -1)
-                            continue;
-
-                        int connectedOutputIndex = FindPointer(
-                            nodes,
-                            connectedOutputNode,
-                            single.connectedOutputPointer);
-
-                        if (connectedOutputIndex == -1)
-                            continue;
-
+                        SaveOutput(bytes, nodes, nodeIndex, single.connectedOutputPointer, inputPointerIndex);
                         count++;
+                    }
+                    else if (nodes[nodeIndex].inputs[inputPointerIndex].TryGetComponent(out MultiConnectionInputPointer multi))
+                    {
+                        bytes.Add(1);
 
-                        bytes.AddRange(BitConverter.GetBytes(nodeIndex));
-                        bytes.Add((byte)inputPointerIndex);
-
-                        bytes.AddRange(BitConverter.GetBytes(connectedOutputNode));
-                        bytes.Add((byte)connectedOutputIndex);
+                        bytes.AddRange(BitConverter.GetBytes(multi.connectedOutputPointers.Count));
+                        foreach (OutputPointer outputPointer in multi.connectedOutputPointers)
+                            SaveOutput(bytes, nodes, nodeIndex, outputPointer, inputPointerIndex);
+                        
+                        count++;
                     }
                     else
                     {
-                        // Save multi connections
+                        bytes.Add(2);
                     }
                 }
             }
@@ -100,6 +89,33 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Save
             bytes[lengthIndex + 3] = countBytes[3];
 
             return bytes.ToArray();
+        }
+
+        private static void SaveOutput(List<byte> bytes, RuntimeNodeEditor.Nodes.Node.Node[] nodes, int nodeIndex, OutputPointer outputPointer, int inputPointerIndex)
+        {
+            if (outputPointer == null)
+                return;
+
+            int connectedOutputNode = FindNode(
+                nodes,
+                outputPointer.node);
+
+            if (connectedOutputNode == -1)
+                return;
+
+            int connectedOutputIndex = FindPointer(
+                nodes,
+                connectedOutputNode,
+                outputPointer);
+
+            if (connectedOutputIndex == -1)
+                return;
+
+            bytes.AddRange(BitConverter.GetBytes(nodeIndex));
+            bytes.Add((byte)inputPointerIndex);
+
+            bytes.AddRange(BitConverter.GetBytes(connectedOutputNode));
+            bytes.Add((byte)connectedOutputIndex);
         }
 
         private static int FindNode(RuntimeNodeEditor.Nodes.Node.Node[] nodes, RuntimeNodeEditor.Nodes.Node.Node nodeToFind)

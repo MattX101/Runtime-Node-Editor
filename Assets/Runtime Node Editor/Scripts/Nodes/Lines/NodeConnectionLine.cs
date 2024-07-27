@@ -114,8 +114,21 @@ namespace RuntimeNodeEditor.Nodes.Line
         {
             LinesData.Remove(this);
 
-            if (Input)  Input.Line = null;
-            if (Output) Output.Lines.Remove(this);
+            if (Input)
+            {
+                if (Input.TryGetComponent(out MultiConnectionInputPointer multi))
+                {
+                    multi.Remove(this);
+                }
+                else if (Input.TryGetComponent(out SingleConnectionInputPointer single))
+                {
+                    single.Destroy();
+                }
+            }
+            if (Output)
+            {
+                Output.Lines.Remove(this);
+            }
 
             _lineRenderer = null;
             Object.Destroy(_lineObject);
