@@ -1,9 +1,9 @@
 using RuntimeNodeEditor.Data;
 using RuntimeNodeEditor.Input;
-using RuntimeNodeEditor.UI.Canvas.Lines;
 using Utils.Colour;
 using UnityEngine;
 using UnityEngine.UI;
+using RuntimeNodeEditor.UI.Canvas.Grid;
 
 namespace RuntimeNodeEditor.UI.Canvas
 {
@@ -17,11 +17,8 @@ namespace RuntimeNodeEditor.UI.Canvas
         [SerializeField] private CanvasScaler canvasScaler;
         [SerializeField] private RectTransform nodesRect, canvasRect;
 
-        [Header("Lines")]
-        [SerializeField] private Transform verticalParent;
-        [SerializeField] private Transform horizontalParent;
-
-        [SerializeField] private Material lineMaterial;
+        [Header("Grid")]
+        [SerializeField] private RawImage gridImage;
 
         private Vector2 _windowSize, _windowSizeWithBorder, _canvasSize;
         private Vector3 _screenRes;
@@ -38,11 +35,8 @@ namespace RuntimeNodeEditor.UI.Canvas
             Pan.NodesRect = nodesRect;
 
             SetSizes(1.0f);
-            CanvasBackgroundLines.Instance.Init(
-                lineMaterial,
-                _windowSizeWithBorder,
-                horizontalParent,
-                verticalParent);
+            BackgroundGrid.Instance.Init(gridImage);
+
             UpdateData();
         }
 
@@ -53,10 +47,10 @@ namespace RuntimeNodeEditor.UI.Canvas
 
             UpdateData();
 
-            if (CanvasBackgroundLines.Instance.Initialised == false)
+            if (BackgroundGrid.Instance.Initialised == false)
                 return;
 
-            Pan.PanCanvas();
+            Pan.PanNodesCanvas();
             Zoom.ZoomCanvas();
 
             ScreenScale.CalculateScale();
@@ -69,23 +63,21 @@ namespace RuntimeNodeEditor.UI.Canvas
                 Pan.Reset();
                 Zoom.Reset();
 
-                SetSizes(Zoom.Scale);
-                CanvasBackgroundLines.Instance.DrawLines(_windowSizeWithBorder);
+                SetSizes(CanvasData.CanvasScaler.scaleFactor);
             }
             else
             {
-                SetSizes(Zoom.Scale);
+                SetSizes(CanvasData.CanvasScaler.scaleFactor);
                 if (cameraBackgroundColour != camera.backgroundColor)
                     SetColor();
-                CanvasBackgroundLines.Instance.ManageLines(_canvasSize, _windowSizeWithBorder);
             }
+
+            BackgroundGrid.Instance.UpdateGrid();
         }
 
         public void Reset()
         {
             UpdateData();
-
-            CanvasBackgroundLines.Instance.Reset(_windowSizeWithBorder);
         }
 
         private void SetSizes(float zoom)
@@ -100,12 +92,11 @@ namespace RuntimeNodeEditor.UI.Canvas
             camera.backgroundColor = cameraBackgroundColour;
 
             Vector3 hsl = ColourConversion.RGBToHSL(cameraBackgroundColour);
-            CanvasBackgroundLines.Instance.LineColour = ColourConversion.HSLToRGB(
+            BackgroundGrid.Instance.SetGridColor(ColourConversion.HSLToRGB(
                 hsl.x,
                 hsl.y,
-                hsl.z * 0.5f);
-
-            CanvasBackgroundLines.Instance.UpdateLinesColour();
+                hsl.z * 0.9f)
+                );
         }
         
         private void UpdateData()

@@ -3,6 +3,7 @@ using RuntimeNodeEditor.Nodes.Lines;
 using RuntimeNodeEditor.Nodes.Pointer;
 using Utils.Curves;
 using UnityEngine;
+using RuntimeNodeEditor.Data;
 
 namespace RuntimeNodeEditor.Nodes.Line
 {
@@ -42,8 +43,8 @@ namespace RuntimeNodeEditor.Nodes.Line
 
         public void UpdateWidth()
         {
-            _lineRenderer.startWidth = LineWidth * Zoom.Scale;
-            _lineRenderer.endWidth = LineWidth * Zoom.Scale;
+            _lineRenderer.startWidth = LineWidth * CanvasData.CanvasScaler.scaleFactor;
+            _lineRenderer.endWidth = LineWidth * CanvasData.CanvasScaler.scaleFactor;
         }
 
         public void UpdateDraggingLine(Vector3 endPosition)
@@ -67,8 +68,8 @@ namespace RuntimeNodeEditor.Nodes.Line
         {
             SetPositions();
             
-            _startPosition *= Zoom.Scale;
-            _endPosition *= Zoom.Scale;
+            _startPosition *= CanvasData.CanvasScaler.scaleFactor;
+            _endPosition *= CanvasData.CanvasScaler.scaleFactor;
 
             UpdatePoints();
         }

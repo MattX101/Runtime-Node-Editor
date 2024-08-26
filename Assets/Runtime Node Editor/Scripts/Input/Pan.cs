@@ -1,55 +1,56 @@
 using RuntimeNodeEditor.Data;
+using UnityEngine;
 using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace RuntimeNodeEditor.Input
 {
     public static class Pan
     {
-        private static Vector2 _lastFrameMousePos;
+        // World Mouse
+        private static Vector2 _lastSavedWorldMousePos;
+        private static Vector2 WorldMousePos => MouseController.MouseWorldPosition;
 
-        private static Vector3 Offset, PositionFromOrigin;
-        public static Vector3 OffsetZoomed => Offset / Zoom.Scale;
-        public static Vector3 PositionFromOriginZoomed => PositionFromOrigin / Zoom.Scale;
+        private static Vector3 PositionFromOrigin;
+        public static Vector3 PositionFromOriginZoomed => PositionFromOrigin / CanvasData.CanvasScaler.scaleFactor;
+
+        // Viewport Mouse
+        private static Vector2 _lastSavedViewportMousePos;
+        private static Vector2 ViewportMousePos => MouseController.MouseViewportPosition * 2 - Vector2.one;
+
+        public static Vector2 ViewportPosition;
 
         public static RectTransform NodesRect;
 
-        public static void PanCanvas()
+        public static void PanNodesCanvas()
         {
-            Offset = Vector3.zero;
-
             if (CanvasData.IsDragging || CanvasData.IsPointing)
                 return;
 
-            Vector2 mousePos = MouseController.MouseWorldPosition;
+            Vector2 mousePos = WorldMousePos;
 
-            if (UnityEngine.Input.GetMouseButton(1) == false)
+            if (!UnityEngine.Input.GetMouseButton(1))
             {
                 CanvasData.IsPanning = false;
-                _lastFrameMousePos = mousePos;
+                _lastSavedWorldMousePos = mousePos;
 
                 return;
             }
-
             CanvasData.IsPanning = true;
 
-            float x = Mathf.Clamp(mousePos.x - _lastFrameMousePos.x, -1, 1);
-            float y = Mathf.Clamp(mousePos.y - _lastFrameMousePos.y, -1, 1);
+            CalculateWorldPan(
+                Mathf.Clamp(mousePos.x - _lastSavedWorldMousePos.x, -1, 1), 
+                Mathf.Clamp(mousePos.y - _lastSavedWorldMousePos.y, -1, 1));
 
-            CalculatePan(x, y);
-
-            _lastFrameMousePos = mousePos;
+            _lastSavedWorldMousePos = mousePos;
         }
 
-        private static void CalculatePan(float x, float y)
+        private static void CalculateWorldPan(float x, float y)
         {
             NodesRect.position = new Vector3(
                 NodesRect.position.x + x,
                 NodesRect.position.y + y,
                 NodesRect.position.z);
-
-            Offset = new Vector3(x, y, 0);
 
             PositionFromOrigin = new Vector3(
                 CanvasData.Camera.pixelWidth / 2,
@@ -58,13 +59,33 @@ namespace RuntimeNodeEditor.Input
             PositionFromOrigin -= CanvasData.Camera.WorldToScreenPoint(-NodesRect.position);
         }
 
+        public static void PanBackgroundGrid(float width, float height)
+        {
+            if (CanvasData.IsDragging || CanvasData.IsPointing)
+                return;
+
+            if (!CanvasData.IsPanning)
+            {
+                _lastSavedViewportMousePos = ViewportMousePos;
+
+                return;
+            }
+
+            ViewportPosition +=
+                (ViewportMousePos - _lastSavedViewportMousePos) *
+                CanvasData.Camera.orthographicSize *
+                new Vector2(width, height) /
+                (CanvasData.Camera.orthographicSize * 2);
+
+            _lastSavedViewportMousePos = ViewportMousePos;
+        }
+
         public static void Reset()
         {
             CanvasData.IsPanning = false;
 
-            _lastFrameMousePos = Vector2.zero;
+            _lastSavedWorldMousePos = Vector2.zero;
 
-            Offset = Vector3.zero;
             PositionFromOrigin = Vector3.zero;
 
             NodesRect.position = new Vector3(0, 0, NodesRect.position.z);
@@ -74,11 +95,8 @@ namespace RuntimeNodeEditor.Input
         {
             List<byte> data = new();
             
-            data.AddRange(BitConverter.GetBytes(NodesRect.position.x / Zoom.Scale));
-            data.AddRange(BitConverter.GetBytes(NodesRect.position.y / Zoom.Scale));
-            
-            data.AddRange(BitConverter.GetBytes(Offset.x));
-            data.AddRange(BitConverter.GetBytes(Offset.y));
+            data.AddRange(BitConverter.GetBytes(NodesRect.position.x / CanvasData.CanvasScaler.scaleFactor));
+            data.AddRange(BitConverter.GetBytes(NodesRect.position.y / CanvasData.CanvasScaler.scaleFactor));
             
             data.AddRange(BitConverter.GetBytes(PositionFromOrigin.x));
             data.AddRange(BitConverter.GetBytes(PositionFromOrigin.y));
@@ -88,14 +106,7 @@ namespace RuntimeNodeEditor.Input
 
         public static int LoadNodesRectPosition(float x, float y)
         { 
-            CalculatePan(x, y);
-
-            return 8;
-        }
-
-        public static int LoadOffset(float x, float y)
-        {
-            Offset = new Vector3(x, y, 0);
+            CalculateWorldPan(x, y);
 
             return 8;
         }

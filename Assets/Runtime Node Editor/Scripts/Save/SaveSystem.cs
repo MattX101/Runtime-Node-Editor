@@ -77,7 +77,6 @@ namespace RuntimeNodeEditor.Save
             position += Zoom.Load(BitConverter.ToSingle(data, position));
             
             position += Pan.LoadNodesRectPosition(BitConverter.ToSingle(data, position), BitConverter.ToSingle(data,position + 4));
-            position += Pan.LoadOffset(BitConverter.ToSingle(data, position), BitConverter.ToSingle(data,position + 4));
             position += Pan.LoadPositionFromOrigin(BitConverter.ToSingle(data, position), BitConverter.ToSingle(data,position + 4));
             
             int numOfNodes = BitConverter.ToInt32(data,position);
