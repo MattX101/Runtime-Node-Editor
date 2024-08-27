@@ -5,25 +5,15 @@ namespace RuntimeNodeEditor.Nodes.Node
 {
     public class StringOutputNode : Node
     {
-        public override void Execute()
+        protected override void CodeToExecute()
         {
-            if (inputs[0].TryGetComponent(out SingleConnectionInputPointer input))
-            {
-                if (input.connectedOutputPointer)
-                {
-                    input.connectedOutputPointer.node.Execute();
-                    Elements.SetInputField(
-                        Elements.InputFields[0],
-                        PointerValue.GetString(input.connectedOutputPointer));
-                }
-            }
-
-            WasExecuted = true;
+            SingleConnectionInputPointer input = GetSingle(0);
+            if (input && IsConnected(input)) input.connectedOutputPointer.node.Execute();
         }
 
-        public override void Reset()
+        protected override void DataToGetAndSet()
         {
-            ResetExecution();
+            Elements.SetInputField(Elements.InputFields[0], PointerValue.GetString(GetSingle(0)));
         }
     }
 }

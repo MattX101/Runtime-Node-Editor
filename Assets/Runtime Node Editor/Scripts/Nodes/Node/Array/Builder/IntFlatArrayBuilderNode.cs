@@ -5,9 +5,10 @@ namespace RuntimeNodeEditor.Nodes.Node
 {
     public class IntFlatArrayBuilderNode : Node
     {
-        public override void Execute()
+        protected override void CodeToExecute()
         {
-            if (inputs[0].TryGetComponent(out MultiConnectionInputPointer multiInput))
+            MultiConnectionInputPointer multiInput = GetMulti(0);
+            if (multiInput)
             {
                 IntArrayOutputPointer outputArray = outputs[0].GetComponent<IntArrayOutputPointer>();
                 outputArray.values = new int[GetArrayLength(multiInput)];
@@ -27,18 +28,11 @@ namespace RuntimeNodeEditor.Nodes.Node
 
                         continue;
                     }
-                    
+
                     outputArray.values[arrayIndex] = PointerValue.GetInt(multiInput.connectedOutputPointers[pointerIndex]);
                     arrayIndex++;
                 }
             }
-
-            WasExecuted = true;
-        }
-
-        public override void Reset()
-        {
-            ResetExecution();
         }
 
         private int GetArrayLength(MultiConnectionInputPointer multiInput)

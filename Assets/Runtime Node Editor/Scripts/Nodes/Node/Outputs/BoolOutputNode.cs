@@ -5,25 +5,15 @@ namespace RuntimeNodeEditor.Nodes.Node
 {
     public class BoolOutputNode : Node
     {
-        public override void Execute()
+        protected override void CodeToExecute()
         {
-            if (inputs[0].TryGetComponent(out SingleConnectionInputPointer input))
-            {
-                if (input.connectedOutputPointer)
-                {
-                    input.connectedOutputPointer.node.Execute();
-                    Elements.SetBoolean(
-                        Elements.Buttons[0],
-                        PointerValue.GetBool(input.connectedOutputPointer));
-                }
-            }
-
-            WasExecuted = true;
+            SingleConnectionInputPointer input = GetSingle(0);
+            if (input && IsConnected(input)) input.connectedOutputPointer.node.Execute();
         }
 
-        public override void Reset()
+        protected override void DataToGetAndSet()
         {
-            ResetExecution();
+            Elements.SetBoolean(Elements.Buttons[0], PointerValue.GetBool(GetSingle(0)));
         }
     }
 }

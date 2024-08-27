@@ -15,73 +15,53 @@ namespace RuntimeNodeEditor.Nodes.Node
             "XNOR",
         };
 
-        public override void Execute()
+        protected override void CodeToExecute()
         {
-            bool a = false;
-            if (inputs[0].TryGetComponent(out SingleConnectionInputPointer inputA))
-            {
-                if (inputA.connectedOutputPointer)
-                {
-                    inputA.connectedOutputPointer.node.Execute();
-                    a = PointerValue.GetBool(inputA.connectedOutputPointer);
-                    Elements.SetBoolean(Elements.Buttons[0], a);
-                }
-            }
+            SingleConnectionInputPointer inputA = GetSingle(0);
+            if (inputA && IsConnected(inputA)) inputA.connectedOutputPointer.node.Execute();
 
-            bool b = false;
-            if (inputs[1].TryGetComponent(out SingleConnectionInputPointer inputB))
-            {
-                if (inputB.connectedOutputPointer)
-                {
-                    inputB.connectedOutputPointer.node.Execute();
-                    b = PointerValue.GetBool(inputB.connectedOutputPointer);
-                    Elements.SetBoolean(Elements.Buttons[1], b);
-                }
-            }
+            SingleConnectionInputPointer inputB = GetSingle(1);
+            if (inputB && IsConnected(inputB)) inputB.connectedOutputPointer.node.Execute();
+        }
 
-            bool result = false;
-            switch (Elements.Dropdowns[0].Context)
-            {
-                case 0:
-                    result = AND(a, b);
-                    break;
-                case 1:
-                    result = OR(a, b);
-                    break;
-                case 2:
-                    result = NAND(a, b);
-                    break;
-                case 3:
-                    result = NOR(a, b);
-                    break;
-                case 4:
-                    result = XOR(a, b);
-                    break;
-                case 5:
-                    result = XNOR(a, b);
-                    break;
-                default:
-                    break;
-            }
+        protected override void DataToGetAndSet()
+        {
+            bool a = PointerValue.GetBool(GetSingle(0));
+            bool b = PointerValue.GetBool(GetSingle(1));
+
+            Elements.SetBoolean(Elements.Buttons[0], a);
+            Elements.SetBoolean(Elements.Buttons[1], b);
+
+            bool result = CalcualteGate(a, b);
 
             outputs[0].GetComponent<BoolOutputPointer>().value = result;
             Elements.SetBoolean(Elements.Buttons[2], result);
-
-            WasExecuted = true;
         }
 
-        public override void Reset()
+        private bool CalcualteGate(bool a, bool b)
         {
-            ResetExecution();
+            return Elements.Dropdowns[0].Context switch
+            {
+                0 => AND(a, b),
+                1 => OR(a, b),
+                2 => NAND(a, b),
+                3 => NOR(a, b),
+                4 => XOR(a, b),
+                5 => XNOR(a, b),
+                _ => false
+            };
+        }
 
+        protected override void CodeToReset()
+        {
             outputs[0].GetComponent<BoolOutputPointer>().Reset();
         }
 
-        private bool AND(bool a, bool b)   { return a && b; }
-        private bool OR(bool a, bool b)    { return a || b; }
-        private bool NAND(bool a, bool b)  { return !(a && b); }
-        private bool NOR(bool a, bool b)   { return !(a || b); }
-        private bool XOR(bool a, bool b)   { return a != b; }
-        private bool XNOR(bool a, bool b)  { return a == b; }
+        private bool AND(bool a, bool b) => a && b;
+        private bool OR(bool a, bool b) => a || b;
+        private bool NAND(bool a, bool b) => !(a && b);
+        private bool NOR(bool a, bool b) => !(a || b);
+        private bool XOR(bool a, bool b) => a != b;
+        private bool XNOR(bool a, bool b) => a == b;
     }
 }

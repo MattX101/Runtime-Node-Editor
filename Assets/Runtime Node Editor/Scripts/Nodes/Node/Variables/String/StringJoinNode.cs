@@ -5,7 +5,7 @@ namespace RuntimeNodeEditor.Nodes.Node
 {
     public class StringJoinNode : Node
     {
-        public override void Execute()
+        protected override void CodeToExecute()
         {
             if (!inputs[0].TryGetComponent(out SingleConnectionInputPointer arrayInput))
                 return;
@@ -36,14 +36,10 @@ namespace RuntimeNodeEditor.Nodes.Node
 
             Elements.SetInputField(Elements.InputFields[0], value);
             Elements.SetInputField(Elements.InputFields[1], seperator);
-
-            WasExecuted = true;
         }
 
-        public override void Reset()
+        protected override void CodeToReset()
         {
-            ResetExecution();
-
             outputs[0].GetComponent<StringOutputPointer>().Reset();
         }
     }

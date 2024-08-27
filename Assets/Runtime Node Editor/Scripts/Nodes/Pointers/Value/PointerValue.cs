@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -60,6 +61,8 @@ namespace RuntimeNodeEditor.Nodes.Pointer.Value
 
             return false;
         }
+        
+        private static bool IsValid(SingleConnectionInputPointer single) => !single.node.IsValid(single);
 
         public static int GetInt(OutputPointer output)
         {
@@ -69,6 +72,13 @@ namespace RuntimeNodeEditor.Nodes.Pointer.Value
                 ValueType.Float => (int)output.GetComponent<FloatOutputPointer>().value,
                 _ => 0
             };
+        }
+        public static int GetInt(SingleConnectionInputPointer single)
+        {
+            if (!IsValid(single))
+                return 0;
+
+            return GetInt(single.connectedOutputPointer);
         }
 
         public static float GetFloat(OutputPointer output)
@@ -80,15 +90,30 @@ namespace RuntimeNodeEditor.Nodes.Pointer.Value
                 _ => 0.0f
             };
         }
-
-        public static bool GetBool(OutputPointer output)
+        public static float GetFloat(SingleConnectionInputPointer single)
         {
-            return output.GetComponent<BoolOutputPointer>().value;
+            if (!IsValid(single))
+                return 0.0f;
+
+            return GetFloat(single.connectedOutputPointer);
         }
 
-        public static char GetChar(OutputPointer output)
+        public static bool GetBool(OutputPointer output) => output.GetComponent<BoolOutputPointer>().value;
+        public static bool GetBool(SingleConnectionInputPointer single)
         {
-            return output.GetComponent<CharOutputPointer>().value;
+            if (!IsValid(single))
+                return false;
+
+            return GetBool(single.connectedOutputPointer);
+        }
+
+        public static char GetChar(OutputPointer output) => output.GetComponent<CharOutputPointer>().value;
+        public static char GetChar(SingleConnectionInputPointer single)
+        {
+            if (!IsValid(single))
+                return ' ';
+
+            return GetChar(single.connectedOutputPointer);
         }
 
         public static string GetString(OutputPointer output)
@@ -103,10 +128,21 @@ namespace RuntimeNodeEditor.Nodes.Pointer.Value
                 _ => ""
             };
         }
-
-        public static Color GetColor(OutputPointer output)
+        public static string GetString(SingleConnectionInputPointer single)
         {
-            return output.GetComponent<ColorOutputPointer>().value; 
+            if (!IsValid(single))
+                return "";
+
+            return GetString(single.connectedOutputPointer);
+        }
+
+        public static Color GetColor(OutputPointer output) =>  output.GetComponent<ColorOutputPointer>().value; 
+        public static Color GetColor(SingleConnectionInputPointer single)
+        {
+            if (!IsValid(single))
+                return Color.black;
+
+            return GetColor(single.connectedOutputPointer);
         }
 
         public static Vector2 GetVector2(OutputPointer output)
@@ -120,6 +156,13 @@ namespace RuntimeNodeEditor.Nodes.Pointer.Value
                 _ => Vector2.zero
             };
         }
+        public static Vector2 GetVector2(SingleConnectionInputPointer single)
+        {
+            if (!IsValid(single))
+                return Vector2.zero;
+
+            return GetVector2(single.connectedOutputPointer);
+        }
 
         public static Vector3 GetVector3(OutputPointer output)
         {
@@ -131,6 +174,13 @@ namespace RuntimeNodeEditor.Nodes.Pointer.Value
                 ValueType.Vector2 => new Vector3(output.GetComponent<Vector2OutputPointer>().value.x, output.GetComponent<Vector2OutputPointer>().value.y, 0),
                 _ => Vector3.zero
             };
+        }
+        public static Vector3 GetVector3(SingleConnectionInputPointer single)
+        {
+            if (!IsValid(single))
+                return Vector3.zero;
+
+            return GetVector3(single.connectedOutputPointer);
         }
     }
 }

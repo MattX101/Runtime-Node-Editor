@@ -6,9 +6,10 @@ namespace RuntimeNodeEditor.Nodes.Node
 {
     public class Vector3FlatArrayBuilderNode : Node
     {
-        public override void Execute()
+        protected override void CodeToExecute()
         {
-            if (inputs[0].TryGetComponent(out MultiConnectionInputPointer multiInput))
+            MultiConnectionInputPointer multiInput = GetMulti(0);
+            if (multiInput)
             {
                 Vector3ArrayOutputPointer outputArray = outputs[0].GetComponent<Vector3ArrayOutputPointer>();
                 outputArray.values = new Vector3[GetArrayLength(multiInput)];
@@ -33,13 +34,6 @@ namespace RuntimeNodeEditor.Nodes.Node
                     arrayIndex++;
                 }
             }
-
-            WasExecuted = true;
-        }
-
-        public override void Reset()
-        {
-            ResetExecution();
         }
 
         private int GetArrayLength(MultiConnectionInputPointer multiInput)

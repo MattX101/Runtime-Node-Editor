@@ -5,7 +5,7 @@ namespace RuntimeNodeEditor.Nodes.Node
 {
     public class StringToCharArrayNode : Node
     {
-        public override void Execute()
+        protected override void CodeToExecute()
         {
             if (!inputs[0].TryGetComponent(out SingleConnectionInputPointer valueInput))
                 return;
@@ -15,14 +15,10 @@ namespace RuntimeNodeEditor.Nodes.Node
                 valueInput.connectedOutputPointer.node.Execute();
                 outputs[0].GetComponent<CharArrayOutputPointer>().values = PointerValue.GetString(valueInput.connectedOutputPointer).ToCharArray();
             }
-
-            WasExecuted = true;
         }
 
-        public override void Reset()
+        protected override void CodeToReset()
         {
-            ResetExecution();
-
             outputs[0].GetComponent<CharArrayOutputPointer>().Reset();
         }
     }

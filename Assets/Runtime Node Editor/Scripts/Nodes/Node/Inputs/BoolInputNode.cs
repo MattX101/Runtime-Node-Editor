@@ -4,17 +4,13 @@ namespace RuntimeNodeEditor.Nodes.Node
 {
     public class BoolInputNode : Node
     {
-        public override void Execute()
+        protected override void CodeToExecute()
         {
             outputs[0].GetComponent<BoolOutputPointer>().value = Elements.Buttons[0].Toggled;
-
-            WasExecuted = true;
         }
 
-        public override void Reset()
+        protected override void CodeToReset()
         {
-            ResetExecution();
-
             outputs[0].GetComponent<BoolOutputPointer>().Reset();
         }
     }

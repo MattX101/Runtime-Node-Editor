@@ -5,7 +5,7 @@ namespace RuntimeNodeEditor.Nodes.Node
 {
     public class StringContactNode : Node
     {
-        public override void Execute()
+        protected override void CodeToExecute()
         {
             string a = "";
             if (inputs[0].TryGetComponent(out SingleConnectionInputPointer inputA))
@@ -33,14 +33,10 @@ namespace RuntimeNodeEditor.Nodes.Node
             Elements.SetInputField(Elements.InputFields[0], a);
             Elements.SetInputField(Elements.InputFields[1], b);
             Elements.SetInputField(Elements.InputFields[2], value);
-
-            WasExecuted = true;
         }
 
-        public override void Reset()
+        protected override void CodeToReset()
         {
-            ResetExecution();
-
             outputs[0].GetComponent<StringOutputPointer>().Reset();
         }
     }

@@ -8,23 +8,15 @@ namespace RuntimeNodeEditor.Nodes.Node
     {
         public ImagePreview ImagePreview;
 
-        public override void Execute()
+        protected override void CodeToExecute()
         {
-            if (inputs[0].TryGetComponent(out SingleConnectionInputPointer input))
-            {
-                if (input.connectedOutputPointer)
-                {
-                    input.connectedOutputPointer.node.Execute();
-                    ImagePreview.Image.color = PointerValue.GetColor(input.connectedOutputPointer);
-                }
-            }
-
-            WasExecuted = true;
+            SingleConnectionInputPointer input = GetSingle(0);
+            if (input && IsConnected(input)) input.connectedOutputPointer.node.Execute();
         }
 
-        public override void Reset()
+        protected override void DataToGetAndSet()
         {
-            ResetExecution();
+            ImagePreview.Image.color = PointerValue.GetColor(GetSingle(0));
         }
     }
 }

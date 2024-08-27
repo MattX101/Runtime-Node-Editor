@@ -6,7 +6,7 @@ namespace RuntimeNodeEditor.Nodes.Node
 {
     public class Vector3SlerpNode : Node
     {
-        public override void Execute()
+        protected override void CodeToExecute()
         {
             Vector3 a = Vector3.zero;
             if (inputs[0].TryGetComponent(out SingleConnectionInputPointer inputA))
@@ -49,13 +49,10 @@ namespace RuntimeNodeEditor.Nodes.Node
             Elements.SetInputField(
                 Elements.InputFields[2],
                 outputs[0].GetComponent<Vector3OutputPointer>().value.z.ToString());
-
-            WasExecuted = true;
         }
 
-        public override void Reset()
+        protected override void CodeToReset()
         {
-            ResetExecution();
             outputs[0].GetComponent<Vector3OutputPointer>().value = Vector3.zero;
         }
     }

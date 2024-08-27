@@ -5,7 +5,7 @@ namespace RuntimeNodeEditor.Nodes.Node
 {
     public class StringInsertNode : Node
     {
-        public override void Execute()
+        protected override void CodeToExecute()
         {
             if (!inputs[0].TryGetComponent(out SingleConnectionInputPointer valueInput))
                 return;
@@ -44,14 +44,10 @@ namespace RuntimeNodeEditor.Nodes.Node
             Elements.SetInputField(Elements.InputFields[1], startIndex.ToString());
             Elements.SetInputField(Elements.InputFields[2], insert);
             Elements.SetInputField(Elements.InputFields[3], result);
-
-            WasExecuted = true;
         }
 
-        public override void Reset()
+        protected override void CodeToReset()
         {
-            ResetExecution();
-
             outputs[0].GetComponent<StringOutputPointer>().Reset();
         }
     }

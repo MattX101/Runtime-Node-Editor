@@ -8,6 +8,8 @@ namespace RuntimeNodeEditor.Nodes
     {
         public void Execute(Node.Node[] nodes)
         {
+            Debug.Log("Executing nodes!");
+
             List<Node.Node> endNodes = nodes.Where(node => node.endNode).ToList();
 
             foreach (Node.Node endNode in endNodes)

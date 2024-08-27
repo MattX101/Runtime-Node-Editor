@@ -6,43 +6,28 @@ namespace RuntimeNodeEditor.Nodes.Node
 {
     public class Vector2ReflectNode : Node
     {
-        public override void Execute()
+        protected override void CodeToExecute()
         {
-            Vector2 a = Vector2.zero;
-            if (inputs[0].TryGetComponent(out SingleConnectionInputPointer inputA))
-            {
-                if (inputA.connectedOutputPointer)
-                {
-                    inputA.connectedOutputPointer.node.Execute();
-                    a = PointerValue.GetVector2(inputA.connectedOutputPointer);
-                }
-            }
-
-            Vector2 b = Vector2.zero;
-            if (inputs[1].TryGetComponent(out SingleConnectionInputPointer inputB))
-            {
-                if (inputB.connectedOutputPointer)
-                {
-                    inputB.connectedOutputPointer.node.Execute();
-                    b = PointerValue.GetVector2(inputB.connectedOutputPointer);
-                }
-            }
-
-            outputs[0].GetComponent<Vector2OutputPointer>().value = Vector2.Reflect(a, b);
-
-            Elements.SetInputField(
-                Elements.InputFields[0],
-                outputs[0].GetComponent<Vector2OutputPointer>().value.x.ToString());
-            Elements.SetInputField(
-                Elements.InputFields[1],
-                outputs[0].GetComponent<Vector2OutputPointer>().value.y.ToString());
-
-            WasExecuted = true;
+            SingleConnectionInputPointer inputA = GetSingle(0);
+            if (inputA && IsConnected(inputA)) inputA.connectedOutputPointer.node.Execute();
+            
+            SingleConnectionInputPointer inputB = GetSingle(1);
+            if (inputB && IsConnected(inputB)) inputB.connectedOutputPointer.node.Execute();
         }
 
-        public override void Reset()
+        protected override void DataToGetAndSet()
         {
-            ResetExecution();
+            outputs[0].GetComponent<Vector2OutputPointer>().value = Vector2.Reflect(
+                PointerValue.GetVector2(GetSingle(0)), 
+                PointerValue.GetVector2(GetSingle(1))
+                );
+
+            Elements.SetInputField(Elements.InputFields[0], outputs[0].GetComponent<Vector2OutputPointer>().value.x.ToString());
+            Elements.SetInputField(Elements.InputFields[1], outputs[0].GetComponent<Vector2OutputPointer>().value.y.ToString());
+        }
+
+        protected override void CodeToReset()
+        {
             outputs[0].GetComponent<Vector2OutputPointer>().value = Vector2.zero;
         }
     }

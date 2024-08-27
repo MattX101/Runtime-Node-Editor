@@ -18,73 +18,50 @@ namespace RuntimeNodeEditor.Nodes.Node
             "Symbol"
         };
 
-        public override void Execute()
+        protected override void CodeToExecute()
         {
-            char c = ' ';
-            if (inputs[0].TryGetComponent(out SingleConnectionInputPointer input))
-            {
-                if (input.connectedOutputPointer)
-                {
-                    input.connectedOutputPointer.node.Execute();
-                    c = PointerValue.GetChar(input.connectedOutputPointer);
-                }
-            }
+            SingleConnectionInputPointer input = GetSingle(0);
+            if (input && IsConnected(input)) input.connectedOutputPointer.node.Execute();
+        }
 
-            bool result = false;
-            switch (Elements.Dropdowns[0].Context)
-            {
-                case 0:
-                    result = IsLower(c);
-                    break;
-                case 1:
-                    result = IsUpper(c);
-                    break;
-                case 2:
-                    result = IsWhiteSpace(c);
-                    break;
-                case 3:
-                    result = IsSeparator(c);
-                    break;
-                case 4:
-                    result = IsNumber(c);
-                    break;
-                case 5:
-                    result = IsDigit(c);
-                    break;
-                case 6:
-                    result = IsLetter(c);
-                    break;
-                case 7:
-                    result = IsLetterOrDigit(c);
-                    break;
-                case 8:
-                    result = IsSymbol(c);
-                    break;
-                default:
-                    break;
-            }
+        protected override void DataToGetAndSet()
+        {
+            bool result = IsChar(PointerValue.GetChar(GetSingle(0)));
 
             outputs[0].GetComponent<BoolOutputPointer>().value = result;
             Elements.SetBoolean(Elements.Buttons[0], result);
-
-            WasExecuted = true;
         }
 
-        public override void Reset()
+        private bool IsChar(char c)
         {
-            ResetExecution();
+            return Elements.Dropdowns[0].Context switch
+            {
+                0 => IsLower(c),
+                1 => IsUpper(c),
+                2 => IsWhiteSpace(c),
+                3 => IsSeparator(c),
+                4 => IsNumber(c),
+                5 => IsDigit(c),
+                6 => IsLetter(c),
+                7 => IsLetterOrDigit(c),
+                8 => IsSymbol(c),
+                _ => false,
+            };
+        }
 
+        protected override void CodeToReset()
+        {
             outputs[0].GetComponent<BoolOutputPointer>().Reset();
         }
 
-        private bool IsLower(char c) { return char.IsLower(c); }
-        private bool IsUpper(char c) { return char.IsUpper(c); }
-        private bool IsWhiteSpace(char c) { return char.IsWhiteSpace(c); }
-        private bool IsSeparator(char c) { return char.IsSeparator(c); }
-        private bool IsNumber(char c) { return char.IsNumber(c); }
-        private bool IsDigit(char c) { return char.IsDigit(c); }
-        private bool IsLetter(char c) { return char.IsLetter(c); }
-        private bool IsLetterOrDigit(char c) { return char.IsLetterOrDigit(c); }
-        private bool IsSymbol(char c) { return char.IsSymbol(c); }
+        private bool IsLower(char c) => char.IsLower(c);
+        private bool IsUpper(char c) => char.IsUpper(c);
+        private bool IsWhiteSpace(char c) => char.IsWhiteSpace(c);
+        private bool IsSeparator(char c) => char.IsSeparator(c);
+        private bool IsNumber(char c) => char.IsNumber(c);
+        private bool IsDigit(char c) => char.IsDigit(c);
+        private bool IsLetter(char c) => char.IsLetter(c);
+        private bool IsLetterOrDigit(char c) => char.IsLetterOrDigit(c);
+        private bool IsSymbol(char c) => char.IsSymbol(c);
     }
 }

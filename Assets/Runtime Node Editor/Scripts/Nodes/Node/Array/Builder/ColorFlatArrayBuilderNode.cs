@@ -6,9 +6,10 @@ namespace RuntimeNodeEditor.Nodes.Node
 {
     public class ColorFlatArrayBuilderNode : Node
     {
-        public override void Execute()
+        protected override void CodeToExecute()
         {
-            if (inputs[0].TryGetComponent(out MultiConnectionInputPointer multiInput))
+            MultiConnectionInputPointer multiInput = GetMulti(0);
+            if (multiInput)
             {
                 ColorArrayOutputPointer outputArray = outputs[0].GetComponent<ColorArrayOutputPointer>();
                 outputArray.values = new Color[GetArrayLength(multiInput)];
@@ -33,13 +34,6 @@ namespace RuntimeNodeEditor.Nodes.Node
                     arrayIndex++;
                 }
             }
-
-            WasExecuted = true;
-        }
-
-        public override void Reset()
-        {
-            ResetExecution();
         }
 
         private int GetArrayLength(MultiConnectionInputPointer multiInput)

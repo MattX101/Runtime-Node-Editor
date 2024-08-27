@@ -12,7 +12,7 @@ namespace RuntimeNodeEditor.Nodes.Node
             "End",
         };
 
-        public override void Execute()
+        protected override void CodeToExecute()
         {
             if (!inputs[0].TryGetComponent(out SingleConnectionInputPointer toTrimInput))
                 return;
@@ -52,14 +52,10 @@ namespace RuntimeNodeEditor.Nodes.Node
 
             Elements.SetInputField(Elements.InputFields[0], toTrim);
             Elements.SetInputField(Elements.InputFields[1], result);
-
-            WasExecuted = true;
         }
 
-        public override void Reset()
+        protected override void CodeToReset()
         {
-            ResetExecution();
-
             outputs[0].GetComponent<StringOutputPointer>().Reset();
         }
 

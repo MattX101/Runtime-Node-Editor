@@ -11,44 +11,36 @@ namespace RuntimeNodeEditor.Nodes.Node
             "Upper"
         };
 
-        public override void Execute()
+        protected override void CodeToExecute()
         {
-            char c = ' ';
-            if (inputs[0].TryGetComponent(out SingleConnectionInputPointer input))
-            {
-                if (input.connectedOutputPointer)
-                {
-                    input.connectedOutputPointer.node.Execute();
-                    c = PointerValue.GetChar(input.connectedOutputPointer);
+            SingleConnectionInputPointer input = GetSingle(0);
+            if (input && IsConnected(input)) input.connectedOutputPointer.node.Execute();
+        }
 
-                    switch (Elements.Dropdowns[0].Context)
-                    {
-                        case 0:
-                            c = ToLower(c);
-                            break;
-                        case 1:
-                            c = ToUpper(c);
-                            break;
-                        default:
-                            break;
-                    }
-                }
-            }
+        protected override void DataToGetAndSet()
+        {
+            char c = IsChar(PointerValue.GetChar(GetSingle(0)));
 
             outputs[0].GetComponent<CharOutputPointer>().value = c;
             Elements.SetInputField(Elements.InputFields[0], c.ToString());
-
-            WasExecuted = true;
         }
 
-        public override void Reset()
+        private char IsChar(char c)
         {
-            ResetExecution();
+            return Elements.Dropdowns[0].Context switch
+            {
+                0 => ToLower(c),
+                1 => ToUpper(c),
+                _ => ' ',
+            };
+        }
 
+        protected override void CodeToReset()
+        {
             outputs[0].GetComponent<CharOutputPointer>().Reset();
         }
 
-        private char ToLower(char c) { return char.ToLower(c); }
-        private char ToUpper(char c) { return char.ToUpper(c); }
+        private char ToLower(char c) => char.ToLower(c);
+        private char ToUpper(char c) => char.ToUpper(c);
     }
 }

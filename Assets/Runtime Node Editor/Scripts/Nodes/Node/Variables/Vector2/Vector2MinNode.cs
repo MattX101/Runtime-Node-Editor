@@ -6,7 +6,7 @@ namespace RuntimeNodeEditor.Nodes.Node
 {
     public class Vector2MinNode : Node
     {
-        public override void Execute()
+        protected override void CodeToExecute()
         {
             Vector2 a = Vector2.zero;
             if (inputs[0].TryGetComponent(out SingleConnectionInputPointer inputA))
@@ -36,13 +36,10 @@ namespace RuntimeNodeEditor.Nodes.Node
             Elements.SetInputField(
                 Elements.InputFields[1],
                 outputs[0].GetComponent<Vector2OutputPointer>().value.y.ToString());
-
-            WasExecuted = true;
         }
 
-        public override void Reset()
+        protected override void CodeToReset()
         {
-            ResetExecution();
             outputs[0].GetComponent<Vector2OutputPointer>().value = Vector2.zero;
         }
     }

@@ -4,7 +4,7 @@ namespace RuntimeNodeEditor.Nodes.Node
 {
     public class StringArrayContactNode : Node
     {
-        public override void Execute()
+        protected override void CodeToExecute()
         {
             if (!inputs[0].TryGetComponent(out SingleConnectionInputPointer arrayInput))
                 return;
@@ -19,14 +19,10 @@ namespace RuntimeNodeEditor.Nodes.Node
             outputs[0].GetComponent<StringOutputPointer>().value = result;
             
             Elements.SetInputField(Elements.InputFields[0], result);
-
-            WasExecuted = true;
         }
 
-        public override void Reset()
+        protected override void CodeToReset()
         {
-            ResetExecution();
-
             outputs[0].GetComponent<StringOutputPointer>().Reset();
         }
     }

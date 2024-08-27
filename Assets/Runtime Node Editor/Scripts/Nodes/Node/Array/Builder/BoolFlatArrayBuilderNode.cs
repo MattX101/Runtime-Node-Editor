@@ -5,9 +5,10 @@ namespace RuntimeNodeEditor.Nodes.Node
 {
     public class BoolFlatArrayBuilderNode : Node
     {
-        public override void Execute()
+        protected override void CodeToExecute()
         {
-            if (inputs[0].TryGetComponent(out MultiConnectionInputPointer multiInput))
+            MultiConnectionInputPointer multiInput = GetMulti(0);
+            if (multiInput)
             {
                 BoolArrayOutputPointer outputArray = outputs[0].GetComponent<BoolArrayOutputPointer>();
                 outputArray.values = new bool[GetArrayLength(multiInput)];
@@ -32,13 +33,6 @@ namespace RuntimeNodeEditor.Nodes.Node
                     arrayIndex++;
                 }
             }
-
-            WasExecuted = true;
-        }
-
-        public override void Reset()
-        {
-            ResetExecution();
         }
 
         private int GetArrayLength(MultiConnectionInputPointer multiInput)

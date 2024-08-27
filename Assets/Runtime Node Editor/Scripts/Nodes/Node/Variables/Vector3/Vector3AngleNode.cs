@@ -6,7 +6,7 @@ namespace RuntimeNodeEditor.Nodes.Node
 {
     public class Vector3AngleNode : Node
     {
-        public override void Execute()
+        protected override void CodeToExecute()
         {
             Vector3 a = Vector3.zero;
             if (inputs[0].TryGetComponent(out SingleConnectionInputPointer inputA))
@@ -30,13 +30,10 @@ namespace RuntimeNodeEditor.Nodes.Node
 
             outputs[0].GetComponent<FloatOutputPointer>().value = Vector3.Angle(a, b);
             Elements.SetInputField(Elements.InputFields[0], outputs[0].GetComponent<FloatOutputPointer>().value.ToString());
-
-            WasExecuted = true;
         }
 
-        public override void Reset()
+        protected override void CodeToReset()
         {
-            ResetExecution();
             outputs[0].GetComponent<FloatOutputPointer>().value = 0.0f;
         }
     }

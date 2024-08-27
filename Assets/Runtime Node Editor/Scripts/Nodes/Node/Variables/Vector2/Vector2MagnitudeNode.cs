@@ -6,7 +6,7 @@ namespace RuntimeNodeEditor.Nodes.Node
 {
     public class Vector2MagnitudeNode : Node
     {
-        public override void Execute()
+        protected override void CodeToExecute()
         {
             Vector2 a = Vector2.zero;
             if (inputs[0].TryGetComponent(out SingleConnectionInputPointer inputA))
@@ -20,13 +20,10 @@ namespace RuntimeNodeEditor.Nodes.Node
 
             outputs[0].GetComponent<FloatOutputPointer>().value = Vector2.SqrMagnitude(a);
             Elements.SetInputField(Elements.InputFields[0], outputs[0].GetComponent<FloatOutputPointer>().value.ToString());
-
-            WasExecuted = true;
         }
 
-        public override void Reset()
+        protected override void CodeToReset()
         {
-            ResetExecution();
             outputs[0].GetComponent<FloatOutputPointer>().value = 0.0f;
         }
     }

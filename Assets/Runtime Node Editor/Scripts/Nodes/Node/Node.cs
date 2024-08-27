@@ -9,23 +9,13 @@ namespace RuntimeNodeEditor.Nodes.Node
 {
     public class Node : MonoBehaviour
     {
-        protected bool WasExecuted;
-        public bool endNode;
+        private bool _wasExecuted;
+        public bool endNode = false;
 
         public readonly List<InputPointer> inputs = new();
         public readonly List<OutputPointer> outputs = new();
 
         public NodeUIElements Elements;
-
-        public virtual void Reset()
-        {
-            //
-        }
-
-        protected void ResetExecution()
-        {
-            WasExecuted = false;
-        }
 
         public void AddPointer(InputPointer inputPointer, ValueType valueType, Pointer.Type.PointerType pointerType = Pointer.Type.PointerType.Variable)
         {
@@ -66,11 +56,6 @@ namespace RuntimeNodeEditor.Nodes.Node
                 output.DeleteConnections();
         }
 
-        public virtual void Execute()
-        {
-            //
-        }
-
         public int MoveUp()
         {
             if (endNode)
@@ -78,7 +63,7 @@ namespace RuntimeNodeEditor.Nodes.Node
                 Execute();
                 return 0;
             }
-            
+
             if (outputs == null)
                 return 0;
 
@@ -87,5 +72,42 @@ namespace RuntimeNodeEditor.Nodes.Node
 
             return 1;
         }
+
+        protected virtual void CodeToExecute() { }
+        public void Execute()
+        {
+            if (!_wasExecuted)
+            {
+                Debug.Log("Executing node: " + gameObject.name + " " + gameObject.GetHashCode());
+
+                CodeToExecute();
+                _wasExecuted = true;
+            }
+            
+            GetData();
+        }
+
+        protected virtual void DataToGetAndSet() { }
+        private void GetData()
+        {
+            Debug.Log("Get data of node: " + gameObject.name + " " + gameObject.GetHashCode());
+
+            DataToGetAndSet();
+        }
+
+        protected virtual void CodeToReset() { }
+        public void Reset()
+        {
+            Debug.Log("Reseting node: " + gameObject.name + " " + gameObject.GetHashCode());
+
+            CodeToReset();
+            _wasExecuted = false;
+        }
+
+        protected SingleConnectionInputPointer GetSingle(int i) => inputs[i].TryGetComponent(out SingleConnectionInputPointer input) ? input : null;
+        protected MultiConnectionInputPointer GetMulti(int i) => inputs[i].TryGetComponent(out MultiConnectionInputPointer input) ? input : null;
+
+        public bool IsValid(SingleConnectionInputPointer single) => !single && single.hasConnection;
+        protected bool IsConnected(SingleConnectionInputPointer single) => single.hasConnection;
     }
 }

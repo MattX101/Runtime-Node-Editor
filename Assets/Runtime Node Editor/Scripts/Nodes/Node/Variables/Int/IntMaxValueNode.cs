@@ -4,15 +4,9 @@ namespace RuntimeNodeEditor.Nodes.Node
 {
     public class IntMaxValueNode : Node
     {
-        public override void Execute()
+        protected override void CodeToExecute()
         {
             outputs[0].GetComponent<IntOutputPointer>().value = int.MaxValue;
-            WasExecuted = true;
-        }
-
-        public override void Reset()
-        {
-            ResetExecution();
         }
     }
 }

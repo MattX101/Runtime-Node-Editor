@@ -6,7 +6,7 @@ namespace RuntimeNodeEditor.Nodes.Node
 {
     public class Vector2InputNode : Node
     {
-        public override void Execute()
+        protected override void CodeToExecute()
         {
             outputs[0].GetComponent<Vector2OutputPointer>().value = Vector2.zero;
 
@@ -27,14 +27,10 @@ namespace RuntimeNodeEditor.Nodes.Node
                 outputs[2].GetComponent<FloatOutputPointer>().value = y;
                 outputs[0].GetComponent<Vector2OutputPointer>().value.y = y;
             }
-
-            WasExecuted = true;
         }
 
-        public override void Reset()
+        protected override void CodeToReset()
         {
-            ResetExecution();
-
             outputs[0].GetComponent<Vector2OutputPointer>().Reset();
         }
     }

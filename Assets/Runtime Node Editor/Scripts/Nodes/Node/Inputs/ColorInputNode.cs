@@ -5,7 +5,7 @@ namespace RuntimeNodeEditor.Nodes.Node
 {
     public class ColorInputNode : Node
     {
-        public override void Execute()
+        protected override void CodeToExecute()
         {
             outputs[1].GetComponent<FloatOutputPointer>().value = Elements.Sliders[0].value;
             outputs[2].GetComponent<FloatOutputPointer>().value = Elements.Sliders[1].value;
@@ -16,14 +16,10 @@ namespace RuntimeNodeEditor.Nodes.Node
                     Elements.Sliders[0].value,
                     Elements.Sliders[1].value,
                     Elements.Sliders[2].value);
-
-            WasExecuted = true;
         }
 
-        public override void Reset()
+        protected override void CodeToReset()
         {
-            ResetExecution();
-
             outputs[0].GetComponent<ColorOutputPointer>().Reset();
         }
     }

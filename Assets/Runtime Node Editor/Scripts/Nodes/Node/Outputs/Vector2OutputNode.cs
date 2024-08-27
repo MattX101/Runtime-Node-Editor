@@ -6,49 +6,29 @@ namespace RuntimeNodeEditor.Nodes.Node
 {
     public class Vector2OutputNode : Node
     {
-        public override void Execute()
+        protected override void CodeToExecute()
+        {
+            SingleConnectionInputPointer inputV = GetSingle(0);
+            SingleConnectionInputPointer inputX = GetSingle(1);
+            SingleConnectionInputPointer inputY = GetSingle(2);
+
+            if (inputV && IsConnected(inputV)) inputV.connectedOutputPointer.node.Execute();
+
+            if (inputX && IsConnected(inputX)) inputX.connectedOutputPointer.node.Execute();
+            if (inputY && IsConnected(inputY)) inputY.connectedOutputPointer.node.Execute();
+        }
+
+        protected override void DataToGetAndSet()
         {
             Vector2 v = Vector2.zero;
 
-            if (inputs[0].TryGetComponent(out SingleConnectionInputPointer inputV))
-            {
-                if (inputV.connectedOutputPointer)
-                {
-                    inputV.connectedOutputPointer.node.Execute();
-                    v = PointerValue.GetVector2(inputV.connectedOutputPointer);
-                }
-            }
+            v = PointerValue.GetVector3(GetSingle(0));
 
-            if (inputs[1].TryGetComponent(out SingleConnectionInputPointer inputX))
-            {
-                if (inputX.connectedOutputPointer)
-                {
-                    inputX.connectedOutputPointer.node.Execute();
-                    v.x = PointerValue.GetFloat(inputX.connectedOutputPointer);
-                }
-            }
-            if (inputs[2].TryGetComponent(out SingleConnectionInputPointer inputY))
-            {
-                if (inputY.connectedOutputPointer)
-                {
-                    inputY.connectedOutputPointer.node.Execute();
-                    v.y = PointerValue.GetFloat(inputY.connectedOutputPointer);
-                }
-            }
+            v.x = PointerValue.GetFloat(GetSingle(1));
+            v.y = PointerValue.GetFloat(GetSingle(2));
 
-            Elements.SetInputField(
-                Elements.InputFields[0], 
-                v.x.ToString());
-            Elements.SetInputField(
-                Elements.InputFields[1], 
-                v.y.ToString());
-
-            WasExecuted = true;
-        }
-
-        public override void Reset()
-        {
-            ResetExecution();
+            Elements.SetInputField(Elements.InputFields[0], v.x.ToString());
+            Elements.SetInputField(Elements.InputFields[1], v.y.ToString());
         }
     }
 }

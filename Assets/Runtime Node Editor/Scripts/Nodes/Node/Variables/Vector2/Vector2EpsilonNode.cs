@@ -5,15 +5,9 @@ namespace RuntimeNodeEditor.Nodes.Node
 {
     public class Vector2EpsilonNode : Node
     {
-        public override void Execute()
+        protected override void CodeToExecute()
         {
             outputs[0].GetComponent<Vector2OutputPointer>().value = new Vector2(float.Epsilon, float.Epsilon);
-            WasExecuted = true;
-        }
-
-        public override void Reset()
-        {
-            ResetExecution();
         }
     }
 }

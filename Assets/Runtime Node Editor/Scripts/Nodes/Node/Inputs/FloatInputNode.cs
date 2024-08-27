@@ -4,20 +4,16 @@ namespace RuntimeNodeEditor.Nodes.Node
 {
     public class FloatInputNode : Node
     {
-        public override void Execute()
+        protected override void CodeToExecute()
         {
             outputs[0].GetComponent<FloatOutputPointer>().value =
                 Elements.InputFields[0].text.Length != 0
                 ? float.Parse(Elements.InputFields[0].text)
                 : 0.0f;
-
-            WasExecuted = true;
         }
 
-        public override void Reset()
+        protected override void CodeToReset()
         {
-            ResetExecution();
-
             outputs[0].GetComponent<FloatOutputPointer>().Reset();
         }
     }

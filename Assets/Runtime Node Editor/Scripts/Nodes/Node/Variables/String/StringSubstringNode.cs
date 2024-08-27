@@ -5,7 +5,7 @@ namespace RuntimeNodeEditor.Nodes.Node
 {
     public class StringSubstringNode : Node
     {
-        public override void Execute()
+        protected override void CodeToExecute()
         {
             if (!inputs[0].TryGetComponent(out SingleConnectionInputPointer valueInput))
                 return;
@@ -50,14 +50,10 @@ namespace RuntimeNodeEditor.Nodes.Node
             Elements.SetInputField(Elements.InputFields[1], startIndex.ToString());
             Elements.SetInputField(Elements.InputFields[2], length.ToString());
             Elements.SetInputField(Elements.InputFields[3], substring);
-
-            WasExecuted = true;
         }
 
-        public override void Reset()
+        protected override void CodeToReset()
         {
-            ResetExecution();
-
             outputs[0].GetComponent<StringOutputPointer>().Reset();
         }
     }

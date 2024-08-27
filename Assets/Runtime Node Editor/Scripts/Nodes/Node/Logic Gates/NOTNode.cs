@@ -5,30 +5,24 @@ namespace RuntimeNodeEditor.Nodes.Node
 {
     public class NOTNode : Node
     {
-        public override void Execute()
+        protected override void CodeToExecute()
         {
-            bool a = false;
-            if (inputs[0].TryGetComponent(out SingleConnectionInputPointer inputA))
-            {
-                if (inputA.connectedOutputPointer)
-                {
-                    inputA.connectedOutputPointer.node.Execute();
-                    a = PointerValue.GetBool(inputA.connectedOutputPointer);
-                }
-            }
+            SingleConnectionInputPointer input = GetSingle(0);
+            if (input && IsConnected(input)) input.connectedOutputPointer.node.Execute();
+        }
+
+        protected override void DataToGetAndSet()
+        {
+            bool a = PointerValue.GetBool(GetSingle(0));
 
             outputs[0].GetComponent<BoolOutputPointer>().value = !a;
 
             Elements.SetBoolean(Elements.Buttons[0], a);
             Elements.SetBoolean(Elements.Buttons[1], !a);
-
-            WasExecuted = true;
         }
 
-        public override void Reset()
+        protected override void CodeToReset()
         {
-            ResetExecution();
-
             outputs[0].GetComponent<BoolOutputPointer>().Reset();
         }
     }

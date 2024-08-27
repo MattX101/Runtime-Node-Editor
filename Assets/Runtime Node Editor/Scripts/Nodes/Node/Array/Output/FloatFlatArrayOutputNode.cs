@@ -5,25 +5,22 @@ namespace RuntimeNodeEditor.Nodes.Node
 {
     public class FloatFlatArrayOutputNode : Node
     {
-        public override void Execute()
+        protected override void CodeToExecute()
         {
-            if (inputs[0].TryGetComponent(out SingleConnectionInputPointer input))
-            {
-                if (input.connectedOutputPointer)
-                {
-                    input.connectedOutputPointer.node.Execute();
-
-                    foreach (float value in input.connectedOutputPointer.GetComponent<FloatArrayOutputPointer>().values)
-                        Debug.Log(value);
-                }
-            }
-
-            WasExecuted = true;
+            SingleConnectionInputPointer input = GetSingle(0);
+            if (input && IsConnected(input))
+                input.connectedOutputPointer.node.Execute();
         }
 
-        public override void Reset()
+        protected override void DataToGetAndSet()
         {
-            ResetExecution();
+            SingleConnectionInputPointer input = GetSingle(0);
+
+            if (!IsValid(input))
+                return;
+
+            foreach (float value in input.connectedOutputPointer.GetComponent<FloatArrayOutputPointer>().values)
+                Debug.Log(value);
         }
     }
 }

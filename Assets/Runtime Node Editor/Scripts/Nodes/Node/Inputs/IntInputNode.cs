@@ -4,20 +4,16 @@ namespace RuntimeNodeEditor.Nodes.Node
 {
     public class IntInputNode : Node
     {
-        public override void Execute()
+        protected override void CodeToExecute()
         {
             outputs[0].GetComponent<IntOutputPointer>().value =
                 Elements.InputFields[0].text.Length != 0
                 ? int.Parse(Elements.InputFields[0].text)
                 : 0;
-
-            WasExecuted = true;
         }
 
-        public override void Reset()
+        protected override void CodeToReset()
         {
-            ResetExecution();
-
             outputs[0].GetComponent<IntOutputPointer>().Reset();
         }
     }

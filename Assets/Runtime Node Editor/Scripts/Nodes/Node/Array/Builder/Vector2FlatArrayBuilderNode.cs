@@ -6,9 +6,10 @@ namespace RuntimeNodeEditor.Nodes.Node
 {
     public class Vector2FlatArrayBuilderNode : Node
     {
-        public override void Execute()
+        protected override void CodeToExecute()
         {
-            if (inputs[0].TryGetComponent(out MultiConnectionInputPointer multiInput))
+            MultiConnectionInputPointer multiInput = GetMulti(0);
+            if (multiInput)
             {
                 Vector2ArrayOutputPointer outputArray = outputs[0].GetComponent<Vector2ArrayOutputPointer>();
                 outputArray.values = new Vector2[GetArrayLength(multiInput)];
@@ -33,13 +34,6 @@ namespace RuntimeNodeEditor.Nodes.Node
                     arrayIndex++;
                 }
             }
-
-            WasExecuted = true;
-        }
-
-        public override void Reset()
-        {
-            ResetExecution();
         }
 
         private int GetArrayLength(MultiConnectionInputPointer multiInput)

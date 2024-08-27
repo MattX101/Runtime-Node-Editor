@@ -5,7 +5,7 @@ namespace RuntimeNodeEditor.Nodes.Node
 {
     public class StringLengthNode : Node
     {
-        public override void Execute()
+        protected override void CodeToExecute()
         {
             if (!inputs[0].TryGetComponent(out SingleConnectionInputPointer valueInput))
                 return;
@@ -20,14 +20,10 @@ namespace RuntimeNodeEditor.Nodes.Node
             outputs[0].GetComponent<IntOutputPointer>().value = length;
 
             Elements.SetInputField(Elements.InputFields[0], length.ToString());
-
-            WasExecuted = true;
         }
 
-        public override void Reset()
+        protected override void CodeToReset()
         {
-            ResetExecution();
-
             outputs[0].GetComponent<IntOutputPointer>().Reset();
         }
     }

@@ -5,25 +5,22 @@ namespace RuntimeNodeEditor.Nodes.Node
 {
     public class Vector3FlatArrayOutputNode : Node
     {
-        public override void Execute()
+        protected override void CodeToExecute()
         {
-            if (inputs[0].TryGetComponent(out SingleConnectionInputPointer input))
-            {
-                if (input.connectedOutputPointer)
-                {
-                    input.connectedOutputPointer.node.Execute();
-
-                    foreach (Vector3 value in input.connectedOutputPointer.GetComponent<Vector3ArrayOutputPointer>().values)
-                        Debug.Log(value);
-                }
-            }
-
-            WasExecuted = true;
+            SingleConnectionInputPointer input = GetSingle(0);
+            if (input && IsConnected(input))
+                input.connectedOutputPointer.node.Execute();
         }
 
-        public override void Reset()
+        protected override void DataToGetAndSet()
         {
-            ResetExecution();
+            SingleConnectionInputPointer input = GetSingle(0);
+
+            if (!IsValid(input))
+                return;
+
+            foreach (Vector3 value in input.connectedOutputPointer.GetComponent<Vector3ArrayOutputPointer>().values)
+                Debug.Log(value);
         }
     }
 }

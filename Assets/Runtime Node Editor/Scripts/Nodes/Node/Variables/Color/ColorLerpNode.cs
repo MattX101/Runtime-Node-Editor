@@ -9,48 +9,29 @@ namespace RuntimeNodeEditor.Nodes.Node
     {
         public ImagePreview ImagePreview;
 
-        public override void Execute()
+        protected override void CodeToExecute()
         {
-            Color a = Color.black;
-            if (inputs[0].TryGetComponent(out SingleConnectionInputPointer inputA))
-            {
-                if (inputA.connectedOutputPointer)
-                {
-                    inputA.connectedOutputPointer.node.Execute();
-                    a = PointerValue.GetColor(inputA.connectedOutputPointer);
-                }
-            }
-
-            Color b = Color.black;
-            if (inputs[1].TryGetComponent(out SingleConnectionInputPointer inputB))
-            {
-                if (inputB.connectedOutputPointer)
-                {
-                    inputB.connectedOutputPointer.node.Execute();
-                    b = PointerValue.GetColor(inputB.connectedOutputPointer);
-                }
-            }
-
-            float t = 0.5f;
-            if (inputs[2].TryGetComponent(out SingleConnectionInputPointer inputT))
-            {
-                if (inputT.connectedOutputPointer)
-                {
-                    inputT.connectedOutputPointer.node.Execute();
-                    t = PointerValue.GetFloat(inputT.connectedOutputPointer);
-                }
-            }
-
-            outputs[0].GetComponent<ColorOutputPointer>().value = Color.Lerp(a, b, t);
-            ImagePreview.Image.color = outputs[0].GetComponent<ColorOutputPointer>().value;
-
-            WasExecuted = true;
+            SingleConnectionInputPointer inputA = GetSingle(0);
+            if (inputA && IsConnected(inputA)) inputA.connectedOutputPointer.node.Execute();
+            SingleConnectionInputPointer inputB = GetSingle(1);
+            if (inputB && IsConnected(inputB)) inputB.connectedOutputPointer.node.Execute();
+            
+            SingleConnectionInputPointer inputT = GetSingle(2);
+            if (inputT && IsConnected(inputT)) inputT.connectedOutputPointer.node.Execute();
         }
 
-        public override void Reset()
+        protected override void DataToGetAndSet()
         {
-            ResetExecution();
+            outputs[0].GetComponent<ColorOutputPointer>().value = Color.Lerp(
+                PointerValue.GetColor(GetSingle(0)),
+                PointerValue.GetColor(GetSingle(1)),
+                PointerValue.GetFloat(GetSingle(2))
+                );
+            ImagePreview.Image.color = outputs[0].GetComponent<ColorOutputPointer>().value;
+        }
 
+        protected override void CodeToReset()
+        {
             outputs[0].GetComponent<ColorOutputPointer>().Reset();
         }
     }
