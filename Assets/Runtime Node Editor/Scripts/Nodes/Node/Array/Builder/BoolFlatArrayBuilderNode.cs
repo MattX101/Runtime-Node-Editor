@@ -7,18 +7,17 @@ namespace RuntimeNodeEditor.Nodes.Node
     {
         protected override void CodeToExecute()
         {
-            MultiConnectionInputPointer multiInput = GetMulti(0);
-            if (multiInput)
+            MultiConnectionInputPointer multi = GetMulti(0);
+            if (IsValid(multi))
             {
                 BoolArrayOutputPointer outputArray = outputs[0].GetComponent<BoolArrayOutputPointer>();
-                outputArray.values = new bool[GetArrayLength(multiInput)];
+                outputArray.values = new bool[GetArrayLength(multi)];
 
-                int arrayIndex = 0;
-                for (int pointerIndex = 0; pointerIndex < multiInput.connectedOutputPointers.Count; pointerIndex++)
+                for (int pointerIndex = 0, arrayIndex = 0; pointerIndex < multi.connectedOutputPointers.Count; pointerIndex++)
                 {
-                    if (multiInput.connectedOutputPointers[pointerIndex].pointerType == Pointer.Type.PointerType.Array)
+                    if (multi.connectedOutputPointers[pointerIndex].pointerType == Pointer.Type.PointerType.Array)
                     {
-                        BoolArrayOutputPointer array = multiInput.connectedOutputPointers[pointerIndex].GetComponent<BoolArrayOutputPointer>();
+                        BoolArrayOutputPointer array = multi.connectedOutputPointers[pointerIndex].GetComponent<BoolArrayOutputPointer>();
 
                         if (array.values == null)
                             continue;
@@ -29,23 +28,23 @@ namespace RuntimeNodeEditor.Nodes.Node
                         continue;
                     }
 
-                    outputArray.values[arrayIndex] = PointerValue.GetBool(multiInput.connectedOutputPointers[pointerIndex]);
+                    outputArray.values[arrayIndex] = PointerValue.GetBool(multi.connectedOutputPointers[pointerIndex]);
                     arrayIndex++;
                 }
             }
         }
 
-        private int GetArrayLength(MultiConnectionInputPointer multiInput)
+        private int GetArrayLength(MultiConnectionInputPointer multi)
         {
             int arrayLength = 0;
 
-            for (int pointerIndex = 0; pointerIndex < multiInput.connectedOutputPointers.Count; pointerIndex++)
+            for (int pointerIndex = 0; pointerIndex < multi.connectedOutputPointers.Count; pointerIndex++)
             {
-                multiInput.connectedOutputPointers[pointerIndex].node.Execute();
+                multi.connectedOutputPointers[pointerIndex].node.Execute();
 
-                if (multiInput.connectedOutputPointers[pointerIndex].pointerType == Pointer.Type.PointerType.Array)
+                if (multi.connectedOutputPointers[pointerIndex].pointerType == Pointer.Type.PointerType.Array)
                 {
-                    BoolArrayOutputPointer array = multiInput.connectedOutputPointers[pointerIndex].GetComponent<BoolArrayOutputPointer>();
+                    BoolArrayOutputPointer array = multi.connectedOutputPointers[pointerIndex].GetComponent<BoolArrayOutputPointer>();
                     array.node.Execute();
 
                     arrayLength += array.values == null ? 0 : array.values.Length;

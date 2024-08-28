@@ -8,18 +8,17 @@ namespace RuntimeNodeEditor.Nodes.Node
     {
         protected override void CodeToExecute()
         {
-            MultiConnectionInputPointer multiInput = GetMulti(0);
-            if (multiInput)
+            MultiConnectionInputPointer multi = GetMulti(0);
+            if (IsValid(multi))
             {
                 Vector2ArrayOutputPointer outputArray = outputs[0].GetComponent<Vector2ArrayOutputPointer>();
-                outputArray.values = new Vector2[GetArrayLength(multiInput)];
+                outputArray.values = new Vector2[GetArrayLength(multi)];
 
-                int arrayIndex = 0;
-                for (int pointerIndex = 0; pointerIndex < multiInput.connectedOutputPointers.Count; pointerIndex++)
+                for (int pointerIndex = 0, arrayIndex = 0; pointerIndex < multi.connectedOutputPointers.Count; pointerIndex++)
                 {
-                    if (multiInput.connectedOutputPointers[pointerIndex].pointerType == Pointer.Type.PointerType.Array)
+                    if (multi.connectedOutputPointers[pointerIndex].pointerType == Pointer.Type.PointerType.Array)
                     {
-                        Vector2ArrayOutputPointer array = multiInput.connectedOutputPointers[pointerIndex].GetComponent<Vector2ArrayOutputPointer>();
+                        Vector2ArrayOutputPointer array = multi.connectedOutputPointers[pointerIndex].GetComponent<Vector2ArrayOutputPointer>();
 
                         if (array.values == null)
                             continue;
@@ -30,23 +29,23 @@ namespace RuntimeNodeEditor.Nodes.Node
                         continue;
                     }
 
-                    outputArray.values[arrayIndex] = PointerValue.GetVector2(multiInput.connectedOutputPointers[pointerIndex]);
+                    outputArray.values[arrayIndex] = PointerValue.GetVector2(multi.connectedOutputPointers[pointerIndex]);
                     arrayIndex++;
                 }
             }
         }
 
-        private int GetArrayLength(MultiConnectionInputPointer multiInput)
+        private int GetArrayLength(MultiConnectionInputPointer multi)
         {
             int arrayLength = 0;
 
-            for (int pointerIndex = 0; pointerIndex < multiInput.connectedOutputPointers.Count; pointerIndex++)
+            for (int pointerIndex = 0; pointerIndex < multi.connectedOutputPointers.Count; pointerIndex++)
             {
-                multiInput.connectedOutputPointers[pointerIndex].node.Execute();
+                multi.connectedOutputPointers[pointerIndex].node.Execute();
 
-                if (multiInput.connectedOutputPointers[pointerIndex].pointerType == Pointer.Type.PointerType.Array)
+                if (multi.connectedOutputPointers[pointerIndex].pointerType == Pointer.Type.PointerType.Array)
                 {
-                    Vector2ArrayOutputPointer array = multiInput.connectedOutputPointers[pointerIndex].GetComponent<Vector2ArrayOutputPointer>();
+                    Vector2ArrayOutputPointer array = multi.connectedOutputPointers[pointerIndex].GetComponent<Vector2ArrayOutputPointer>();
                     array.node.Execute();
 
                     arrayLength += array.values == null ? 0 : array.values.Length;

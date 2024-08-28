@@ -17,11 +17,8 @@ namespace RuntimeNodeEditor.Nodes.Node
 
         protected override void CodeToExecute()
         {
-            SingleConnectionInputPointer inputA = GetSingle(0);
-            if (inputA && IsConnected(inputA)) inputA.connectedOutputPointer.node.Execute();
-
-            SingleConnectionInputPointer inputB = GetSingle(1);
-            if (inputB && IsConnected(inputB)) inputB.connectedOutputPointer.node.Execute();
+            ExecuteConnection(0);
+            ExecuteConnection(1);
         }
 
         protected override void DataToGetAndSet()

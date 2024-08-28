@@ -1,4 +1,3 @@
-using RuntimeNodeEditor.Nodes.Pointer;
 using RuntimeNodeEditor.Nodes.Pointer.Value;
 using UnityEngine;
 
@@ -8,16 +7,11 @@ namespace RuntimeNodeEditor.Nodes.Node
     {
         protected override void CodeToExecute()
         {
-            SingleConnectionInputPointer inputV = GetSingle(0);
-            SingleConnectionInputPointer inputX = GetSingle(1);
-            SingleConnectionInputPointer inputY = GetSingle(2);
-            SingleConnectionInputPointer inputZ = GetSingle(3);
+            ExecuteConnection(0);
 
-            if (inputV && IsConnected(inputV)) inputV.connectedOutputPointer.node.Execute();
-
-            if (inputX && IsConnected(inputX)) inputX.connectedOutputPointer.node.Execute();
-            if (inputY && IsConnected(inputY)) inputY.connectedOutputPointer.node.Execute();
-            if (inputZ && IsConnected(inputZ)) inputZ.connectedOutputPointer.node.Execute();
+            ExecuteConnection(1);
+            ExecuteConnection(2);
+            ExecuteConnection(3);
         }
 
         protected override void DataToGetAndSet()

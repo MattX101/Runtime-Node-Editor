@@ -7,9 +7,7 @@ namespace RuntimeNodeEditor.Nodes.Node
     {
         protected override void CodeToExecute()
         {
-            SingleConnectionInputPointer input = GetSingle(0);
-            if (input && IsConnected(input))
-                input.connectedOutputPointer.node.Execute();
+            ExecuteConnection(0);
         }
 
         protected override void DataToGetAndSet()

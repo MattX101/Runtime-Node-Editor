@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -62,7 +61,7 @@ namespace RuntimeNodeEditor.Nodes.Pointer.Value
             return false;
         }
         
-        private static bool IsValid(SingleConnectionInputPointer single) => !single.node.IsValid(single);
+        private static bool IsValid(SingleConnectionInputPointer single) => single.node.IsValid(single);
 
         public static int GetInt(OutputPointer output)
         {

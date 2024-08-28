@@ -1,5 +1,4 @@
 using RuntimeNodeEditor.Functions.UI.Component;
-using RuntimeNodeEditor.Nodes.Pointer;
 using RuntimeNodeEditor.Nodes.Pointer.Value;
 
 namespace RuntimeNodeEditor.Nodes.Node
@@ -10,8 +9,7 @@ namespace RuntimeNodeEditor.Nodes.Node
 
         protected override void CodeToExecute()
         {
-            SingleConnectionInputPointer input = GetSingle(0);
-            if (input && IsConnected(input)) input.connectedOutputPointer.node.Execute();
+            ExecuteConnection(0);
         }
 
         protected override void DataToGetAndSet()

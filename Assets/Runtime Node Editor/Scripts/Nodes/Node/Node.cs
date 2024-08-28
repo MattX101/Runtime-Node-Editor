@@ -86,6 +86,22 @@ namespace RuntimeNodeEditor.Nodes.Node
             
             GetData();
         }
+        public void Execute(SingleConnectionInputPointer input)
+        {
+            if (!IsValid(input))
+                return;
+
+            Execute();
+        }
+        protected void ExecuteConnection(int i)
+        {
+            SingleConnectionInputPointer input = GetSingle(i);
+
+            if (!IsValid(input))
+                return;
+
+            input.connectedOutputPointer.node.Execute(input);
+        }
 
         protected virtual void DataToGetAndSet() { }
         private void GetData()
@@ -107,7 +123,8 @@ namespace RuntimeNodeEditor.Nodes.Node
         protected SingleConnectionInputPointer GetSingle(int i) => inputs[i].TryGetComponent(out SingleConnectionInputPointer input) ? input : null;
         protected MultiConnectionInputPointer GetMulti(int i) => inputs[i].TryGetComponent(out MultiConnectionInputPointer input) ? input : null;
 
-        public bool IsValid(SingleConnectionInputPointer single) => !single && single.hasConnection;
+        public bool IsValid(SingleConnectionInputPointer single) => !single && single.connectedOutputPointer && single.connectedOutputPointer.node;
+        public bool IsValid(MultiConnectionInputPointer multi) => !multi;
         protected bool IsConnected(SingleConnectionInputPointer single) => single.hasConnection;
     }
 }
