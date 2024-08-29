@@ -19,8 +19,8 @@ namespace RuntimeNodeEditor.Nodes.Node
 
             v = PointerValue.GetVector2(GetSingle(0));
 
-            v.x = PointerValue.GetFloat(GetSingle(1));
-            v.y = PointerValue.GetFloat(GetSingle(2));
+            PointerValue.GetFloat(GetSingle(1), ref v.x);
+            PointerValue.GetFloat(GetSingle(2), ref v.y);
 
             Elements.SetInputField(Elements.InputFields[0], v.x.ToString());
             Elements.SetInputField(Elements.InputFields[1], v.y.ToString());

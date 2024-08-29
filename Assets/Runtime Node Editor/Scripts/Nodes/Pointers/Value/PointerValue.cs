@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace RuntimeNodeEditor.Nodes.Pointer.Value
 {
@@ -22,46 +24,36 @@ namespace RuntimeNodeEditor.Nodes.Pointer.Value
             if (input == output)
                 return true;
 
-            int index = -1;
-            switch (input)
-            {
-                case ValueType.Int:
-                    index = 0;
-                    break;
-                case ValueType.Float:
-                    index = 1;
-                    break;
-                case ValueType.Bool:
-                    index = 2;
-                    break;
-                case ValueType.Char:
-                    index = 3;
-                    break;
-                case ValueType.String:
-                    index = 4;
-                    break;
-                case ValueType.Color:
-                    index = 5;
-                    break;
-                case ValueType.Vector2:
-                    index = 6;
-                    break;
-                case ValueType.Vector3:
-                    index = 7;
-                    break;
-                default:
-                    break;
-            }
+            int index = GetValueTypeIndex(input);
 
-            if (_compatiableValues[index] != null)
-                foreach (ValueType value in _compatiableValues[index])
-                    if (output == value)
-                        return true;
+            if (_compatiableValues[index] == null)
+                return false;
+
+            foreach (ValueType value in _compatiableValues[index])
+                if (output == value)
+                    return true;
 
             return false;
         }
+
+        private static int GetValueTypeIndex(ValueType input)
+        {
+            return input switch
+            {
+                ValueType.Int => 0,
+                ValueType.Float => 1,
+                ValueType.Bool => 2,
+                ValueType.Char => 3,
+                ValueType.String => 4,
+                ValueType.Color => 5,
+                ValueType.Vector2 => 6,
+                ValueType.Vector3 => 7,
+                _ => -1
+            };
+        }
         
-        private static bool IsValid(SingleConnectionInputPointer single) => single.node.IsValid(single);
+        private static bool IsValid(SingleConnectionInputPointer single) 
+            => single.node.IsValid(single);
 
         public static int GetInt(OutputPointer output)
         {
@@ -73,12 +65,9 @@ namespace RuntimeNodeEditor.Nodes.Pointer.Value
             };
         }
         public static int GetInt(SingleConnectionInputPointer single)
-        {
-            if (!IsValid(single))
-                return 0;
-
-            return GetInt(single.connectedOutputPointer);
-        }
+            => IsValid(single) ? GetInt(single.connectedOutputPointer) : 0;
+        public static void GetInt(SingleConnectionInputPointer single, ref int value)
+            => value = IsValid(single) ? GetInt(single.connectedOutputPointer) : value;
 
         public static float GetFloat(OutputPointer output)
         {
@@ -90,30 +79,23 @@ namespace RuntimeNodeEditor.Nodes.Pointer.Value
             };
         }
         public static float GetFloat(SingleConnectionInputPointer single)
-        {
-            if (!IsValid(single))
-                return 0.0f;
+            => IsValid(single) ? GetFloat(single.connectedOutputPointer) : 0.0f;
+        public static void GetFloat(SingleConnectionInputPointer single, ref float value)
+            => value = GetFloat(single.connectedOutputPointer);
 
-            return GetFloat(single.connectedOutputPointer);
-        }
-
-        public static bool GetBool(OutputPointer output) => output.GetComponent<BoolOutputPointer>().value;
+        public static bool GetBool(OutputPointer output)
+            => output.GetComponent<BoolOutputPointer>().value;
         public static bool GetBool(SingleConnectionInputPointer single)
-        {
-            if (!IsValid(single))
-                return false;
+            => IsValid(single) ? GetBool(single.connectedOutputPointer) : false;
+        public static void GetBool(SingleConnectionInputPointer single, ref bool value)
+            => value = IsValid(single) ? GetBool(single.connectedOutputPointer) : value;
 
-            return GetBool(single.connectedOutputPointer);
-        }
-
-        public static char GetChar(OutputPointer output) => output.GetComponent<CharOutputPointer>().value;
+        public static char GetChar(OutputPointer output)
+            => output.GetComponent<CharOutputPointer>().value;
         public static char GetChar(SingleConnectionInputPointer single)
-        {
-            if (!IsValid(single))
-                return ' ';
-
-            return GetChar(single.connectedOutputPointer);
-        }
+            => IsValid(single) ? GetChar(single.connectedOutputPointer) : ' ';
+        public static void GetChar(SingleConnectionInputPointer single, ref char value)
+            => value = IsValid(single) ? GetChar(single.connectedOutputPointer) : value;
 
         public static string GetString(OutputPointer output)
         {
@@ -128,21 +110,15 @@ namespace RuntimeNodeEditor.Nodes.Pointer.Value
             };
         }
         public static string GetString(SingleConnectionInputPointer single)
-        {
-            if (!IsValid(single))
-                return "";
-
-            return GetString(single.connectedOutputPointer);
-        }
+            => IsValid(single) ? GetString(single.connectedOutputPointer) : "";
+        public static void GetString(SingleConnectionInputPointer single, ref string value)
+            => value = IsValid(single) ? GetString(single.connectedOutputPointer) : value;
 
         public static Color GetColor(OutputPointer output) =>  output.GetComponent<ColorOutputPointer>().value; 
         public static Color GetColor(SingleConnectionInputPointer single)
-        {
-            if (!IsValid(single))
-                return Color.black;
-
-            return GetColor(single.connectedOutputPointer);
-        }
+            => IsValid(single) ? GetColor(single.connectedOutputPointer) : Color.black;
+        public static void GetColor(SingleConnectionInputPointer single, ref Color value)
+            => value = IsValid(single) ? GetColor(single.connectedOutputPointer) : value;
 
         public static Vector2 GetVector2(OutputPointer output)
         {
@@ -156,12 +132,9 @@ namespace RuntimeNodeEditor.Nodes.Pointer.Value
             };
         }
         public static Vector2 GetVector2(SingleConnectionInputPointer single)
-        {
-            if (!IsValid(single))
-                return Vector2.zero;
-
-            return GetVector2(single.connectedOutputPointer);
-        }
+            => IsValid(single) ? GetVector2(single.connectedOutputPointer) : Vector2.zero;
+        public static void GetVector2(SingleConnectionInputPointer single, ref Vector2 value)
+            => value = IsValid(single) ? GetVector2(single.connectedOutputPointer) : value;
 
         public static Vector3 GetVector3(OutputPointer output)
         {
@@ -175,11 +148,8 @@ namespace RuntimeNodeEditor.Nodes.Pointer.Value
             };
         }
         public static Vector3 GetVector3(SingleConnectionInputPointer single)
-        {
-            if (!IsValid(single))
-                return Vector3.zero;
-
-            return GetVector3(single.connectedOutputPointer);
-        }
+            => IsValid(single) ? GetVector3(single.connectedOutputPointer) : Vector3.zero;
+        public static void GetVector3(SingleConnectionInputPointer single, ref Vector3 value)
+            => value = IsValid(single) ? GetVector3(single.connectedOutputPointer) : value;
     }
 }
