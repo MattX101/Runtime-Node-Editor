@@ -40,9 +40,9 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
 
             PreviewColor(node.Elements.Sliders[0], node.Elements.Sliders[1], node.Elements.Sliders[2]);
             
-            ImagePreview.UpdateNodeOnValueChange(node.Elements.Sliders[0], node.MoveUp);
-            ImagePreview.UpdateNodeOnValueChange(node.Elements.Sliders[1], node.MoveUp);
-            ImagePreview.UpdateNodeOnValueChange(node.Elements.Sliders[2], node.MoveUp);
+            ImagePreview.UpdateNodeOnValueChange(node.Elements.Sliders[0], node.OnValueChangeReset);
+            ImagePreview.UpdateNodeOnValueChange(node.Elements.Sliders[1], node.OnValueChangeReset);
+            ImagePreview.UpdateNodeOnValueChange(node.Elements.Sliders[2], node.OnValueChangeReset);
 
             string[] parameters = StringParameterExtractor.ExtractParameters(nodeId);
             if (parameters != null)

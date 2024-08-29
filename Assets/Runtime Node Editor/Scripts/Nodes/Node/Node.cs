@@ -4,7 +4,6 @@ using RuntimeNodeEditor.Functions.UI.Elements;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.Windows;
 
 namespace RuntimeNodeEditor.Nodes.Node
 {
@@ -62,14 +61,35 @@ namespace RuntimeNodeEditor.Nodes.Node
             if (endNode)
             {
                 Execute();
+
                 return 0;
             }
 
             if (outputs == null)
                 return 0;
 
-            foreach (var input in outputs.Where(output => output.connectedInputPointers != null).SelectMany(output => output.connectedInputPointers))
+            foreach (InputPointer input in outputs.Where(output => output.connectedInputPointers != null).SelectMany(output => output.connectedInputPointers))
                 input.node.MoveUp();
+
+            return 1;
+        }
+
+        public int OnValueChangeReset()
+        {
+            ResetExecution();
+
+            if (endNode)
+            {
+                Execute();
+
+                return 0;
+            }
+
+            if (outputs == null)
+                return 0;
+
+            foreach (InputPointer input in outputs.Where(output => output.connectedInputPointers != null).SelectMany(output => output.connectedInputPointers))
+                input.node.OnValueChangeReset();
 
             return 1;
         }
@@ -108,8 +128,10 @@ namespace RuntimeNodeEditor.Nodes.Node
             Debug.Log("Reseting node: " + gameObject.name + " " + gameObject.GetHashCode());
 
             CodeToReset();
-            _wasExecuted = false;
+            ResetExecution();
         }
+
+        private void ResetExecution() => _wasExecuted = false;
 
         protected SingleConnectionInputPointer GetSingle(int i) => inputs[i].TryGetComponent(out SingleConnectionInputPointer input) ? input : null;
         protected MultiConnectionInputPointer GetMulti(int i) => inputs[i].TryGetComponent(out MultiConnectionInputPointer input) ? input : null;

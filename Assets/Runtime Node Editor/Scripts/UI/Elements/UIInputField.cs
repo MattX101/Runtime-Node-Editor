@@ -55,7 +55,7 @@ namespace RuntimeNodeEditor.UI.Elements
             inputField.onValueChanged.AddListener(
                 delegate
                 {
-                    node.MoveUp();
+                    node.OnValueChangeReset();
                 });
         }
 

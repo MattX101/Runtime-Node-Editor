@@ -31,7 +31,7 @@ namespace RuntimeNodeEditor.UI.Elements
             button.onClick.AddListener(
                 delegate
                 {
-                    node.MoveUp();
+                    node.OnValueChangeReset();
                 });
         }
     }

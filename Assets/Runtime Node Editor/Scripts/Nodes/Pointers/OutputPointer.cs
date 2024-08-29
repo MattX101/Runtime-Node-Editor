@@ -22,6 +22,9 @@ namespace RuntimeNodeEditor.Nodes.Pointer
 
         public override void Reset()
         {
+            if (connectedInputPointers == null)
+                return;
+
             connectedInputPointers.Clear();
         }
 

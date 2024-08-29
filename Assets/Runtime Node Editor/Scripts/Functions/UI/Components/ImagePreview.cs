@@ -67,12 +67,12 @@ namespace RuntimeNodeEditor.Functions.UI.Component
                 1);
         }
 
-        public void UpdateNodeOnValueChange(Slider slider, Func<int> MoveUp)
+        public void UpdateNodeOnValueChange(Slider slider, Func<int> OnValueChange)
         {
             slider.onValueChanged.AddListener(
                 delegate
                 {
-                    MoveUp();
+                    OnValueChange();
                 });
         }
     }
