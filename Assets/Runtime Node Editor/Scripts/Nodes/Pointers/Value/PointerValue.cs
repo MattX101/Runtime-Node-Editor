@@ -81,7 +81,7 @@ namespace RuntimeNodeEditor.Nodes.Pointer.Value
         public static float GetFloat(SingleConnectionInputPointer single)
             => IsValid(single) ? GetFloat(single.connectedOutputPointer) : 0.0f;
         public static void GetFloat(SingleConnectionInputPointer single, ref float value)
-            => value = GetFloat(single.connectedOutputPointer);
+            => value = IsValid(single) ? GetFloat(single.connectedOutputPointer) : value;
 
         public static bool GetBool(OutputPointer output)
             => output.GetComponent<BoolOutputPointer>().value;
