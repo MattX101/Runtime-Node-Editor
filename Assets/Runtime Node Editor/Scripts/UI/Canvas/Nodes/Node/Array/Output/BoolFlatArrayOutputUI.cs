@@ -8,10 +8,10 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
 	internal class BoolFlatArrayOutputUI : NodeUI
 	{
 		public override void Init(string nodeId)
-		{
-			base.Init(nodeId);
+        {
+            InitBase(nodeId);
 
-			PopulateRoot("Bool Flat Array Output");
+            PopulateRoot("Bool Flat Array Output");
 			BoolFlatArrayOutputNode node = root.AddComponent<BoolFlatArrayOutputNode>();
             node.endNode = true;
 

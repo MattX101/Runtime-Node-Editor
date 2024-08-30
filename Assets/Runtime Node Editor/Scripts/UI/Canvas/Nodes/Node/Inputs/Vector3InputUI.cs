@@ -10,7 +10,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
     {
         public override void Init(string nodeId)
         {
-            base.Init(nodeId);
+            InitBase(nodeId);
 
             PopulateRoot("Vector 3");
             Vector3InputNode node = root.AddComponent<Vector3InputNode>();
@@ -18,7 +18,6 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
             NumOfOutputs = 4;
 
             drawBodyImage = false;
-            interactablePreview = true;
             toggleInputField = true;
             isInput = true;
 
@@ -30,7 +29,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
             node.AddPointer(CreatePointer("Y", ValueType.Float, 2).AddComponent<FloatOutputPointer>(), ValueType.Float);
             node.AddPointer(CreatePointer("Z", ValueType.Float, 3).AddComponent<FloatOutputPointer>(), ValueType.Float);
 
-            node.Elements = new NodeUIElements(3, 0, 0)
+            node.Elements = new NodeUIElements(3)
             {
                 InputFields =
                 {

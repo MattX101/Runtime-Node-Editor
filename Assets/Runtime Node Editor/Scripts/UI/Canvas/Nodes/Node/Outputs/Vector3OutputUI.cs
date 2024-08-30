@@ -10,7 +10,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
     {
         public override void Init(string nodeId)
         {
-            base.Init(nodeId);
+            InitBase(nodeId);
 
             PopulateRoot("Vector 3");
             Vector3OutputNode node = root.AddComponent<Vector3OutputNode>();
@@ -31,7 +31,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
             node.AddPointer(CreatePointer("Y", ValueType.Float, 2, true).AddComponent<SingleConnectionInputPointer>(), ValueType.Float);
             node.AddPointer(CreatePointer("Z", ValueType.Float, 3, true).AddComponent<SingleConnectionInputPointer>(), ValueType.Float);
 
-            node.Elements = new NodeUIElements(3, 0, 0)
+            node.Elements = new NodeUIElements(3)
             {
                 InputFields =
                 {

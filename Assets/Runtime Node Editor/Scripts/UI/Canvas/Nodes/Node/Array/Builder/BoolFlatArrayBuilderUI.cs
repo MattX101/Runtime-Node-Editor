@@ -9,7 +9,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
     {
         public override void Init(string nodeId)
         {
-            base.Init(nodeId);
+            InitBase(nodeId);
 
             PopulateRoot("Bool Flat Array Builder");
             BoolFlatArrayBuilderNode node = root.AddComponent<BoolFlatArrayBuilderNode>();

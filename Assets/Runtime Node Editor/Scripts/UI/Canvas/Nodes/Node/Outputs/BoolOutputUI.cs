@@ -9,7 +9,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
     {
         public override void Init(string nodeId)
         {
-            base.Init(nodeId);
+            InitBase(nodeId);
 
             PopulateRoot("Bool");
             BoolOutputNode node = root.AddComponent<BoolOutputNode>();
@@ -24,7 +24,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
 
             node.AddPointer(CreatePointer("In", ValueType.Bool, 0, true).AddComponent<SingleConnectionInputPointer>(), ValueType.Bool);
 
-            node.Elements = new NodeUIElements(0, 1, 0)
+            node.Elements = new NodeUIElements(0, 1)
             {
                 Buttons =
                 {

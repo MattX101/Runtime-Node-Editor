@@ -10,7 +10,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
     {
         public override void Init(string nodeId)
         {
-            base.Init(StringParameterExtractor.ExtractBase(nodeId));
+            InitBase(StringParameterExtractor.ExtractBase(nodeId));
 
             PopulateRoot("Color");
             ColorInputNode node = root.AddComponent<ColorInputNode>();
@@ -19,6 +19,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
 
             drawBodyImage = false;
             togglePreviewImage = true;
+            isInput = true;
 
             CreateNodeUI(node, NodeColor.Default, "Color");
 

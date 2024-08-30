@@ -9,7 +9,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
     {
         public override void Init(string nodeId)
         {
-            base.Init(nodeId);
+            InitBase(nodeId);
 
             PopulateRoot("Char Flat Array Builder");
             CharFlatArrayBuilderNode node = root.AddComponent<CharFlatArrayBuilderNode>();

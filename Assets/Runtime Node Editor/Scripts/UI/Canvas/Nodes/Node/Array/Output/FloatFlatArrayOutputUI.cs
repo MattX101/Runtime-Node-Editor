@@ -8,10 +8,10 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
 	internal class FloatFlatArrayOutputUI : NodeUI
 	{
 		public override void Init(string nodeId)
-		{
-			base.Init(nodeId);
+        {
+            InitBase(nodeId);
 
-			PopulateRoot("Float Flat Array Output");
+            PopulateRoot("Float Flat Array Output");
             FloatFlatArrayOutputNode node = root.AddComponent<FloatFlatArrayOutputNode>();
             node.endNode = true;
 

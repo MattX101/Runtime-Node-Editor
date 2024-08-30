@@ -8,10 +8,10 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
 	internal class CharFlatArrayOutputUI : NodeUI
 	{
 		public override void Init(string nodeId)
-		{
-			base.Init(nodeId);
+        {
+            InitBase(nodeId);
 
-			PopulateRoot("Char Flat Array Output");
+            PopulateRoot("Char Flat Array Output");
             CharFlatArrayOutputNode node = root.AddComponent<CharFlatArrayOutputNode>();
             node.endNode = true;
 

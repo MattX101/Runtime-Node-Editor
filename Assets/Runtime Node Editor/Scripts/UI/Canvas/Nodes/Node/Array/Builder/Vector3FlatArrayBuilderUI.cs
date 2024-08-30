@@ -9,7 +9,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
     {
         public override void Init(string nodeId)
         {
-            base.Init(nodeId);
+            InitBase(nodeId);
 
             PopulateRoot("Vector3 Flat Array Builder");
             Vector3FlatArrayBuilderNode node = root.AddComponent<Vector3FlatArrayBuilderNode>();

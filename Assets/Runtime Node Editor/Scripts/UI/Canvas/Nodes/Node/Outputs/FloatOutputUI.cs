@@ -10,7 +10,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
     {
         public override void Init(string nodeId)
         {
-            base.Init(nodeId);
+            InitBase(nodeId);
 
             PopulateRoot("Float");
             FloatOutputNode node = root.AddComponent<FloatOutputNode>();
@@ -25,7 +25,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
 
             node.AddPointer(CreatePointer("In", ValueType.Float, 0, true).AddComponent<SingleConnectionInputPointer>(), ValueType.Float);
 
-            node.Elements = new NodeUIElements(1, 0, 0)
+            node.Elements = new NodeUIElements(1)
             {
                 InputFields =
                 {

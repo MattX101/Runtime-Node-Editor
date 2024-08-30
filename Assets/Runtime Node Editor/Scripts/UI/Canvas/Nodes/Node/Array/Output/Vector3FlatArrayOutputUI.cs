@@ -8,10 +8,10 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
 	internal class Vector3FlatArrayOutputUI : NodeUI
 	{
 		public override void Init(string nodeId)
-		{
-			base.Init(nodeId);
+        {
+            InitBase(nodeId);
 
-			PopulateRoot("Vector3 Flat Array Output");
+            PopulateRoot("Vector3 Flat Array Output");
             Vector3FlatArrayOutputNode node = root.AddComponent<Vector3FlatArrayOutputNode>();
             node.endNode = true;
 

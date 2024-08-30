@@ -63,7 +63,8 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
         private float _borderX2;
         private float _sizeX, _sizeY;
 
-        public virtual void Init(string nodeId)
+        public virtual void Init(string nodeId) { }
+        protected void InitBase(string nodeId)
         {
             NodeId = nodeId;
 

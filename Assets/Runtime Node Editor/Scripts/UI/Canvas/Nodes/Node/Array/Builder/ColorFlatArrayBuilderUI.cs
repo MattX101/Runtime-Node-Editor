@@ -9,7 +9,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
     {
         public override void Init(string nodeId)
         {
-            base.Init(nodeId);
+            InitBase(nodeId);
 
             PopulateRoot("Color Flat Array Builder");
             ColorFlatArrayBuilderNode node = root.AddComponent<ColorFlatArrayBuilderNode>();

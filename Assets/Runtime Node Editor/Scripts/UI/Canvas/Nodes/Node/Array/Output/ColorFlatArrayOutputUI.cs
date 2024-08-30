@@ -8,10 +8,10 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
 	internal class ColorFlatArrayOutputUI : NodeUI
 	{
 		public override void Init(string nodeId)
-		{
-			base.Init(nodeId);
+        {
+            InitBase(nodeId);
 
-			PopulateRoot("Color Flat Array Output");
+            PopulateRoot("Color Flat Array Output");
 			ColorFlatArrayOutputNode node = root.AddComponent<ColorFlatArrayOutputNode>();
             node.endNode = true;
 

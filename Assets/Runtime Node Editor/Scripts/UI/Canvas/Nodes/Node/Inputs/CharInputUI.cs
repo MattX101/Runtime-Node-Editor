@@ -11,7 +11,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
     {
         public override void Init(string nodeId)
         {
-            base.Init(nodeId);
+            InitBase(nodeId);
 
             PopulateRoot("Char");
             CharInputNode node = root.AddComponent<CharInputNode>();
@@ -19,7 +19,6 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
             NumOfOutputs = 1;
 
             drawBodyImage = false;
-            interactablePreview = true;
             toggleInputField = true;
             isInput = true;
 
@@ -27,7 +26,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
 
             node.AddPointer(CreatePointer("Out", ValueType.Char, 0).AddComponent<CharOutputPointer>(), ValueType.Char);
 
-            node.Elements = new NodeUIElements(1, 0, 0)
+            node.Elements = new NodeUIElements(1)
             {
                 InputFields =
                 {

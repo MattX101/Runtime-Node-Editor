@@ -9,7 +9,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
     {
         public override void Init(string nodeId)
         {
-            base.Init(nodeId);
+            InitBase(nodeId);
 
             PopulateRoot("NOT");
             NOTNode node = root.AddComponent<NOTNode>();
@@ -27,7 +27,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
             
             node.AddPointer(CreatePointer("Out", ValueType.Bool, 0).AddComponent<BoolOutputPointer>(), ValueType.Bool);
 
-            node.Elements = new NodeUIElements(0, 2, 0)
+            node.Elements = new NodeUIElements(0, 2)
             {
                 Buttons =
                 {
