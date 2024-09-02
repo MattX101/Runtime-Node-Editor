@@ -144,8 +144,9 @@ namespace RuntimeNodeEditor.Nodes.Lines
         private void DropOnInputPointer(SingleConnectionInputPointer inputPointer)
         {
             SetConnectionInput(inputPointer);
-
+            
             inputPointer.SetConnection(_currentOutputPointer, _currentConnectionLine);
+            inputPointer.node.Reset();
         }
 
         private void DropOnMultiConnectInputPointer(MultiConnectionInputPointer inputPointer)
@@ -154,6 +155,7 @@ namespace RuntimeNodeEditor.Nodes.Lines
 
             inputPointer.connectedOutputPointers ??= new List<OutputPointer>();
             inputPointer.SetMultiConnection(_currentOutputPointer, _currentConnectionLine);
+            inputPointer.node.Reset();
         }
 
         private void SetConnectionInput(InputPointer inputPointer)
