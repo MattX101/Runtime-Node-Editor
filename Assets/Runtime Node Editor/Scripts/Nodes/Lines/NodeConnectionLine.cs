@@ -116,14 +116,7 @@ namespace RuntimeNodeEditor.Nodes.Line
 
             if (Input)
             {
-                if (Input.TryGetComponent(out MultiConnectionInputPointer multi))
-                {
-                    multi.Remove(this);
-                }
-                else if (Input.TryGetComponent(out SingleConnectionInputPointer single))
-                {
-                    single.Destroy();
-                }
+                Input.Destroy();
             }
             if (Output)
             {

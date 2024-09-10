@@ -43,17 +43,8 @@ namespace RuntimeNodeEditor.Nodes.Lines
 
         private static void DeleteInputConnection(InputPointer inputPointer)
         {
-            if (inputPointer.TryGetComponent(out SingleConnectionInputPointer single))
-            {
-                Remove(single.Line);
-                single.DeleteConnection();
-            }
-            else if (inputPointer.TryGetComponent(out MultiConnectionInputPointer multi))
-            {
-                foreach(NodeConnectionLine line in multi.Lines) 
-                    Remove(line);
-                multi.DeleteConnections();
-            }
+            Remove(inputPointer.Line);
+            inputPointer.DeleteConnection();
         }
     }
 }

@@ -58,27 +58,8 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Save
 
                 for (int inputPointerIndex = 0; inputPointerIndex < nodes[nodeIndex].inputs.Count; inputPointerIndex++)
                 {
-                    if (nodes[nodeIndex].inputs[inputPointerIndex].TryGetComponent(out SingleConnectionInputPointer single))
-                    {
-                        bytes.Add(0);
-
-                        SaveOutput(bytes, nodes, nodeIndex, single.connectedOutputPointer, inputPointerIndex);
-                        count++;
-                    }
-                    else if (nodes[nodeIndex].inputs[inputPointerIndex].TryGetComponent(out MultiConnectionInputPointer multi))
-                    {
-                        bytes.Add(1);
-
-                        bytes.AddRange(BitConverter.GetBytes(multi.connectedOutputPointers.Count));
-                        foreach (OutputPointer outputPointer in multi.connectedOutputPointers)
-                            SaveOutput(bytes, nodes, nodeIndex, outputPointer, inputPointerIndex);
-                        
-                        count++;
-                    }
-                    else
-                    {
-                        bytes.Add(2);
-                    }
+                    SaveOutput(bytes, nodes, nodeIndex, nodes[nodeIndex].inputs[inputPointerIndex].connectedOutputPointer, inputPointerIndex);
+                    count++;
                 }
             }
 

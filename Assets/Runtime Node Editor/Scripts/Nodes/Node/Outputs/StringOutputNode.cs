@@ -11,7 +11,7 @@ namespace RuntimeNodeEditor.Nodes.Node
 
         protected override void DataToGetAndSet()
         {
-            Elements.SetInputField(Elements.InputFields[0], PointerValue.GetString(GetSingle(0)));
+            Elements.SetInputField(Elements.InputFields[0], PointerValue.GetString(inputs[0]));
         }
     }
 }

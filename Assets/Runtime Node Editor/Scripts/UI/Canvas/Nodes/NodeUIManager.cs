@@ -25,8 +25,6 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes
             UISettings.NodeCanvasTransform = parent;
 
             UISettings.PointerTexture = pointerTexture;
-            UISettings.ArrayPointerTexture = arrayPointerTexture;
-            UISettings.ValueInsertPointerTexture = valueInsertPointerTexture;
         }
 
         private void Update()

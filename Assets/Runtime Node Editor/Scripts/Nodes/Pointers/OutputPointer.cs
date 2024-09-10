@@ -37,21 +37,7 @@ namespace RuntimeNodeEditor.Nodes.Pointer
                 DeleteConnection(i);
         }
 
-        protected void DeleteConnection(int i)
-        {
-            if (connectedInputPointers[i].TryGetComponent(out SingleConnectionInputPointer single))
-            {
-                single.DeleteConnection();
-            }
-            else if (connectedInputPointers[i].TryGetComponent(out MultiConnectionInputPointer multi))
-            {
-                multi.DeleteConnection(this, Lines[i]);
-            }
-            else
-            {
-                return;
-            }
-        }
+        protected void DeleteConnection(int i) => connectedInputPointers[i].DeleteConnection();
 
         protected void UpdateLines()
         {

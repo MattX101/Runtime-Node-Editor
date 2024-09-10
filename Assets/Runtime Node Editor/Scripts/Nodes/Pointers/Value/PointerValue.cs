@@ -52,8 +52,7 @@ namespace RuntimeNodeEditor.Nodes.Pointer.Value
             };
         }
         
-        private static bool IsValid(SingleConnectionInputPointer single) 
-            => single.node.IsValid(single);
+        private static bool IsValid(InputPointer input) => input.node.IsValid(input);
 
         public static int GetInt(OutputPointer output)
         {
@@ -64,10 +63,10 @@ namespace RuntimeNodeEditor.Nodes.Pointer.Value
                 _ => 0
             };
         }
-        public static int GetInt(SingleConnectionInputPointer single)
-            => IsValid(single) ? GetInt(single.connectedOutputPointer) : 0;
-        public static void GetInt(SingleConnectionInputPointer single, ref int value)
-            => value = IsValid(single) ? GetInt(single.connectedOutputPointer) : value;
+        public static int GetInt(InputPointer input)
+            => IsValid(input) ? GetInt(input.connectedOutputPointer) : 0;
+        public static void GetInt(InputPointer input, ref int value)
+            => value = IsValid(input) ? GetInt(input.connectedOutputPointer) : value;
 
         public static float GetFloat(OutputPointer output)
         {
@@ -78,24 +77,24 @@ namespace RuntimeNodeEditor.Nodes.Pointer.Value
                 _ => 0.0f
             };
         }
-        public static float GetFloat(SingleConnectionInputPointer single)
-            => IsValid(single) ? GetFloat(single.connectedOutputPointer) : 0.0f;
-        public static void GetFloat(SingleConnectionInputPointer single, ref float value)
-            => value = IsValid(single) ? GetFloat(single.connectedOutputPointer) : value;
+        public static float GetFloat(InputPointer input)
+            => IsValid(input) ? GetFloat(input.connectedOutputPointer) : 0.0f;
+        public static void GetFloat(InputPointer input, ref float value)
+            => value = IsValid(input) ? GetFloat(input.connectedOutputPointer) : value;
 
         public static bool GetBool(OutputPointer output)
             => output.GetComponent<BoolOutputPointer>().value;
-        public static bool GetBool(SingleConnectionInputPointer single)
-            => IsValid(single) ? GetBool(single.connectedOutputPointer) : false;
-        public static void GetBool(SingleConnectionInputPointer single, ref bool value)
-            => value = IsValid(single) ? GetBool(single.connectedOutputPointer) : value;
+        public static bool GetBool(InputPointer input)
+            => IsValid(input) ? GetBool(input.connectedOutputPointer) : false;
+        public static void GetBool(InputPointer input, ref bool value)
+            => value = IsValid(input) ? GetBool(input.connectedOutputPointer) : value;
 
         public static char GetChar(OutputPointer output)
             => output.GetComponent<CharOutputPointer>().value;
-        public static char GetChar(SingleConnectionInputPointer single)
-            => IsValid(single) ? GetChar(single.connectedOutputPointer) : ' ';
-        public static void GetChar(SingleConnectionInputPointer single, ref char value)
-            => value = IsValid(single) ? GetChar(single.connectedOutputPointer) : value;
+        public static char GetChar(InputPointer input)
+            => IsValid(input) ? GetChar(input.connectedOutputPointer) : ' ';
+        public static void GetChar(InputPointer input, ref char value)
+            => value = IsValid(input) ? GetChar(input.connectedOutputPointer) : value;
 
         public static string GetString(OutputPointer output)
         {
@@ -109,16 +108,16 @@ namespace RuntimeNodeEditor.Nodes.Pointer.Value
                 _ => ""
             };
         }
-        public static string GetString(SingleConnectionInputPointer single)
-            => IsValid(single) ? GetString(single.connectedOutputPointer) : "";
-        public static void GetString(SingleConnectionInputPointer single, ref string value)
-            => value = IsValid(single) ? GetString(single.connectedOutputPointer) : value;
+        public static string GetString(InputPointer input)
+            => IsValid(input) ? GetString(input.connectedOutputPointer) : "";
+        public static void GetString(InputPointer input, ref string value)
+            => value = IsValid(input) ? GetString(input.connectedOutputPointer) : value;
 
         public static Color GetColor(OutputPointer output) =>  output.GetComponent<ColorOutputPointer>().value; 
-        public static Color GetColor(SingleConnectionInputPointer single)
-            => IsValid(single) ? GetColor(single.connectedOutputPointer) : Color.black;
-        public static void GetColor(SingleConnectionInputPointer single, ref Color value)
-            => value = IsValid(single) ? GetColor(single.connectedOutputPointer) : value;
+        public static Color GetColor(InputPointer input)
+            => IsValid(input) ? GetColor(input.connectedOutputPointer) : Color.black;
+        public static void GetColor(InputPointer input, ref Color value)
+            => value = IsValid(input) ? GetColor(input.connectedOutputPointer) : value;
 
         public static Vector2 GetVector2(OutputPointer output)
         {
@@ -131,10 +130,10 @@ namespace RuntimeNodeEditor.Nodes.Pointer.Value
                 _ => Vector2.zero
             };
         }
-        public static Vector2 GetVector2(SingleConnectionInputPointer single)
-            => IsValid(single) ? GetVector2(single.connectedOutputPointer) : Vector2.zero;
-        public static void GetVector2(SingleConnectionInputPointer single, ref Vector2 value)
-            => value = IsValid(single) ? GetVector2(single.connectedOutputPointer) : value;
+        public static Vector2 GetVector2(InputPointer input)
+            => IsValid(input) ? GetVector2(input.connectedOutputPointer) : Vector2.zero;
+        public static void GetVector2(InputPointer input, ref Vector2 value)
+            => value = IsValid(input) ? GetVector2(input.connectedOutputPointer) : value;
 
         public static Vector3 GetVector3(OutputPointer output)
         {
@@ -147,9 +146,9 @@ namespace RuntimeNodeEditor.Nodes.Pointer.Value
                 _ => Vector3.zero
             };
         }
-        public static Vector3 GetVector3(SingleConnectionInputPointer single)
-            => IsValid(single) ? GetVector3(single.connectedOutputPointer) : Vector3.zero;
-        public static void GetVector3(SingleConnectionInputPointer single, ref Vector3 value)
-            => value = IsValid(single) ? GetVector3(single.connectedOutputPointer) : value;
+        public static Vector3 GetVector3(InputPointer input)
+            => IsValid(input) ? GetVector3(input.connectedOutputPointer) : Vector3.zero;
+        public static void GetVector3(InputPointer input, ref Vector3 value)
+            => value = IsValid(input) ? GetVector3(input.connectedOutputPointer) : value;
     }
 }

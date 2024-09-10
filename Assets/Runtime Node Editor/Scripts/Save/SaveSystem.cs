@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
 using RuntimeNodeEditor.Input;
 using RuntimeNodeEditor.Functions.Seed;
 using RuntimeNodeEditor.Nodes;
@@ -8,6 +5,9 @@ using RuntimeNodeEditor.Nodes.Lines;
 using RuntimeNodeEditor.UI.Canvas.Nodes.Save;
 using Utils.IO.Selection;
 using UnityEngine;
+using System;
+using System.Collections.Generic;
+using System.IO;
 
 namespace RuntimeNodeEditor.Save
 {
@@ -100,17 +100,7 @@ namespace RuntimeNodeEditor.Save
                 byte inputConnectionType = data[position];
                 position++;
 
-                switch (inputConnectionType)
-                {
-                    case 0:
-                        position = LoadConnection(nodes, position, data);
-                        break;
-                    case 1:
-                        position = LoadConnections(nodes, position, data);
-                        break;
-                    default:
-                        break;
-                }
+                position = LoadConnection(nodes, position, data);
             }
 
             nodeConnections.UpdateLinesOnLoad();
@@ -134,24 +124,7 @@ namespace RuntimeNodeEditor.Save
                 nodes[BitConverter.ToInt32(data, position)].inputs[data[position + 4]], 
                 nodes[BitConverter.ToInt32(data, position + 5)].outputs[data[position + 9]]);
             
-            return position + 10;
-        }
-
-        private int LoadConnections(Nodes.Node.Node[] nodes, int position, byte[] data)
-        {
-            int numOfConnections = BitConverter.ToInt32(data, position);
-            position += 4;
-
-            for (int i = 0; i < numOfConnections; i++)
-            {
-                nodeConnections.Load(
-                    nodes[BitConverter.ToInt32(data, position)].inputs[data[position + 4]],
-                    nodes[BitConverter.ToInt32(data, position + 5)].outputs[data[position + 9]]);
-
-                position += 10;
-            }
-
-            return position;
+            return position + 9;
         }
     }
 }

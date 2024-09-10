@@ -14,7 +14,7 @@ namespace RuntimeNodeEditor.Nodes.Node
 
         protected override void DataToGetAndSet()
         {
-            ImagePreview.Image.color = PointerValue.GetColor(GetSingle(0));
+            ImagePreview.Image.color = PointerValue.GetColor(inputs[0]);
         }
     }
 }

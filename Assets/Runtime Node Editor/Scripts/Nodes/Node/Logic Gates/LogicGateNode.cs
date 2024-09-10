@@ -23,8 +23,8 @@ namespace RuntimeNodeEditor.Nodes.Node
 
         protected override void DataToGetAndSet()
         {
-            bool a = PointerValue.GetBool(GetSingle(0));
-            bool b = PointerValue.GetBool(GetSingle(1));
+            bool a = PointerValue.GetBool(inputs[0]);
+            bool b = PointerValue.GetBool(inputs[1]);
 
             Elements.SetBoolean(Elements.Buttons[0], a);
             Elements.SetBoolean(Elements.Buttons[1], b);

@@ -11,7 +11,7 @@ namespace RuntimeNodeEditor.Nodes.Node
 
         protected override void DataToGetAndSet()
         {
-            Elements.SetBoolean(Elements.Buttons[0], PointerValue.GetBool(GetSingle(0)));
+            Elements.SetBoolean(Elements.Buttons[0], PointerValue.GetBool(inputs[0]));
         }
     }
 }

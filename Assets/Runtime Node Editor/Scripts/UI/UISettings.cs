@@ -20,6 +20,6 @@ namespace RuntimeNodeEditor.UI
 
         public static Transform NodeCanvasTransform, WindowSpawnParent;
 
-        public static Texture2D PointerTexture, ArrayPointerTexture, ValueInsertPointerTexture;
+        public static Texture2D PointerTexture;
     }
 }

@@ -37,20 +37,7 @@ namespace RuntimeNodeEditor.Nodes.Node
         public void DeletePointerConnections()
         {
             foreach (InputPointer input in inputs)
-            {
-                if (input.TryGetComponent(out SingleConnectionInputPointer single))
-                {
-                    single.DeleteConnection();
-                }
-                else if (input.TryGetComponent(out MultiConnectionInputPointer multi))
-                {
-                    multi.DeleteConnections();
-                }
-                else
-                {
-                    continue;
-                }
-            }
+                input.DeleteConnection();
 
             foreach (OutputPointer output in outputs)
                 output.DeleteConnections();
@@ -109,9 +96,8 @@ namespace RuntimeNodeEditor.Nodes.Node
         }
         protected void ExecuteConnection(int i)
         {
-            SingleConnectionInputPointer input = GetSingle(i);
-            if (IsValid(input))
-                input.connectedOutputPointer.node.Execute();
+            if (IsValid(i))
+                inputs[i].connectedOutputPointer.node.Execute();
         }
 
         protected virtual void DataToGetAndSet() { }
@@ -133,11 +119,8 @@ namespace RuntimeNodeEditor.Nodes.Node
 
         private void ResetExecution() => _wasExecuted = false;
 
-        protected SingleConnectionInputPointer GetSingle(int i) => inputs[i].TryGetComponent(out SingleConnectionInputPointer input) ? input : null;
-        protected MultiConnectionInputPointer GetMulti(int i) => inputs[i].TryGetComponent(out MultiConnectionInputPointer input) ? input : null;
-
-        public bool IsValid(SingleConnectionInputPointer single) => single && single.connectedOutputPointer;
-        public bool IsValid(MultiConnectionInputPointer multi) => multi && multi.connectedOutputPointers != null && multi.connectedOutputPointers.Count > 0;
-        protected bool IsConnected(SingleConnectionInputPointer single) => single.hasConnection;
+        public bool IsValid(int i) => inputs[i] && inputs[i].connectedOutputPointer;
+        public bool IsValid(InputPointer input) => input && input.connectedOutputPointer;
+        protected bool IsConnected(int i) => inputs[i].hasConnection;
     }
 }
