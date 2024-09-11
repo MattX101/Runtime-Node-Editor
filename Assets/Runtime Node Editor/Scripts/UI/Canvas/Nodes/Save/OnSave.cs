@@ -58,7 +58,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Save
 
                 for (int inputPointerIndex = 0; inputPointerIndex < nodes[nodeIndex].inputs.Count; inputPointerIndex++)
                 {
-                    SaveOutput(bytes, nodes, nodeIndex, nodes[nodeIndex].inputs[inputPointerIndex].connectedOutputPointer, inputPointerIndex);
+                    SaveOutput(bytes, nodes, nodeIndex, nodes[nodeIndex].inputs[inputPointerIndex].ConnectedOutputPointer, inputPointerIndex);
                     count++;
                 }
             }
@@ -79,7 +79,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Save
 
             int connectedOutputNode = FindNode(
                 nodes,
-                outputPointer.node);
+                outputPointer.Node);
 
             if (connectedOutputNode == -1)
                 return;

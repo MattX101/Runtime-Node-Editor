@@ -1,21 +1,14 @@
-using RuntimeNodeEditor.Nodes.Pointer.Value;
-
 namespace RuntimeNodeEditor.Nodes.Pointer
 {
     public class BoolOutputPointer : OutputPointer
     {
         public bool value = false;
 
-        public BoolOutputPointer(Node.Node node) : base(node)
-        {
-            valueType = ValueType.Bool;
-        }
+        public BoolOutputPointer(Node.Node node) : base(node) { }
 
-        public override void Reset()
+        private protected override void ResetPointer()
         {
             value = false;
-
-            base.Reset();
         }
     }
 }

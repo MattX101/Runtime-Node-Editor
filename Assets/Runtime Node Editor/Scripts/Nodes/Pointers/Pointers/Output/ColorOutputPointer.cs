@@ -1,4 +1,3 @@
-using RuntimeNodeEditor.Nodes.Pointer.Value;
 using UnityEngine;
 
 namespace RuntimeNodeEditor.Nodes.Pointer
@@ -7,16 +6,11 @@ namespace RuntimeNodeEditor.Nodes.Pointer
     {
         public Color value = Color.black;
 
-        public ColorOutputPointer(Node.Node node) : base(node)
-        {
-            valueType = ValueType.Color;
-        }
+        public ColorOutputPointer(Node.Node node) : base(node) { }
 
-        public override void Reset()
+        private protected override void ResetPointer()
         {
             value = Color.black;
-
-            base.Reset();
         }
     }
 }

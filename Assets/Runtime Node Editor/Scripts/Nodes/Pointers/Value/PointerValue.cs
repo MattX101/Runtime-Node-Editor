@@ -50,11 +50,11 @@ namespace RuntimeNodeEditor.Nodes.Pointer.Value
             };
         }
         
-        private static bool IsValid(InputPointer input) => input.node.IsValid(input);
+        private static bool IsValid(InputPointer input) => input.Node.IsValid(input);
 
         public static int GetInt(OutputPointer output)
         {
-            return output.valueType switch
+            return output.ValueType switch
             {
                 ValueType.Int => output.GetComponent<IntOutputPointer>().value,
                 ValueType.Float => (int)output.GetComponent<FloatOutputPointer>().value,
@@ -62,13 +62,13 @@ namespace RuntimeNodeEditor.Nodes.Pointer.Value
             };
         }
         public static int GetInt(InputPointer input)
-            => IsValid(input) ? GetInt(input.connectedOutputPointer) : 0;
+            => IsValid(input) ? GetInt(input.ConnectedOutputPointer) : 0;
         public static void GetInt(InputPointer input, ref int value)
-            => value = IsValid(input) ? GetInt(input.connectedOutputPointer) : value;
+            => value = IsValid(input) ? GetInt(input.ConnectedOutputPointer) : value;
 
         public static float GetFloat(OutputPointer output)
         {
-            return output.valueType switch
+            return output.ValueType switch
             {
                 ValueType.Float => output.GetComponent<FloatOutputPointer>().value,
                 ValueType.Int => output.GetComponent<IntOutputPointer>().value,
@@ -76,27 +76,27 @@ namespace RuntimeNodeEditor.Nodes.Pointer.Value
             };
         }
         public static float GetFloat(InputPointer input)
-            => IsValid(input) ? GetFloat(input.connectedOutputPointer) : 0.0f;
+            => IsValid(input) ? GetFloat(input.ConnectedOutputPointer) : 0.0f;
         public static void GetFloat(InputPointer input, ref float value)
-            => value = IsValid(input) ? GetFloat(input.connectedOutputPointer) : value;
+            => value = IsValid(input) ? GetFloat(input.ConnectedOutputPointer) : value;
 
         public static bool GetBool(OutputPointer output)
             => output.GetComponent<BoolOutputPointer>().value;
         public static bool GetBool(InputPointer input)
-            => IsValid(input) ? GetBool(input.connectedOutputPointer) : false;
+            => IsValid(input) ? GetBool(input.ConnectedOutputPointer) : false;
         public static void GetBool(InputPointer input, ref bool value)
-            => value = IsValid(input) ? GetBool(input.connectedOutputPointer) : value;
+            => value = IsValid(input) ? GetBool(input.ConnectedOutputPointer) : value;
 
         public static char GetChar(OutputPointer output)
             => output.GetComponent<CharOutputPointer>().value;
         public static char GetChar(InputPointer input)
-            => IsValid(input) ? GetChar(input.connectedOutputPointer) : ' ';
+            => IsValid(input) ? GetChar(input.ConnectedOutputPointer) : ' ';
         public static void GetChar(InputPointer input, ref char value)
-            => value = IsValid(input) ? GetChar(input.connectedOutputPointer) : value;
+            => value = IsValid(input) ? GetChar(input.ConnectedOutputPointer) : value;
 
         public static string GetString(OutputPointer output)
         {
-            return output.valueType switch
+            return output.ValueType switch
             {
                 ValueType.String => output.GetComponent<StringOutputPointer>().value,
                 ValueType.Int => output.GetComponent<IntOutputPointer>().value.ToString(),
@@ -107,19 +107,19 @@ namespace RuntimeNodeEditor.Nodes.Pointer.Value
             };
         }
         public static string GetString(InputPointer input)
-            => IsValid(input) ? GetString(input.connectedOutputPointer) : "";
+            => IsValid(input) ? GetString(input.ConnectedOutputPointer) : "";
         public static void GetString(InputPointer input, ref string value)
-            => value = IsValid(input) ? GetString(input.connectedOutputPointer) : value;
+            => value = IsValid(input) ? GetString(input.ConnectedOutputPointer) : value;
 
         public static Color GetColor(OutputPointer output) =>  output.GetComponent<ColorOutputPointer>().value; 
         public static Color GetColor(InputPointer input)
-            => IsValid(input) ? GetColor(input.connectedOutputPointer) : Color.black;
+            => IsValid(input) ? GetColor(input.ConnectedOutputPointer) : Color.black;
         public static void GetColor(InputPointer input, ref Color value)
-            => value = IsValid(input) ? GetColor(input.connectedOutputPointer) : value;
+            => value = IsValid(input) ? GetColor(input.ConnectedOutputPointer) : value;
 
         public static Vector2 GetVector2(OutputPointer output)
         {
-            return output.valueType switch
+            return output.ValueType switch
             {
                 ValueType.Vector2 => output.GetComponent<Vector2OutputPointer>().value,
                 ValueType.Int => new Vector2(output.GetComponent<IntOutputPointer>().value, output.GetComponent<IntOutputPointer>().value),
@@ -129,13 +129,13 @@ namespace RuntimeNodeEditor.Nodes.Pointer.Value
             };
         }
         public static Vector2 GetVector2(InputPointer input)
-            => IsValid(input) ? GetVector2(input.connectedOutputPointer) : Vector2.zero;
+            => IsValid(input) ? GetVector2(input.ConnectedOutputPointer) : Vector2.zero;
         public static void GetVector2(InputPointer input, ref Vector2 value)
-            => value = IsValid(input) ? GetVector2(input.connectedOutputPointer) : value;
+            => value = IsValid(input) ? GetVector2(input.ConnectedOutputPointer) : value;
 
         public static Vector3 GetVector3(OutputPointer output)
         {
-            return output.valueType switch
+            return output.ValueType switch
             {
                 ValueType.Vector3 => output.GetComponent<Vector3OutputPointer>().value,
                 ValueType.Int => new Vector3(output.GetComponent<IntOutputPointer>().value, output.GetComponent<IntOutputPointer>().value, output.GetComponent<IntOutputPointer>().value),
@@ -145,8 +145,8 @@ namespace RuntimeNodeEditor.Nodes.Pointer.Value
             };
         }
         public static Vector3 GetVector3(InputPointer input)
-            => IsValid(input) ? GetVector3(input.connectedOutputPointer) : Vector3.zero;
+            => IsValid(input) ? GetVector3(input.ConnectedOutputPointer) : Vector3.zero;
         public static void GetVector3(InputPointer input, ref Vector3 value)
-            => value = IsValid(input) ? GetVector3(input.connectedOutputPointer) : value;
+            => value = IsValid(input) ? GetVector3(input.ConnectedOutputPointer) : value;
     }
 }

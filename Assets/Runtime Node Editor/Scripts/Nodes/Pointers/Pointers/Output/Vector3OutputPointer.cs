@@ -1,4 +1,3 @@
-using RuntimeNodeEditor.Nodes.Pointer.Value;
 using UnityEngine;
 
 namespace RuntimeNodeEditor.Nodes.Pointer
@@ -7,16 +6,11 @@ namespace RuntimeNodeEditor.Nodes.Pointer
     {
         public Vector3 value = Vector3.zero;
 
-        public Vector3OutputPointer(Node.Node node) : base(node)
-        {
-            valueType = ValueType.Vector3;
-        }
+        public Vector3OutputPointer(Node.Node node) : base(node) { }
 
-        public override void Reset()
+        private protected override void ResetPointer()
         {
             value = Vector3.zero;
-
-            base.Reset();
         }
     }
 }

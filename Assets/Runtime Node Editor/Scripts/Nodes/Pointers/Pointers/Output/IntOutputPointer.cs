@@ -1,21 +1,14 @@
-using RuntimeNodeEditor.Nodes.Pointer.Value;
-
 namespace RuntimeNodeEditor.Nodes.Pointer
 {
     public class IntOutputPointer : OutputPointer
     {
         public int value = 0;
 
-        public IntOutputPointer(Node.Node node) : base(node)
-        {
-            valueType = ValueType.Int;
-        }
+        public IntOutputPointer(Node.Node node) : base(node) { }
 
-        public override void Reset()
+        private protected override void ResetPointer()
         {
             value = 0;
-
-            base.Reset();
         }
     }
 }

@@ -13,38 +13,32 @@ namespace RuntimeNodeEditor.Nodes.Lines
 
         public static bool NotNullOrEmpty => DroppedLines is not { Count: > 0 };
 
-        public static void Add(NodeConnectionLine line)
-        {
-            DroppedLines.Add(line);
-        }
+        public static void Add(NodeConnectionLine line) => DroppedLines.Add(line);
 
-        public static void Remove(NodeConnectionLine line)
-        {
-            DroppedLines.Remove(line);
-        }
+        public static void Remove(NodeConnectionLine line) => DroppedLines.Remove(line);
 
         public static void DeletePointerConnectionsOnClick(RaycastHit2D raycast)
         {
             if (!raycast.collider || CanvasData.IsPointing)
                 return;
 
-            if (raycast.collider.TryGetComponent(out OutputPointer outputPointer))
-                DeleteOutputConnections(outputPointer);
-            else if (raycast.collider.TryGetComponent(out InputPointer inputPointer))
-                DeleteInputConnection(inputPointer);
+            if (raycast.collider.TryGetComponent(out OutputPointer output))
+                DeleteOutputConnections(output);
+            else if (raycast.collider.TryGetComponent(out InputPointer input))
+                DeleteInputConnection(input);
         }
 
-        private static void DeleteOutputConnections(OutputPointer outputPointer)
+        private static void DeleteOutputConnections(OutputPointer output)
         {
-            foreach (NodeConnectionLine line in outputPointer.Lines)
+            foreach (NodeConnectionLine line in output.Lines)
                 Remove(line);
-            outputPointer.DeleteConnections();
+            output.DeleteConnections();
         }
 
-        private static void DeleteInputConnection(InputPointer inputPointer)
+        private static void DeleteInputConnection(InputPointer input)
         {
-            Remove(inputPointer.Line);
-            inputPointer.DeleteConnection();
+            Remove(input.Line);
+            input.DeleteConnection();
         }
     }
 }

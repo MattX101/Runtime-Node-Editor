@@ -1,21 +1,14 @@
-using RuntimeNodeEditor.Nodes.Pointer.Value;
-
 namespace RuntimeNodeEditor.Nodes.Pointer
 {
     public class CharOutputPointer : OutputPointer
     {
         public char value = ' ';
 
-        public CharOutputPointer(Node.Node node) : base(node)
-        {
-            valueType = ValueType.Char;
-        }
+        public CharOutputPointer(Node.Node node) : base(node) { }
 
-        public override void Reset()
+        private protected override void ResetPointer()
         {
             value = ' ';
-
-            base.Reset();
         }
     }
 }

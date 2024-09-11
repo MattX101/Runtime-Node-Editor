@@ -115,13 +115,9 @@ namespace RuntimeNodeEditor.Nodes.Line
             LinesData.Remove(this);
 
             if (Input)
-            {
-                Input.Destroy();
-            }
+                Input.SetLineToNull();
             if (Output)
-            {
-                Output.Lines.Remove(this);
-            }
+                Output.RemoveLine(this);
 
             _lineRenderer = null;
             Object.Destroy(_lineObject);

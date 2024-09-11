@@ -17,20 +17,8 @@ namespace RuntimeNodeEditor.Nodes.Node
 
         public NodeUIElements Elements;
 
-        public void AddPointer(InputPointer inputPointer, ValueType valueType)
-        {
-            inputPointer.node = this;
-            inputPointer.valueType = valueType;
-
-            inputs.Add(inputPointer);
-        }
-        public void AddPointer(OutputPointer outputPointer, ValueType valueType)
-        {
-            outputPointer.node = this;
-            outputPointer.valueType = valueType;
-
-            outputs.Add(outputPointer);
-        }
+        public void AddPointer(InputPointer input, ValueType valueType) => input.AddInputPointer(this, input, valueType);
+        public void AddPointer(OutputPointer output, ValueType valueType) => output.AddOutputPointer(this, output, valueType);
 
         public void DeletePointerConnections()
         {
@@ -53,8 +41,8 @@ namespace RuntimeNodeEditor.Nodes.Node
             if (outputs == null)
                 return 0;
 
-            foreach (InputPointer input in outputs.Where(output => output.connectedInputPointers != null).SelectMany(output => output.connectedInputPointers))
-                input.node.MoveUp();
+            foreach (InputPointer input in outputs.Where(output => output.ConnectedInputPointers != null).SelectMany(output => output.ConnectedInputPointers))
+                input.Node.MoveUp();
 
             return 1;
         }
@@ -73,8 +61,8 @@ namespace RuntimeNodeEditor.Nodes.Node
             if (outputs == null)
                 return 0;
 
-            foreach (InputPointer input in outputs.Where(output => output.connectedInputPointers != null).SelectMany(output => output.connectedInputPointers))
-                input.node.OnValueChangeReset();
+            foreach (InputPointer input in outputs.Where(output => output.ConnectedInputPointers != null).SelectMany(output => output.ConnectedInputPointers))
+                input.Node.OnValueChangeReset();
 
             return 1;
         }
@@ -95,7 +83,7 @@ namespace RuntimeNodeEditor.Nodes.Node
         protected void ExecuteConnection(int i)
         {
             if (IsValid(i))
-                inputs[i].connectedOutputPointer.node.Execute();
+                inputs[i].ConnectedOutputPointer.Node.Execute();
         }
 
         protected virtual void DataToGetAndSet() { }
@@ -117,8 +105,8 @@ namespace RuntimeNodeEditor.Nodes.Node
 
         private void ResetExecution() => _wasExecuted = false;
 
-        public bool IsValid(int i) => inputs[i] && inputs[i].connectedOutputPointer;
-        public bool IsValid(InputPointer input) => input && input.connectedOutputPointer;
-        protected bool IsConnected(int i) => inputs[i].hasConnection;
+        public bool IsValid(int i) => inputs[i] && inputs[i].ConnectedOutputPointer;
+        public bool IsValid(InputPointer input) => input && input.ConnectedOutputPointer;
+        protected bool IsConnected(int i) => inputs[i].HasConnection;
     }
 }

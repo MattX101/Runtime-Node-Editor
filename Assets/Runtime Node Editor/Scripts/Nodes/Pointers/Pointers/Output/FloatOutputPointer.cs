@@ -1,21 +1,14 @@
-using RuntimeNodeEditor.Nodes.Pointer.Value;
-
 namespace RuntimeNodeEditor.Nodes.Pointer
 {
     public class FloatOutputPointer : OutputPointer
     {
         public float value = 0.0f;
 
-        public FloatOutputPointer(Node.Node node) : base(node)
-        {
-            valueType = ValueType.Float;
-        }
+        public FloatOutputPointer(Node.Node node) : base(node) { }
 
-        public override void Reset()
+        private protected override void ResetPointer()
         {
             value = 0.0f;
-
-            base.Reset();
         }
     }
 }

@@ -1,47 +1,44 @@
 using RuntimeNodeEditor.Nodes.Line;
-using RuntimeNodeEditor.Nodes.Pointer.Value;
 
 namespace RuntimeNodeEditor.Nodes.Pointer
 {
     public class InputPointer : Pointer
     {
-        public OutputPointer connectedOutputPointer;
-        private NodeConnectionLine line;
-        public NodeConnectionLine Line => line;
+        private OutputPointer _connectedOutputPointer;
+        public OutputPointer ConnectedOutputPointer => _connectedOutputPointer;
+        
+        private NodeConnectionLine _line;
+        internal NodeConnectionLine Line => _line;
 
-        public bool hasConnection = false;
+        private bool _hasConnection = false;
+        internal bool HasConnection => _hasConnection;
 
-        public InputPointer(Node.Node node) : base(node)
+        public InputPointer(Node.Node node) : base(node) { }
+
+        internal void SetLineToNull() => _line = null;
+
+        internal void SetConnection(OutputPointer output, NodeConnectionLine line)
         {
-            valueType = ValueType.None;
+            _hasConnection = true;
+            _connectedOutputPointer = output;
+
+            _line = line;
         }
 
-        public void Destroy()
+        internal void DeleteConnection()
         {
-            line = null;
-        }
-
-        public void SetConnection(OutputPointer outputPointer, NodeConnectionLine line)
-        {
-            hasConnection = true;
-            connectedOutputPointer = outputPointer;
-
-            this.line = line;
-        }
-
-        public void DeleteConnection()
-        {
-            if (line == null)
+            if (_line == null)
                 return;
 
-            line.DestroyLine();
+            _line.DestroyLine();
+            _line = null;
 
-            hasConnection = false;
+            _hasConnection = false;
 
-            connectedOutputPointer.connectedInputPointers.Remove(this);
-            connectedOutputPointer = null;
+            _connectedOutputPointer.RemoveConnection(this);
+            _connectedOutputPointer = null;
 
-            node.MoveUp();
+            Node.MoveUp();
         }
     }
 }
