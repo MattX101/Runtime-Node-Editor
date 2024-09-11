@@ -17,19 +17,17 @@ namespace RuntimeNodeEditor.Nodes.Node
 
         public NodeUIElements Elements;
 
-        public void AddPointer(InputPointer inputPointer, ValueType valueType, Pointer.Type.PointerType pointerType = Pointer.Type.PointerType.Variable)
+        public void AddPointer(InputPointer inputPointer, ValueType valueType)
         {
             inputPointer.node = this;
             inputPointer.valueType = valueType;
-            inputPointer.pointerType = pointerType;
 
             inputs.Add(inputPointer);
         }
-        public void AddPointer(OutputPointer outputPointer, ValueType valueType, Pointer.Type.PointerType pointerType = Pointer.Type.PointerType.Variable)
+        public void AddPointer(OutputPointer outputPointer, ValueType valueType)
         {
             outputPointer.node = this;
             outputPointer.valueType = valueType;
-            outputPointer.pointerType = pointerType;
 
             outputs.Add(outputPointer);
         }

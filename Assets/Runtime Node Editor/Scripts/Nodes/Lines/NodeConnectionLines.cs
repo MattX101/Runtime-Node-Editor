@@ -3,12 +3,9 @@ using RuntimeNodeEditor.Input;
 using RuntimeNodeEditor.Nodes.Line;
 using RuntimeNodeEditor.Nodes.Pointer;
 using RuntimeNodeEditor.Nodes.Pointer.Data;
-using RuntimeNodeEditor.Nodes.Pointer.Type;
 using RuntimeNodeEditor.Nodes.Pointer.Value;
-using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace RuntimeNodeEditor.Nodes.Lines
 {
@@ -112,8 +109,6 @@ namespace RuntimeNodeEditor.Nodes.Lines
                 return false;
 
             if (!PointerValue.CheckCompatibility(inputPointer.valueType, _currentOutputPointer.valueType))
-                return false;
-            if (!PointerTypeCompatibility.CheckCompatibility(inputPointer.pointerType, _currentOutputPointer.pointerType))
                 return false;
 
             if (inputPointer.hasConnection)
