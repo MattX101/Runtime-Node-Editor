@@ -17,8 +17,8 @@ namespace RuntimeNodeEditor.Nodes.Node
 
         protected override void CodeToExecute()
         {
-            ExecuteConnection(0);
-            ExecuteConnection(1);
+            ExecuteInputConnection(0);
+            ExecuteInputConnection(1);
         }
 
         protected override void DataToGetAndSet()

@@ -6,7 +6,7 @@ namespace RuntimeNodeEditor.Nodes.Node
     {
         protected override void CodeToExecute()
         {
-            ExecuteConnection(0);
+            ExecuteInputConnection(0);
         }
 
         protected override void DataToGetAndSet()

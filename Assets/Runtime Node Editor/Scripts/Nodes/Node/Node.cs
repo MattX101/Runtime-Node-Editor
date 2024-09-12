@@ -17,8 +17,14 @@ namespace RuntimeNodeEditor.Nodes.Node
 
         public NodeUIElements Elements;
 
-        public void AddPointer(InputPointer input, ValueType valueType) => input.AddInputPointer(this, input, valueType);
-        public void AddPointer(OutputPointer output, ValueType valueType) => output.AddOutputPointer(this, output, valueType);
+        public void AddPointer(InputPointer input, ValueType valueType)
+        {
+            input.AddInputPointer(this, input, valueType);
+        }
+        public void AddPointer(OutputPointer output, ValueType valueType)
+        {
+            output.AddOutputPointer(this, output, valueType);
+        }
 
         public void DeletePointerConnections()
         {
@@ -68,7 +74,7 @@ namespace RuntimeNodeEditor.Nodes.Node
         }
 
         protected virtual void CodeToExecute() { }
-        public void Execute()
+        internal void Execute()
         {
             if (!_wasExecuted)
             {
@@ -77,12 +83,13 @@ namespace RuntimeNodeEditor.Nodes.Node
                 CodeToExecute();
                 _wasExecuted = true;
             }
-            
+
             GetData();
         }
-        protected void ExecuteConnection(int i)
+
+        protected void ExecuteInputConnection(int i)
         {
-            if (IsValid(i))
+            if (IsValid(inputs[i]))
                 inputs[i].ConnectedOutputPointer.Node.Execute();
         }
 
@@ -95,7 +102,7 @@ namespace RuntimeNodeEditor.Nodes.Node
         }
 
         protected virtual void CodeToReset() { }
-        public void Reset()
+        internal void Reset()
         {
             Debug.Log("Reseting node: " + gameObject.name + " " + gameObject.GetHashCode());
 
@@ -103,10 +110,14 @@ namespace RuntimeNodeEditor.Nodes.Node
             ResetExecution();
         }
 
-        private void ResetExecution() => _wasExecuted = false;
+        private void ResetExecution()
+        {
+            _wasExecuted = false;
+        }
 
-        public bool IsValid(int i) => inputs[i] && inputs[i].ConnectedOutputPointer;
-        public bool IsValid(InputPointer input) => input && input.ConnectedOutputPointer;
-        protected bool IsConnected(int i) => inputs[i].HasConnection;
+        internal bool IsValid(InputPointer input)
+        {
+            return input && input.ConnectedOutputPointer;
+        }
     }
 }
