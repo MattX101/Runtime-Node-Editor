@@ -24,7 +24,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Grid
         private float ScaleY => CanvasData.Camera.pixelHeight / GridSize * CanvasData.Camera.orthographicSize;
         private float Height => ScaleY / CanvasData.CanvasScaler.scaleFactor;
 
-        public void Init(RawImage image)
+        internal void Init(RawImage image)
         {
             _image = image;
 
@@ -33,7 +33,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Grid
             Initialised = true;
         }
 
-        public void UpdateGrid()
+        internal void UpdateGrid()
         {
             Pan.PanBackgroundGrid(Width, Height);
 
@@ -45,7 +45,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Grid
                  );
         }
 
-        public void SetGridColor(Color color)
+        internal void SetGridColor(Color color)
         {
             _image.color = color;
         }

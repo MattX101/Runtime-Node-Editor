@@ -1,9 +1,9 @@
-using RuntimeNodeEditor.Data;
+using RuntimeNodeEditor.UI.Canvas.Grid;
 using RuntimeNodeEditor.Input;
+using RuntimeNodeEditor.Data;
 using Utils.Colour;
 using UnityEngine;
 using UnityEngine.UI;
-using RuntimeNodeEditor.UI.Canvas.Grid;
 
 namespace RuntimeNodeEditor.UI.Canvas
 {
@@ -23,7 +23,7 @@ namespace RuntimeNodeEditor.UI.Canvas
         private Vector2 _windowSize, _windowSizeWithBorder, _canvasSize;
         private Vector3 _screenRes;
         
-        public void Awake()
+        private void Awake()
         {
             CanvasData.Camera = camera;
             CanvasData.CanvasScaler = canvasScaler;

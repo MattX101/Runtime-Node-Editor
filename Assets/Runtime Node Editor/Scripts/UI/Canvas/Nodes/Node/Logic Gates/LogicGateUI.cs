@@ -9,7 +9,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
 {
     internal class LogicGateUI : NodeUI
     {
-        public override void Init(string nodeId)
+        internal override void Init(string nodeId)
         {
             InitBase(StringParameterExtractor.ExtractBase(nodeId));
 

@@ -8,7 +8,7 @@ namespace RuntimeNodeEditor.Nodes.Lines
 {
     internal static class LinesData
     {
-        private static List<NodeConnectionLine> DroppedLines = new();
+        private static readonly List<NodeConnectionLine> DroppedLines = new();
         internal static NodeConnectionLine[] DroppedLinesArray => DroppedLines.ToArray();
 
         internal static bool NotNullOrEmpty

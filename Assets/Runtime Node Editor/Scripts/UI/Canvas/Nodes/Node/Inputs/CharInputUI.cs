@@ -1,15 +1,15 @@
 using RuntimeNodeEditor.Nodes.Node;
 using RuntimeNodeEditor.Nodes.Pointer;
 using RuntimeNodeEditor.Nodes.Pointer.Value;
-using RuntimeNodeEditor.UI.Elements;
 using RuntimeNodeEditor.Functions.UI.Elements;
+using RuntimeNodeEditor.UI.Elements;
 using TMPro;
 
 namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
 {
     internal class CharInputUI : NodeUI
     {
-        public override void Init(string nodeId)
+        internal override void Init(string nodeId)
         {
             InitBase(nodeId);
 

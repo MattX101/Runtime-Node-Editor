@@ -1,6 +1,6 @@
+using RuntimeNodeEditor.UI.Canvas.Nodes.Node;
 using RuntimeNodeEditor.Data;
 using RuntimeNodeEditor.Input;
-using RuntimeNodeEditor.UI.Canvas.Nodes.Node;
 using UnityEngine;
 
 namespace RuntimeNodeEditor.UI.Canvas.Nodes.Components
@@ -13,8 +13,8 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Components
         private static bool _dragOnSpawn;
 
         private static Vector3 _distanceFromMouseToNodeCenter = Vector3.zero;
-        
-        public static void ManageDrag()
+
+        internal static void ManageDrag()
         {
             if (UIData.TabOrWindowOpened)
                 return;
@@ -36,13 +36,14 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Components
             }
         }
 
-        public static void InitSpawnDrag(NodeUI nodeUI)
+        internal static void InitSpawnDrag(NodeUI nodeUI)
         {
             _selectedNodeUI = nodeUI;
             _dragOnSpawn = true;
 
             CanvasData.IsDragging = true;
         }
+
         private static void SpawnDrag()
         {
             DragNode();

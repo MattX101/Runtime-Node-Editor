@@ -8,8 +8,8 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.Components
     internal static class Factory
     {
         private const string NodeNamespace = "RuntimeNodeEditor.UI.Canvas.Nodes.Node.";
-        
-        public static NodeUI CreateNode(string id, Vector3 position)
+
+        internal static NodeUI CreateNode(string id, Vector3 position)
         {
             // Removes parameters from id else 'not null' error is thrown
             string typeId = StringParameterExtractor.ExtractBase(id);
@@ -32,6 +32,5 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.Components
 
             return nodeUI;
         }
-
     }
 }

@@ -1,7 +1,7 @@
+using RuntimeNodeEditor.UI.Elements;
+using RuntimeNodeEditor.Functions.UI.Component;
 using RuntimeNodeEditor.Nodes.Pointer.Data;
 using RuntimeNodeEditor.Nodes.Pointer.Value;
-using RuntimeNodeEditor.Functions.UI.Component;
-using RuntimeNodeEditor.UI.Elements;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -12,12 +12,12 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Pointer
     {
         private readonly RuntimeNodeEditor.Nodes.Node.Node _node;
 
-        public UIPointers(RuntimeNodeEditor.Nodes.Node.Node node)
+        internal UIPointers(RuntimeNodeEditor.Nodes.Node.Node node)
         {
             _node = node;
         }
 
-        public GameObject CreatePointer(string name, GameObject parent, ValueType valueType, Texture2D texture, int layer, bool pointerIsInput = false, bool createText = false)
+        internal GameObject CreatePointer(string name, GameObject parent, ValueType valueType, Texture2D texture, int layer, bool pointerIsInput = false, bool createText = false)
         {
             GameObject uiElement = UIElement.Create(
                 parent.transform,
@@ -80,7 +80,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Pointer
             circleCollider2D.radius = pointerRect.rect.width / 2;
         }
 
-        public TMP_InputField AddInputField(Transform parent, TMP_InputField.ContentType contentType, bool pointerIsInput = false, bool interactable = true, bool shorten = false, int layer = 0)
+        internal TMP_InputField AddInputField(Transform parent, TMP_InputField.ContentType contentType, bool pointerIsInput = false, bool interactable = true, bool shorten = false, int layer = 0)
         {
             TMP_InputField inputField = UIInputField.Create(parent, contentType, interactable, shorten);
             UIInputField.AddOnValueChange(inputField, _node);
@@ -96,7 +96,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Pointer
 
             return inputField;
         }
-        public TMP_InputField AddHalfInputField(Transform parent, TMP_InputField.ContentType contentType, bool pointerIsInput = false, bool interactable = true, bool shorten = false, int layer = 0)
+        internal TMP_InputField AddHalfInputField(Transform parent, TMP_InputField.ContentType contentType, bool pointerIsInput = false, bool interactable = true, bool shorten = false, int layer = 0)
         {
             TMP_InputField inputField = UIInputField.Create(parent, contentType, interactable, shorten, true);
             UIInputField.AddOnValueChange(inputField, _node);
@@ -111,7 +111,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Pointer
             return inputField;
         }
 
-        public BooleanButton AddBooleanPreview(Transform parent, bool pointerIsInput = false, bool interactable = false)
+        internal BooleanButton AddBooleanPreview(Transform parent, bool pointerIsInput = false, bool interactable = false)
         {
             BooleanButton button = UIBooleanPreview.Create(parent, interactable);
             UIBooleanPreview.AddOnValueChange(button.Button, _node);
@@ -123,7 +123,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Pointer
             return button;
         }
 
-        public Slider AddSlider(Transform parent, bool pointerIsInput = false)
+        internal Slider AddSlider(Transform parent, bool pointerIsInput = false)
         {
             GameObject sliderObject = UISlider.Create(parent);
             Slider slider = UISlider.CreateSlider(sliderObject.transform);

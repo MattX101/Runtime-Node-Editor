@@ -5,16 +5,16 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Save
 {
     public class LoadData
     {
-        public readonly string ID;
+        internal readonly string ID;
 
-        public readonly Vector3 Position;
+        internal readonly Vector3 Position;
 
-        public string[] Texts  { get; private set; }
-        public bool[] Booleans { get; private set; }
-        public float[] Values  { get; private set; }
-        
-        public int[] DropdownContext   { get; private set; }
-        public string[] DropdownText   { get; private set; }
+        internal string[] Texts  { get; private set; }
+        internal bool[] Booleans { get; private set; }
+        internal float[] Values  { get; private set; }
+
+        internal int[] DropdownContext   { get; private set; }
+        internal string[] DropdownText   { get; private set; }
 
         public readonly int EndIndex;
 

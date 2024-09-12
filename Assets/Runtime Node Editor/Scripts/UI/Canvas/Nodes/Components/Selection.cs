@@ -1,7 +1,7 @@
+using RuntimeNodeEditor.UI.Canvas.Nodes.Node;
+using RuntimeNodeEditor.Nodes.Lines;
 using RuntimeNodeEditor.Data;
 using RuntimeNodeEditor.Input;
-using RuntimeNodeEditor.Nodes.Lines;
-using RuntimeNodeEditor.UI.Canvas.Nodes.Node;
 using UnityEngine;
 
 namespace RuntimeNodeEditor.UI.Canvas.Nodes.Components
@@ -11,7 +11,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Components
         private static RuntimeNodeEditor.Nodes.Node.Node _currentNode, _copiedNode;
         private static bool _currentCopyIsCut;
 
-        public static void OnUpdate(NodeUIManager nodeUIManager, NodeConnectionLines connectionLines)
+        internal static void OnUpdate(NodeUIManager nodeUIManager, NodeConnectionLines connectionLines)
         {
             MangeSelection();
             KeyboardInput(nodeUIManager, connectionLines);
@@ -102,7 +102,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Components
             }
         }
 
-        public static void Delete(RuntimeNodeEditor.Nodes.Node.Node node, bool ignoreChecks = false)
+        internal static void Delete(RuntimeNodeEditor.Nodes.Node.Node node, bool ignoreChecks = false)
         {
             if (!ignoreChecks)
             {

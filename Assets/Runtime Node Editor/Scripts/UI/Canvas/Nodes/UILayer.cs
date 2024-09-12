@@ -5,7 +5,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes
 {
     internal static class UILayer
     {
-        public static GameObject CreateLayer(string name, Transform parent, int layer = 0)
+        internal static GameObject CreateLayer(string name, Transform parent, int layer = 0)
         {
             GameObject uiElement = UIElement.Create(
                 parent,

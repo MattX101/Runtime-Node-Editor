@@ -8,7 +8,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
 {
     internal class FloatOutputUI : NodeUI
     {
-        public override void Init(string nodeId)
+        internal override void Init(string nodeId)
         {
             InitBase(nodeId);
 

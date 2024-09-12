@@ -1,7 +1,7 @@
-using RuntimeNodeEditor.Nodes.Pointer.Value;
 using RuntimeNodeEditor.UI.Elements;
 using RuntimeNodeEditor.UI.Canvas.Nodes.Pointer;
 using RuntimeNodeEditor.Functions.UI.Component;
+using RuntimeNodeEditor.Nodes.Pointer.Value;
 using Utils.Colour;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,11 +13,11 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
 {
     internal class NodeUI : MonoBehaviour
     {
-        public string NodeId { get; private set; } = "NodeUI";
+        internal string NodeId { get; private set; } = "NodeUI";
 
         // Root
-        public GameObject root;
-        public RectTransform rootRect;
+        internal GameObject root;
+        internal RectTransform rootRect;
 
         private Vector2 _rootSize;
 
@@ -38,7 +38,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
         private float _bodyHeight;
         private Vector2 _bodySize;
 
-        public bool drawBodyImage = true;
+        internal bool drawBodyImage = true;
 
         private GameObject _inputs;
         private GameObject _outputs;
@@ -52,18 +52,18 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
         private UIPointers _uiPointers;
 
         // Input Field
-        public bool toggleInputField = false;
+        internal bool toggleInputField = false;
 
         // Other
-        public bool togglePreviewImage = false;
-        public bool interactablePreview = false;
+        internal bool togglePreviewImage = false;
+        internal bool interactablePreview = false;
 
-        public bool isInput = false;
+        internal bool isInput = false;
 
         private float _borderX2;
         private float _sizeX, _sizeY;
 
-        public virtual void Init(string nodeId) { }
+        internal virtual void Init(string nodeId) { }
         protected void InitBase(string nodeId)
         {
             NodeId = nodeId;
@@ -275,26 +275,26 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
             ImagePreview.SetSliderInput(r, g, b);
         }
 
-        public void ToggleSelectColor()
+        internal void ToggleSelectColor()
         {
             _rootImage.color = _primaryColor * new Color(0.5f, 0.5f, 0.5f);
         }
-        public void SetPrimaryColor()
+        internal void SetPrimaryColor()
         {
             _rootImage.color = _primaryColor;
         }
 
-        public void SetAlpha(float alpha)
+        internal void SetAlpha(float alpha)
         {
             _canvasGroup.alpha = alpha;
         }
 
-        public void BlockRaycasts(bool toggle)
+        internal void BlockRaycasts(bool toggle)
         {
             _canvasGroup.blocksRaycasts = toggle;
         }
 
-        public byte[] SaveNodeUI()
+        internal byte[] SaveNodeUI()
         {
             List<byte> bytes = new()
             {

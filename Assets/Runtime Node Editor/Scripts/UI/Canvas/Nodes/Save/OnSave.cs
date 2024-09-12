@@ -1,6 +1,6 @@
-using RuntimeNodeEditor.Nodes.Pointer;
 using RuntimeNodeEditor.UI.Canvas.Node.Components;
 using RuntimeNodeEditor.UI.Canvas.Nodes.Node;
+using RuntimeNodeEditor.Nodes.Pointer;
 using UnityEngine;
 using System;
 using System.Collections.Generic;
