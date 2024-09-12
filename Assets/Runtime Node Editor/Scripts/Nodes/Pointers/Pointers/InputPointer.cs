@@ -15,7 +15,10 @@ namespace RuntimeNodeEditor.Nodes.Pointer
 
         public InputPointer(Node.Node node) : base(node) { }
 
-        internal void SetLineToNull() => _line = null;
+        internal void SetLineToNull()
+        {
+            _line = null;
+        }
 
         internal void SetConnection(OutputPointer output, NodeConnectionLine line)
         {

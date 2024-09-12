@@ -10,15 +10,13 @@ namespace RuntimeNodeEditor.Nodes.Lines
 {
     public class NodeConnectionLines : MonoBehaviour
     {
-        public Transform parent;
-        
         private Vector2 _mousePos;
         private RaycastHit2D _raycastHit2D;
 
         private NodeConnectionLine _currentConnectionLine;
 
         private OutputPointer _currentOutputPointer;
-        
+
         [SerializeField] private Material sourceMaterial;
 
         private void Update()
@@ -27,7 +25,7 @@ namespace RuntimeNodeEditor.Nodes.Lines
                 return;
 
             _raycastHit2D = Physics2D.Raycast(_mousePos, Vector2.zero);
-            
+
             _mousePos = MouseController.MouseWorldPosition;
 
             if (UnityEngine.Input.GetMouseButtonDown(0))
@@ -40,11 +38,11 @@ namespace RuntimeNodeEditor.Nodes.Lines
             if (UnityEngine.Input.GetMouseButtonDown(1))
                 LinesData.DeletePointerConnectionsOnClick(_raycastHit2D);
 
-            if (LinesData.NotNullOrEmpty) 
+            if (LinesData.NotNullOrEmpty)
                 return;
-            
+
             foreach (NodeConnectionLine line in LinesData.DroppedLinesArray)
-                line.UpdateWidth();
+                UpdateLineWidth(line);
         }
 
         public void Reset()
@@ -56,7 +54,10 @@ namespace RuntimeNodeEditor.Nodes.Lines
                 DestroyLine(LinesData.DroppedLinesArray[i]);
         }
 
-        private void DestroyLine(NodeConnectionLine line) => line.DestroyLine();
+        private void DestroyLine(NodeConnectionLine line)
+        {
+            line.DestroyLine();
+        }
 
         private void CreateLineOnClick()
         {
@@ -76,7 +77,7 @@ namespace RuntimeNodeEditor.Nodes.Lines
         {
             sourceMaterial.color = PointerColor.PickColor(output.ValueType);
 
-            _currentConnectionLine = new NodeConnectionLine(parent, sourceMaterial, new Vector3(_mousePos.x, _mousePos.y, 100.0f))
+            _currentConnectionLine = new NodeConnectionLine(sourceMaterial, new Vector3(_mousePos.x, _mousePos.y, 100.0f))
             {
                 Output = output
             };
@@ -96,6 +97,11 @@ namespace RuntimeNodeEditor.Nodes.Lines
 
             _currentConnectionLine = null;
             _currentOutputPointer = null;
+        }
+
+        private void UpdateLineWidth(NodeConnectionLine line)
+        {
+            line.UpdateWidth();
         }
 
         private bool LineDropped()
@@ -124,17 +130,16 @@ namespace RuntimeNodeEditor.Nodes.Lines
 
         private void DropOnInputPointer(InputPointer input)
         {
-            SetConnectionInput(input);
+            _currentOutputPointer.AddConnection(input);
+            _currentConnectionLine.Input = input;
 
             SetInputConnection(input, _currentOutputPointer, _currentConnectionLine);
             input.Node.Reset();
         }
 
-        private void SetConnectionInput(InputPointer input)
+        private void SetInputConnection(InputPointer input, OutputPointer output, NodeConnectionLine line)
         {
-            _currentOutputPointer.AddConnection(input);
-
-            _currentConnectionLine.Input = input;
+            input.SetConnection(output, line);
         }
 
         public void Paste(Node.Node copiedNode, Node.Node newNode)
@@ -153,13 +158,6 @@ namespace RuntimeNodeEditor.Nodes.Lines
             _currentConnectionLine = null;
         }
 
-        public void Load(InputPointer input, OutputPointer output)
-        {
-            SetConnection(input, output);
-
-            _currentConnectionLine = null;
-        }
-
         private void SetConnection(InputPointer input, OutputPointer output)
         {
             output.AddConnection(input);
@@ -171,14 +169,19 @@ namespace RuntimeNodeEditor.Nodes.Lines
             LinesData.Add(_currentConnectionLine);
         }
 
-        private void SetInputConnection(InputPointer input, OutputPointer output, NodeConnectionLine line) => input.SetConnection(output, line);
+        public void Load(InputPointer input, OutputPointer output)
+        {
+            SetConnection(input, output);
+
+            _currentConnectionLine = null;
+        }
         
         public void UpdateLinesOnLoad()
         {
             foreach (NodeConnectionLine line in LinesData.DroppedLinesArray)
             {
                 line.UpdateLinePositionsOnLoad();
-                line.UpdateWidth();
+                UpdateLineWidth(line);
             }
         }
     }

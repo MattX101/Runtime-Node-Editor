@@ -9,15 +9,24 @@ namespace RuntimeNodeEditor.Nodes.Lines
     internal static class LinesData
     {
         private static List<NodeConnectionLine> DroppedLines = new();
-        public static NodeConnectionLine[] DroppedLinesArray => DroppedLines.ToArray();
+        internal static NodeConnectionLine[] DroppedLinesArray => DroppedLines.ToArray();
 
-        public static bool NotNullOrEmpty => DroppedLines is not { Count: > 0 };
+        internal static bool NotNullOrEmpty
+        { 
+            get => DroppedLines.Count <= 0;
+        }
 
-        public static void Add(NodeConnectionLine line) => DroppedLines.Add(line);
+        internal static void Add(NodeConnectionLine line)
+        {
+            DroppedLines.Add(line);
+        }
 
-        public static void Remove(NodeConnectionLine line) => DroppedLines.Remove(line);
+        internal static void Remove(NodeConnectionLine line) 
+        { 
+            DroppedLines.Remove(line); 
+        }
 
-        public static void DeletePointerConnectionsOnClick(RaycastHit2D raycast)
+        internal static void DeletePointerConnectionsOnClick(RaycastHit2D raycast)
         {
             if (!raycast.collider || CanvasData.IsPointing)
                 return;
@@ -32,6 +41,7 @@ namespace RuntimeNodeEditor.Nodes.Lines
         {
             foreach (NodeConnectionLine line in output.Lines)
                 Remove(line);
+
             output.DeleteConnections();
         }
 
