@@ -1,5 +1,5 @@
-using System;
 using RuntimeNodeEditor.Data;
+using System;
 
 namespace RuntimeNodeEditor.Input
 {

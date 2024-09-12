@@ -1,15 +1,15 @@
 using RuntimeNodeEditor.Functions.UI.Component;
-using UnityEngine.UI;
-using System.Collections.Generic;
 using System;
 using System.Linq;
+using System.Collections.Generic;
+using UnityEngine.UI;
 using TMPro;
 
 namespace RuntimeNodeEditor.Functions.UI.Elements
 {
     internal class UIElementWriter
     {
-        public byte[] Save(TMP_InputField[] inputFields, BooleanButton[] buttons, Slider[] sliders, Component.Dropdown[] dropdowns)
+        internal byte[] Save(TMP_InputField[] inputFields, BooleanButton[] buttons, Slider[] sliders, Component.Dropdown[] dropdowns)
         {
             List<byte> bytes = new List<byte>();
 

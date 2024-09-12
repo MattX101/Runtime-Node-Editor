@@ -15,7 +15,7 @@ namespace RuntimeNodeEditor.Functions.UI.Component
             Toggle(!Toggled);
         }
 
-        public void Toggle(bool toggle)
+        internal void Toggle(bool toggle)
         {
             Image.color = toggle ? Color.green : Color.red;
             Toggled = toggle;

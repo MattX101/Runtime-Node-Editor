@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 2560
     height: 1349
   m_ShowMode: 4
-  m_Title: Game
+  m_Title: Console
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 371}
   m_MaxSize: {x: 10000, y: 10000}
@@ -411,9 +411,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
-      m_LastClickedID: 0
-      m_ExpandedIDs: 1afbffff
+      m_SelectedIDs: 2af7ffff
+      m_LastClickedID: -2262
+      m_ExpandedIDs: 8af9ffff1afbffff8a6200009a620000b0630000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -780,9 +780,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -0.58051664, y: 0.2550879, z: -0.004824785}
+    m_Target: {x: -0.10801101, y: 0.012540958, z: 0.059659295}
     speed: 2
-    m_Value: {x: -0.58051664, y: 0.2550879, z: -0.004824785}
+    m_Value: {x: -0.10801101, y: 0.012540958, z: 0.059659295}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -832,9 +832,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 7.2447534
+    m_Target: 5.6809673
     speed: 2
-    m_Value: 7.2447534
+    m_Value: 5.6809673
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -1079,7 +1079,7 @@ MonoBehaviour:
     m_CachedPref: 294
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
-  m_LastInspectedObjectInstanceID: -1
+  m_LastInspectedObjectInstanceID: -2262
   m_LastVerticalScrollValue: 0
   m_GlobalObjectId: 
   m_InspectorMode: 0
