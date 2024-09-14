@@ -1302,6 +1302,31 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1777772066}
+        m_TargetAssemblyTypeName: RuntimeNodeEditor.UI.Canvas.Nodes.NodeUIManager,
+          RuntimeNodeEditor.UI.Canvas.Node
+        m_MethodName: Reset
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1809428003}
+        m_TargetAssemblyTypeName: RuntimeNodeEditor.UI.Canvas.CanvasManager, RuntimeNodeEditor.UI.Canvas
+        m_MethodName: Reset
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &162173175
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8657,6 +8682,43 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1777772066}
+        m_TargetAssemblyTypeName: RuntimeNodeEditor.UI.Canvas.Nodes.NodeUIManager,
+          RuntimeNodeEditor.UI.Canvas.Node
+        m_MethodName: Reset
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1809428003}
+        m_TargetAssemblyTypeName: RuntimeNodeEditor.UI.Canvas.CanvasManager, RuntimeNodeEditor.UI.Canvas
+        m_MethodName: Reset
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1105068431}
+        m_TargetAssemblyTypeName: RuntimeNodeEditor.Save.SaveSystem, RuntimeNodeEditor.Save
+        m_MethodName: Load
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1610021059
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9689,7 +9751,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 845c8ca4f7bc3534fbe1e66a94e9185b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parent: {fileID: 1135406250}
   sourceMaterial: {fileID: 2100000, guid: c7c12c2b7a8a5e94da7da553c6500f31, type: 2}
 --- !u!1001 &1798159167
 PrefabInstance:
@@ -10297,6 +10358,7 @@ GameObject:
   - component: {fileID: 1912841080}
   - component: {fileID: 1912841084}
   - component: {fileID: 1912841085}
+  - component: {fileID: 1912841086}
   m_Layer: 5
   m_Name: UI Tooltip
   m_TagString: Untagged
@@ -10333,10 +10395,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
-  m_ReferencePixelsPerUnit: 100
+  m_UiScaleMode: 1
+  m_ReferencePixelsPerUnit: 1
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -10415,6 +10477,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   windowSpawnParent: {fileID: 783142579}
   nodePanel: {fileID: 1777772063}
+--- !u!114 &1912841086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1912841079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e87f101b86108d14ca59516cdfb7c0bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _camera: {fileID: 519420031}
+  _scaler: {fileID: 1912841081}
 --- !u!1001 &1943034100
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10962,6 +11038,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: RuntimeNodeEditor.UI.Interface.InterfaceUIManager,
           RuntimeNodeEditor
         m_MethodName: HideTabs
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1105068431}
+        m_TargetAssemblyTypeName: RuntimeNodeEditor.Save.SaveSystem, RuntimeNodeEditor.Save
+        m_MethodName: Save
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
