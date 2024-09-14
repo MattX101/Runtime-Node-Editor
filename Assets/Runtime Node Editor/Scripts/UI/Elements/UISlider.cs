@@ -150,7 +150,8 @@ namespace RuntimeNodeEditor.UI.Elements
                 "Text",
                 scale,
                 new Vector3(0, 0, -1),
-                "0.5");
+                "0.5",
+                Color.black);
             UIText.SetFontAlignment(text, TextAlignmentOptions.Center);
 
             return text;

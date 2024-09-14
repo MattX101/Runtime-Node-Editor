@@ -45,7 +45,8 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
                 title,
                 title_textsize,
                 titleTextPos,
-                text);
+                text,
+                Color.black);
 
             UIText.SetFontStyle(_titleText, FontStyles.Bold);
             UIText.SetFontAlignment(_titleText, TextAlignmentOptions.Center);

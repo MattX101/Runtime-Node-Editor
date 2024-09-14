@@ -66,7 +66,8 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Pointer
                 "Text", 
                 new Vector2(60, 20), 
                 new Vector3(x, 0, -1), 
-                name);
+                name,
+                Color.white);
             
             UIText.SetFontAlignment(
                 text, 

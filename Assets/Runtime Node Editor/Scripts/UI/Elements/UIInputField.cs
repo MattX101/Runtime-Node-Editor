@@ -25,7 +25,7 @@ namespace RuntimeNodeEditor.UI.Elements
             RectTransform textAreaRect = textArea.GetComponent<RectTransform>();
 
             // Text
-            TextMeshPro textText = UIText.CreateText(textArea.transform, "Text", rect.sizeDelta, new Vector3(0, 0, -1), "");
+            TextMeshPro textText = UIText.CreateText(textArea.transform, "Text", rect.sizeDelta, new Vector3(0, 0, -1), "", Color.black);
             UIText.SetTextColor(textText, new Color(0.2f, 0.2f, 0.2f, 1.0f));
             UIText.SetFontAlignment(textText, TextAlignmentOptions.Center);
 
