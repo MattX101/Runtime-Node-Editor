@@ -18,7 +18,6 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
             NumOfInputs = 1;
 
             drawBodyImage = false;
-            interactablePreview = true;
 
             CreateNodeUI(node, NodeColor.Default, "Bool");
 

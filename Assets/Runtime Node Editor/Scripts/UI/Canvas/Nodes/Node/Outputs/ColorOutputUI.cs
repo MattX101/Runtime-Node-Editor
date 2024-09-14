@@ -15,7 +15,6 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
             node.endNode = true;
 
             NumOfInputs = 1;
-            NumOfOutputs = 0;
 
             drawBodyImage = false;
             togglePreviewImage = true;

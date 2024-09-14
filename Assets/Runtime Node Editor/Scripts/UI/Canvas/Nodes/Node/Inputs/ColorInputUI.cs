@@ -19,7 +19,6 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
 
             drawBodyImage = false;
             togglePreviewImage = true;
-            isInput = true;
 
             CreateNodeUI(node, NodeColor.Default, "Color");
 

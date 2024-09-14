@@ -68,10 +68,10 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Components
             _selectedNodeUI.BlockRaycasts(false);
 
             CanvasData.IsDragging = true;
-
-            _distanceFromMouseToNodeCenter = 
-                (Vector3)MouseController.MousePositionRelativeToCenter 
-                - _selectedNodeUI.rootRect.localPosition 
+            
+            _distanceFromMouseToNodeCenter =
+                (Vector3)MouseController.MousePositionRelativeToCenter
+                - _selectedNodeUI.RootPosition
                 - Pan.PositionFromOriginZoomed;
         }
 
@@ -133,7 +133,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Components
         
         private static void DragNode()
         {
-            _selectedNodeUI.rootRect.localPosition = 
+            _selectedNodeUI.RootPosition = 
                 (Vector3)MouseController.MousePositionRelativeToCenter 
                 - _distanceFromMouseToNodeCenter 
                 - Pan.PositionFromOriginZoomed;

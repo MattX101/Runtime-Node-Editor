@@ -19,9 +19,6 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
             NumOfInputs = 4;
 
             drawBodyImage = false;
-            interactablePreview = true;
-            toggleInputField = true;
-            isInput = true;
 
             CreateNodeUI(node, NodeColor.Default, "Vector 3");
 

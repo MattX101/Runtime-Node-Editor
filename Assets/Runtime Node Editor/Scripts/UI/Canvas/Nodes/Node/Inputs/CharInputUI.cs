@@ -19,8 +19,6 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
             NumOfOutputs = 1;
 
             drawBodyImage = false;
-            toggleInputField = true;
-            isInput = true;
 
             CreateNodeUI(node, NodeColor.Default, "Char");
 

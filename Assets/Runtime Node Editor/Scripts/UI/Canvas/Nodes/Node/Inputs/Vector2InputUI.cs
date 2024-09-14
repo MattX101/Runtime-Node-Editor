@@ -18,8 +18,6 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
             NumOfOutputs = 3;
 
             drawBodyImage = false;
-            toggleInputField = true;
-            isInput = true;
 
             CreateNodeUI(node, NodeColor.Default, "Vector 2");
 

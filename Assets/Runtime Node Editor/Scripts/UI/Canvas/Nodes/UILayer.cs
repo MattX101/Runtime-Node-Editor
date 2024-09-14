@@ -7,15 +7,14 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes
     {
         internal static GameObject CreateLayer(string name, Transform parent, int layer = 0)
         {
-            GameObject uiElement = UIElement.Create(
+            return UIElement.Create(
                 parent,
                 name,
                 new Vector2(UISettings.NodeWidth - (UISettings.BorderSize * 2), UISettings.PointerSize),
                 CalcualtePosition(
                     parent.GetComponent<RectTransform>(),
-                    layer));
-
-            return uiElement;
+                    layer)
+                );
         }
 
         private static Vector3 CalcualtePosition(RectTransform rect, int layer)

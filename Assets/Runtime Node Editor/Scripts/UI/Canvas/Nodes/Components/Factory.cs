@@ -28,7 +28,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.Components
             GameObject nodeUIObject = new GameObject();
             NodeUI nodeUI = (NodeUI)nodeUIObject.AddComponent(type);
             nodeUI.Init(id);
-            nodeUI.rootRect.localPosition = position;
+            nodeUI.RootPosition = position;
 
             return nodeUI;
         }

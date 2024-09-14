@@ -86,7 +86,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Components
                 return;
 
             NodeUI copiedNodeUI = _copiedNode.GetComponent<NodeUI>();
-            NodeUI newNodeUI = nodeUIManager.SpawnWithReturn(copiedNodeUI.NodeId, copiedNodeUI.rootRect.localPosition);
+            NodeUI newNodeUI = nodeUIManager.SpawnWithReturn(copiedNodeUI.NodeId, copiedNodeUI.RootPosition);
 
             RuntimeNodeEditor.Nodes.Node.Node newNode = newNodeUI.root.GetComponent<RuntimeNodeEditor.Nodes.Node.Node>();
 
