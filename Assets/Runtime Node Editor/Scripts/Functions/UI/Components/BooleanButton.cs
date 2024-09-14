@@ -6,9 +6,22 @@ namespace RuntimeNodeEditor.Functions.UI.Component
     public class BooleanButton
     {
         public Button Button;
-        public RawImage Image;
+        private RawImage _image;
 
         public bool Toggled;
+
+        public BooleanButton(Button button, RawImage image, bool interactable)
+        {
+            Button = button;
+            _image = image;
+
+            Button.transition = Selectable.Transition.None;
+            Button.onClick.AddListener(() => Toggle());
+            Button.interactable = interactable;
+
+            if (!Button.interactable)
+                _image.color *= 0.75f;
+        }
 
         public void Toggle()
         {
@@ -17,11 +30,11 @@ namespace RuntimeNodeEditor.Functions.UI.Component
 
         internal void Toggle(bool toggle)
         {
-            Image.color = toggle ? Color.green : Color.red;
+            _image.color = toggle ? Color.green : Color.red;
             Toggled = toggle;
 
             if (!Button.interactable)
-                Image.color *= 0.75f;
+                _image.color *= 0.75f;
         }
     }
 }
