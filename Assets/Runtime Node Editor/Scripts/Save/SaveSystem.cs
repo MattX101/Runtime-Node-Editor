@@ -94,10 +94,8 @@ namespace RuntimeNodeEditor.Save
             position += 4;
 
             nodeConnections.Reset();
-
             for (int i = 0; i < connectionArrayLength; i++)
                 position = LoadConnection(nodes, position, data);
-
             nodeConnections.UpdateLinesOnLoad();
             
             nodeExecution.Execute(nodes);

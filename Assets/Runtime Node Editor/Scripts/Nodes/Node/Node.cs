@@ -110,7 +110,7 @@ namespace RuntimeNodeEditor.Nodes.Node
             ResetExecution();
         }
 
-        private void ResetExecution()
+        internal void ResetExecution()
         {
             _wasExecuted = false;
         }

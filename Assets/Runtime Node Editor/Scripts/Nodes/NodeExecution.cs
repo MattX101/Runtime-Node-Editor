@@ -8,21 +8,17 @@ namespace RuntimeNodeEditor.Nodes
     {
         public void Execute()
         {
-            Debug.Log("Executing nodes!");
-
-            Node.Node[] nodes = FindObjectsOfType<Node.Node>();
-            List<Node.Node> endNodes = nodes.Where(node => node.endNode).ToList();
-
-            foreach (Node.Node endNode in endNodes)
-                endNode.Execute();
+            Execute(FindObjectsOfType<Node.Node>());
         }
 
         public void Execute(Node.Node[] nodes)
         {
             Debug.Log("Executing nodes!");
 
-            List<Node.Node> endNodes = nodes.Where(node => node.endNode).ToList();
+            foreach (Node.Node node in nodes)
+                node.ResetExecution();
 
+            List<Node.Node> endNodes = nodes.Where(node => node.endNode).ToList();
             foreach (Node.Node endNode in endNodes)
                 endNode.Execute();
         }
