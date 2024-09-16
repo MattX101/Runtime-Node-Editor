@@ -1,3 +1,4 @@
+using RuntimeNodeEditor.Functions.UI.Elements;
 using RuntimeNodeEditor.Nodes.Pointer;
 
 namespace RuntimeNodeEditor.Nodes.Node
@@ -8,7 +9,7 @@ namespace RuntimeNodeEditor.Nodes.Node
         {
             outputs[0].GetComponent<FloatOutputPointer>().value =
                 Elements.InputFields[0].text.Length != 0
-                ? float.Parse(Elements.InputFields[0].text)
+                ? InputFieldToFloat.Get(Elements.InputFields[0].text)
                 : 0.0f;
         }
 

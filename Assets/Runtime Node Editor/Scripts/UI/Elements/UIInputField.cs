@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using System;
 
 namespace RuntimeNodeEditor.UI.Elements
 {
@@ -55,8 +56,47 @@ namespace RuntimeNodeEditor.UI.Elements
             inputField.onValueChanged.AddListener(
                 delegate
                 {
+                    ValidateInputField(inputField);
                     node.OnValueChangeReset();
                 });
+        }
+
+        private static void ValidateInputField(TMP_InputField inputField)
+        {
+            if (inputField.text.Length == 0)
+                return;
+
+            if (inputField.text.Length == 1 && inputField.text[0] == '-')
+                return;
+
+            if (inputField.contentType == TMP_InputField.ContentType.IntegerNumber)
+            {
+                try
+                {
+                    int.Parse(inputField.text);
+                }
+                catch (OverflowException)
+                {
+                    inputField.text =
+                        inputField.text[0] == '-' ?
+                        int.MinValue.ToString() :
+                        int.MaxValue.ToString();
+                }
+            }
+            else if (inputField.contentType == TMP_InputField.ContentType.DecimalNumber)
+            {
+                try
+                {
+                    float.Parse(inputField.text);
+                }
+                catch (OverflowException)
+                {
+                    inputField.text =
+                        inputField.text[0] == '-' ?
+                        float.MinValue.ToString() :
+                        float.MaxValue.ToString();
+                }
+            }
         }
 
         private static void UpdateCharacter(TMP_InputField inputField)

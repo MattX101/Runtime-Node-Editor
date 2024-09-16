@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using RuntimeNodeEditor.Nodes.Pointer;
+using RuntimeNodeEditor.Functions.UI.Elements;
 
 namespace RuntimeNodeEditor.Nodes.Node
 {
@@ -13,7 +14,7 @@ namespace RuntimeNodeEditor.Nodes.Node
             TMP_InputField xField = Elements.InputFields[0];
             if (xField.text.Length != 0)
             {
-                float x = float.Parse(xField.text);
+                float x = InputFieldToFloat.Get(xField.text);
 
                 outputs[1].GetComponent<FloatOutputPointer>().value = x;
                 outputs[0].GetComponent<Vector2OutputPointer>().value.x = x;
@@ -22,7 +23,7 @@ namespace RuntimeNodeEditor.Nodes.Node
             TMP_InputField yField = Elements.InputFields[1];
             if (yField.text.Length != 0)
             {
-                float y = float.Parse(yField.text);
+                float y = InputFieldToFloat.Get(yField.text);
 
                 outputs[2].GetComponent<FloatOutputPointer>().value = y;
                 outputs[0].GetComponent<Vector2OutputPointer>().value.y = y;
