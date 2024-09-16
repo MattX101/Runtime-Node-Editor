@@ -83,8 +83,22 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Pointer
 
         internal TMP_InputField AddInputField(Transform parent, TMP_InputField.ContentType contentType, bool pointerIsInput = false, bool interactable = true, bool shorten = false, int layer = 0)
         {
-            TMP_InputField inputField = UIInputField.Create(parent, contentType, interactable, shorten);
-            UIInputField.AddOnValueChange(inputField, _node);
+            TMP_InputField inputField = null;
+            if (contentType == TMP_InputField.ContentType.IntegerNumber)
+            {
+                inputField = UIIntInputField.Create(parent, interactable, shorten);
+                UIIntInputField.AddOnValueChange(inputField, _node);
+            }
+            else if (contentType == TMP_InputField.ContentType.DecimalNumber)
+            {
+                inputField = UIFloatInputField.Create(parent, interactable, shorten);
+                UIFloatInputField.AddOnValueChange(inputField, _node);
+            }
+            else
+            {
+                inputField = UIInputField.Create(parent, interactable, shorten);
+                UIInputField.AddOnValueChange(inputField, _node);
+            }
 
             float posX = UISettings.NodeWidth / 2;
             posX += UISettings.PointerSize / 4;
@@ -99,8 +113,22 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Pointer
         }
         internal TMP_InputField AddHalfInputField(Transform parent, TMP_InputField.ContentType contentType, bool pointerIsInput = false, bool interactable = true, bool shorten = false, int layer = 0)
         {
-            TMP_InputField inputField = UIInputField.Create(parent, contentType, interactable, shorten, true);
-            UIInputField.AddOnValueChange(inputField, _node);
+            TMP_InputField inputField = null;
+            if (contentType == TMP_InputField.ContentType.IntegerNumber)
+            {
+                inputField = UIIntInputField.Create(parent, interactable, shorten, true);
+                UIIntInputField.AddOnValueChange(inputField, _node);
+            }
+            else if (contentType == TMP_InputField.ContentType.DecimalNumber)
+            {
+                inputField = UIFloatInputField.Create(parent, interactable, shorten, true);
+                UIFloatInputField.AddOnValueChange(inputField, _node);
+            }
+            else
+            {
+                inputField = UIInputField.Create(parent, interactable, shorten, true);
+                UIInputField.AddOnValueChange(inputField, _node);
+            }
 
             float posX = UISettings.NodeWidth / 4;
             posX += UISettings.PointerSize / 4;
