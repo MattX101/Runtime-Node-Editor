@@ -7,16 +7,17 @@ namespace RuntimeNodeEditor.UI.Elements
     {
         public static TMP_InputField Create(Transform parent, bool interactable = true, bool shorten = false, bool halfSize = false)
         {
-            float width = UISettings.NodeWidth;
-            width /= halfSize ? 2 : 1;
-            width -= UISettings.PointerSize / 2;
-            if (shorten && !halfSize)
-                width -= UISettings.PointerSize / 2;
-            width -= UISettings.PointerPadding * 2;
-            Vector2 size = new Vector2(width,  UISettings.InputFieldHeight);
+            // Input Field
+            TMP_InputField inputField = AddInputField(parent, "Input Field", interactable, shorten, halfSize);
+            inputField.contentType = TMP_InputField.ContentType.Standard;
 
+            return inputField;
+        }
+
+        internal static TMP_InputField AddInputField(Transform parent, string name, bool interactable, bool shorten, bool halfSize)
+        {
             // Root
-            GameObject root = UIElement.Create(parent, "Input Field", size, Vector3.zero);
+            GameObject root = UIElement.Create(parent, name, CalcualteSize(shorten, halfSize), Vector3.zero);
             RectTransform rect = root.GetComponent<RectTransform>();
             UIImage.Create(root, Color.white);
 
@@ -36,9 +37,20 @@ namespace RuntimeNodeEditor.UI.Elements
             inputField.textViewport = textAreaRect;
             inputField.textComponent = textText;
             inputField.interactable = interactable;
-            inputField.contentType = TMP_InputField.ContentType.Standard;
 
             return inputField;
+        }
+
+        private static Vector2 CalcualteSize(bool shorten, bool halfSize)
+        {
+            float width = UISettings.NodeWidth;
+            width /= halfSize ? 2 : 1;
+            width -= UISettings.PointerSize / 2;
+            if (shorten && !halfSize)
+                width -= UISettings.PointerSize / 2;
+            width -= UISettings.PointerPadding * 2;
+
+            return new Vector2(width, UISettings.InputFieldHeight);
         }
 
         public static void SetSingleCharacterInputField(TMP_InputField inputField)
