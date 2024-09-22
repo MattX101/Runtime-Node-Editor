@@ -16,7 +16,7 @@ namespace RuntimeNodeEditor.Nodes.Node
         public readonly List<OutputPointer> outputs = new();
 
         public NodeUIElements Elements;
-
+        
         public void AddPointer(InputPointer input, ValueType valueType)
         {
             input.AddInputPointer(this, input, valueType);

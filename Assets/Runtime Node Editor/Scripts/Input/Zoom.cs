@@ -1,6 +1,6 @@
 using RuntimeNodeEditor.Data;
-using System;
 using UnityEngine;
+using System;
 
 namespace RuntimeNodeEditor.Input
 {
@@ -19,23 +19,26 @@ namespace RuntimeNodeEditor.Input
 
                 return;
             }
-
             CanvasData.IsScrolling = true;
              
-            Scale = Mathf.Clamp(Scale + UnityEngine.Input.GetAxis("Mouse ScrollWheel"), 0.1f * ScreenScale.Scale, 2.0f * ScreenScale.Scale);
+            Scale = Mathf.Clamp(
+                Scale + UnityEngine.Input.GetAxis("Mouse ScrollWheel"), 
+                0.1f * ScreenScale.Scale, 
+                2.0f * ScreenScale.Scale
+                );
             SetScaler();
         }
 
         private static void SetScaler()
         {
-            CanvasData.CanvasScaler.scaleFactor = Scale;
+            CanvasData.SetScaleFactor(Scale);
         }
 
         public static void Reset()
         {
             CanvasData.IsScrolling = false;
 
-            CanvasData.CanvasScaler.scaleFactor = 1.0f;
+            CanvasData.SetScaleFactor(1.0f);
             Scale = 1.0f;
         }
 

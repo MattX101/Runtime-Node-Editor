@@ -10,10 +10,7 @@ namespace RuntimeNodeEditor.UI.Tooltip.Window
         
         public void Create()
         {
-            if (CanvasData.NodesCanvasIsActive)
-                return;
-            
-            if (UISettings.WindowSpawnParent.childCount != 0)
+            if (CanvasData.NodesCanvasIsActive || UISettings.WindowSpawnParent.childCount != 0)
                 return;
 
             Manage(true);
@@ -24,22 +21,22 @@ namespace RuntimeNodeEditor.UI.Tooltip.Window
             Manage(false);
         }
 
-        private void Manage(bool windowIsOpen)
+        private void Manage(bool openWindow)
         {
-            UIData.WindowOpened = windowIsOpen;
-
-            if (windowIsOpen) 
+            if (openWindow) 
                 Instantiate(window, UISettings.WindowSpawnParent);
             else 
                 Destroy(gameObject);
 
             Toggle();
+
+            UIData.WindowOpened = openWindow;
         }
 
         private void Toggle()
         {
             LinkToTooltip.TooltipManager.ToggleButtons(!UIData.WindowOpened);
-            UIData.NodePanel.SetActive(UIData.WindowOpened);
+            UIData.NodeUIPanel.SetActive(UIData.WindowOpened);
         }
     }
 }

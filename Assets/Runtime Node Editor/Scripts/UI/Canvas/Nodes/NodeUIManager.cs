@@ -11,21 +11,9 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes
     {
         [SerializeField] private Transform parent;
 
-        [SerializeField] private NodeConnectionLines connectionLines;
+        [SerializeField] private ConnectionLines connectionLines;
 
         [SerializeField] private GameObject nodesObject;
-
-        [Header("Pointer Textures")]
-        [SerializeField] private Texture2D pointerTexture;
-        [SerializeField] private Texture2D arrayPointerTexture;
-        [SerializeField] private Texture2D valueInsertPointerTexture;
-
-        private void Awake()
-        {
-            UISettings.NodeCanvasTransform = parent;
-
-            UISettings.PointerTexture = pointerTexture;
-        }
 
         private void Update()
         {

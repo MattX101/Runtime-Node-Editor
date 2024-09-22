@@ -1,5 +1,4 @@
 using RuntimeNodeEditor.UI.Tooltip.Tab;
-using RuntimeNodeEditor.Data;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,20 +8,24 @@ namespace RuntimeNodeEditor.UI.Tooltip
     {
         private TabsManager[] _tabsManagers;
 
-        [SerializeField] private Transform windowSpawnParent;
-        [SerializeField] private GameObject nodePanel;
-
         private Button[] _buttons;
+
+        [Header("Auto Tooltip Scaling")]
+        [SerializeField] private Camera _camera;
+        [SerializeField] private CanvasScaler _scaler;
 
         private void Awake()
         {
-            UISettings.WindowSpawnParent = windowSpawnParent;
-            UIData.NodePanel = nodePanel;
-
             _tabsManagers = GetComponentsInChildren<TabsManager>();
             _buttons = FindObjectsOfType<Button>();
 
             LinkToTooltip.TooltipManager = this;
+        }
+
+        // TODO - Change from Update() to an OnValueChange method
+        private void Update()
+        {
+            _scaler.matchWidthOrHeight = _camera.pixelWidth > _camera.pixelHeight ? 0 : 1;
         }
 
         public void HideTabs()

@@ -26,7 +26,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
         protected void PopulateRoot(string title)
         {
             root.name = title;
-            root.transform.parent = UISettings.NodeCanvasTransform.transform;
+            root.transform.parent = UISettings.NodeSpawnTransform.transform;
             
             RectTransform rect = root.AddComponent<RectTransform>();
             rect.localScale = Vector3.one;

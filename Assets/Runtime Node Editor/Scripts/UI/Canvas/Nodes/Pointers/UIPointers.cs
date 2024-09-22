@@ -1,14 +1,10 @@
 using RuntimeNodeEditor.UI.Elements;
-using RuntimeNodeEditor.Functions.UI.Component;
-using RuntimeNodeEditor.Nodes.Pointer.Data;
 using RuntimeNodeEditor.Nodes.Pointer.Value;
 using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
 
 namespace RuntimeNodeEditor.UI.Canvas.Nodes.Pointer
 {
-    internal class UIPointers
+    internal partial class UIPointers
     {
         private readonly RuntimeNodeEditor.Nodes.Node.Node _node;
 
@@ -31,7 +27,9 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Pointer
             AddImage(uiElement, valueType, texture);
 
             if (createText)
+            {
                 AddText(uiElement, name, pointerIsInput);
+            }
 
             AddCollider(uiElement);
 
@@ -50,129 +48,11 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Pointer
             return new Vector3(posX, posY, 0.0f);
         }
 
-        private void AddImage(GameObject uiElement, ValueType valueType, Texture2D texture)
-        {
-            UIImage.Create(uiElement, PickPointerColor(valueType));
-            UIImage.AssignTexture(uiElement, texture);
-        }
-
-        private void AddText(GameObject uiElement, string name, bool isInput)
-        {
-            float x = 50;
-            x = isInput ? x : -x;
-
-            TextMeshPro text = UIText.CreateText(
-                uiElement.transform, 
-                "Text", 
-                new Vector2(60, 20), 
-                new Vector3(x, 0, -1), 
-                name,
-                Color.white);
-            
-            UIText.SetFontAlignment(
-                text, 
-                isInput ? TextAlignmentOptions.Left : TextAlignmentOptions.Right);
-        }
-
         private void AddCollider(GameObject uiElement)
         {
             RectTransform pointerRect = uiElement.GetComponent<RectTransform>();
             CircleCollider2D circleCollider2D = uiElement.AddComponent<CircleCollider2D>();
             circleCollider2D.radius = pointerRect.rect.width / 2;
-        }
-
-        internal TMP_InputField AddInputField(Transform parent, TMP_InputField.ContentType contentType, bool pointerIsInput = false, bool interactable = true, bool shorten = false, int layer = 0)
-        {
-            TMP_InputField inputField = null;
-            if (contentType == TMP_InputField.ContentType.IntegerNumber)
-            {
-                inputField = UIIntInputField.Create(parent, interactable, shorten);
-                UIIntInputField.AddOnValueChange(inputField, _node);
-            }
-            else if (contentType == TMP_InputField.ContentType.DecimalNumber)
-            {
-                inputField = UIFloatInputField.Create(parent, interactable, shorten);
-                UIFloatInputField.AddOnValueChange(inputField, _node);
-            }
-            else
-            {
-                inputField = UIInputField.Create(parent, interactable, shorten);
-                UIInputField.AddOnValueChange(inputField, _node);
-            }
-
-            float posX = UISettings.NodeWidth / 2;
-            posX += UISettings.PointerSize / 4;
-            if (shorten)
-                posX -= UISettings.PointerSize / 4;
-            posX = !pointerIsInput ? -posX : posX;
-            float posY = layer * -(UISettings.InputFieldHeight + UISettings.PointerPadding);
-
-            inputField.gameObject.transform.localPosition = new Vector3(posX, posY, -1);
-
-            return inputField;
-        }
-        internal TMP_InputField AddHalfInputField(Transform parent, TMP_InputField.ContentType contentType, bool pointerIsInput = false, bool interactable = true, bool shorten = false, int layer = 0)
-        {
-            TMP_InputField inputField = null;
-            if (contentType == TMP_InputField.ContentType.IntegerNumber)
-            {
-                inputField = UIIntInputField.Create(parent, interactable, shorten, true);
-                UIIntInputField.AddOnValueChange(inputField, _node);
-            }
-            else if (contentType == TMP_InputField.ContentType.DecimalNumber)
-            {
-                inputField = UIFloatInputField.Create(parent, interactable, shorten, true);
-                UIFloatInputField.AddOnValueChange(inputField, _node);
-            }
-            else
-            {
-                inputField = UIInputField.Create(parent, interactable, shorten, true);
-                UIInputField.AddOnValueChange(inputField, _node);
-            }
-
-            float posX = UISettings.NodeWidth / 4;
-            posX += UISettings.PointerSize / 4;
-            posX = !pointerIsInput ? -posX : posX;
-            float posY = layer * -(UISettings.InputFieldHeight + UISettings.PointerPadding);
-
-            inputField.gameObject.transform.localPosition = new Vector3(posX, posY, -1);
-
-            return inputField;
-        }
-
-        internal BooleanButton AddBooleanPreview(Transform parent, bool pointerIsInput = false, bool interactable = false)
-        {
-            BooleanButton button = UIBooleanPreview.Create(parent, interactable);
-            UIBooleanPreview.AddOnValueChange(button.Button, _node);
-
-            float posX = UISettings.PointerSize * 1.5f;
-            posX = pointerIsInput ? posX : -posX;
-            button.Button.gameObject.transform.localPosition = new Vector3(posX, 0, -1);
-
-            return button;
-        }
-
-        internal Slider AddSlider(Transform parent, bool pointerIsInput = false)
-        {
-            GameObject sliderObject = UISlider.Create(parent);
-            Slider slider = UISlider.CreateSlider(sliderObject.transform);
-
-            float posX = sliderObject.transform.localPosition.x;
-            if (pointerIsInput)
-            {
-                posX += UISettings.NodeWidth;
-                posX += UISettings.SliderTextFieldWidth;
-                posX += UISettings.BorderSize;
-                posX += UISettings.PointerSize * 1.5f;
-            }
-            sliderObject.transform.localPosition = new Vector3(posX, 0, -1);
-
-            return slider;
-        }
-
-        private Color PickPointerColor(ValueType valueType)
-        {
-            return PointerColor.PickColor(valueType);
         }
     }
 }

@@ -17,10 +17,7 @@ namespace RuntimeNodeEditor.UI.Tooltip.Tab
 
         public void Show()
         {
-            if (CanvasData.NodesCanvasIsActive)
-                return;
-            
-            if (UIData.WindowOpened)
+            if (CanvasData.NodesCanvasIsActive || UIData.WindowOpened)
                 return;
 
             _tabsManagers.HideTabs();

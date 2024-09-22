@@ -1,5 +1,4 @@
 using RuntimeNodeEditor.Data;
-using System;
 
 namespace RuntimeNodeEditor.Input
 {
@@ -10,11 +9,6 @@ namespace RuntimeNodeEditor.Input
         public static void CalculateScale()
         {
             Scale = CanvasData.Camera.pixelWidth / 1000.0f;
-        }
-
-        public static byte[] Save()
-        {
-            return BitConverter.GetBytes(Scale);
         }
     }
 }

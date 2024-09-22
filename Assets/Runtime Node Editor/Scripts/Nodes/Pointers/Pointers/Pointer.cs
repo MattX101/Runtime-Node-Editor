@@ -5,29 +5,35 @@ namespace RuntimeNodeEditor.Nodes.Pointer
 {
     public class Pointer : MonoBehaviour
     {
-        private Node.Node _node;
-        public Node.Node Node => _node;
+        public Node.Node Node
+        {
+            get;
+            private set;
+        }
 
-        private ValueType _valueType = ValueType.None;
-        internal ValueType ValueType => _valueType;
+        internal ValueType ValueType
+        {
+            get;
+            private set;
+        }
 
         public Pointer(Node.Node node)
         {
-            _node = node;
+            Node = node;
         }
 
         internal void AddInputPointer(Node.Node node, InputPointer input, ValueType valueType)
         {
-            _node = node;
-            _valueType = valueType;
+            Node = node;
+            ValueType = valueType;
 
             node.inputs.Add(input);
         }
 
         internal void AddOutputPointer(Node.Node node, OutputPointer output, ValueType valueType)
         {
-            _node = node;
-            _valueType = valueType;
+            Node = node;
+            ValueType = valueType;
 
             node.outputs.Add(output);
         }

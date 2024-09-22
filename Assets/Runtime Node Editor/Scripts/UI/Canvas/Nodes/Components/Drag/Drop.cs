@@ -1,0 +1,33 @@
+﻿using RuntimeNodeEditor.Data;
+
+namespace RuntimeNodeEditor.UI.Canvas.Nodes.Components
+{
+    internal static partial class Drag
+    {
+        private static void ValidateDrop()
+        {
+            if (_selectedNodeUI)
+            {
+                Drop();
+            }
+
+            Reset();
+        }
+
+        private static void Drop()
+        {
+            _selectedNodeUI.BlockRaycasts(true);
+
+            _dragOnSpawn = false;
+            CanvasData.IsDragging = false;
+
+            _selectedNodeUI = null;
+        }
+
+        private static void Reset()
+        {
+            _selectedNodeUI = null;
+            _dragOnSpawn = false;
+        }
+    }
+}

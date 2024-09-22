@@ -18,8 +18,22 @@ namespace RuntimeNodeEditor.UI
         public const float SliderWidth = 150.0f, SliderHandleWidth = 20.0f;
         public const float SliderTextFieldWidth = 45.0f;
 
-        public static Transform NodeCanvasTransform, WindowSpawnParent;
+        public static Transform NodeSpawnTransform
+        {
+            get;
+            internal set;
+        }
 
-        public static Texture2D PointerTexture;
+        public static Transform WindowSpawnParent
+        {
+            get;
+            internal set;
+        }
+
+        public static Texture2D PointerTexture
+        {
+            get;
+            internal set;
+        }
     }
 }

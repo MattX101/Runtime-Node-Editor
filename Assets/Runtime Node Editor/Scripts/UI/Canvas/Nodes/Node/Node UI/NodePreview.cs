@@ -40,7 +40,9 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
                 return;
 
             if (ImagePreview == null)
+            {
                 AddPreviewImage();
+            }
 
             ImagePreview.SetSliderInput(r, g, b);
         }

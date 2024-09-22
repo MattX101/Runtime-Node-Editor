@@ -4,42 +4,51 @@ namespace RuntimeNodeEditor.Nodes.Pointer
 {
     public class InputPointer : Pointer
     {
-        private OutputPointer _connectedOutputPointer;
-        public OutputPointer ConnectedOutputPointer => _connectedOutputPointer;
-        
-        private NodeConnectionLine _line;
-        internal NodeConnectionLine Line => _line;
+        public OutputPointer ConnectedOutputPointer
+        {
+            get;
+            private set;
+        }
 
-        private bool _hasConnection = false;
-        internal bool HasConnection => _hasConnection;
+        internal ConnectionLine Line
+        {
+            get;
+            private set;
+        }
+
+        internal bool HasConnection
+        {
+            get;
+            private set;
+        }
 
         public InputPointer(Node.Node node) : base(node) { }
 
         internal void SetLineToNull()
         {
-            _line = null;
+            Line = null;
         }
 
-        internal void SetConnection(OutputPointer output, NodeConnectionLine line)
+        internal void SetConnection(OutputPointer output, ConnectionLine line)
         {
-            _hasConnection = true;
-            _connectedOutputPointer = output;
+            ConnectedOutputPointer = output;
+            HasConnection = true;
 
-            _line = line;
+            Line = line;
         }
 
         internal void DeleteConnection()
         {
-            if (_line == null)
+            if (Line == null)
                 return;
 
-            _line.DestroyLine();
-            _line = null;
+            Line.DestroyLine();
+            Line = null;
 
-            _hasConnection = false;
+            HasConnection = false;
 
-            _connectedOutputPointer.RemoveConnection(this);
-            _connectedOutputPointer = null;
+            ConnectedOutputPointer.RemoveConnection(this);
+            ConnectedOutputPointer = null;
 
             Node.MoveUp();
         }

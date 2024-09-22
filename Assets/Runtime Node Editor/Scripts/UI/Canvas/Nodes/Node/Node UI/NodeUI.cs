@@ -41,7 +41,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
             SetRootColor(primaryHSL);
 
             // Root element
-            root.transform.SetParent(UISettings.NodeCanvasTransform);
+            root.transform.SetParent(UISettings.NodeSpawnTransform);
             _rootImage = root.AddComponent<RawImage>();
             SetPrimaryColor();
             _canvasGroup = root.AddComponent<CanvasGroup>();

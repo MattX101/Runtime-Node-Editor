@@ -83,7 +83,9 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
             _outputs.GetComponent<RectTransform>().transform.localPosition = new Vector3(0, 0, -1);
 
             if (togglePreviewImage)
+            {
                 AddPreviewImage();
+            }
         }
     }
 }

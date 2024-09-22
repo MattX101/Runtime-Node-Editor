@@ -4,10 +4,21 @@ namespace RuntimeNodeEditor.Data
 {
     public static class UIData
     {
-        public static bool TabOpened, WindowOpened = false;
+        public static bool TabOpened = false;
+        public static bool WindowOpened = false;
         
-        public static GameObject NodePanel;
+        public static GameObject NodeUIPanel
+        {
+            get;
+            internal set;
+        }
         
-        public static bool TabOrWindowOpened => TabOpened || WindowOpened;
+        public static bool TabOrWindowOpened
+        {
+            get 
+            {
+                return TabOpened || WindowOpened;
+            }
+        }
     }
 }

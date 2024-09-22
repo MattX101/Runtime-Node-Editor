@@ -6,23 +6,29 @@ namespace RuntimeNodeEditor.Nodes.Pointer
 {
     public class OutputPointer : Pointer
     {
-        private List<InputPointer> _connectedInputPointers;
-        internal List<InputPointer> ConnectedInputPointers => _connectedInputPointers;
+        internal List<InputPointer> ConnectedInputPointers
+        {
+            get;
+            private set;
+        }
 
-        private List<NodeConnectionLine> _lines;
-        internal List<NodeConnectionLine> Lines => _lines;
+        internal List<ConnectionLine> Lines
+        {
+            get;
+            private set;
+        }
 
         public OutputPointer(Node.Node node) : base(node) { }
 
         private void Update()
         {
-            if (_lines == null || _lines.Count == 0)
+            if (Lines == null || Lines.Count == 0)
                 return;
 
             if (!CanvasData.IsDragging && !CanvasData.IsPanning && !CanvasData.IsScrolling)
                 return;
 
-            foreach (NodeConnectionLine line in _lines)
+            foreach (ConnectionLine line in Lines)
                 line.UpdateLinePositions();
         }
 
@@ -31,41 +37,41 @@ namespace RuntimeNodeEditor.Nodes.Pointer
         {
             ResetPointer();
 
-            if (_connectedInputPointers == null)
+            if (ConnectedInputPointers == null)
                 return;
 
-            _connectedInputPointers.Clear();
+            ConnectedInputPointers.Clear();
         }
 
         internal void AddConnection(InputPointer input)
         {
-            _connectedInputPointers ??= new List<InputPointer>();
-            _connectedInputPointers.Add(input);
+            ConnectedInputPointers ??= new List<InputPointer>();
+            ConnectedInputPointers.Add(input);
         }
 
         internal void RemoveConnection(InputPointer input)
         {
-            _connectedInputPointers.Remove(input);
+            ConnectedInputPointers.Remove(input);
         }
 
         internal void DeleteConnections()
         {
-            if (_connectedInputPointers == null)
+            if (ConnectedInputPointers == null)
                 return;
 
-            for (int i = _connectedInputPointers.Count - 1; i >= 0; i--)
-                _connectedInputPointers[i].DeleteConnection();
+            for (int i = ConnectedInputPointers.Count - 1; i >= 0; i--)
+                ConnectedInputPointers[i].DeleteConnection();
         }
 
-        internal void AddLine(NodeConnectionLine connectionLine)
+        internal void AddLine(ConnectionLine connectionLine)
         {
-            _lines ??= new List<NodeConnectionLine>();
-            _lines.Add(connectionLine);
+            Lines ??= new List<ConnectionLine>();
+            Lines.Add(connectionLine);
         }
 
-        internal void RemoveLine(NodeConnectionLine connectionLine)
+        internal void RemoveLine(ConnectionLine connectionLine)
         {
-            _lines.Remove(connectionLine);
+            Lines.Remove(connectionLine);
         }
     }
 }

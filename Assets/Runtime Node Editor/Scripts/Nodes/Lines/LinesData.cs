@@ -8,20 +8,23 @@ namespace RuntimeNodeEditor.Nodes.Lines
 {
     internal static class LinesData
     {
-        private static readonly List<NodeConnectionLine> DroppedLines = new();
-        internal static NodeConnectionLine[] DroppedLinesArray => DroppedLines.ToArray();
+        private static readonly List<ConnectionLine> DroppedLines = new();
+        internal static ConnectionLine[] DroppedLinesArray => DroppedLines.ToArray();
 
         internal static bool NotNullOrEmpty
-        { 
-            get => DroppedLines.Count <= 0;
+        {
+            get
+            {
+                return DroppedLines.Count <= 0;
+            }
         }
 
-        internal static void Add(NodeConnectionLine line)
+        internal static void Add(ConnectionLine line)
         {
             DroppedLines.Add(line);
         }
 
-        internal static void Remove(NodeConnectionLine line) 
+        internal static void Remove(ConnectionLine line) 
         { 
             DroppedLines.Remove(line); 
         }
@@ -39,7 +42,7 @@ namespace RuntimeNodeEditor.Nodes.Lines
 
         private static void DeleteOutputConnections(OutputPointer output)
         {
-            foreach (NodeConnectionLine line in output.Lines)
+            foreach (ConnectionLine line in output.Lines)
                 Remove(line);
 
             output.DeleteConnections();

@@ -6,7 +6,7 @@ namespace RuntimeNodeEditor.Functions.UI.Component
 {
     public class ImagePreview
     {
-        public RawImage Image { get; set; }
+        public RawImage Image;
 
         public void SetSliderInput(Slider red, Slider green, Slider blue)
         {
