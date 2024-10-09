@@ -81,7 +81,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
 
         protected GameObject CreatePointer(string name, ValueType valueType, int layer, bool pointerIsInput = false, bool createText = false)
         {
-            return _uiPointers.CreatePointer(
+            GameObject uiPointerObject = _uiPointers.CreatePointer(
                 name,
                 pointerIsInput ? _inputs : _outputs, 
                 valueType,
@@ -89,6 +89,12 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
                 layer,
                 pointerIsInput,
                 createText);
+
+            UIPointer uiPointer = uiPointerObject.AddComponent<UIPointer>();
+            uiPointer.nodeTitle = _titleText.text;
+            uiPointer.header = _titleText;
+
+            return uiPointerObject;
         }
     }
 }

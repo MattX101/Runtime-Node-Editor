@@ -20,12 +20,12 @@ namespace RuntimeNodeEditor.UI.Canvas
         private void Awake()
         {
             Pan.SetNodesRect(nodesRect);
-
-            BackgroundGrid.Instance.Init(gridImage);
         }
 
         private void Start()
         {
+            BackgroundGrid.Instance.Init(gridImage);
+
             _screenRes = new Vector3(CanvasData.Camera.pixelWidth, CanvasData.Camera.pixelHeight, 1);
 
             UpdateCanvasScale();
