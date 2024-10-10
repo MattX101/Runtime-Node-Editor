@@ -1,5 +1,6 @@
 using RuntimeNodeEditor.UI.Canvas.Nodes.Pointer;
 using RuntimeNodeEditor.Nodes.Pointer.Value;
+using RuntimeNodeEditor.Nodes.Pointer.Data;
 using Utils.Colour;
 using UnityEngine;
 using UnityEngine.UI;
@@ -93,6 +94,8 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
             UIPointer uiPointer = uiPointerObject.AddComponent<UIPointer>();
             uiPointer.nodeTitle = _titleText.text;
             uiPointer.header = _titleText;
+            uiPointer.image = uiPointerObject.GetComponent<RawImage>();
+            uiPointer.color = PointerColor.PickColor(valueType);
 
             return uiPointerObject;
         }
