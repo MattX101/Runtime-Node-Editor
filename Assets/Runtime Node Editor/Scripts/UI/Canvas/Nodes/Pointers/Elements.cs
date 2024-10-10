@@ -51,22 +51,14 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Pointer
             return button;
         }
 
-        internal Slider AddSlider(Transform parent, bool pointerIsInput = false)
+        internal Slider AddLinearSlider(Transform parent, Color color, bool pointerIsInput = false)
         {
-            GameObject sliderObject = UISlider.Create(parent);
-            Slider slider = UISlider.CreateSlider(sliderObject.transform);
+            return UISlider.AddLinearSlider(parent, color, pointerIsInput);
+        }
 
-            float posX = sliderObject.transform.localPosition.x;
-            if (pointerIsInput)
-            {
-                posX += UISettings.NodeWidth;
-                posX += UISettings.SliderTextFieldWidth;
-                posX += UISettings.BorderSize;
-                posX += UISettings.PointerSize * 1.5f;
-            }
-            sliderObject.transform.localPosition = new Vector3(posX, 0, -1);
-
-            return slider;
+        internal Slider AddIntegerSlider(Transform parent, Color color, int min, int max, bool pointerIsInput = false)
+        {
+            return UISlider.AddIntegerSlider(parent, color, min, max, pointerIsInput);
         }
     }
 }

@@ -6,28 +6,15 @@ namespace RuntimeNodeEditor.UI.Elements
 {
     public static partial class UISlider
     {
-        public static Slider CreateSlider(Transform parent)
+        private static TextMeshPro CreateSliderText(Transform parent, float value)
         {
-            Slider slider = CreateSliderComponent(parent);
-
             TextMeshPro text = CreateTextField(parent);
-            text.text = ProcessSliderValue(slider.value.ToString());
+            text.text = ProcessSliderValue(value.ToString());
 
-            AddOnValueChange(slider, text);
-
-            return slider;
+            return text;
         }
 
-        private static void AddOnValueChange(Slider slider, TextMeshPro text)
-        {
-            slider.onValueChanged.AddListener(
-                delegate
-                {
-                    UpdateTextOnValueChange(text, slider.value);
-                });
-        }
-
-        private static Slider CreateSliderComponent(Transform parent)
+        private static Slider CreateSliderComponent(Transform parent, Color color)
         {
             // Slider
             float scaleX = ScaleX;
@@ -44,7 +31,7 @@ namespace RuntimeNodeEditor.UI.Elements
                 "Fill",
                 Vector2.zero,
                 Vector3.zero);
-            UIImage.Create(fillObject, Color.white);
+            UIImage.Create(fillObject, color);
 
             // Handle
             GameObject handleObject = UIElement.Create(
@@ -54,16 +41,17 @@ namespace RuntimeNodeEditor.UI.Elements
                 new Vector3(UISettings.SliderHandleWidth / 2, 0, 0));
 
             return AddSliderComponent(
-                sliderObject.AddComponent<Slider>(), 
+                sliderObject.AddComponent<Slider>(),
+                color,
                 fillObject.GetComponent<RectTransform>(), 
                 handleObject.GetComponent<RectTransform>()
             );
         }
 
-        private static Slider AddSliderComponent(Slider slider, RectTransform fill, RectTransform handle)
+        private static Slider AddSliderComponent(Slider slider, Color color, RectTransform fill, RectTransform handle)
         {
             slider.interactable = true;
-            slider.targetGraphic = UIImage.Create(handle.gameObject, Color.white);
+            slider.targetGraphic = UIImage.Create(handle.gameObject, color * 0.9f);
 
             slider.fillRect = fill.GetComponent<RectTransform>();
             slider.handleRect = handle.GetComponent<RectTransform>();
@@ -82,11 +70,6 @@ namespace RuntimeNodeEditor.UI.Elements
             {
                 return UISettings.NodeWidth - (UISettings.PointerSize / 2) - UISettings.SliderHandleWidth - UISettings.SliderTextFieldWidth - (UISettings.BorderSize * 2);
             }
-        }
-
-        private static void UpdateTextOnValueChange(TextMeshPro text, float value)
-        {
-            text.text = ProcessSliderValue(value.ToString());
         }
 
         private static string ProcessSliderValue(string value)

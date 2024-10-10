@@ -33,9 +33,18 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
             return _uiPointers.AddBooleanPreview(parent, pointerIsInput, interactable);
         }
 
-        protected Slider AddSlider(Transform parent, bool pointerIsInput = false)
+        protected Slider AddLinearSlider(Transform parent, Color color, bool pointerIsInput = false)
         {
-            return _uiPointers.AddSlider(parent, pointerIsInput);
+            return _uiPointers.AddLinearSlider(parent, color, pointerIsInput);
+        }
+
+        protected Slider AddIntegerSlider(Transform parent, Color color, int max, bool pointerIsInput = false)
+        {
+            return AddIntegerSlider(parent, color, 0, max, pointerIsInput);
+        }
+        protected Slider AddIntegerSlider(Transform parent, Color color, int min, int max, bool pointerIsInput = false)
+        {
+            return _uiPointers.AddIntegerSlider(parent, color, min, max, pointerIsInput);
         }
     }
 }

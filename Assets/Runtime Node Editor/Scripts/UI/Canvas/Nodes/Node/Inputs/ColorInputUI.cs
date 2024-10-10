@@ -3,6 +3,7 @@ using RuntimeNodeEditor.Nodes.Pointer;
 using RuntimeNodeEditor.Nodes.Pointer.Value;
 using RuntimeNodeEditor.Functions.UI.Elements;
 using Utils.StringParameterExtractor;
+using UnityEngine;
 
 namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
 {
@@ -32,9 +33,9 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
             {
                 Sliders =
                 {
-                    [0] = AddSlider(node.outputs[1].transform),
-                    [1] = AddSlider(node.outputs[2].transform),
-                    [2] = AddSlider(node.outputs[3].transform)
+                    [0] = AddIntegerSlider(node.outputs[1].transform, Color.red, 255),
+                    [1] = AddIntegerSlider(node.outputs[2].transform, Color.green, 255),
+                    [2] = AddIntegerSlider(node.outputs[3].transform, Color.blue, 255)
                 }
             };
 
