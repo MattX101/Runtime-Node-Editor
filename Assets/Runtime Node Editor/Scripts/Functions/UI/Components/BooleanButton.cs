@@ -10,12 +10,20 @@ namespace RuntimeNodeEditor.Functions.UI.Component
 
         public bool Toggled;
 
-        public BooleanButton(Button button, RawImage image, bool interactable)
+        public BooleanButton(GameObject root, RawImage image, bool interactable)
         {
-            Button = button;
+            Button = root.AddComponent<Button>();
             _image = image;
 
-            Button.transition = Selectable.Transition.None;
+            Button.transition = Selectable.Transition.ColorTint;
+            
+            ColorBlock colors = Button.colors;
+            colors.normalColor = Color.white * 0.9f;
+            colors.highlightedColor = Color.white;
+            colors.pressedColor = Color.white * 0.9f;
+            colors.disabledColor = Color.white * 0.75f;
+            Button.colors = colors;
+
             Button.onClick.AddListener(() => Toggle());
             Button.interactable = interactable;
 

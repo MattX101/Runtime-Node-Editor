@@ -11,7 +11,7 @@ namespace RuntimeNodeEditor.UI.Elements
             GameObject root = UIElement.Create(parent, "Boolean Preview", Vector2.one * 30, Vector3.zero);
 
             return new BooleanButton(
-                root.AddComponent<Button>(), 
+                root, 
                 UIImage.Create(root, Color.red), 
                 interactable);
         }
