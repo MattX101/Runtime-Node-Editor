@@ -21,7 +21,9 @@ namespace RuntimeNodeEditor.Functions.UI.Component
             colors.normalColor = Color.white * 0.9f;
             colors.highlightedColor = Color.white;
             colors.pressedColor = Color.white * 0.9f;
+            colors.selectedColor = Color.white * 0.9f;
             colors.disabledColor = Color.white * 0.75f;
+            colors.fadeDuration = 0.0f;
             Button.colors = colors;
 
             Button.onClick.AddListener(() => Toggle());

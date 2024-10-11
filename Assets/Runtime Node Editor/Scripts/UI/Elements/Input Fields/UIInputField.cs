@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 namespace RuntimeNodeEditor.UI.Elements
 {
@@ -37,6 +38,15 @@ namespace RuntimeNodeEditor.UI.Elements
             inputField.textViewport = textAreaRect;
             inputField.textComponent = textText;
             inputField.interactable = interactable;
+
+            ColorBlock colors = inputField.colors; 
+            colors.normalColor = Color.white * 0.9f;
+            colors.highlightedColor = Color.white;
+            colors.pressedColor = Color.white * 0.9f;
+            colors.selectedColor = Color.white * 0.9f;
+            colors.disabledColor = Color.white * 0.75f;
+            colors.fadeDuration = 0.0f;
+            inputField.colors = colors;
 
             return inputField;
         }
