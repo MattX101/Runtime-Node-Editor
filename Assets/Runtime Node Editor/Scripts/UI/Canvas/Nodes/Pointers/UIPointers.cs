@@ -4,16 +4,9 @@ using UnityEngine;
 
 namespace RuntimeNodeEditor.UI.Canvas.Nodes.Pointer
 {
-    internal partial class UIPointers
+    internal static partial class UIPointers
     {
-        private readonly RuntimeNodeEditor.Nodes.Node.Node _node;
-
-        internal UIPointers(RuntimeNodeEditor.Nodes.Node.Node node)
-        {
-            _node = node;
-        }
-
-        internal GameObject CreatePointer(string name, GameObject parent, ValueType valueType, Texture2D texture, int layer, bool pointerIsInput = false, bool createText = false)
+        internal static GameObject CreatePointer(string name, GameObject parent, ValueType valueType, Texture2D texture, int layer, bool pointerIsInput = false, bool createText = false)
         {
             GameObject uiElement = UIElement.Create(
                 parent.transform,
@@ -36,7 +29,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Pointer
             return uiElement;
         }
 
-        private Vector3 CalcualtePosition(RectTransform rect, bool isInput, int layer)
+        private static Vector3 CalcualtePosition(RectTransform rect, bool isInput, int layer)
         {
             float posX = rect.sizeDelta.x + UISettings.BorderSize * 2;
             posX = isInput ? -posX : posX;
@@ -48,7 +41,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Pointer
             return new Vector3(posX, posY, 0.0f);
         }
 
-        private void AddCollider(GameObject uiElement)
+        private static void AddCollider(GameObject uiElement)
         {
             RectTransform pointerRect = uiElement.GetComponent<RectTransform>();
             CircleCollider2D circleCollider2D = uiElement.AddComponent<CircleCollider2D>();

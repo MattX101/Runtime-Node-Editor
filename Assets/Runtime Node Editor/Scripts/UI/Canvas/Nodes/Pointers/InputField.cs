@@ -4,9 +4,9 @@ using TMPro;
 
 namespace RuntimeNodeEditor.UI.Canvas.Nodes.Pointer
 {
-    internal partial class UIPointers
+    internal static partial class UIPointers
     {
-        internal TMP_InputField AddInputField(Transform parent, TMP_InputField.ContentType contentType, bool pointerIsInput = false, bool interactable = true, bool shorten = false, int layer = 0)
+        internal static TMP_InputField AddInputField(RuntimeNodeEditor.Nodes.Node.Node node, Transform parent, TMP_InputField.ContentType contentType, bool pointerIsInput = false, bool interactable = true, bool shorten = false, int layer = 0)
         {
             float posX = UISettings.NodeWidth / 2;
             posX += UISettings.PointerSize / 4;
@@ -15,43 +15,43 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Pointer
             
             float posY = layer * -(UISettings.InputFieldHeight + UISettings.PointerPadding);
 
-            TMP_InputField inputField = AddInputFieldOfType(contentType, parent, interactable, shorten);
+            TMP_InputField inputField = AddInputFieldOfType(node, contentType, parent, interactable, shorten);
             inputField.gameObject.transform.localPosition = new Vector3(posX, posY, -1);
 
             return inputField;
         }
 
-        internal TMP_InputField AddHalfInputField(Transform parent, TMP_InputField.ContentType contentType, bool pointerIsInput = false, bool interactable = true, bool shorten = false, int layer = 0)
+        internal static TMP_InputField AddHalfInputField(RuntimeNodeEditor.Nodes.Node.Node node, Transform parent, TMP_InputField.ContentType contentType, bool pointerIsInput = false, bool interactable = true, bool shorten = false, int layer = 0)
         {
             float posX = UISettings.NodeWidth / 4;
             posX += UISettings.PointerSize / 4;
             posX = !pointerIsInput ? -posX : posX;
             float posY = layer * -(UISettings.InputFieldHeight + UISettings.PointerPadding);
 
-            TMP_InputField inputField = AddInputFieldOfType(contentType, parent, interactable, shorten, true);
+            TMP_InputField inputField = AddInputFieldOfType(node, contentType, parent, interactable, shorten, true);
             inputField.gameObject.transform.localPosition = new Vector3(posX, posY, -1);
 
             return inputField;
         }
 
-        private TMP_InputField AddInputFieldOfType(TMP_InputField.ContentType contentType, Transform parent, bool interactable, bool shorten, bool halfSize = false)
+        private static TMP_InputField AddInputFieldOfType(RuntimeNodeEditor.Nodes.Node.Node node, TMP_InputField.ContentType contentType, Transform parent, bool interactable, bool shorten, bool halfSize = false)
         {
             TMP_InputField inputField = null;
 
             if (contentType == TMP_InputField.ContentType.IntegerNumber)
             {
                 inputField = UIIntInputField.Create(parent, interactable, shorten, halfSize);
-                UIIntInputField.AddOnValueChange(inputField, _node);
+                UIIntInputField.AddOnValueChange(inputField, node);
             }
             else if (contentType == TMP_InputField.ContentType.DecimalNumber)
             {
                 inputField = UIFloatInputField.Create(parent, interactable, shorten, halfSize);
-                UIFloatInputField.AddOnValueChange(inputField, _node);
+                UIFloatInputField.AddOnValueChange(inputField, node);
             }
             else
             {
                 inputField = UIInputField.Create(parent, interactable, shorten, halfSize);
-                UIInputField.AddOnValueChange(inputField, _node);
+                UIInputField.AddOnValueChange(inputField, node);
             }
 
             return inputField;

@@ -26,7 +26,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
             {
                 Buttons =
                 {
-                    [0] = AddBooleanPreview(node.outputs[0].transform, false, true)
+                    [0] = AddBooleanPreview(node, node.outputs[0].transform, false, true)
                 }
             };
         }

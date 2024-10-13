@@ -42,9 +42,9 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
             {
                 Buttons =
                 {
-                    [0] = AddBooleanPreview(node.inputs[0].transform, true),
-                    [1] = AddBooleanPreview(node.inputs[1].transform, true),
-                    [2] = AddBooleanPreview(node.outputs[0].transform)
+                    [0] = AddBooleanPreview(node, node.inputs[0].transform, true),
+                    [1] = AddBooleanPreview(node, node.inputs[1].transform, true),
+                    [2] = AddBooleanPreview(node, node.outputs[0].transform)
                 },
                 Dropdowns =
                 {

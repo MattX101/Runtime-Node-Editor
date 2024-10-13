@@ -14,8 +14,6 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
         // In/Out Pointers
         protected int NumOfLayers = 0, NumOfInputs = 0, NumOfOutputs = 0;
 
-        private UIPointers _uiPointers;
-
         private float _borderX2;
         private float _sizeX, _sizeY;
 
@@ -29,8 +27,6 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
 
         protected void CreateNodeUI(RuntimeNodeEditor.Nodes.Node.Node node, Color primaryColour, string title)
         {
-            _uiPointers = new UIPointers(node);
-
             int count = NumOfInputs > NumOfOutputs ? NumOfInputs : NumOfOutputs;
             count += NumOfLayers;
             _bodyHeight = count * UISettings.PointerSize;
@@ -82,7 +78,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
 
         protected GameObject CreatePointer(string name, ValueType valueType, int layer, bool pointerIsInput = false, bool createText = false)
         {
-            GameObject uiPointerObject = _uiPointers.CreatePointer(
+            GameObject uiPointerObject = UIPointers.CreatePointer(
                 name,
                 pointerIsInput ? _inputs : _outputs, 
                 valueType,

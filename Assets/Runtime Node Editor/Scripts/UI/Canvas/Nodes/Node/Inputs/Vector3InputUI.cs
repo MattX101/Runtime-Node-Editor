@@ -31,9 +31,9 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
             {
                 InputFields =
                 {
-                    [0] = AddInputField(node.outputs[1].gameObject.transform, TMP_InputField.ContentType.DecimalNumber),
-                    [1] = AddInputField(node.outputs[2].gameObject.transform, TMP_InputField.ContentType.DecimalNumber),
-                    [2] = AddInputField(node.outputs[3].gameObject.transform, TMP_InputField.ContentType.DecimalNumber)
+                    [0] = AddInputField(node, node.outputs[1].gameObject.transform, TMP_InputField.ContentType.DecimalNumber),
+                    [1] = AddInputField(node, node.outputs[2].gameObject.transform, TMP_InputField.ContentType.DecimalNumber),
+                    [2] = AddInputField(node, node.outputs[3].gameObject.transform, TMP_InputField.ContentType.DecimalNumber)
                 }
             };
         }

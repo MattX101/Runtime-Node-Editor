@@ -1,4 +1,5 @@
-﻿using RuntimeNodeEditor.Functions.UI.Component;
+﻿using RuntimeNodeEditor.UI.Canvas.Nodes.Pointer;
+using RuntimeNodeEditor.Functions.UI.Component;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -7,9 +8,10 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
 {
     internal partial class NodeUI
     {
-        protected TMP_InputField AddInputField(Transform parent, TMP_InputField.ContentType contentType, bool pointerIsInput = false, bool interactable = true, bool shorten = false, int layer = 0)
+        protected TMP_InputField AddInputField(RuntimeNodeEditor.Nodes.Node.Node node, Transform parent, TMP_InputField.ContentType contentType, bool pointerIsInput = false, bool interactable = true, bool shorten = false, int layer = 0)
         {
-            return _uiPointers.AddInputField(
+            return UIPointers.AddInputField(
+                node,
                 parent,
                 contentType,
                 pointerIsInput,
@@ -17,9 +19,10 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
                 shorten,
                 layer);
         }
-        protected TMP_InputField AddHalfInputField(Transform parent, TMP_InputField.ContentType contentType, bool pointerIsInput = false, bool interactable = true, bool shorten = false, int layer = 0)
+        protected TMP_InputField AddHalfInputField(RuntimeNodeEditor.Nodes.Node.Node node, Transform parent, TMP_InputField.ContentType contentType, bool pointerIsInput = false, bool interactable = true, bool shorten = false, int layer = 0)
         {
-            return _uiPointers.AddHalfInputField(
+            return UIPointers.AddHalfInputField(
+                node,
                 parent,
                 contentType,
                 pointerIsInput,
@@ -28,14 +31,14 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
                 layer);
         }
 
-        protected BooleanButton AddBooleanPreview(Transform parent, bool pointerIsInput = false, bool interactable = false)
+        protected BooleanButton AddBooleanPreview(RuntimeNodeEditor.Nodes.Node.Node node, Transform parent, bool pointerIsInput = false, bool interactable = false)
         {
-            return _uiPointers.AddBooleanPreview(parent, pointerIsInput, interactable);
+            return UIPointers.AddBooleanPreview(node, parent, pointerIsInput, interactable);
         }
 
         protected Slider AddLinearSlider(Transform parent, Color color, bool pointerIsInput = false)
         {
-            return _uiPointers.AddLinearSlider(parent, color, pointerIsInput);
+            return UIPointers.AddLinearSlider(parent, color, pointerIsInput);
         }
 
         protected Slider AddIntegerSlider(Transform parent, Color color, int max, bool pointerIsInput = false)
@@ -44,7 +47,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
         }
         protected Slider AddIntegerSlider(Transform parent, Color color, int min, int max, bool pointerIsInput = false)
         {
-            return _uiPointers.AddIntegerSlider(parent, color, min, max, pointerIsInput);
+            return UIPointers.AddIntegerSlider(parent, color, min, max, pointerIsInput);
         }
     }
 }

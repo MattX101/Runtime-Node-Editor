@@ -32,11 +32,13 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
                 InputFields =
                 {
                     [0] = AddInputField(
+                        node,
                         node.inputs[1].gameObject.transform,
                         TMP_InputField.ContentType.DecimalNumber,
                         true,
                         false),
                     [1] = AddInputField(
+                        node,
                         node.inputs[2].gameObject.transform,
                         TMP_InputField.ContentType.DecimalNumber,
                         true,

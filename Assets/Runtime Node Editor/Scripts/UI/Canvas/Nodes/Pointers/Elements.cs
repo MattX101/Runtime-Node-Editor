@@ -8,9 +8,9 @@ using TMPro;
 
 namespace RuntimeNodeEditor.UI.Canvas.Nodes.Pointer
 {
-    internal partial class UIPointers
+    internal static partial class UIPointers
     {
-        private void AddImage(GameObject uiElement, ValueType valueType, Texture2D texture)
+        private static void AddImage(GameObject uiElement, ValueType valueType, Texture2D texture)
         {
             UIImage.Create(
                 uiElement,
@@ -21,7 +21,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Pointer
                 texture);
         }
 
-        private void AddText(GameObject uiElement, string name, bool isInput)
+        private static void AddText(GameObject uiElement, string name, bool isInput)
         {
             float x = 50;
             x = isInput ? x : -x;
@@ -39,10 +39,10 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Pointer
                 isInput ? TextAlignmentOptions.Left : TextAlignmentOptions.Right);
         }
 
-        internal BooleanButton AddBooleanPreview(Transform parent, bool pointerIsInput = false, bool interactable = false)
+        internal static BooleanButton AddBooleanPreview(RuntimeNodeEditor.Nodes.Node.Node node, Transform parent, bool pointerIsInput = false, bool interactable = false)
         {
             BooleanButton button = UIBooleanPreview.Create(parent, interactable);
-            UIBooleanPreview.AddOnValueChange(button.Button, _node);
+            UIBooleanPreview.AddOnValueChange(button.Button, node);
 
             float posX = UISettings.PointerSize * 1.5f;
             posX = pointerIsInput ? posX : -posX;
@@ -51,12 +51,12 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Pointer
             return button;
         }
 
-        internal Slider AddLinearSlider(Transform parent, Color color, bool pointerIsInput = false)
+        internal static Slider AddLinearSlider(Transform parent, Color color, bool pointerIsInput = false)
         {
             return UISlider.AddLinearSlider(parent, color, pointerIsInput);
         }
 
-        internal Slider AddIntegerSlider(Transform parent, Color color, int min, int max, bool pointerIsInput = false)
+        internal static Slider AddIntegerSlider(Transform parent, Color color, int min, int max, bool pointerIsInput = false)
         {
             return UISlider.AddIntegerSlider(parent, color, min, max, pointerIsInput);
         }

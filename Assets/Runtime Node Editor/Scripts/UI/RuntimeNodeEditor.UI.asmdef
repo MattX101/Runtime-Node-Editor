@@ -1,11 +1,7 @@
 {
     "name": "RuntimeNodeEditor.UI",
     "rootNamespace": "",
-    "references": [
-        "GUID:a51e64d045fc8a144b8a9eef1e5ea548",
-        "GUID:971907e042dcd334289fba405f52b119",
-        "GUID:6055be8ebefd69e48b49212b09b47b2f"
-    ],
+    "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
