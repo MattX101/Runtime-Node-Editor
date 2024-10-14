@@ -76,7 +76,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Components
             if (!hit.collider)
                 return null;
 
-            if (!hit.collider.gameObject.TryGetComponent(out RuntimeNodeEditor.Nodes.Node.Node node))
+            if (!hit.collider.gameObject.TryGetComponent(out RuntimeNodeEditor.Node.Node.Node node))
                 return null;
 
             return node.gameObject.GetComponent<NodeUI>();

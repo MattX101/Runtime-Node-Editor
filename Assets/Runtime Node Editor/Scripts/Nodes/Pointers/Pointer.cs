@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace RuntimeNodeEditor.Nodes.Pointer
+namespace RuntimeNodeEditor.Node.Pointer
 {
     public class Pointer : MonoBehaviour
     {

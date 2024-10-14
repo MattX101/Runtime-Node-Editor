@@ -1,10 +1,11 @@
-using RuntimeNodeEditor.Nodes.Node;
-using RuntimeNodeEditor.Nodes.Pointer;
-using RuntimeNodeEditor.Nodes.Pointer.Value;
-using RuntimeNodeEditor.Nodes.Pointer.Data;
-using RuntimeNodeEditor.Functions.UI.Elements;
+using RNE.Template.Node;
+using RNE.Template.Node.Pointer;
+using RNE.Template.Node.Pointer.Data;
+using RNE.Template.Node.Pointer.Value;
+using RuntimeNodeEditor.Node.UIFunctions.Elements;
+using RuntimeNodeEditor.UI.Canvas.Nodes.Node;
 
-namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
+namespace RNE.Template.UI.Node
 {
     public class BoolInputUI : NodeUI
     {

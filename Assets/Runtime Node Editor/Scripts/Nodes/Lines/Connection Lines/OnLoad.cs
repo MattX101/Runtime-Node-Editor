@@ -1,7 +1,8 @@
-﻿using RuntimeNodeEditor.Nodes.Line;
-using RuntimeNodeEditor.Nodes.Pointer;
+﻿using RuntimeNodeEditor.Node.Line;
+using RuntimeNodeEditor.Node.Lines.Data;
+using RuntimeNodeEditor.Node.Pointer;
 
-namespace RuntimeNodeEditor.Nodes.Lines
+namespace RuntimeNodeEditor.Node.Lines
 {
     public partial class ConnectionLines
     {

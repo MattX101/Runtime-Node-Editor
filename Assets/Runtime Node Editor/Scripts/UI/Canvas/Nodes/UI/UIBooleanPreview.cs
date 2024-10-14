@@ -1,8 +1,8 @@
-using RuntimeNodeEditor.Functions.UI.Component;
+using RuntimeNodeEditor.Node.UIFunctions.Component;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace RuntimeNodeEditor.UI.Elements
+namespace RuntimeNodeEditor.UI.Canvas.Node.UI
 {
     public static class UIBooleanPreview
     {
@@ -16,7 +16,7 @@ namespace RuntimeNodeEditor.UI.Elements
                 interactable);
         }
 
-        public static void AddOnValueChange(Button button, Nodes.Node.Node node)
+        public static void AddOnValueChange(Button button, RuntimeNodeEditor.Node.Node.Node node)
         {
             button.onClick.AddListener(
                 delegate

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace RuntimeNodeEditor.Nodes
+namespace RuntimeNodeEditor.Node
 {
     public class NodeExecution : MonoBehaviour
     {

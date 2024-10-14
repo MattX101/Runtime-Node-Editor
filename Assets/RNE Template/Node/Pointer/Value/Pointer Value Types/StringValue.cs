@@ -1,4 +1,6 @@
-﻿namespace RuntimeNodeEditor.Nodes.Pointer.Value
+﻿using RuntimeNodeEditor.Node.Pointer;
+
+namespace RNE.Template.Node.Pointer.Value
 {
     public static partial class PointerValue
     {

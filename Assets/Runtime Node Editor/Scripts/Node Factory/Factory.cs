@@ -4,12 +4,12 @@ using UnityEngine;
 using System;
 using System.Reflection;
 
-namespace RuntimeNodeEditor.UI.Canvas.Node.Components
+namespace RuntimeNodeEditor.Factory
 {
     internal static class Factory
     {
         private const string AssemblyName = "RNE.Template.UI";
-        private const string NodeNamespace = "RuntimeNodeEditor.UI.Canvas.Nodes.Node.";
+        private const string NodeNamespace = "RNE.Template.UI.Node.";
 
         internal static NodeUI CreateNode(string id, Vector3 position)
         {

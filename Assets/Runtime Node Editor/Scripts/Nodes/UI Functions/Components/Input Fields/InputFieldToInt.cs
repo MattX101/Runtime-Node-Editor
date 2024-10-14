@@ -1,4 +1,4 @@
-﻿namespace RuntimeNodeEditor.Functions.UI.Elements
+﻿namespace RuntimeNodeEditor.Node.UIFunctions.Component
 {
     public static class InputFieldToInt
     {

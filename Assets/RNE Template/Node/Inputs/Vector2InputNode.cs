@@ -1,11 +1,11 @@
+using RuntimeNodeEditor.Node.UIFunctions.Component;
+using RNE.Template.Node.Pointer;
 using UnityEngine;
 using TMPro;
-using RuntimeNodeEditor.Nodes.Pointer;
-using RuntimeNodeEditor.Functions.UI.Elements;
 
-namespace RuntimeNodeEditor.Nodes.Node
+namespace RNE.Template.Node
 {
-    public class Vector2InputNode : Node
+    public class Vector2InputNode : RuntimeNodeEditor.Node.Node.Node
     {
         protected override void CodeToExecute()
         {

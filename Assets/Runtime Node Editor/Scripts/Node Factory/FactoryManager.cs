@@ -1,8 +1,7 @@
-using RuntimeNodeEditor.UI.Canvas.Node.Components;
 using RuntimeNodeEditor.UI.Canvas.Nodes.Node;
 using UnityEngine;
 
-namespace RuntimeNodeEditor.UI.Canvas.Nodes
+namespace RuntimeNodeEditor.Factory
 {
     public class FactoryManager : MonoBehaviour
     {

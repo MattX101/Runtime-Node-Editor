@@ -1,12 +1,12 @@
 ﻿using RuntimeNodeEditor.Input;
-using RuntimeNodeEditor.Nodes.Lines;
+using RuntimeNodeEditor.Node.Lines;
 using UnityEngine;
 
 namespace RuntimeNodeEditor.UI.Canvas.Nodes.Components
 {
     internal static partial class Selection
     {
-        private static RuntimeNodeEditor.Nodes.Node.Node _currentNode;
+        private static RuntimeNodeEditor.Node.Node.Node _currentNode;
         private static bool CurrentNodeIsNull
         {
             get
@@ -33,7 +33,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Components
 
             if (hit2D.collider)
             {
-                hit2D.collider.TryGetComponent(out RuntimeNodeEditor.Nodes.Node.Node node);
+                hit2D.collider.TryGetComponent(out RuntimeNodeEditor.Node.Node.Node node);
                 if (!node)
                     return;
 

@@ -1,8 +1,8 @@
 using RuntimeNodeEditor.Data;
-using RuntimeNodeEditor.Nodes.Line;
+using RuntimeNodeEditor.Node.Line;
 using System.Collections.Generic;
 
-namespace RuntimeNodeEditor.Nodes.Pointer
+namespace RuntimeNodeEditor.Node.Pointer
 {
     public class OutputPointer : Pointer
     {

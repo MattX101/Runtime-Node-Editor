@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace RuntimeNodeEditor.UI.Canvas.Nodes.Save.Data
+namespace RuntimeNodeEditor.Factory.Data
 {
     public partial class LoadData
     {

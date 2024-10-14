@@ -1,8 +1,8 @@
-﻿using RuntimeNodeEditor.Functions.UI.Component;
+﻿using RuntimeNodeEditor.Node.UIFunctions.Component;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace RuntimeNodeEditor.Functions.UI.Elements
+namespace RuntimeNodeEditor.Node.UIFunctions.Elements
 {
     public partial class NodeUIElements
     {

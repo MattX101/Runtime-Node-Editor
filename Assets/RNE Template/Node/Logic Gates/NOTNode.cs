@@ -1,9 +1,9 @@
-using RuntimeNodeEditor.Nodes.Pointer;
-using RuntimeNodeEditor.Nodes.Pointer.Value;
+using RNE.Template.Node.Pointer;
+using RNE.Template.Node.Pointer.Value;
 
-namespace RuntimeNodeEditor.Nodes.Node
+namespace RNE.Template.Node
 {
-    public class NOTNode : Node
+    public class NOTNode : RuntimeNodeEditor.Node.Node.Node
     {
         protected override void CodeToExecute()
         {

@@ -2,16 +2,16 @@ using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
 
-namespace RuntimeNodeEditor.UI.Elements
+namespace RuntimeNodeEditor.UI.Canvas.Node.UI
 {
     public static class UIDropdown
     {
-        public static Functions.UI.Component.Dropdown Create(GameObject root, Nodes.Node.Node node, string[] elements, string defualt)
+        public static RuntimeNodeEditor.Node.UIFunctions.Component.Dropdown Create(GameObject root, RuntimeNodeEditor.Node.Node.Node node, string[] elements, string defualt)
         {
             float width = UISettings.NodeWidth * 0.8f - (UISettings.BorderSize * 2);
             float height = UISettings.PointerSize * elements.Length + UISettings.BorderSize;
 
-            Functions.UI.Component.Dropdown dropdown = new Functions.UI.Component.Dropdown();
+            RuntimeNodeEditor.Node.UIFunctions.Component.Dropdown dropdown = new RuntimeNodeEditor.Node.UIFunctions.Component.Dropdown();
 
             // Root
             RawImage rootImage = root.AddComponent<RawImage>();
@@ -60,7 +60,7 @@ namespace RuntimeNodeEditor.UI.Elements
             return dropdown;
         }
 
-        private static void AddOption(GameObject parent, Functions.UI.Component.Dropdown dropdown, string text, float posY, float width, int i, Nodes.Node.Node node)
+        private static void AddOption(GameObject parent, RuntimeNodeEditor.Node.UIFunctions.Component.Dropdown dropdown, string text, float posY, float width, int i, RuntimeNodeEditor.Node.Node.Node node)
         {
             // Toggle
             GameObject optionObject = UIElement.Create(parent.transform, "Option - " + text, new Vector2(width, UISettings.PointerSize), new Vector3(0, posY, 0));

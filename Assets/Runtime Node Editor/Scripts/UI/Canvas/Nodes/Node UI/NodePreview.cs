@@ -1,5 +1,5 @@
-﻿using RuntimeNodeEditor.Functions.UI.Component;
-using RuntimeNodeEditor.UI.Elements;
+﻿using RuntimeNodeEditor.Node.UIFunctions.Component;
+using RuntimeNodeEditor.UI.Canvas.Node.UI;
 using UnityEngine;
 using UnityEngine.UI;
 

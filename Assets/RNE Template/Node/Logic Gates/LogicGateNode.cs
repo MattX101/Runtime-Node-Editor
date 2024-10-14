@@ -1,9 +1,9 @@
-using RuntimeNodeEditor.Nodes.Pointer;
-using RuntimeNodeEditor.Nodes.Pointer.Value;
+using RNE.Template.Node.Pointer;
+using RNE.Template.Node.Pointer.Value;
 
-namespace RuntimeNodeEditor.Nodes.Node
+namespace RNE.Template.Node
 {
-    public class LogicGateNode : Node
+    public class LogicGateNode : RuntimeNodeEditor.Node.Node.Node
     {
         public readonly string[] gates =
         {

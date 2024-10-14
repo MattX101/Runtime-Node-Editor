@@ -1,4 +1,5 @@
 using RuntimeNodeEditor.UI.Canvas.Nodes.Pointer;
+using RuntimeNodeEditor.UI.Canvas.Node.UI;
 using Utils.Colour;
 using UnityEngine;
 using UnityEngine.UI;
@@ -23,7 +24,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
             root = gameObject;
         }
 
-        protected void CreateNodeUI(RuntimeNodeEditor.Nodes.Node.Node node, Color primaryColour, string title)
+        protected void CreateNodeUI(RuntimeNodeEditor.Node.Node.Node node, Color primaryColour, string title)
         {
             int count = NumOfInputs > NumOfOutputs ? NumOfInputs : NumOfOutputs;
             count += NumOfLayers;

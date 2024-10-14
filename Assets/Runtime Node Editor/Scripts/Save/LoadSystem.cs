@@ -1,11 +1,11 @@
-﻿using RuntimeNodeEditor.UI.Canvas.Nodes.Save;
-using RuntimeNodeEditor.UI.Canvas.Nodes.Save.Data;
-using RuntimeNodeEditor.Nodes.Lines;
+﻿using RuntimeNodeEditor.Node.Lines;
 using RuntimeNodeEditor.Input;
-using RuntimeNodeEditor.Nodes;
+using RuntimeNodeEditor.Node;
 using UnityEngine;
 using System;
 using System.IO;
+using RuntimeNodeEditor.Factory;
+using RuntimeNodeEditor.Factory.Data;
 
 namespace RuntimeNodeEditor.Save
 {
@@ -40,7 +40,7 @@ namespace RuntimeNodeEditor.Save
             LoadPan(ref position, data);
 
             LoadNodes(ref position, data);
-            Nodes.Node.Node[] nodes = nodesObject.GetComponentsInChildren<Nodes.Node.Node>();
+            Node.Node.Node[] nodes = nodesObject.GetComponentsInChildren<Node.Node.Node>();
 
             LoadConnections(ref position, nodes, data);
 
@@ -77,7 +77,7 @@ namespace RuntimeNodeEditor.Save
                 );
         }
 
-        private void LoadConnections(ref int position, Nodes.Node.Node[] nodes, byte[] data)
+        private void LoadConnections(ref int position, Node.Node.Node[] nodes, byte[] data)
         {
             int connectionArrayLength = BitConverter.ToInt32(data, position);
             position += 4;
@@ -89,7 +89,7 @@ namespace RuntimeNodeEditor.Save
             nodeConnections.UpdateLinesOnLoad();
         }
 
-        private void LoadNodeConnection(ref int position, Nodes.Node.Node[] nodes, byte[] data)
+        private void LoadNodeConnection(ref int position, Node.Node.Node[] nodes, byte[] data)
         {
             nodeConnections.Load(
                 nodes[BitConverter.ToInt32(data, position)].inputs[data[position + 4]],

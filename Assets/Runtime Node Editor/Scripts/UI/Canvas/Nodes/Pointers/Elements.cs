@@ -1,5 +1,5 @@
-﻿using RuntimeNodeEditor.Functions.UI.Component;
-using RuntimeNodeEditor.UI.Elements;
+﻿using RuntimeNodeEditor.Node.UIFunctions.Component;
+using RuntimeNodeEditor.UI.Canvas.Node.UI;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -37,7 +37,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Pointer
                 isInput ? TextAlignmentOptions.Left : TextAlignmentOptions.Right);
         }
 
-        internal static BooleanButton AddBooleanPreview(RuntimeNodeEditor.Nodes.Node.Node node, Transform parent, bool pointerIsInput = false, bool interactable = false)
+        internal static BooleanButton AddBooleanPreview(RuntimeNodeEditor.Node.Node.Node node, Transform parent, bool pointerIsInput = false, bool interactable = false)
         {
             BooleanButton button = UIBooleanPreview.Create(parent, interactable);
             UIBooleanPreview.AddOnValueChange(button.Button, node);

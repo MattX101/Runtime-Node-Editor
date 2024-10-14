@@ -1,6 +1,6 @@
 using TMPro;
 
-namespace RuntimeNodeEditor.Functions.UI.Component
+namespace RuntimeNodeEditor.Node.UIFunctions.Component
 {
     public class Dropdown
     {

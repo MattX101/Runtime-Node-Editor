@@ -2,7 +2,7 @@
 using System.Linq;
 using System;
 
-namespace RuntimeNodeEditor.Functions.UI.Elements
+namespace RuntimeNodeEditor.Node.UIFunctions.Elements
 {
     public partial class NodeUIElements
     {

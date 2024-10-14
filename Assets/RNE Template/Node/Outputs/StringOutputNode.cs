@@ -1,8 +1,8 @@
-using RuntimeNodeEditor.Nodes.Pointer.Value;
+using RNE.Template.Node.Pointer.Value;
 
-namespace RuntimeNodeEditor.Nodes.Node
+namespace RNE.Template.Node
 {
-    public class StringOutputNode : Node
+    public class StringOutputNode : RuntimeNodeEditor.Node.Node.Node
     {
         protected override void CodeToExecute()
         {

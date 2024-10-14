@@ -1,12 +1,13 @@
+using RuntimeNodeEditor.Node.Pointer;
 using UnityEngine;
 
-namespace RuntimeNodeEditor.Nodes.Pointer
+namespace RNE.Template.Node.Pointer
 {
     public class ColorOutputPointer : OutputPointer
     {
         public Color value = Color.black;
 
-        public ColorOutputPointer(Node.Node node) : base(node) { }
+        public ColorOutputPointer(RuntimeNodeEditor.Node.Node.Node node) : base(node) { }
 
         protected override void ResetPointer()
         {

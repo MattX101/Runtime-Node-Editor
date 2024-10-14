@@ -1,4 +1,4 @@
-﻿namespace RuntimeNodeEditor.Nodes.Lines
+﻿namespace RuntimeNodeEditor.Node.Lines
 {
     public partial class ConnectionLines
     {

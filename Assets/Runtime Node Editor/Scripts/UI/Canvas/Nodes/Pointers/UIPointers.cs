@@ -1,4 +1,4 @@
-using RuntimeNodeEditor.UI.Elements;
+using RuntimeNodeEditor.UI.Canvas.Node.UI;
 using UnityEngine;
 
 namespace RuntimeNodeEditor.UI.Canvas.Nodes.Pointer

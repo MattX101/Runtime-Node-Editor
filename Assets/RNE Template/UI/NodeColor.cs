@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
+namespace RNE.Template.UI
 {
     internal static class NodeColor
     {

@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using Utils.Colour;
 using TMPro;
 
-namespace RuntimeNodeEditor.UI.Canvas.Nodes.Pointer
+namespace RuntimeNodeEditor.UI.Canvas.Node.UI
 {
     public class UIPointer : MonoBehaviour
     {

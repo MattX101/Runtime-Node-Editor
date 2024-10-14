@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace RuntimeNodeEditor.UI.Elements
+namespace RuntimeNodeEditor.UI.Canvas.Node.UI
 {
     public static class UIElement
     {

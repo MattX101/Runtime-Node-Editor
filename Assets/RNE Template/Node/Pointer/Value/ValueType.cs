@@ -1,4 +1,4 @@
-namespace RuntimeNodeEditor.Nodes.Pointer.Value
+namespace RNE.Template.Node.Pointer.Value
 {
     public enum ValueType
     {

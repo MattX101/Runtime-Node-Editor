@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace RuntimeNodeEditor.Functions.UI.Component
+namespace RuntimeNodeEditor.Node.UIFunctions.Component
 {
     public class ImagePreview
     {

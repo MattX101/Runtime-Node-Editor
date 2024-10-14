@@ -1,9 +1,9 @@
-using RuntimeNodeEditor.Nodes.Pointer;
+using RNE.Template.Node.Pointer;
 using UnityEngine;
 
-namespace RuntimeNodeEditor.Nodes.Node
+namespace RNE.Template.Node
 {
-    public class ColorInputNode : Node
+    public class ColorInputNode : RuntimeNodeEditor.Node.Node.Node
     {
         protected override void CodeToExecute()
         {

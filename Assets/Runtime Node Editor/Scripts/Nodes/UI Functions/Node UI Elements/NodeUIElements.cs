@@ -1,8 +1,8 @@
-using RuntimeNodeEditor.Functions.UI.Component;
+using RuntimeNodeEditor.Node.UIFunctions.Component;
 using UnityEngine.UI;
 using TMPro;
 
-namespace RuntimeNodeEditor.Functions.UI.Elements
+namespace RuntimeNodeEditor.Node.UIFunctions.Elements
 {
     public partial class NodeUIElements
     {

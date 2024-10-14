@@ -1,7 +1,6 @@
-using RuntimeNodeEditor.UI.Elements;
 using UnityEngine;
 
-namespace RuntimeNodeEditor.UI.Canvas.Nodes
+namespace RuntimeNodeEditor.UI.Canvas.Node.UI
 {
     public static class UILayer
     {

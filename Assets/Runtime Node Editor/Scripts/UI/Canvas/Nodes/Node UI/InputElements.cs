@@ -1,5 +1,5 @@
 ﻿using RuntimeNodeEditor.UI.Canvas.Nodes.Pointer;
-using RuntimeNodeEditor.Functions.UI.Component;
+using RuntimeNodeEditor.Node.UIFunctions.Component;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -8,7 +8,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
 {
     public partial class NodeUI
     {
-        protected TMP_InputField AddInputField(RuntimeNodeEditor.Nodes.Node.Node node, Transform parent, TMP_InputField.ContentType contentType, bool pointerIsInput = false, bool interactable = true, bool shorten = false, int layer = 0)
+        protected TMP_InputField AddInputField(RuntimeNodeEditor.Node.Node.Node node, Transform parent, TMP_InputField.ContentType contentType, bool pointerIsInput = false, bool interactable = true, bool shorten = false, int layer = 0)
         {
             return UIPointers.AddInputField(
                 node,
@@ -19,7 +19,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
                 shorten,
                 layer);
         }
-        protected TMP_InputField AddHalfInputField(RuntimeNodeEditor.Nodes.Node.Node node, Transform parent, TMP_InputField.ContentType contentType, bool pointerIsInput = false, bool interactable = true, bool shorten = false, int layer = 0)
+        protected TMP_InputField AddHalfInputField(RuntimeNodeEditor.Node.Node.Node node, Transform parent, TMP_InputField.ContentType contentType, bool pointerIsInput = false, bool interactable = true, bool shorten = false, int layer = 0)
         {
             return UIPointers.AddHalfInputField(
                 node,
@@ -31,7 +31,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
                 layer);
         }
 
-        protected BooleanButton AddBooleanPreview(RuntimeNodeEditor.Nodes.Node.Node node, Transform parent, bool pointerIsInput = false, bool interactable = false)
+        protected BooleanButton AddBooleanPreview(RuntimeNodeEditor.Node.Node.Node node, Transform parent, bool pointerIsInput = false, bool interactable = false)
         {
             return UIPointers.AddBooleanPreview(node, parent, pointerIsInput, interactable);
         }

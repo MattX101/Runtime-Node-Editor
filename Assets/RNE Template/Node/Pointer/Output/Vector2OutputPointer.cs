@@ -1,12 +1,13 @@
+using RuntimeNodeEditor.Node.Pointer;
 using UnityEngine;
 
-namespace RuntimeNodeEditor.Nodes.Pointer
+namespace RNE.Template.Node.Pointer
 {
     public class Vector2OutputPointer : OutputPointer
     {
         public Vector2 value = Vector2.zero;
 
-        public Vector2OutputPointer(Node.Node node) : base(node) { }
+        public Vector2OutputPointer(RuntimeNodeEditor.Node.Node.Node node) : base(node) { }
 
         protected override void ResetPointer()
         {

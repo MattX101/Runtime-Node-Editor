@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace RuntimeNodeEditor.Functions.UI.Elements
+namespace RuntimeNodeEditor.Node.UIFunctions.Elements
 {
     public partial class NodeUIElements
     {

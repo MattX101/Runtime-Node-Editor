@@ -1,5 +1,5 @@
 using RuntimeNodeEditor.UI.Canvas.Nodes.Components;
-using RuntimeNodeEditor.Nodes.Lines;
+using RuntimeNodeEditor.Node.Lines;
 using RuntimeNodeEditor.Input;
 using UnityEngine;
 
@@ -24,7 +24,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes
             Pan.Reset();
             Zoom.Reset();
 
-            foreach (RuntimeNodeEditor.Nodes.Node.Node node in GetComponentsInChildren<RuntimeNodeEditor.Nodes.Node.Node>())
+            foreach (RuntimeNodeEditor.Node.Node.Node node in GetComponentsInChildren<RuntimeNodeEditor.Node.Node.Node>())
                 Selection.Delete(node, true);
         }
     }

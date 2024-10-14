@@ -2,7 +2,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
-namespace RuntimeNodeEditor.UI.Elements
+namespace RuntimeNodeEditor.UI.Canvas.Node.UI
 {
     public static class UIInputField
     {
@@ -72,7 +72,7 @@ namespace RuntimeNodeEditor.UI.Elements
                 });
         }
 
-        public static void AddOnValueChange(TMP_InputField inputField, Nodes.Node.Node node)
+        public static void AddOnValueChange(TMP_InputField inputField, RuntimeNodeEditor.Node.Node.Node node)
         {
             inputField.onValueChanged.AddListener(
                 delegate

@@ -1,10 +1,10 @@
-using RuntimeNodeEditor.Nodes.Pointer;
-using RuntimeNodeEditor.Functions.UI.Elements;
+using RuntimeNodeEditor.Node.Pointer;
+using RuntimeNodeEditor.Node.UIFunctions.Elements;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace RuntimeNodeEditor.Nodes.Node
+namespace RuntimeNodeEditor.Node.Node
 {
     public class Node : MonoBehaviour
     {

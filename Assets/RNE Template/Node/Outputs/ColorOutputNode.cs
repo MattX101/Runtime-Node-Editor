@@ -1,9 +1,9 @@
-using RuntimeNodeEditor.Functions.UI.Component;
-using RuntimeNodeEditor.Nodes.Pointer.Value;
+using RNE.Template.Node.Pointer.Value;
+using RuntimeNodeEditor.Node.UIFunctions.Component;
 
-namespace RuntimeNodeEditor.Nodes.Node
+namespace RNE.Template.Node
 {
-    public class ColorOutputNode : Node
+    public class ColorOutputNode : RuntimeNodeEditor.Node.Node.Node
     {
         public ImagePreview ImagePreview;
 

@@ -1,5 +1,5 @@
 using RuntimeNodeEditor.UI.Canvas.Nodes.Node;
-using RuntimeNodeEditor.Nodes.Lines;
+using RuntimeNodeEditor.Node.Lines;
 
 namespace RuntimeNodeEditor.UI.Canvas.Nodes.Components
 {
@@ -7,7 +7,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Components
     {
         private static bool _currentCopyIsCut;
 
-        private static RuntimeNodeEditor.Nodes.Node.Node _copiedNode;
+        private static RuntimeNodeEditor.Node.Node.Node _copiedNode;
         private static bool CopiedNodeIsNull
         {
             get
@@ -33,7 +33,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Components
             NodeUI copiedNodeUI = _copiedNode.GetComponent<NodeUI>();
             NodeUI newNodeUI = nodeUIManager.SpawnWithReturn(copiedNodeUI.NodeId, copiedNodeUI.RootPosition);
 
-            RuntimeNodeEditor.Nodes.Node.Node newNode = newNodeUI.root.GetComponent<RuntimeNodeEditor.Nodes.Node.Node>();
+            RuntimeNodeEditor.Node.Node.Node newNode = newNodeUI.root.GetComponent<RuntimeNodeEditor.Node.Node.Node>();
 
             if (newNode.Elements != null)
                 newNode.Elements.SetElements(_copiedNode.Elements);

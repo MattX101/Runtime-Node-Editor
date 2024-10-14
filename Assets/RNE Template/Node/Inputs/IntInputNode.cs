@@ -1,9 +1,9 @@
-using RuntimeNodeEditor.Functions.UI.Elements;
-using RuntimeNodeEditor.Nodes.Pointer;
+using RNE.Template.Node.Pointer;
+using RuntimeNodeEditor.Node.UIFunctions.Component;
 
-namespace RuntimeNodeEditor.Nodes.Node
+namespace RNE.Template.Node
 {
-    public class IntInputNode : Node
+    public class IntInputNode : RuntimeNodeEditor.Node.Node.Node
     {
         protected override void CodeToExecute()
         {

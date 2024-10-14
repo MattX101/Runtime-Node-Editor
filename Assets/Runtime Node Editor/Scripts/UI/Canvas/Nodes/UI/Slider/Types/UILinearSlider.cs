@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 using TMPro;
 
-namespace RuntimeNodeEditor.UI.Elements
+namespace RuntimeNodeEditor.UI.Canvas.Node.UI
 {
     public static partial class UISlider
     {

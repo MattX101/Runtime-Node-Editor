@@ -5,7 +5,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Components
 {
     internal static partial class Selection
     {
-        internal static void Delete(RuntimeNodeEditor.Nodes.Node.Node node, bool ignoreChecks = false)
+        internal static void Delete(RuntimeNodeEditor.Node.Node.Node node, bool ignoreChecks = false)
         {
             if (!ignoreChecks)
             {
