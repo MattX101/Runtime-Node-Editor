@@ -1,0 +1,16 @@
+{
+    "name": "RNE.Template.Node.Pointer",
+    "rootNamespace": "",
+    "references": [
+        "GUID:971907e042dcd334289fba405f52b119"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -72,7 +72,7 @@ namespace RuntimeNodeEditor.Save
 
         private void LoadNode(ref int position, byte[] data)
         {
-            OnNodeSerialization.Load(
+            OnLoad.Load(
                 new LoadData(data, ref position)
                 );
         }

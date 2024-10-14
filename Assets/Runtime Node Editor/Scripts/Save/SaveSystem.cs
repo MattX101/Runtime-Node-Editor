@@ -46,7 +46,7 @@ namespace RuntimeNodeEditor.Save
             _data.AddRange(seedManager.Save());
             _data.AddRange(Zoom.Save());
             _data.AddRange(Pan.Save());
-            _data.AddRange(OnNodeSerialization.Save(nodesObject));
+            _data.AddRange(OnSave.Save(nodesObject));
 
             File.WriteAllBytes(_saveDirectory, _data.ToArray());
         }

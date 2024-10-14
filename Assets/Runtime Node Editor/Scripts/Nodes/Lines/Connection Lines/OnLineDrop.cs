@@ -1,4 +1,4 @@
-﻿using RuntimeNodeEditor.Nodes.Pointer.Value;
+﻿//using RuntimeNodeEditor.Nodes.Pointer.Value;
 using RuntimeNodeEditor.Nodes.Pointer;
 
 namespace RuntimeNodeEditor.Nodes.Lines
@@ -15,7 +15,7 @@ namespace RuntimeNodeEditor.Nodes.Lines
             if (!input)
                 return false;
 
-            if (!PointerValue.CheckCompatibility(input.ValueType, _currentOutputPointer.ValueType))
+            if (!CheckPointerCompatibility(input.ValueTypeIndex, _currentOutputPointer.ValueTypeIndex))
                 return false;
 
             if (input.HasConnection)
@@ -36,6 +36,11 @@ namespace RuntimeNodeEditor.Nodes.Lines
 
             SetInputConnection(input, _currentOutputPointer, _currentConnectionLine);
             input.Node.Reset();
+        }
+
+        private bool CheckPointerCompatibility(int input, int output)
+        {
+            return input.Equals(output);
         }
     }
 }

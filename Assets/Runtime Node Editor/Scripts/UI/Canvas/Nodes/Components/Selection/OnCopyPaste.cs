@@ -27,7 +27,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Components
 
         private static void Paste(NodeUIManager nodeUIManager, ConnectionLines connectionLines)
         {
-            if (CopiedNodeIsNull)
+            /*if (CopiedNodeIsNull)
                 return;
 
             NodeUI copiedNodeUI = _copiedNode.GetComponent<NodeUI>();
@@ -45,7 +45,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Components
                 Delete(_copiedNode);
                 _currentNode = newNode;
                 Copy(false);
-            }
+            }*/
         }
     }
 }

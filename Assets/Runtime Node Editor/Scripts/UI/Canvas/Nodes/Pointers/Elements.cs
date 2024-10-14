@@ -1,6 +1,4 @@
-﻿using RuntimeNodeEditor.Nodes.Pointer.Data;
-using RuntimeNodeEditor.Nodes.Pointer.Value;
-using RuntimeNodeEditor.Functions.UI.Component;
+﻿using RuntimeNodeEditor.Functions.UI.Component;
 using RuntimeNodeEditor.UI.Elements;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,11 +8,11 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Pointer
 {
     internal static partial class UIPointers
     {
-        private static void AddImage(GameObject uiElement, ValueType valueType, Texture2D texture)
+        private static void AddImage(GameObject uiElement, Texture2D texture, Color color)
         {
             UIImage.Create(
                 uiElement,
-                PointerColor.PickColor(valueType)
+                color
                 );
             UIImage.AssignTexture(
                 uiElement,

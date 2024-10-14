@@ -1,12 +1,11 @@
 using RuntimeNodeEditor.UI.Elements;
-using RuntimeNodeEditor.Nodes.Pointer.Value;
 using UnityEngine;
 
 namespace RuntimeNodeEditor.UI.Canvas.Nodes.Pointer
 {
     internal static partial class UIPointers
     {
-        internal static GameObject CreatePointer(string name, GameObject parent, ValueType valueType, Texture2D texture, int layer, bool pointerIsInput = false, bool createText = false)
+        internal static GameObject CreatePointer(string name, GameObject parent, Color color, Texture2D texture, int layer, bool pointerIsInput = false, bool createText = false)
         {
             GameObject uiElement = UIElement.Create(
                 parent.transform,
@@ -17,7 +16,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Pointer
                     pointerIsInput,
                     layer));
 
-            AddImage(uiElement, valueType, texture);
+            AddImage(uiElement, texture, color);
 
             if (createText)
             {

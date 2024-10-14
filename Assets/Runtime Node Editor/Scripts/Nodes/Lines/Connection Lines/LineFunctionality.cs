@@ -1,6 +1,5 @@
 ﻿using RuntimeNodeEditor.Data;
 using RuntimeNodeEditor.Nodes.Line;
-using RuntimeNodeEditor.Nodes.Pointer.Data;
 using RuntimeNodeEditor.Nodes.Pointer;
 using UnityEngine;
 
@@ -34,7 +33,7 @@ namespace RuntimeNodeEditor.Nodes.Lines
 
         private void Create(OutputPointer output)
         {
-            sourceMaterial.color = PointerColor.PickColor(output.ValueType);
+            sourceMaterial.color = Color.white;// PointerColor.PickColor(output.ValueTypeIndex);
 
             _currentConnectionLine = new ConnectionLine(sourceMaterial, new Vector3(_mousePos.x, _mousePos.y, 100.0f))
             {

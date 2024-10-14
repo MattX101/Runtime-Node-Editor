@@ -2,10 +2,11 @@
     "name": "RuntimeNodeEditor.UI.Canvas.Node.UI",
     "rootNamespace": "",
     "references": [
-        "GUID:6055be8ebefd69e48b49212b09b47b2f",
         "GUID:971907e042dcd334289fba405f52b119",
         "GUID:dc71d4e70a7f5154196ea46513c5d4f2",
-        "GUID:d1ee122f8b413e9468c3b95bf5ed794d"
+        "GUID:d1ee122f8b413e9468c3b95bf5ed794d",
+        "GUID:6055be8ebefd69e48b49212b09b47b2f",
+        "GUID:c7160f775647e1e47b95897417aa1652"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
