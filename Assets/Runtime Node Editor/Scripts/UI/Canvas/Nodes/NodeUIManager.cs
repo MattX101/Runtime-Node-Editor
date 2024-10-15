@@ -1,9 +1,9 @@
-using RuntimeNodeEditor.UI.Canvas.Nodes.Components;
-using RuntimeNodeEditor.Node.Lines;
+using RuntimeNodeEditor.UI.Canvas.Node.Components;
+using RuntimeNodeEditor.Node.Connection.Lines;
 using RuntimeNodeEditor.Input;
 using UnityEngine;
 
-namespace RuntimeNodeEditor.UI.Canvas.Nodes
+namespace RuntimeNodeEditor.UI.Canvas.Node
 {
     internal class NodeUIManager : MonoBehaviour
     {
@@ -24,7 +24,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes
             Pan.Reset();
             Zoom.Reset();
 
-            foreach (RuntimeNodeEditor.Node.Node.Node node in GetComponentsInChildren<RuntimeNodeEditor.Node.Node.Node>())
+            foreach (RuntimeNodeEditor.Node.Node node in GetComponentsInChildren<RuntimeNodeEditor.Node.Node>())
                 Selection.Delete(node, true);
         }
     }

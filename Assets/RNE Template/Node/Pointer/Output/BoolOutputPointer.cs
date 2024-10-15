@@ -6,7 +6,7 @@ namespace RNE.Template.Node.Pointer
     {
         public bool value = false;
 
-        public BoolOutputPointer(RuntimeNodeEditor.Node.Node.Node node) : base(node) { }
+        public BoolOutputPointer(RuntimeNodeEditor.Node.Node node) : base(node) { }
 
         protected override void ResetPointer()
         {

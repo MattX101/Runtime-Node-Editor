@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
+namespace RuntimeNodeEditor.UI.Canvas.Node
 {
     public partial class NodeUI
     {

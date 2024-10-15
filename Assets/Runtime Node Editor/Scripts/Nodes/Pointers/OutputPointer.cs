@@ -1,5 +1,5 @@
 using RuntimeNodeEditor.Data;
-using RuntimeNodeEditor.Node.Line;
+using RuntimeNodeEditor.Node.Connection.Line;
 using System.Collections.Generic;
 
 namespace RuntimeNodeEditor.Node.Pointer
@@ -18,7 +18,7 @@ namespace RuntimeNodeEditor.Node.Pointer
             private set;
         }
 
-        public OutputPointer(Node.Node node) : base(node) { }
+        public OutputPointer(Node node) : base(node) { }
 
         private void Update()
         {

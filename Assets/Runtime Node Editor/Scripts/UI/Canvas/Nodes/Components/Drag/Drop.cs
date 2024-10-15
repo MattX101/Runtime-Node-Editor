@@ -1,6 +1,6 @@
 ﻿using RuntimeNodeEditor.Data;
 
-namespace RuntimeNodeEditor.UI.Canvas.Nodes.Components
+namespace RuntimeNodeEditor.UI.Canvas.Node.Components
 {
     internal static partial class Drag
     {

@@ -4,7 +4,7 @@ namespace RuntimeNodeEditor.Node.Pointer
 {
     public class Pointer : MonoBehaviour
     {
-        public Node.Node Node
+        public Node Node
         {
             get;
             private set;
@@ -16,12 +16,12 @@ namespace RuntimeNodeEditor.Node.Pointer
             private set;
         }
 
-        public Pointer(Node.Node node)
+        public Pointer(Node node)
         {
             Node = node;
         }
 
-        internal void AddInputPointer(Node.Node node, InputPointer input, int valueTypeIndex)
+        internal void AddInputPointer(Node node, InputPointer input, int valueTypeIndex)
         {
             Node = node;
             ValueTypeIndex = valueTypeIndex;
@@ -29,7 +29,7 @@ namespace RuntimeNodeEditor.Node.Pointer
             node.inputs.Add(input);
         }
 
-        internal void AddOutputPointer(Node.Node node, OutputPointer output, int valueTypeIndex)
+        internal void AddOutputPointer(Node node, OutputPointer output, int valueTypeIndex)
         {
             Node = node;
             ValueTypeIndex = valueTypeIndex;

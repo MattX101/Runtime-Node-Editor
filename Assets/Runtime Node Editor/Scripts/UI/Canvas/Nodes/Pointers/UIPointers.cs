@@ -1,7 +1,7 @@
 using RuntimeNodeEditor.UI.Canvas.Node.UI;
 using UnityEngine;
 
-namespace RuntimeNodeEditor.UI.Canvas.Nodes.Pointer
+namespace RuntimeNodeEditor.UI.Canvas.Node.Pointer
 {
     internal static partial class UIPointers
     {

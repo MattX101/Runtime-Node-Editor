@@ -1,10 +1,10 @@
 using RuntimeNodeEditor.Data;
 using RuntimeNodeEditor.Input;
-using RuntimeNodeEditor.Node.Line;
-using RuntimeNodeEditor.Node.Lines.Data;
+using RuntimeNodeEditor.Node.Connection.Line;
+using RuntimeNodeEditor.Node.Connection.Data;
 using UnityEngine;
 
-namespace RuntimeNodeEditor.Node.Lines
+namespace RuntimeNodeEditor.Node.Connection.Lines
 {
     public partial class ConnectionLines : MonoBehaviour
     {

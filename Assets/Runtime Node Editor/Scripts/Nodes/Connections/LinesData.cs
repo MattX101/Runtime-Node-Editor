@@ -1,10 +1,10 @@
 using RuntimeNodeEditor.Data;
-using RuntimeNodeEditor.Node.Line;
+using RuntimeNodeEditor.Node.Connection.Line;
 using RuntimeNodeEditor.Node.Pointer;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace RuntimeNodeEditor.Node.Lines.Data
+namespace RuntimeNodeEditor.Node.Connection.Data
 {
     internal static class LinesData
     {

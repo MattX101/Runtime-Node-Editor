@@ -1,7 +1,7 @@
 ﻿using RuntimeNodeEditor.Data;
 using UnityEngine;
 
-namespace RuntimeNodeEditor.Node.Line
+namespace RuntimeNodeEditor.Node.Connection.Line
 {
     internal partial class ConnectionLine
     {

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace RNE.Template.Node
 {
-    public class ColorInputNode : RuntimeNodeEditor.Node.Node.Node
+    public class ColorInputNode : RuntimeNodeEditor.Node.Node
     {
         protected override void CodeToExecute()
         {

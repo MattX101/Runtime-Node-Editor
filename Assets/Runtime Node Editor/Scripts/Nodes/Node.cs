@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace RuntimeNodeEditor.Node.Node
+namespace RuntimeNodeEditor.Node
 {
     public class Node : MonoBehaviour
     {

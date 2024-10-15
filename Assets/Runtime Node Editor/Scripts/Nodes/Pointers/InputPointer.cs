@@ -1,4 +1,4 @@
-using RuntimeNodeEditor.Node.Line;
+using RuntimeNodeEditor.Node.Connection.Line;
 
 namespace RuntimeNodeEditor.Node.Pointer
 {
@@ -22,7 +22,7 @@ namespace RuntimeNodeEditor.Node.Pointer
             private set;
         }
 
-        public InputPointer(Node.Node node) : base(node) { }
+        public InputPointer(Node node) : base(node) { }
 
         internal void SetLineToNull()
         {

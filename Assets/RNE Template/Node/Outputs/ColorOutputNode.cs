@@ -3,7 +3,7 @@ using RuntimeNodeEditor.Node.UIFunctions.Component;
 
 namespace RNE.Template.Node
 {
-    public class ColorOutputNode : RuntimeNodeEditor.Node.Node.Node
+    public class ColorOutputNode : RuntimeNodeEditor.Node.Node
     {
         public ImagePreview ImagePreview;
 

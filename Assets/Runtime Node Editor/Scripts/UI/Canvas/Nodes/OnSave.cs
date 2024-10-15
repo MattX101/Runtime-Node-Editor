@@ -1,10 +1,10 @@
-using RuntimeNodeEditor.UI.Canvas.Nodes.Node;
+using RuntimeNodeEditor.UI.Canvas.Node;
 using RuntimeNodeEditor.Node.Pointer;
 using UnityEngine;
 using System;
 using System.Collections.Generic;
 
-namespace RuntimeNodeEditor.UI.Canvas.Nodes.Save
+namespace RuntimeNodeEditor.UI.Canvas.Node.Save
 {
     public static class OnSave
     {
@@ -12,7 +12,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Save
         {
             List<byte> bytes = new();
 
-            RuntimeNodeEditor.Node.Node.Node[] nodes = nodesObject.GetComponentsInChildren<RuntimeNodeEditor.Node.Node.Node>();
+            RuntimeNodeEditor.Node.Node[] nodes = nodesObject.GetComponentsInChildren<RuntimeNodeEditor.Node.Node>();
 
             if (nodes == null)
             {
@@ -25,7 +25,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Save
             bytes.Add(numOfNodes[2]);
             bytes.Add(numOfNodes[3]);
 
-            foreach (RuntimeNodeEditor.Node.Node.Node node in nodes)
+            foreach (RuntimeNodeEditor.Node.Node node in nodes)
             {
                 bytes.AddRange(node.gameObject.GetComponent<NodeUI>().SaveNodeUI());
 
@@ -42,7 +42,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Save
             return bytes.ToArray();
         }
 
-        private static byte[] SaveNodeConnections(RuntimeNodeEditor.Node.Node.Node[] nodes)
+        private static byte[] SaveNodeConnections(RuntimeNodeEditor.Node.Node[] nodes)
         {
             List<byte> bytes = new List<byte>();
 
@@ -75,7 +75,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Save
             return bytes.ToArray();
         }
 
-        private static void SaveOutput(List<byte> bytes, RuntimeNodeEditor.Node.Node.Node[] nodes, int nodeIndex, OutputPointer outputPointer, int inputPointerIndex)
+        private static void SaveOutput(List<byte> bytes, RuntimeNodeEditor.Node.Node[] nodes, int nodeIndex, OutputPointer outputPointer, int inputPointerIndex)
         {
             if (outputPointer == null)
                 return;
@@ -102,7 +102,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Save
             bytes.Add((byte)connectedOutputIndex);
         }
 
-        private static int FindNode(RuntimeNodeEditor.Node.Node.Node[] nodes, RuntimeNodeEditor.Node.Node.Node nodeToFind)
+        private static int FindNode(RuntimeNodeEditor.Node.Node[] nodes, RuntimeNodeEditor.Node.Node nodeToFind)
         {
             for (int i = 0; i < nodes.Length; i++)
             {
@@ -113,7 +113,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Save
             return -1;
         }
 
-        private static int FindPointer(RuntimeNodeEditor.Node.Node.Node[] nodes, int nodeIndex, OutputPointer pointerToFind)
+        private static int FindPointer(RuntimeNodeEditor.Node.Node[] nodes, int nodeIndex, OutputPointer pointerToFind)
         {
             for (int i = 0; i < nodes[nodeIndex].outputs.Count; i++)
             {

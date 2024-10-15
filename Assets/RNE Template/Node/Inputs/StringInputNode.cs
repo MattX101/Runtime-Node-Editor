@@ -2,7 +2,7 @@ using RNE.Template.Node.Pointer;
 
 namespace RNE.Template.Node
 {
-    public class StringInputNode : RuntimeNodeEditor.Node.Node.Node
+    public class StringInputNode : RuntimeNodeEditor.Node.Node
     {
         protected override void CodeToExecute()
         {

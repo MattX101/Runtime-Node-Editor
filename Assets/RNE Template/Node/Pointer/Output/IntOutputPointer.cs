@@ -6,7 +6,7 @@ namespace RNE.Template.Node.Pointer
     {
         public int value = 0;
 
-        public IntOutputPointer(RuntimeNodeEditor.Node.Node.Node node) : base(node) { }
+        public IntOutputPointer(RuntimeNodeEditor.Node.Node node) : base(node) { }
 
         protected override void ResetPointer()
         {

@@ -3,7 +3,7 @@ using RNE.Template.Node.Pointer;
 using RNE.Template.Node.Pointer.Data;
 using RNE.Template.Node.Pointer.Value;
 using RuntimeNodeEditor.Node.UIFunctions.Elements;
-using RuntimeNodeEditor.UI.Canvas.Nodes.Node;
+using RuntimeNodeEditor.UI.Canvas.Node;
 using TMPro;
 
 namespace RNE.Template.UI.Node

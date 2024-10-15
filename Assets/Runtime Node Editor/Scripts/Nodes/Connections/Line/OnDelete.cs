@@ -1,8 +1,8 @@
-﻿using RuntimeNodeEditor.Node.Lines.Data;
+﻿using RuntimeNodeEditor.Node.Connection.Data;
 using RuntimeNodeEditor.Node.Pointer;
 using UnityEngine;
 
-namespace RuntimeNodeEditor.Node.Line
+namespace RuntimeNodeEditor.Node.Connection.Line
 {
     internal partial class ConnectionLine
     {

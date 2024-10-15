@@ -1,8 +1,8 @@
-﻿namespace RuntimeNodeEditor.Node.Lines
+﻿namespace RuntimeNodeEditor.Node.Connection.Lines
 {
     public partial class ConnectionLines
     {
-        public void Paste(Node.Node copiedNode, Node.Node newNode)
+        public void Paste(Node copiedNode, Node newNode)
         {
             if (copiedNode.inputs.Count == 0)
                 return;

@@ -7,7 +7,7 @@ namespace RNE.Template.Node.Pointer
     {
         public Vector2 value = Vector2.zero;
 
-        public Vector2OutputPointer(RuntimeNodeEditor.Node.Node.Node node) : base(node) { }
+        public Vector2OutputPointer(RuntimeNodeEditor.Node.Node node) : base(node) { }
 
         protected override void ResetPointer()
         {

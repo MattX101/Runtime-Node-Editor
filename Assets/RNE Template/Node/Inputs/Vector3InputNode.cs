@@ -5,7 +5,7 @@ using TMPro;
 
 namespace RNE.Template.Node
 {
-    public class Vector3InputNode : RuntimeNodeEditor.Node.Node.Node
+    public class Vector3InputNode : RuntimeNodeEditor.Node.Node
     {
         protected override void CodeToExecute()
         {

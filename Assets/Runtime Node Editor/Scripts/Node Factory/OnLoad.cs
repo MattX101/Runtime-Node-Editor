@@ -1,5 +1,5 @@
 using RuntimeNodeEditor.Factory.Data;
-using RuntimeNodeEditor.UI.Canvas.Nodes.Node;
+using RuntimeNodeEditor.UI.Canvas.Node;
 
 namespace RuntimeNodeEditor.Factory
 {
@@ -8,7 +8,7 @@ namespace RuntimeNodeEditor.Factory
         public static void Load(LoadData data)
         {
             NodeUI nodeUI = Factory.CreateNode(data.ID, data.Position);
-            Node.Node.Node node = nodeUI.gameObject.GetComponent<Node.Node.Node>();
+            Node.Node node = nodeUI.gameObject.GetComponent<Node.Node>();
 
             if (node.Elements == null)
                 return;

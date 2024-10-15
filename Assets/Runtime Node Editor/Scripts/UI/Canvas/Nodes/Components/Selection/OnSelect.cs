@@ -1,10 +1,10 @@
-using RuntimeNodeEditor.UI.Canvas.Nodes.Node;
+using RuntimeNodeEditor.UI.Canvas.Node;
 
-namespace RuntimeNodeEditor.UI.Canvas.Nodes.Components
+namespace RuntimeNodeEditor.UI.Canvas.Node.Components
 {
     internal static partial class Selection
     {
-        private static void Select(RuntimeNodeEditor.Node.Node.Node node)
+        private static void Select(RuntimeNodeEditor.Node.Node node)
         {
             if (!CurrentNodeIsNull)
             {

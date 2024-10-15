@@ -2,7 +2,7 @@
 using UnityEngine;
 using TMPro;
 
-namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
+namespace RuntimeNodeEditor.UI.Canvas.Node
 {
     public partial class NodeUI
     {

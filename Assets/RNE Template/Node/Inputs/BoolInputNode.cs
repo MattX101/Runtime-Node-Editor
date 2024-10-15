@@ -2,7 +2,7 @@ using RNE.Template.Node.Pointer;
 
 namespace RNE.Template.Node
 {
-    public class BoolInputNode : RuntimeNodeEditor.Node.Node.Node
+    public class BoolInputNode : RuntimeNodeEditor.Node.Node
     {
         protected override void CodeToExecute()
         {

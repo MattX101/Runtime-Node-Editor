@@ -6,7 +6,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.UI
 {
     public static class UIDropdown
     {
-        public static RuntimeNodeEditor.Node.UIFunctions.Component.Dropdown Create(GameObject root, RuntimeNodeEditor.Node.Node.Node node, string[] elements, string defualt)
+        public static RuntimeNodeEditor.Node.UIFunctions.Component.Dropdown Create(GameObject root, RuntimeNodeEditor.Node.Node node, string[] elements, string defualt)
         {
             float width = UISettings.NodeWidth * 0.8f - (UISettings.BorderSize * 2);
             float height = UISettings.PointerSize * elements.Length + UISettings.BorderSize;
@@ -60,7 +60,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.UI
             return dropdown;
         }
 
-        private static void AddOption(GameObject parent, RuntimeNodeEditor.Node.UIFunctions.Component.Dropdown dropdown, string text, float posY, float width, int i, RuntimeNodeEditor.Node.Node.Node node)
+        private static void AddOption(GameObject parent, RuntimeNodeEditor.Node.UIFunctions.Component.Dropdown dropdown, string text, float posY, float width, int i, RuntimeNodeEditor.Node.Node node)
         {
             // Toggle
             GameObject optionObject = UIElement.Create(parent.transform, "Option - " + text, new Vector2(width, UISettings.PointerSize), new Vector3(0, posY, 0));

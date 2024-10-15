@@ -1,13 +1,12 @@
-using RuntimeNodeEditor.UI.Canvas.Nodes.Node;
-using RuntimeNodeEditor.Node.Lines;
+using RuntimeNodeEditor.Node.Connection.Lines;
 
-namespace RuntimeNodeEditor.UI.Canvas.Nodes.Components
+namespace RuntimeNodeEditor.UI.Canvas.Node.Components
 {
     internal static partial class Selection
     {
         private static bool _currentCopyIsCut;
 
-        private static RuntimeNodeEditor.Node.Node.Node _copiedNode;
+        private static RuntimeNodeEditor.Node.Node _copiedNode;
         private static bool CopiedNodeIsNull
         {
             get

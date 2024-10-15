@@ -7,7 +7,7 @@ namespace RNE.Template.Node.Pointer
     {
         public Color value = Color.black;
 
-        public ColorOutputPointer(RuntimeNodeEditor.Node.Node.Node node) : base(node) { }
+        public ColorOutputPointer(RuntimeNodeEditor.Node.Node node) : base(node) { }
 
         protected override void ResetPointer()
         {

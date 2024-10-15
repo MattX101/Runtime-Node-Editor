@@ -1,11 +1,11 @@
 ﻿using RuntimeNodeEditor.Data;
 using UnityEngine;
 
-namespace RuntimeNodeEditor.UI.Canvas.Nodes.Components
+namespace RuntimeNodeEditor.UI.Canvas.Node.Components
 {
     internal static partial class Selection
     {
-        internal static void Delete(RuntimeNodeEditor.Node.Node.Node node, bool ignoreChecks = false)
+        internal static void Delete(RuntimeNodeEditor.Node.Node node, bool ignoreChecks = false)
         {
             if (!ignoreChecks)
             {

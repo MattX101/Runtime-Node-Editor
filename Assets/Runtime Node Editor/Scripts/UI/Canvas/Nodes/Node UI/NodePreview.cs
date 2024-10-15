@@ -3,7 +3,7 @@ using RuntimeNodeEditor.UI.Canvas.Node.UI;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace RuntimeNodeEditor.UI.Canvas.Nodes.Node
+namespace RuntimeNodeEditor.UI.Canvas.Node
 {
     public partial class NodeUI
     {

@@ -1,4 +1,4 @@
-using RuntimeNodeEditor.UI.Canvas.Nodes.Node;
+using RuntimeNodeEditor.UI.Canvas.Node;
 using UnityEngine;
 
 namespace RuntimeNodeEditor.Factory

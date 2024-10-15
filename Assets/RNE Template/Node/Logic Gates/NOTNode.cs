@@ -3,7 +3,7 @@ using RNE.Template.Node.Pointer.Value;
 
 namespace RNE.Template.Node
 {
-    public class NOTNode : RuntimeNodeEditor.Node.Node.Node
+    public class NOTNode : RuntimeNodeEditor.Node.Node
     {
         protected override void CodeToExecute()
         {

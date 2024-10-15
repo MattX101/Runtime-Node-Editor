@@ -2,11 +2,11 @@
 using UnityEngine;
 using TMPro;
 
-namespace RuntimeNodeEditor.UI.Canvas.Nodes.Pointer
+namespace RuntimeNodeEditor.UI.Canvas.Node.Pointer
 {
     internal static partial class UIPointers
     {
-        internal static TMP_InputField AddInputField(RuntimeNodeEditor.Node.Node.Node node, Transform parent, TMP_InputField.ContentType contentType, bool pointerIsInput = false, bool interactable = true, bool shorten = false, int layer = 0)
+        internal static TMP_InputField AddInputField(RuntimeNodeEditor.Node.Node node, Transform parent, TMP_InputField.ContentType contentType, bool pointerIsInput = false, bool interactable = true, bool shorten = false, int layer = 0)
         {
             float posX = UISettings.NodeWidth / 2;
             posX += UISettings.PointerSize / 4;
@@ -21,7 +21,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Pointer
             return inputField;
         }
 
-        internal static TMP_InputField AddHalfInputField(RuntimeNodeEditor.Node.Node.Node node, Transform parent, TMP_InputField.ContentType contentType, bool pointerIsInput = false, bool interactable = true, bool shorten = false, int layer = 0)
+        internal static TMP_InputField AddHalfInputField(RuntimeNodeEditor.Node.Node node, Transform parent, TMP_InputField.ContentType contentType, bool pointerIsInput = false, bool interactable = true, bool shorten = false, int layer = 0)
         {
             float posX = UISettings.NodeWidth / 4;
             posX += UISettings.PointerSize / 4;
@@ -34,7 +34,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Pointer
             return inputField;
         }
 
-        private static TMP_InputField AddInputFieldOfType(RuntimeNodeEditor.Node.Node.Node node, TMP_InputField.ContentType contentType, Transform parent, bool interactable, bool shorten, bool halfSize = false)
+        private static TMP_InputField AddInputFieldOfType(RuntimeNodeEditor.Node.Node node, TMP_InputField.ContentType contentType, Transform parent, bool interactable, bool shorten, bool halfSize = false)
         {
             TMP_InputField inputField = null;
 

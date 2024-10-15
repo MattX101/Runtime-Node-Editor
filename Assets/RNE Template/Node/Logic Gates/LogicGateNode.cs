@@ -3,7 +3,7 @@ using RNE.Template.Node.Pointer.Value;
 
 namespace RNE.Template.Node
 {
-    public class LogicGateNode : RuntimeNodeEditor.Node.Node.Node
+    public class LogicGateNode : RuntimeNodeEditor.Node.Node
     {
         public readonly string[] gates =
         {

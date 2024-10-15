@@ -6,7 +6,7 @@ namespace RNE.Template.Node.Pointer
     {
         public char value = ' ';
 
-        public CharOutputPointer(RuntimeNodeEditor.Node.Node.Node node) : base(node) { }
+        public CharOutputPointer(RuntimeNodeEditor.Node.Node node) : base(node) { }
 
         protected override void ResetPointer()
         {

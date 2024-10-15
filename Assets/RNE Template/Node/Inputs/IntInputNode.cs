@@ -3,7 +3,7 @@ using RuntimeNodeEditor.Node.UIFunctions.Component;
 
 namespace RNE.Template.Node
 {
-    public class IntInputNode : RuntimeNodeEditor.Node.Node.Node
+    public class IntInputNode : RuntimeNodeEditor.Node.Node
     {
         protected override void CodeToExecute()
         {

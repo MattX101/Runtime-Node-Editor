@@ -1,9 +1,9 @@
 ﻿using RuntimeNodeEditor.Data;
 using RuntimeNodeEditor.Input;
-using RuntimeNodeEditor.UI.Canvas.Nodes.Node;
+using RuntimeNodeEditor.UI.Canvas.Node;
 using UnityEngine;
 
-namespace RuntimeNodeEditor.UI.Canvas.Nodes.Components
+namespace RuntimeNodeEditor.UI.Canvas.Node.Components
 {
     internal static partial class Drag
     {
@@ -76,7 +76,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Components
             if (!hit.collider)
                 return null;
 
-            if (!hit.collider.gameObject.TryGetComponent(out RuntimeNodeEditor.Node.Node.Node node))
+            if (!hit.collider.gameObject.TryGetComponent(out RuntimeNodeEditor.Node.Node node))
                 return null;
 
             return node.gameObject.GetComponent<NodeUI>();

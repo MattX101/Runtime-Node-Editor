@@ -15,7 +15,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.UI
             return inputField;
         }
 
-        public static void AddOnValueChange(TMP_InputField inputField, RuntimeNodeEditor.Node.Node.Node node)
+        public static void AddOnValueChange(TMP_InputField inputField, RuntimeNodeEditor.Node.Node node)
         {
             inputField.onValueChanged.AddListener(
                 delegate

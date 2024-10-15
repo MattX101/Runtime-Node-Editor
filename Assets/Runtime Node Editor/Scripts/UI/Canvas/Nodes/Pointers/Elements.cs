@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-namespace RuntimeNodeEditor.UI.Canvas.Nodes.Pointer
+namespace RuntimeNodeEditor.UI.Canvas.Node.Pointer
 {
     internal static partial class UIPointers
     {
@@ -37,7 +37,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Nodes.Pointer
                 isInput ? TextAlignmentOptions.Left : TextAlignmentOptions.Right);
         }
 
-        internal static BooleanButton AddBooleanPreview(RuntimeNodeEditor.Node.Node.Node node, Transform parent, bool pointerIsInput = false, bool interactable = false)
+        internal static BooleanButton AddBooleanPreview(RuntimeNodeEditor.Node.Node node, Transform parent, bool pointerIsInput = false, bool interactable = false)
         {
             BooleanButton button = UIBooleanPreview.Create(parent, interactable);
             UIBooleanPreview.AddOnValueChange(button.Button, node);

@@ -1,5 +1,5 @@
 using RuntimeNodeEditor.Node.UIFunctions.Elements;
-using RuntimeNodeEditor.UI.Canvas.Nodes.Node;
+using RuntimeNodeEditor.UI.Canvas.Node;
 using RNE.Template.Node;
 using RNE.Template.Node.Pointer.Data;
 using RNE.Template.Node.Pointer.Value;

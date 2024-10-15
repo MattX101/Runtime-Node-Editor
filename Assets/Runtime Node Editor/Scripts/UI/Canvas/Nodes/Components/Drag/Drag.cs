@@ -1,9 +1,9 @@
-using RuntimeNodeEditor.UI.Canvas.Nodes.Node;
+using RuntimeNodeEditor.UI.Canvas.Node;
 using RuntimeNodeEditor.Data;
 using RuntimeNodeEditor.Input;
 using UnityEngine;
 
-namespace RuntimeNodeEditor.UI.Canvas.Nodes.Components
+namespace RuntimeNodeEditor.UI.Canvas.Node.Components
 {
     internal static partial class Drag
     {

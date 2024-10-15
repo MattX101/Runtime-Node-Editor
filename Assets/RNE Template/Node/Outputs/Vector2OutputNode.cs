@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace RNE.Template.Node
 {
-    public class Vector2OutputNode : RuntimeNodeEditor.Node.Node.Node
+    public class Vector2OutputNode : RuntimeNodeEditor.Node.Node
     {
         protected override void CodeToExecute()
         {

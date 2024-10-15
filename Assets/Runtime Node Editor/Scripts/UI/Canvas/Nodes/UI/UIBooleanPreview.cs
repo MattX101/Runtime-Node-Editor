@@ -16,7 +16,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.UI
                 interactable);
         }
 
-        public static void AddOnValueChange(Button button, RuntimeNodeEditor.Node.Node.Node node)
+        public static void AddOnValueChange(Button button, RuntimeNodeEditor.Node.Node node)
         {
             button.onClick.AddListener(
                 delegate
