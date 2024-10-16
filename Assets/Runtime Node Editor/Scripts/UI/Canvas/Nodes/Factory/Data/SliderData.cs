@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace RuntimeNodeEditor.Factory.Data
+namespace RuntimeNodeEditor.UI.Canvas.Node.Factory.Data
 {
     public partial class LoadData
     {

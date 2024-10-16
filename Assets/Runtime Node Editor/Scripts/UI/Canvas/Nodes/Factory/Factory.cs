@@ -1,10 +1,9 @@
-using RuntimeNodeEditor.UI.Canvas.Node;
 using Utils.StringParameterExtractor;
 using UnityEngine;
 using System;
 using System.Reflection;
 
-namespace RuntimeNodeEditor.Factory
+namespace RuntimeNodeEditor.UI.Canvas.Node.Factory
 {
     internal static class Factory
     {

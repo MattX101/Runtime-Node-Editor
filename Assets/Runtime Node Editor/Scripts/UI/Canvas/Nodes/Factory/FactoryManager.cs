@@ -1,7 +1,6 @@
-using RuntimeNodeEditor.UI.Canvas.Node;
 using UnityEngine;
 
-namespace RuntimeNodeEditor.Factory
+namespace RuntimeNodeEditor.UI.Canvas.Node.Factory
 {
     public class FactoryManager : MonoBehaviour
     {
@@ -25,7 +24,7 @@ namespace RuntimeNodeEditor.Factory
 
         private void InitSpawnDrag(NodeUI nodeUI)
         {
-            UI.Canvas.Node.Components.Drag.InitSpawnDrag(nodeUI);
+            Components.Drag.InitSpawnDrag(nodeUI);
         }
     }
 }

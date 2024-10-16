@@ -1,8 +1,8 @@
 ﻿using RuntimeNodeEditor.Node.Connection.Lines;
 using RuntimeNodeEditor.Node;
 using RuntimeNodeEditor.Input;
-using RuntimeNodeEditor.Factory;
-using RuntimeNodeEditor.Factory.Data;
+using RuntimeNodeEditor.UI.Canvas.Node.Factory;
+using RuntimeNodeEditor.UI.Canvas.Node.Factory.Data;
 using UnityEngine;
 using System;
 using System.IO;
