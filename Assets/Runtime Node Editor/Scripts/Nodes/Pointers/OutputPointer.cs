@@ -1,6 +1,7 @@
 using RuntimeNodeEditor.Data;
 using RuntimeNodeEditor.Node.Connection.Line;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace RuntimeNodeEditor.Node.Pointer
 {
@@ -67,11 +68,22 @@ namespace RuntimeNodeEditor.Node.Pointer
         {
             Lines ??= new List<ConnectionLine>();
             Lines.Add(connectionLine);
+
+            SetLineMaterial();
         }
 
         internal void RemoveLine(ConnectionLine connectionLine)
         {
             Lines.Remove(connectionLine);
+        }
+
+        private void SetLineMaterial()
+        {
+            Lines[Lines.Count - 1].SetMaterial(GetLineColor());
+        }
+        protected virtual Color GetLineColor()
+        {
+            return Color.black;
         }
     }
 }

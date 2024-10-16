@@ -35,9 +35,13 @@ namespace RuntimeNodeEditor.Node.Connection.Data
                 return;
 
             if (raycast.collider.TryGetComponent(out OutputPointer output))
+            {
                 DeleteOutputConnections(output);
+            }
             else if (raycast.collider.TryGetComponent(out InputPointer input))
+            {
                 DeleteInputConnection(input);
+            }
         }
 
         private static void DeleteOutputConnections(OutputPointer output)

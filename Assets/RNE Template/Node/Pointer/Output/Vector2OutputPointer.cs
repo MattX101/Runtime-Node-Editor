@@ -13,5 +13,10 @@ namespace RNE.Template.Node.Pointer
         {
             value = Vector2.zero;
         }
+
+        protected override Color GetLineColor()
+        {
+            return Data.Colors.Vector2;
+        }
     }
 }
