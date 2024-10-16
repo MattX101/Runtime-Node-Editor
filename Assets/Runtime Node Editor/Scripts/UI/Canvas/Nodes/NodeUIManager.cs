@@ -11,6 +11,9 @@ namespace RuntimeNodeEditor.UI.Canvas.Node
 
         [SerializeField] private ConnectionLines connectionLines;
 
+        [SerializeField] private Factory.FactoryManager factoryManager;
+        internal Factory.FactoryManager FactoryManager => factoryManager;
+
         [SerializeField] private GameObject nodesObject;
 
         private void Update()

@@ -1,11 +1,10 @@
-using RuntimeNodeEditor.UI.Canvas.Node;
 using RuntimeNodeEditor.Data;
 using RuntimeNodeEditor.Input;
 using UnityEngine;
 
 namespace RuntimeNodeEditor.UI.Canvas.Node.Components
 {
-    internal static partial class Drag
+    public static partial class Drag
     {
         private static NodeUI _hover;
         private static NodeUI _selectedNodeUI;
@@ -38,7 +37,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.Components
             }
         }
 
-        internal static void InitSpawnDrag(NodeUI nodeUI)
+        public static void InitSpawnDrag(NodeUI nodeUI)
         {
             _selectedNodeUI = nodeUI;
             _dragOnSpawn = true;

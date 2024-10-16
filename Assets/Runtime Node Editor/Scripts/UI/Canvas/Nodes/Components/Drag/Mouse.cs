@@ -1,11 +1,10 @@
 ﻿using RuntimeNodeEditor.Data;
 using RuntimeNodeEditor.Input;
-using RuntimeNodeEditor.UI.Canvas.Node;
 using UnityEngine;
 
 namespace RuntimeNodeEditor.UI.Canvas.Node.Components
 {
-    internal static partial class Drag
+    public static partial class Drag
     {
         private static void OnClick()
         {

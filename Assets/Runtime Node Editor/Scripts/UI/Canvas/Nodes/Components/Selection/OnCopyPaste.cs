@@ -26,13 +26,13 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.Components
 
         private static void Paste(NodeUIManager nodeUIManager, ConnectionLines connectionLines)
         {
-            /*if (CopiedNodeIsNull)
+            if (CopiedNodeIsNull)
                 return;
 
             NodeUI copiedNodeUI = _copiedNode.GetComponent<NodeUI>();
-            NodeUI newNodeUI = nodeUIManager.SpawnWithReturn(copiedNodeUI.NodeId, copiedNodeUI.RootPosition);
+            NodeUI newNodeUI = nodeUIManager.FactoryManager.SpawnWithReturn(copiedNodeUI.NodeId, copiedNodeUI.RootPosition);
 
-            RuntimeNodeEditor.Node.Node.Node newNode = newNodeUI.root.GetComponent<RuntimeNodeEditor.Node.Node.Node>();
+            RuntimeNodeEditor.Node.Node newNode = newNodeUI.root.GetComponent<RuntimeNodeEditor.Node.Node>();
 
             if (newNode.Elements != null)
                 newNode.Elements.SetElements(_copiedNode.Elements);
@@ -44,7 +44,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.Components
                 Delete(_copiedNode);
                 _currentNode = newNode;
                 Copy(false);
-            }*/
+            }
         }
     }
 }

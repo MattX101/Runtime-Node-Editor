@@ -2,7 +2,7 @@
 
 namespace RuntimeNodeEditor.UI.Canvas.Node.Components
 {
-    internal static partial class Drag
+    public static partial class Drag
     {
         private static void ValidateDrop()
         {

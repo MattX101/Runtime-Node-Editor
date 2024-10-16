@@ -9761,6 +9761,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parent: {fileID: 1777772064}
   connectionLines: {fileID: 1777772067}
+  factoryManager: {fileID: 1777772069}
   nodesObject: {fileID: 1777772063}
 --- !u!114 &1777772067
 MonoBehaviour:
