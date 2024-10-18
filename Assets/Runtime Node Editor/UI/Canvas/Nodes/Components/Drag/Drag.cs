@@ -6,6 +6,8 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.Components
 {
     public static partial class Drag
     {
+        private const int _modulate = 32;
+
         private static NodeUI _hover;
         private static NodeUI _selectedNodeUI;
 
@@ -57,10 +59,15 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.Components
 
         private static void DragNode()
         {
-            _selectedNodeUI.RootPosition = 
-                (Vector3)MouseController.MousePositionRelativeToCenter 
-                - _distanceFromMouseToNodeCenter 
-                - Pan.PositionFromOriginZoomed;
+            Vector3 position =
+                    (Vector3)MouseController.MousePositionRelativeToCenter
+                    - _distanceFromMouseToNodeCenter
+                    - Pan.PositionFromOriginZoomed;
+
+            _selectedNodeUI.RootPosition = new Vector3(
+                position.x - (position.x % _modulate),
+                position.y - (position.y % _modulate),
+                position.z);
         }
     }
 }
