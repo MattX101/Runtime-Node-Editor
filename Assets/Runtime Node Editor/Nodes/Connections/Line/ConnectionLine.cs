@@ -10,13 +10,14 @@ namespace RuntimeNodeEditor.Node.Connection.Line
         private Vector3 _startPosition;
         private Vector3 _endPosition;
 
-        internal ConnectionLine(Material material, Vector3 start)
+        internal ConnectionLine(Transform parent, Material material, Vector3 start)
         {
             _lineObject = new GameObject
             {
                 transform =
                 {
-                    name = "Line"
+                    name = "Line",
+                    parent = parent
                 }
             };
 

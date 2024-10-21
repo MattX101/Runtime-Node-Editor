@@ -4803,6 +4803,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 845c8ca4f7bc3534fbe1e66a94e9185b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _linesParent: {fileID: 1135406250}
   sourceMaterial: {fileID: 2100000, guid: c7c12c2b7a8a5e94da7da553c6500f31, type: 2}
 --- !u!114 &1777772068
 MonoBehaviour:

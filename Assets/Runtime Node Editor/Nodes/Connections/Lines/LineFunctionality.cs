@@ -9,6 +9,9 @@ namespace RuntimeNodeEditor.Node.Connection.Lines
     {
         private OutputPointer _currentOutputPointer;
 
+        [SerializeField]
+        private Transform _linesParent;
+
         [SerializeField] 
         private Material sourceMaterial;
 
@@ -33,7 +36,7 @@ namespace RuntimeNodeEditor.Node.Connection.Lines
 
         private void Create(OutputPointer output)
         {
-            _currentConnectionLine = new ConnectionLine(sourceMaterial, new Vector3(_mousePos.x, _mousePos.y, 100.0f))
+            _currentConnectionLine = new ConnectionLine(_linesParent, sourceMaterial, new Vector3(_mousePos.x, _mousePos.y, 100.0f))
             {
                 Output = output
             };
