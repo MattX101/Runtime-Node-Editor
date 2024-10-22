@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace RuntimeNodeEditor.UI.Canvas.Node
 {
-    internal class NodeUIManager : MonoBehaviour
+    public class NodeUIManager : MonoBehaviour
     {
         [SerializeField] private Transform parent;
 

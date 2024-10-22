@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace RuntimeNodeEditor.UI.Tooltip.Window
 {
-    internal class Window : MonoBehaviour
+    public class Window : MonoBehaviour
     {
         [SerializeField] 
         protected GameObject window;

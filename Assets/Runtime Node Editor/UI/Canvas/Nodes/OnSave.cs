@@ -1,4 +1,3 @@
-using RuntimeNodeEditor.UI.Canvas.Node;
 using RuntimeNodeEditor.Node.Pointer;
 using UnityEngine;
 using System;

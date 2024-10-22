@@ -17,8 +17,21 @@ namespace RNE.Template.Save
         [SerializeField]
         private NodeExecution nodeExecution;
 
+        [SerializeField]
+        private RuntimeNodeEditor.UI.Tooltip.Window.OnOpenWindow onOpenWindow;
+
+        // TODO - Fix On Open bug
         public void Load()
         {
+            Node[] nodes = nodesObject.GetComponentsInChildren<Node>();
+
+            if (nodes.Length > 0)
+            {
+                onOpenWindow.Create();
+
+                return;
+            }
+
             string path = _iOSelection.SelectFile(SaveExtension);
 
             if (path == null)
@@ -37,7 +50,7 @@ namespace RNE.Template.Save
             LoadPan(ref position, data);
 
             LoadNodes(ref position, data);
-            Node[] nodes = nodesObject.GetComponentsInChildren<Node>();
+            nodes = nodesObject.GetComponentsInChildren<Node>();
 
             LoadConnections(ref position, nodes, data);
 

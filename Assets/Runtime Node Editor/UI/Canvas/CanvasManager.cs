@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace RuntimeNodeEditor.UI.Canvas
 {
-    internal class CanvasManager : MonoBehaviour
+    public class CanvasManager : MonoBehaviour
     {
         [SerializeField] private Color cameraBackgroundColour;
 
