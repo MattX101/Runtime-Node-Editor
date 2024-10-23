@@ -1,6 +1,6 @@
 ﻿namespace RuntimeNodeEditor.UI.Tooltip.Window
 {
-    public class OnOpenWindow : Window
+    public class OnCanvasClearWindow : Window
     {
         private Canvas.CanvasManager canvasManager;
         private Canvas.Node.NodeUIManager nodeUIManager;
@@ -11,11 +11,20 @@
             nodeUIManager = FindObjectOfType<Canvas.Node.NodeUIManager>();
         }
 
+        public void Clear()
+        {
+            if (canvasManager == null)
+                canvasManager = FindObjectOfType<Canvas.CanvasManager>();
+            canvasManager.Reset();
+
+            if (nodeUIManager == null)
+                nodeUIManager = FindObjectOfType<Canvas.Node.NodeUIManager>();
+            nodeUIManager.Reset();
+        }
+
         public void ClearCanvas()
         {
-            canvasManager.Reset();
-            nodeUIManager.Reset();
-
+            Clear();
             Close();
         }
     }
