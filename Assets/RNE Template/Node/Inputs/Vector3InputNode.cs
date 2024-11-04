@@ -9,15 +9,15 @@ namespace RNE.Template.Node
     {
         protected override void CodeToExecute()
         {
-            outputs[0].GetComponent<Vector3OutputPointer>().value = Vector3.zero;
+            Outputs[0].GetComponent<Vector3OutputPointer>().Value = Vector3.zero;
 
             TMP_InputField xField = Elements.InputFields[0];
             if (xField.text.Length != 0)
             {
                 float x = InputFieldToFloat.Get(xField.text);
 
-                outputs[1].GetComponent<FloatOutputPointer>().value = x;
-                outputs[0].GetComponent<Vector3OutputPointer>().value.x = x;
+                Outputs[1].GetComponent<FloatOutputPointer>().Value = x;
+                Outputs[0].GetComponent<Vector3OutputPointer>().Value.x = x;
             }
 
             TMP_InputField yField = Elements.InputFields[1];
@@ -25,8 +25,8 @@ namespace RNE.Template.Node
             {
                 float y = InputFieldToFloat.Get(yField.text);
 
-                outputs[2].GetComponent<FloatOutputPointer>().value = y;
-                outputs[0].GetComponent<Vector3OutputPointer>().value.y = y;
+                Outputs[2].GetComponent<FloatOutputPointer>().Value = y;
+                Outputs[0].GetComponent<Vector3OutputPointer>().Value.y = y;
             }
 
             TMP_InputField zField = Elements.InputFields[2];
@@ -34,14 +34,14 @@ namespace RNE.Template.Node
             {
                 float z = InputFieldToFloat.Get(zField.text);
 
-                outputs[3].GetComponent<FloatOutputPointer>().value = z;
-                outputs[0].GetComponent<Vector3OutputPointer>().value.z = z;
+                Outputs[3].GetComponent<FloatOutputPointer>().Value = z;
+                Outputs[0].GetComponent<Vector3OutputPointer>().Value.z = z;
             }
         }
 
         protected override void CodeToReset()
         {
-            outputs[0].GetComponent<Vector3OutputPointer>().Reset();
+            Outputs[0].GetComponent<Vector3OutputPointer>().Reset();
         }
     }
 }

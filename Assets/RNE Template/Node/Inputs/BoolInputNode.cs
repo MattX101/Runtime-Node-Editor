@@ -6,12 +6,12 @@ namespace RNE.Template.Node
     {
         protected override void CodeToExecute()
         {
-            outputs[0].GetComponent<BoolOutputPointer>().value = Elements.Buttons[0].Toggled;
+            Outputs[0].GetComponent<BoolOutputPointer>().Value = Elements.Buttons[0].Toggled;
         }
 
         protected override void CodeToReset()
         {
-            outputs[0].GetComponent<BoolOutputPointer>().Reset();
+            Outputs[0].GetComponent<BoolOutputPointer>().Reset();
         }
     }
 }

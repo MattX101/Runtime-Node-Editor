@@ -15,11 +15,9 @@ namespace RNE.Template.UI.Node
             InitBase(nodeId);
 
             PopulateRoot("String");
-            StringInputNode node = root.AddComponent<StringInputNode>();
+            StringInputNode node = RootObject.AddComponent<StringInputNode>();
 
             NumOfOutputs = 1;
-
-            drawBodyImage = false;
 
             CreateNodeUI(node, NodeColor.Default, "String");
 
@@ -29,7 +27,7 @@ namespace RNE.Template.UI.Node
             {
                 InputFields =
                 {
-                    [0] = AddInputField(node, node.outputs[0].gameObject.transform, TMP_InputField.ContentType.Standard)
+                    [0] = AddInputField(node, node.Outputs[0].gameObject.transform, TMP_InputField.ContentType.Standard)
                 }
             };
         }

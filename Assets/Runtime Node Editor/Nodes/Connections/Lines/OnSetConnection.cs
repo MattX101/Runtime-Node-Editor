@@ -6,19 +6,19 @@ namespace RuntimeNodeEditor.Node.Connection.Lines
 {
     public partial class ConnectionLines
     {
-        private void SetInputConnection(InputPointer input, OutputPointer output, ConnectionLine line)
+        private void SetInputConnection(InputPointer Input, OutputPointer Output, ConnectionLine line)
         {
-            input.SetConnection(output, line);
+            Input.SetConnection(Output, line);
         }
 
-        private void SetConnection(InputPointer input, OutputPointer output)
+        private void SetConnection(InputPointer Input, OutputPointer Output)
         {
-            output.AddConnection(input);
-            Create(output);
+            Output.AddConnection(Input);
+            Create(Output);
 
-            SetInputConnection(input, output, _currentConnectionLine);
+            SetInputConnection(Input, Output, _currentConnectionLine);
 
-            _currentConnectionLine.Input = input;
+            _currentConnectionLine.Input = Input;
             LinesData.Add(_currentConnectionLine);
         }
     }

@@ -22,7 +22,7 @@
 
             for (int i = 0; i < Booleans.Length; i++, index++)
             {
-                Booleans[i] = data[index] == 1 ? true : false;
+                Booleans[i] = data[index] == 1;
             }
 
             return index;

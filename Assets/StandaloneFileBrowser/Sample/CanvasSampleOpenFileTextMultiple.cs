@@ -9,7 +9,7 @@ using SFB;
 
 [RequireComponent(typeof(Button))]
 public class CanvasSampleOpenFileTextMultiple : MonoBehaviour, IPointerDownHandler {
-    public Text output;
+    public Text Output;
 
 #if UNITY_WEBGL && !UNITY_EDITOR
     //
@@ -57,6 +57,6 @@ public class CanvasSampleOpenFileTextMultiple : MonoBehaviour, IPointerDownHandl
             yield return loader;
             outputText += loader.text;
         }
-        output.text = outputText;
+        Output.text = outputText;
     }
 }

@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 namespace RuntimeNodeEditor.Data
 {
-    public static class CanvasData
+    public static partial class GlobalData
     {
         public static Camera Camera
         {
@@ -20,6 +20,7 @@ namespace RuntimeNodeEditor.Data
         public static float ScalerFactor
         {
             get => CanvasScaler.scaleFactor;
+            set => CanvasScaler.scaleFactor = value;
         }
 
         public static Vector2 ScalerResolution
@@ -42,11 +43,6 @@ namespace RuntimeNodeEditor.Data
             {
                 return IsPointing || IsDragging || IsPanning || IsScrolling;
             }
-        }
-
-        public static void SetScaleFactor(float scale)
-        {
-            CanvasScaler.scaleFactor = scale;
         }
     }
 }

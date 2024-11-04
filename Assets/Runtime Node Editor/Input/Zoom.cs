@@ -6,54 +6,54 @@ namespace RuntimeNodeEditor.Input
 {
     public static class Zoom
     {
-        private static float Scale = 1.0f;
-        
+        private static float _scale = 1.0f;
+        private static float _screenScale;
+
         public static void ZoomCanvas()
         {
-            if (CanvasData.IsDragging || CanvasData.IsPointing)
+            if (GlobalData.IsDragging || GlobalData.IsPointing)
                 return;
 
             if (UnityEngine.Input.mouseScrollDelta.y == 0)
             {
-                CanvasData.IsScrolling = false;
+                GlobalData.IsScrolling = false;
 
                 return;
             }
-            CanvasData.IsScrolling = true;
-             
-            Scale = Mathf.Clamp(
-                Scale + UnityEngine.Input.GetAxis("Mouse ScrollWheel"), 
-                0.1f * ScreenScale.Scale, 
-                2.0f * ScreenScale.Scale
+            GlobalData.IsScrolling = true;
+
+            _screenScale = GlobalData.Camera.pixelWidth / 1000.0f;
+            _scale = Mathf.Clamp(
+                _scale + UnityEngine.Input.GetAxis("Mouse ScrollWheel"), 
+                0.1f * _screenScale, 
+                2.0f * _screenScale
                 );
+
             SetScaler();
         }
 
         private static void SetScaler()
         {
-            CanvasData.SetScaleFactor(Scale);
+            GlobalData.ScalerFactor = _scale;
         }
 
         public static void Reset()
         {
-            CanvasData.IsScrolling = false;
+            GlobalData.IsScrolling = false;
+            GlobalData.ScalerFactor = 1.0f;
 
-            CanvasData.SetScaleFactor(1.0f);
-            Scale = 1.0f;
+            _scale = 1.0f;
         }
 
         public static byte[] Save()
         {
-            return BitConverter.GetBytes(Scale);
+            return BitConverter.GetBytes(_scale);
         }
 
-        public static int Load(float scale)
+        public static void Load(float scale)
         {
-            Scale = scale;
-
+            _scale = scale;
             SetScaler();
-
-            return 4;
         }
     }
 }

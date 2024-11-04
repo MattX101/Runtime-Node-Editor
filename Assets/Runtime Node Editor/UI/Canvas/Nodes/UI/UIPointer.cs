@@ -7,27 +7,35 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.UI
 {
     public class UIPointer : MonoBehaviour
     {
-        public string nodeTitle;
-        public TextMeshPro header;
+        private string _nodeTitle;
+        private TextMeshPro _header;
 
-        public RawImage image;
-        public Color color;
+        private RawImage _image;
+        private Color _color;
+
+        public void Init(string title, TextMeshPro text, RawImage image, Color color)
+        {
+            _nodeTitle = title;
+            _header = text;
+            _image = image;
+            _color = color;
+        }
 
         private void OnMouseOver()
         {
-            header.text = gameObject.name;
-            header.fontStyle = FontStyles.Normal;
+            _header.text = gameObject.name;
+            _header.fontStyle = FontStyles.Normal;
 
-            Vector3 hsl = ColourConversion.RGBToHSL(color);
-            image.color = ColourConversion.HSLToRGB(hsl.x, hsl.y * 0.75f, hsl.z * 1.5f);
+            Vector3 hsl = ColourConversion.RGBToHSL(_color);
+            _image.color = ColourConversion.HSLToRGB(hsl.x, hsl.y * 0.75f, hsl.z * 1.5f);
         }
 
         private void OnMouseExit()
         {
-            header.text = nodeTitle;
-            header.fontStyle = FontStyles.Bold;
+            _header.text = _nodeTitle;
+            _header.fontStyle = FontStyles.Bold;
 
-            image.color = color;
+            _image.color = _color;
         }
     }
 }

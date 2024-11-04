@@ -1,9 +1,10 @@
 using RNE.Template.Node.Pointer.Value;
+using RuntimeNodeEditor.Node;
 using RuntimeNodeEditor.Node.UIFunctions.Component;
 
 namespace RNE.Template.Node
 {
-    public class ColorOutputNode : RuntimeNodeEditor.Node.Node
+    public class ColorOutputNode : EndNode
     {
         public ImagePreview ImagePreview;
 
@@ -14,7 +15,7 @@ namespace RNE.Template.Node
 
         protected override void DataToGetAndSet()
         {
-            ImagePreview.Image.color = PointerValue.GetColor(inputs[0]);
+            ImagePreview.Image.color = PointerValue.GetColor(Inputs[0]);
         }
     }
 }

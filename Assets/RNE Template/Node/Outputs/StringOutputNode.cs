@@ -1,8 +1,9 @@
 using RNE.Template.Node.Pointer.Value;
+using RuntimeNodeEditor.Node;
 
 namespace RNE.Template.Node
 {
-    public class StringOutputNode : RuntimeNodeEditor.Node.Node
+    public class StringOutputNode : EndNode
     {
         protected override void CodeToExecute()
         {
@@ -11,7 +12,7 @@ namespace RNE.Template.Node
 
         protected override void DataToGetAndSet()
         {
-            Elements.SetInputField(Elements.InputFields[0], PointerValue.GetString(inputs[0]));
+            Elements.SetInputField(Elements.InputFields[0], PointerValue.GetString(Inputs[0]));
         }
     }
 }

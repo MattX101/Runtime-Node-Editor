@@ -6,11 +6,11 @@ namespace RuntimeNodeEditor.UI.Tooltip.Window
     public class Window : MonoBehaviour
     {
         [SerializeField] 
-        protected GameObject window;
+        protected GameObject WindowObject;
         
         public void Create()
         {
-            if (CanvasData.NodesCanvasIsActive || UISettings.WindowSpawnParent.childCount != 0)
+            if (GlobalData.NodesCanvasIsActive || UISettings.WindowSpawnParent.childCount != 0)
                 return;
 
             Manage(true);
@@ -23,20 +23,24 @@ namespace RuntimeNodeEditor.UI.Tooltip.Window
 
         private void Manage(bool openWindow)
         {
-            if (openWindow) 
-                Instantiate(window, UISettings.WindowSpawnParent);
-            else 
+            if (openWindow)
+            {
+                Instantiate(WindowObject, UISettings.WindowSpawnParent);
+            }
+            else
+            {
                 Destroy(gameObject);
+            }
 
             Toggle();
 
-            UIData.WindowOpened = openWindow;
+            GlobalData.WindowOpened = openWindow;
         }
 
         private void Toggle()
         {
-            LinkToTooltip.TooltipManager.ToggleButtons(!UIData.WindowOpened);
-            UIData.NodeUIPanel.SetActive(UIData.WindowOpened);
+            LinkToTooltip.TooltipManager.ToggleButtons(!GlobalData.WindowOpened);
+            GlobalData.NodeUIPanel.SetActive(GlobalData.WindowOpened);
         }
     }
 }

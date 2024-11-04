@@ -15,12 +15,12 @@ namespace RuntimeNodeEditor.Input
 
         public static void PanBackgroundGrid(float width, float height)
         {
-            if (CanvasData.IsDragging || CanvasData.IsPointing)
+            if (GlobalData.IsDragging || GlobalData.IsPointing)
                 return;
 
             Vector2 viewportMousePos = MouseController.MouseViewportPosition * 2 - Vector2.one;
 
-            if (!CanvasData.IsPanning)
+            if (!GlobalData.IsPanning)
             {
                 _lastSavedViewportMousePos = viewportMousePos;
 
@@ -29,18 +29,16 @@ namespace RuntimeNodeEditor.Input
 
             ViewportPosition +=
                 (viewportMousePos - _lastSavedViewportMousePos) *
-                CanvasData.Camera.orthographicSize *
+                GlobalData.Camera.orthographicSize *
                 new Vector2(width, height) /
-                (CanvasData.Camera.orthographicSize * 2);
+                (GlobalData.Camera.orthographicSize * 2);
 
             _lastSavedViewportMousePos = viewportMousePos;
         }
 
-        public static int LoadPositionFromOrigin(float x, float y)
+        public static void LoadViewportPan(float x, float y)
         {
             _positionFromOriginZoomed = new Vector3(x, y, 0);
-
-            return 8;
         }
     }
 }

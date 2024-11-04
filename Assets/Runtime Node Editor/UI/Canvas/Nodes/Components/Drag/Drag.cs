@@ -6,7 +6,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.Components
 {
     public static partial class Drag
     {
-        private const int _modulate = 32;
+        private const int ModulateBy = 32;
 
         private static NodeUI _hover;
         private static NodeUI _selectedNodeUI;
@@ -17,7 +17,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.Components
 
         internal static void ManageDrag()
         {
-            if (UIData.TabOrWindowOpened)
+            if (GlobalData.TabOrWindowOpened)
                 return;
 
             if (_dragOnSpawn)
@@ -32,7 +32,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.Components
                 OnHover();
                 OnHoverLeave();
 
-                if (_selectedNodeUI && CanvasData.IsDragging)
+                if (_selectedNodeUI && GlobalData.IsDragging)
                 {
                     DragNode();
                 }
@@ -44,7 +44,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.Components
             _selectedNodeUI = nodeUI;
             _dragOnSpawn = true;
 
-            CanvasData.IsDragging = true;
+            GlobalData.IsDragging = true;
         }
 
         private static void SpawnDrag()
@@ -60,13 +60,13 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.Components
         private static void DragNode()
         {
             Vector3 position =
-                    (Vector3)MouseController.MousePositionRelativeToCenter
-                    - _distanceFromMouseToNodeCenter
-                    - Pan.PositionFromOriginZoomed;
+                (Vector3)MouseController.MousePositionRelativeToCenter
+                - _distanceFromMouseToNodeCenter
+                - Pan.PositionFromOriginZoomed;
 
             _selectedNodeUI.RootPosition = new Vector3(
-                position.x - (position.x % _modulate),
-                position.y - (position.y % _modulate),
+                position.x - (position.x % ModulateBy),
+                position.y - (position.y % ModulateBy),
                 position.z);
         }
     }

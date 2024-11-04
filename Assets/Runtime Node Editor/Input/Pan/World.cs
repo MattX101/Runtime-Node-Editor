@@ -10,24 +10,24 @@ namespace RuntimeNodeEditor.Input
         private static Vector3 _positionFromOriginZoomed;
         public static Vector3 PositionFromOriginZoomed
         {
-            get => _positionFromOriginZoomed / CanvasData.ScalerFactor;
+            get => _positionFromOriginZoomed / GlobalData.ScalerFactor;
         }
 
         public static void PanNodesCanvas()
         {
-            if (CanvasData.IsDragging || CanvasData.IsPointing)
+            if (GlobalData.IsDragging || GlobalData.IsPointing)
                 return;
 
             Vector2 mousePos = MouseController.MouseWorldPosition;
 
             if (!UnityEngine.Input.GetMouseButton(1))
             {
-                CanvasData.IsPanning = false;
+                GlobalData.IsPanning = false;
                 _lastSavedWorldMousePos = mousePos;
 
                 return;
             }
-            CanvasData.IsPanning = true;
+            GlobalData.IsPanning = true;
 
             CalculateWorldPan(
                 Mathf.Clamp(mousePos.x - _lastSavedWorldMousePos.x, -1, 1),
@@ -36,11 +36,9 @@ namespace RuntimeNodeEditor.Input
             _lastSavedWorldMousePos = mousePos;
         }
 
-        public static int LoadNodesRectPosition(float x, float y)
+        public static void LoadWorldPan(float x, float y)
         {
             CalculateWorldPan(x, y);
-
-            return 8;
         }
 
         private static void CalculateWorldPan(float x, float y)
@@ -51,10 +49,10 @@ namespace RuntimeNodeEditor.Input
                 NodesRectPosition.z);
 
             _positionFromOriginZoomed = new Vector3(
-                CanvasData.Camera.pixelWidth / 2,
-                CanvasData.Camera.pixelHeight / 2,
+                GlobalData.Camera.pixelWidth / 2,
+                GlobalData.Camera.pixelHeight / 2,
                 0);
-            _positionFromOriginZoomed -= CanvasData.Camera.WorldToScreenPoint(-NodesRectPosition);
+            _positionFromOriginZoomed -= GlobalData.Camera.WorldToScreenPoint(-NodesRectPosition);
         }
     }
 }

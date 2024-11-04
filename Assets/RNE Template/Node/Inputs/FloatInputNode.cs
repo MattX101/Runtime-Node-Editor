@@ -7,7 +7,7 @@ namespace RNE.Template.Node
     {
         protected override void CodeToExecute()
         {
-            outputs[0].GetComponent<FloatOutputPointer>().value =
+            Outputs[0].GetComponent<FloatOutputPointer>().Value =
                 Elements.InputFields[0].text.Length != 0
                 ? InputFieldToFloat.Get(Elements.InputFields[0].text)
                 : 0.0f;
@@ -15,7 +15,7 @@ namespace RNE.Template.Node
 
         protected override void CodeToReset()
         {
-            outputs[0].GetComponent<FloatOutputPointer>().Reset();
+            Outputs[0].GetComponent<FloatOutputPointer>().Reset();
         }
     }
 }

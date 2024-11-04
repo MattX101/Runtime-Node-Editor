@@ -4,15 +4,15 @@
     {
         public void Paste(Node copiedNode, Node newNode)
         {
-            if (copiedNode.inputs.Count == 0)
+            if (copiedNode.Inputs.Count == 0)
                 return;
 
-            for (int i = 0; i < copiedNode.inputs.Count; i++)
+            for (int i = 0; i < copiedNode.Inputs.Count; i++)
             {
-                if (!copiedNode.inputs[i].ConnectedOutputPointer)
+                if (!copiedNode.Inputs[i].ConnectedOutputPointer)
                     continue;
 
-                SetConnection(newNode.inputs[i], copiedNode.inputs[i].ConnectedOutputPointer);
+                SetConnection(newNode.Inputs[i], copiedNode.Inputs[i].ConnectedOutputPointer);
             }
 
             _currentConnectionLine = null;

@@ -16,12 +16,11 @@ namespace RNE.Template.UI.Node
             InitBase(StringParameterExtractor.ExtractBase(nodeId));
 
             PopulateRoot("Color");
-            ColorInputNode node = root.AddComponent<ColorInputNode>();
+            ColorInputNode node = RootObject.AddComponent<ColorInputNode>();
 
             NumOfOutputs = 4;
 
-            drawBodyImage = false;
-            togglePreviewImage = true;
+            TogglePreviewImage = true;
 
             CreateNodeUI(node, NodeColor.Default, "Color");
 
@@ -35,14 +34,14 @@ namespace RNE.Template.UI.Node
             {
                 Sliders =
                 {
-                    [0] = AddIntegerSlider(node.outputs[1].transform, Color.red, 255),
-                    [1] = AddIntegerSlider(node.outputs[2].transform, Color.green, 255),
-                    [2] = AddIntegerSlider(node.outputs[3].transform, Color.blue, 255)
+                    [0] = AddIntegerSlider(node.Outputs[1].transform, Color.red, 255),
+                    [1] = AddIntegerSlider(node.Outputs[2].transform, Color.green, 255),
+                    [2] = AddIntegerSlider(node.Outputs[3].transform, Color.blue, 255)
                 }
             };
 
             PreviewColor(node.Elements.Sliders[0], node.Elements.Sliders[1], node.Elements.Sliders[2]);
-            
+
             ImagePreview.UpdateNodeOnValueChange(node.Elements.Sliders[0], node.OnValueChangeReset);
             ImagePreview.UpdateNodeOnValueChange(node.Elements.Sliders[1], node.OnValueChangeReset);
             ImagePreview.UpdateNodeOnValueChange(node.Elements.Sliders[2], node.OnValueChangeReset);

@@ -19,7 +19,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.Components
             _selectedNodeUI.BlockRaycasts(true);
 
             _dragOnSpawn = false;
-            CanvasData.IsDragging = false;
+            GlobalData.IsDragging = false;
 
             _selectedNodeUI = null;
         }

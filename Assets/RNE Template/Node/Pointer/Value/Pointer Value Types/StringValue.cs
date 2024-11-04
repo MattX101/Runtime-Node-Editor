@@ -4,31 +4,31 @@ namespace RNE.Template.Node.Pointer.Value
 {
     public static partial class PointerValue
     {
-        public static string GetString(OutputPointer output)
+        public static string GetString(OutputPointer Output)
         {
-            return output.ValueTypeIndex switch
+            return Output.ValueTypeIndex switch
             {
-                (int)ValueType.String => output.GetComponent<StringOutputPointer>().value,
-                (int)ValueType.Int => output.GetComponent<IntOutputPointer>().value.ToString(),
-                (int)ValueType.Float => output.GetComponent<FloatOutputPointer>().value.ToString(),
-                (int)ValueType.Bool => output.GetComponent<BoolOutputPointer>().value.ToString(),
-                (int)ValueType.Char => output.GetComponent<CharOutputPointer>().value.ToString(),
+                (int)ValueType.String => Output.GetComponent<StringOutputPointer>().Value,
+                (int)ValueType.Int => Output.GetComponent<IntOutputPointer>().Value.ToString(),
+                (int)ValueType.Float => Output.GetComponent<FloatOutputPointer>().Value.ToString(),
+                (int)ValueType.Bool => Output.GetComponent<BoolOutputPointer>().Value.ToString(),
+                (int)ValueType.Char => Output.GetComponent<CharOutputPointer>().Value.ToString(),
                 _ => ""
             };
         }
-        public static string GetString(InputPointer input)
+        public static string GetString(InputPointer Input)
         {
             return 
-                IsValid(input) ? 
-                GetString(input.ConnectedOutputPointer) : 
+                IsValid(Input) ? 
+                GetString(Input.ConnectedOutputPointer) : 
                 "";
         }
 
-        public static void GetString(InputPointer input, ref string value)
+        public static void GetString(InputPointer Input, ref string value)
         {
             value = 
-                IsValid(input) ? 
-                GetString(input.ConnectedOutputPointer) : 
+                IsValid(Input) ? 
+                GetString(Input.ConnectedOutputPointer) : 
                 value;
         }
     }

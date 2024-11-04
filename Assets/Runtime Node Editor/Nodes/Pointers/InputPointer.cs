@@ -22,16 +22,19 @@ namespace RuntimeNodeEditor.Node.Pointer
             private set;
         }
 
-        public InputPointer(Node node) : base(node) { }
+        public InputPointer(Node node) : base(node)
+        {
+            //
+        }
 
         internal void SetLineToNull()
         {
             Line = null;
         }
 
-        internal void SetConnection(OutputPointer output, ConnectionLine line)
+        internal void SetConnection(OutputPointer Output, ConnectionLine line)
         {
-            ConnectedOutputPointer = output;
+            ConnectedOutputPointer = Output;
             HasConnection = true;
 
             Line = line;

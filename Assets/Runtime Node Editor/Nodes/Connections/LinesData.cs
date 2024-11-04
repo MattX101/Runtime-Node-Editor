@@ -8,54 +8,62 @@ namespace RuntimeNodeEditor.Node.Connection.Data
 {
     internal static class LinesData
     {
-        private static readonly List<ConnectionLine> DroppedLines = new();
-        internal static ConnectionLine[] DroppedLinesArray => DroppedLines.ToArray();
+        private static readonly List<ConnectionLine> _droppedLines = new();
+        internal static ConnectionLine[] DroppedLinesArray
+        {
+            get
+            {
+                return _droppedLines.ToArray();
+            }
+        }
 
         internal static bool NotNullOrEmpty
         {
             get
             {
-                return DroppedLines.Count <= 0;
+                return _droppedLines.Count <= 0;
             }
         }
 
         internal static void Add(ConnectionLine line)
         {
-            DroppedLines.Add(line);
+            _droppedLines.Add(line);
         }
 
         internal static void Remove(ConnectionLine line) 
-        { 
-            DroppedLines.Remove(line); 
+        {
+            _droppedLines.Remove(line); 
         }
 
         internal static void DeletePointerConnectionsOnClick(RaycastHit2D raycast)
         {
-            if (!raycast.collider || CanvasData.IsPointing)
+            if (!raycast.collider || GlobalData.IsPointing)
                 return;
 
-            if (raycast.collider.TryGetComponent(out OutputPointer output))
+            if (raycast.collider.TryGetComponent(out OutputPointer Output))
             {
-                DeleteOutputConnections(output);
+                DeleteOutputConnections(Output);
             }
-            else if (raycast.collider.TryGetComponent(out InputPointer input))
+            else if (raycast.collider.TryGetComponent(out InputPointer Input))
             {
-                DeleteInputConnection(input);
+                DeleteInputConnection(Input);
             }
         }
 
-        private static void DeleteOutputConnections(OutputPointer output)
+        private static void DeleteOutputConnections(OutputPointer Output)
         {
-            foreach (ConnectionLine line in output.Lines)
+            foreach (ConnectionLine line in Output.Lines)
+            {
                 Remove(line);
+            }
 
-            output.DeleteConnections();
+            Output.DeleteConnections();
         }
 
-        private static void DeleteInputConnection(InputPointer input)
+        private static void DeleteInputConnection(InputPointer Input)
         {
-            Remove(input.Line);
-            input.DeleteConnection();
+            Remove(Input.Line);
+            Input.DeleteConnection();
         }
     }
 }

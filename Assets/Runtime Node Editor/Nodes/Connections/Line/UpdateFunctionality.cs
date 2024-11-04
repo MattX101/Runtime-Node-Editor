@@ -9,8 +9,8 @@ namespace RuntimeNodeEditor.Node.Connection.Line
 
         internal void UpdateWidth()
         {
-            _lineRenderer.startWidth = LineWidth * CanvasData.ScalerFactor;
-            _lineRenderer.endWidth = LineWidth * CanvasData.ScalerFactor;
+            _lineRenderer.startWidth = LineWidth * GlobalData.ScalerFactor;
+            _lineRenderer.endWidth = LineWidth * GlobalData.ScalerFactor;
         }
 
         internal void UpdateDraggingLine(Vector3 endPosition)

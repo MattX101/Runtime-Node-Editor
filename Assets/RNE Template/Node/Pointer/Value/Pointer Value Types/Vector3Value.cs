@@ -5,30 +5,30 @@ namespace RNE.Template.Node.Pointer.Value
 {
     public static partial class PointerValue
     {
-        public static Vector3 GetVector3(OutputPointer output)
+        public static Vector3 GetVector3(OutputPointer Output)
         {
-            return output.ValueTypeIndex switch
+            return Output.ValueTypeIndex switch
             {
-                (int)ValueType.Vector3 => output.GetComponent<Vector3OutputPointer>().value,
-                (int)ValueType.Int => new Vector3(output.GetComponent<IntOutputPointer>().value, output.GetComponent<IntOutputPointer>().value, output.GetComponent<IntOutputPointer>().value),
-                (int)ValueType.Float => new Vector3(output.GetComponent<FloatOutputPointer>().value, output.GetComponent<FloatOutputPointer>().value, output.GetComponent<FloatOutputPointer>().value),
-                (int)ValueType.Vector2 => new Vector3(output.GetComponent<Vector2OutputPointer>().value.x, output.GetComponent<Vector2OutputPointer>().value.y, 0),
+                (int)ValueType.Vector3 => Output.GetComponent<Vector3OutputPointer>().Value,
+                (int)ValueType.Int => new Vector3(Output.GetComponent<IntOutputPointer>().Value, Output.GetComponent<IntOutputPointer>().Value, Output.GetComponent<IntOutputPointer>().Value),
+                (int)ValueType.Float => new Vector3(Output.GetComponent<FloatOutputPointer>().Value, Output.GetComponent<FloatOutputPointer>().Value, Output.GetComponent<FloatOutputPointer>().Value),
+                (int)ValueType.Vector2 => new Vector3(Output.GetComponent<Vector2OutputPointer>().Value.x, Output.GetComponent<Vector2OutputPointer>().Value.y, 0),
                 _ => Vector3.zero
             };
         }
-        public static Vector3 GetVector3(InputPointer input)
+        public static Vector3 GetVector3(InputPointer Input)
         {
             return 
-                IsValid(input) ? 
-                GetVector3(input.ConnectedOutputPointer) : 
+                IsValid(Input) ? 
+                GetVector3(Input.ConnectedOutputPointer) : 
                 Vector3.zero;
         }
 
-        public static void GetVector3(InputPointer input, ref Vector3 value)
+        public static void GetVector3(InputPointer Input, ref Vector3 value)
         {
             value = 
-                IsValid(input) ? 
-                GetVector3(input.ConnectedOutputPointer) : 
+                IsValid(Input) ? 
+                GetVector3(Input.ConnectedOutputPointer) : 
                 value;
         }
     }

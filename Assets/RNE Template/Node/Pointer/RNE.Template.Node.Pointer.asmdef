@@ -1,6 +1,6 @@
 {
     "name": "RNE.Template.Node.Pointer",
-    "rootNamespace": "",
+    "rootNamespace": "RNE.Template.Node.Pointer",
     "references": [
         "GUID:971907e042dcd334289fba405f52b119"
     ],

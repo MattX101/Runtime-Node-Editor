@@ -13,13 +13,12 @@ namespace RNE.Template.UI.Node
             InitBase(nodeId);
 
             PopulateRoot("Color");
-            ColorOutputNode node = root.AddComponent<ColorOutputNode>();
-            node.endNode = true;
+            ColorOutputNode node = RootObject.AddComponent<ColorOutputNode>();
+            node.Init();
 
             NumOfInputs = 1;
 
-            drawBodyImage = false;
-            togglePreviewImage = true;
+            TogglePreviewImage = true;
 
             CreateNodeUI(node, NodeColor.Default, "Color");
             node.ImagePreview = ImagePreview;

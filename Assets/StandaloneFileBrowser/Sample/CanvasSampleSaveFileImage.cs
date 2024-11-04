@@ -8,7 +8,7 @@ using SFB;
 
 [RequireComponent(typeof(Button))]
 public class CanvasSampleSaveFileImage : MonoBehaviour, IPointerDownHandler {
-    public Text output;
+    public Text Output;
 
     private byte[] _textureBytes;
 
@@ -41,7 +41,7 @@ public class CanvasSampleSaveFileImage : MonoBehaviour, IPointerDownHandler {
 
     // Called from browser
     public void OnFileDownload() {
-        output.text = "File Successfully Downloaded";
+        Output.text = "File Successfully Downloaded";
     }
 #else
     //

@@ -8,7 +8,7 @@ using SFB;
 
 [RequireComponent(typeof(Button))]
 public class CanvasSampleSaveFileText : MonoBehaviour, IPointerDownHandler {
-    public Text output;
+    public Text Output;
 
     // Sample text data
     private string _data = "Example text created by StandaloneFileBrowser";
@@ -28,7 +28,7 @@ public class CanvasSampleSaveFileText : MonoBehaviour, IPointerDownHandler {
 
     // Called from browser
     public void OnFileDownload() {
-        output.text = "File Successfully Downloaded";
+        Output.text = "File Successfully Downloaded";
     }
 #else
     //

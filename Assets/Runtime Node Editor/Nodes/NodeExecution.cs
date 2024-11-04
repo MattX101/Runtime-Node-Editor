@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -16,11 +15,14 @@ namespace RuntimeNodeEditor.Node
             Debug.Log("Executing nodes!");
 
             foreach (Node node in nodes)
+            {
                 node.ResetExecution();
-
-            List<Node> endNodes = nodes.Where(node => node.endNode).ToList();
-            foreach (Node endNode in endNodes)
+            }
+            
+            foreach (Node endNode in nodes.Where(node => node.EndNode).ToList())
+            {
                 endNode.Execute();
+            }
         }
     }
 }

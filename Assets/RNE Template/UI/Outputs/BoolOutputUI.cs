@@ -14,12 +14,10 @@ namespace RNE.Template.UI.Node
             InitBase(nodeId);
 
             PopulateRoot("Bool");
-            BoolOutputNode node = root.AddComponent<BoolOutputNode>();
-            node.endNode = true;
+            BoolOutputNode node = RootObject.AddComponent<BoolOutputNode>();
+            node.Init();
 
             NumOfInputs = 1;
-
-            drawBodyImage = false;
 
             CreateNodeUI(node, NodeColor.Default, "Bool");
 
@@ -29,7 +27,7 @@ namespace RNE.Template.UI.Node
             {
                 Buttons =
                 {
-                    [0] = AddBooleanPreview(node, node.inputs[0].transform, true)
+                    [0] = AddBooleanPreview(node, node.Inputs[0].transform, true)
                 }
             };
         }

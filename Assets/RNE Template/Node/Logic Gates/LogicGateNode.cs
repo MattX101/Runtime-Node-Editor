@@ -5,7 +5,7 @@ namespace RNE.Template.Node
 {
     public class LogicGateNode : RuntimeNodeEditor.Node.Node
     {
-        public readonly string[] gates =
+        public readonly string[] Gates =
         {
             "AND",
             "OR",
@@ -23,15 +23,15 @@ namespace RNE.Template.Node
 
         protected override void DataToGetAndSet()
         {
-            bool a = PointerValue.GetBool(inputs[0]);
-            bool b = PointerValue.GetBool(inputs[1]);
+            bool a = PointerValue.GetBool(Inputs[0]);
+            bool b = PointerValue.GetBool(Inputs[1]);
 
             Elements.SetBoolean(Elements.Buttons[0], a);
             Elements.SetBoolean(Elements.Buttons[1], b);
 
             bool result = CalcualteGate(a, b);
 
-            outputs[0].GetComponent<BoolOutputPointer>().value = result;
+            Outputs[0].GetComponent<BoolOutputPointer>().Value = result;
             Elements.SetBoolean(Elements.Buttons[2], result);
         }
 
@@ -51,7 +51,7 @@ namespace RNE.Template.Node
 
         protected override void CodeToReset()
         {
-            outputs[0].GetComponent<BoolOutputPointer>().Reset();
+            Outputs[0].GetComponent<BoolOutputPointer>().Reset();
         }
 
         private bool AND(bool a, bool b) => a && b;

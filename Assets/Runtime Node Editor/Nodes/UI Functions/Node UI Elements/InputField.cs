@@ -6,7 +6,10 @@ namespace RuntimeNodeEditor.Node.UIFunctions.Elements
 {
     public partial class NodeUIElements
     {
-        public readonly TMP_InputField[] InputFields;
+        public TMP_InputField[] InputFields
+        {
+            get;
+        }
 
         public void SetInputField(TMP_InputField inputField, string value)
         {

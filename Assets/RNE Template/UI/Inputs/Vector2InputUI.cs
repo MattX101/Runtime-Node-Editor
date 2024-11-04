@@ -15,11 +15,9 @@ namespace RNE.Template.UI.Node
             InitBase(nodeId);
 
             PopulateRoot("Vector 2");
-            Vector2InputNode node = root.AddComponent<Vector2InputNode>();
+            Vector2InputNode node = RootObject.AddComponent<Vector2InputNode>();
 
             NumOfOutputs = 3;
-
-            drawBodyImage = false;
 
             CreateNodeUI(node, NodeColor.Default, "Vector 2");
 
@@ -32,8 +30,8 @@ namespace RNE.Template.UI.Node
             {
                 InputFields =
                 {
-                    [0] = AddInputField(node, node.outputs[1].gameObject.transform, TMP_InputField.ContentType.DecimalNumber),
-                    [1] = AddInputField(node, node.outputs[2].gameObject.transform, TMP_InputField.ContentType.DecimalNumber)
+                    [0] = AddInputField(node, node.Outputs[1].gameObject.transform, TMP_InputField.ContentType.DecimalNumber),
+                    [1] = AddInputField(node, node.Outputs[2].gameObject.transform, TMP_InputField.ContentType.DecimalNumber)
                 }
             };
         }

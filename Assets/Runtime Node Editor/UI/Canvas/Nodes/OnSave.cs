@@ -30,12 +30,18 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.Save
 
                 if (node.Elements == null)
                 {
-                    node.Elements = new RuntimeNodeEditor.Node.UIFunctions.Elements.NodeUIElements();
+                    bytes.Add(0);
+                    bytes.Add(0);
+                    bytes.Add(0);
+                    bytes.Add(0);
                 }
-                
-                bytes.AddRange(node.Elements.Save());
+                else
+                {
+                    bytes.AddRange(node.Elements.Save());
+                }
             }
             
+            // TODO - Saving connections currently cuases an error on load
             bytes.AddRange(SaveNodeConnections(nodes));
 
             return bytes.ToArray();
@@ -55,12 +61,12 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.Save
 
             for (int nodeIndex = 0; nodeIndex < nodes.Length; nodeIndex++)
             {
-                if (nodes[nodeIndex].inputs == null)
+                if (nodes[nodeIndex].Inputs == null)
                     continue;
 
-                for (int inputPointerIndex = 0; inputPointerIndex < nodes[nodeIndex].inputs.Count; inputPointerIndex++)
+                for (int inputPointerIndex = 0; inputPointerIndex < nodes[nodeIndex].Inputs.Count; inputPointerIndex++)
                 {
-                    SaveOutput(bytes, nodes, nodeIndex, nodes[nodeIndex].inputs[inputPointerIndex].ConnectedOutputPointer, inputPointerIndex);
+                    SaveOutput(bytes, nodes, nodeIndex, nodes[nodeIndex].Inputs[inputPointerIndex].ConnectedOutputPointer, inputPointerIndex);
                     count++;
                 }
             }
@@ -114,9 +120,9 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.Save
 
         private static int FindPointer(RuntimeNodeEditor.Node.Node[] nodes, int nodeIndex, OutputPointer pointerToFind)
         {
-            for (int i = 0; i < nodes[nodeIndex].outputs.Count; i++)
+            for (int i = 0; i < nodes[nodeIndex].Outputs.Count; i++)
             {
-                if (nodes[nodeIndex].outputs[i] == pointerToFind)
+                if (nodes[nodeIndex].Outputs[i] == pointerToFind)
                     return i;
             }
             

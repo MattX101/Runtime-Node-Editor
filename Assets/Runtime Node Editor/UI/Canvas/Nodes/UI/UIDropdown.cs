@@ -6,22 +6,22 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.UI
 {
     public static class UIDropdown
     {
-        public static RuntimeNodeEditor.Node.UIFunctions.Component.Dropdown Create(GameObject root, RuntimeNodeEditor.Node.Node node, string[] elements, string defualt)
+        public static RuntimeNodeEditor.Node.UIFunctions.Component.Dropdown Create(GameObject RootObject, RuntimeNodeEditor.Node.Node node, string[] Elements, string defualt)
         {
             float width = UISettings.NodeWidth * 0.8f - (UISettings.BorderSize * 2);
-            float height = UISettings.PointerSize * elements.Length + UISettings.BorderSize;
+            float height = UISettings.PointerSize * Elements.Length + UISettings.BorderSize;
 
             RuntimeNodeEditor.Node.UIFunctions.Component.Dropdown dropdown = new RuntimeNodeEditor.Node.UIFunctions.Component.Dropdown();
 
             // Root
-            RawImage rootImage = root.AddComponent<RawImage>();
+            RawImage rootImage = RootObject.AddComponent<RawImage>();
             rootImage.color = Color.white;
 
-            Button button = root.AddComponent<Button>();
+            Button button = RootObject.AddComponent<Button>();
             button.targetGraphic = rootImage;
 
             // Title
-            dropdown.Text = UIElement.Create(root.transform, "Label", new Vector2(width, UISettings.PointerSize), new Vector3(0, 0, -1)).AddComponent<TextMeshPro>();
+            dropdown.CreateText(UIElement.Create(RootObject.transform, "Label", new Vector2(width, UISettings.PointerSize), new Vector3(0, 0, -1)).AddComponent<TextMeshPro>());
             dropdown.Text.text = defualt;
             dropdown.Text.color = Color.black;
             dropdown.Text.enableAutoSizing = true;
@@ -31,7 +31,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.UI
             dropdown.Text.alignment = TextAlignmentOptions.Center;
 
             // Panel
-            GameObject panel = UIElement.Create(root.transform, "Panel", Vector2.one, new Vector3(0, -UISettings.PointerSize / 2, 0));
+            GameObject panel = UIElement.Create(RootObject.transform, "Panel", Vector2.one, new Vector3(0, -UISettings.PointerSize / 2, 0));
 
             // Background
             GameObject background = UIElement.Create(panel.transform, "Background", new Vector2(width, height), new Vector3(0, -height / 2, 0));
@@ -39,11 +39,11 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.UI
 
             // Toggles
             float halfSize = UISettings.PointerSize / 2;
-            for (int i = 0; i < elements.Length; i++)
+            for (int i = 0; i < Elements.Length; i++)
                 AddOption(
                     panel,
                     dropdown,
-                    elements[i],
+                    Elements[i],
                     (i * -UISettings.PointerSize) - halfSize,
                     width,
                     i,
@@ -89,7 +89,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.UI
                 {
                     parent.SetActive(false);
                     dropdown.Text.text = text;
-                    dropdown.Context = i;
+                    dropdown.SetContext(i);
                     node.MoveUp();
                 });
         }

@@ -7,7 +7,10 @@ namespace RuntimeNodeEditor.UI.Canvas.Grid
 {
     internal class BackgroundGrid
     {
-        private BackgroundGrid() { }
+        private BackgroundGrid()
+        {
+            //
+        }
 
         private static BackgroundGrid _instance;
         public static BackgroundGrid Instance => _instance ??= new BackgroundGrid();
@@ -16,11 +19,11 @@ namespace RuntimeNodeEditor.UI.Canvas.Grid
 
         private const float GridSize = 500.0f;
 
-        private float ScaleX => CanvasData.Camera.pixelWidth / GridSize * CanvasData.Camera.orthographicSize;
-        private float Width => ScaleX / CanvasData.ScalerFactor;
+        private float ScaleX => GlobalData.Camera.pixelWidth / GridSize * GlobalData.Camera.orthographicSize;
+        private float Width => ScaleX / GlobalData.ScalerFactor;
 
-        private float ScaleY => CanvasData.Camera.pixelHeight / GridSize * CanvasData.Camera.orthographicSize;
-        private float Height => ScaleY / CanvasData.ScalerFactor;
+        private float ScaleY => GlobalData.Camera.pixelHeight / GridSize * GlobalData.Camera.orthographicSize;
+        private float Height => ScaleY / GlobalData.ScalerFactor;
 
         internal void Init(RawImage image)
         {

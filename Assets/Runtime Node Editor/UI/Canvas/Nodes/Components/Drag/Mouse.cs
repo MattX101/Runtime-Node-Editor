@@ -21,7 +21,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.Components
 
             _selectedNodeUI.BlockRaycasts(false);
 
-            CanvasData.IsDragging = true;
+            GlobalData.IsDragging = true;
 
             _distanceFromMouseToNodeCenter =
                 (Vector3)MouseController.MousePositionRelativeToCenter

@@ -12,7 +12,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.Components
                 if (CurrentNodeIsNull)
                     return;
 
-                if (CanvasData.IsPointing || CanvasData.IsDragging || CanvasData.IsPanning || CanvasData.IsScrolling)
+                if (GlobalData.IsPointing || GlobalData.IsDragging || GlobalData.IsPanning || GlobalData.IsScrolling)
                     return;
             }
 

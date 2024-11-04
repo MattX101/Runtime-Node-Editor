@@ -16,11 +16,9 @@ namespace RNE.Template.UI.Node
             InitBase(nodeId);
 
             PopulateRoot("Char");
-            CharInputNode node = root.AddComponent<CharInputNode>();
+            CharInputNode node = RootObject.AddComponent<CharInputNode>();
 
             NumOfOutputs = 1;
-
-            drawBodyImage = false;
 
             CreateNodeUI(node, NodeColor.Default, "Char");
 
@@ -30,7 +28,7 @@ namespace RNE.Template.UI.Node
             {
                 InputFields =
                 {
-                    [0] = AddHalfInputField(node, node.outputs[0].gameObject.transform, TMP_InputField.ContentType.Standard)
+                    [0] = AddHalfInputField(node, node.Outputs[0].gameObject.transform, TMP_InputField.ContentType.Standard)
                 }
             };
 

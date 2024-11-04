@@ -1,6 +1,6 @@
 {
     "name": "RuntimeNodeEditor.Data",
-    "rootNamespace": "",
+    "rootNamespace": "RuntimeNodeEditor.Data",
     "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],

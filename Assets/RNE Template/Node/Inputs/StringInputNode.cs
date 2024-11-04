@@ -6,12 +6,12 @@ namespace RNE.Template.Node
     {
         protected override void CodeToExecute()
         {
-            outputs[0].GetComponent<StringOutputPointer>().value = Elements.InputFields[0].text;
+            Outputs[0].GetComponent<StringOutputPointer>().Value = Elements.InputFields[0].text;
         }
 
         protected override void CodeToReset()
         {
-            outputs[0].GetComponent<StringOutputPointer>().Reset();
+            Outputs[0].GetComponent<StringOutputPointer>().Reset();
         }
     }
 }

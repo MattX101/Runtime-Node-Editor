@@ -9,7 +9,7 @@ namespace RuntimeNodeEditor.Input
         {
             get
             {
-                return CanvasData.Camera.ScreenToWorldPoint(UnityEngine.Input.mousePosition);
+                return GlobalData.Camera.ScreenToWorldPoint(UnityEngine.Input.mousePosition);
             }
         }
 
@@ -17,7 +17,7 @@ namespace RuntimeNodeEditor.Input
         {
             get
             {
-                return CanvasData.Camera.ScreenToViewportPoint(UnityEngine.Input.mousePosition);
+                return GlobalData.Camera.ScreenToViewportPoint(UnityEngine.Input.mousePosition);
             }
         }
        
@@ -27,9 +27,9 @@ namespace RuntimeNodeEditor.Input
             {
                 return 
                     new Vector2(
-                        (MouseViewportPosition.x * CanvasData.ScalerResolution.x) - CanvasData.ScalerResolution.x / 2.0f,
-                        (MouseViewportPosition.y * CanvasData.ScalerResolution.y) - CanvasData.ScalerResolution.y / 2.0f
-                    ) * CanvasData.CanvasScale;
+                        (MouseViewportPosition.x * GlobalData.ScalerResolution.x) - GlobalData.ScalerResolution.x / 2.0f,
+                        (MouseViewportPosition.y * GlobalData.ScalerResolution.y) - GlobalData.ScalerResolution.y / 2.0f
+                    ) * GlobalData.CanvasScale;
             }
         }
     }

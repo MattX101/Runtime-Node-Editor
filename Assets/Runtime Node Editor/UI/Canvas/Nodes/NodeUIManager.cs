@@ -7,18 +7,19 @@ namespace RuntimeNodeEditor.UI.Canvas.Node
 {
     public class NodeUIManager : MonoBehaviour
     {
-        [SerializeField] private Transform parent;
+        [SerializeField] 
+        private ConnectionLines _connectionLines;
 
-        [SerializeField] private ConnectionLines connectionLines;
-
-        [SerializeField] private Factory.FactoryManager factoryManager;
-        internal Factory.FactoryManager FactoryManager => factoryManager;
-
-        [SerializeField] private GameObject nodesObject;
+        [SerializeField] 
+        private Factory.FactoryManager _factoryManager;
+        internal Factory.FactoryManager FactoryManager
+        {
+            get => _factoryManager;
+        }
 
         private void Update()
         {
-            Selection.OnUpdate(this, connectionLines);
+            Selection.OnUpdate(this, _connectionLines);
             Drag.ManageDrag();
         }
 
@@ -28,7 +29,9 @@ namespace RuntimeNodeEditor.UI.Canvas.Node
             Zoom.Reset();
 
             foreach (RuntimeNodeEditor.Node.Node node in GetComponentsInChildren<RuntimeNodeEditor.Node.Node>())
+            {
                 Selection.Delete(node, true);
+            }
         }
     }
 }

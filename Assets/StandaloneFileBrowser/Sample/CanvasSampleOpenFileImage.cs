@@ -9,7 +9,7 @@ using SFB;
 
 [RequireComponent(typeof(Button))]
 public class CanvasSampleOpenFileImage : MonoBehaviour, IPointerDownHandler {
-    public RawImage output;
+    public RawImage Output;
 
 #if UNITY_WEBGL && !UNITY_EDITOR
     //
@@ -48,6 +48,6 @@ public class CanvasSampleOpenFileImage : MonoBehaviour, IPointerDownHandler {
     private IEnumerator OutputRoutine(string url) {
         var loader = new WWW(url);
         yield return loader;
-        output.texture = loader.texture;
+        Output.texture = loader.texture;
     }
 }

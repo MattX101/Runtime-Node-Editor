@@ -5,13 +5,13 @@ namespace RNE.Template.Node.Pointer
 {
     public class StringOutputPointer : OutputPointer
     {
-        public string value = "";
+        public string Value = "";
 
         public StringOutputPointer(RuntimeNodeEditor.Node.Node node) : base(node) { }
 
         protected override void ResetPointer()
         {
-            value = "";
+            Value = "";
         }
 
         protected override Color GetLineColor()

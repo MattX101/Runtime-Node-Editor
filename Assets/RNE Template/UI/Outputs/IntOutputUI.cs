@@ -15,12 +15,10 @@ namespace RNE.Template.UI.Node
             InitBase(nodeId);
 
             PopulateRoot("Int");
-            IntOutputNode node = root.AddComponent<IntOutputNode>();
-            node.endNode = true;
+            IntOutputNode node = RootObject.AddComponent<IntOutputNode>();
+            node.Init();
 
             NumOfInputs = 1;
-
-            drawBodyImage = false;
 
             CreateNodeUI(node, NodeColor.Default, "Int");
 
@@ -32,7 +30,7 @@ namespace RNE.Template.UI.Node
                 {
                     [0] = AddInputField(
                         node,
-                        node.inputs[0].gameObject.transform,
+                        node.Inputs[0].gameObject.transform,
                         TMP_InputField.ContentType.IntegerNumber,
                         true,
                         false)

@@ -21,20 +21,20 @@ namespace RuntimeNodeEditor.Node.Pointer
             Node = node;
         }
 
-        internal void AddInputPointer(Node node, InputPointer input, int valueTypeIndex)
+        internal void AddInputPointer(Node node, InputPointer Input, int valueTypeIndex)
         {
             Node = node;
             ValueTypeIndex = valueTypeIndex;
 
-            node.inputs.Add(input);
+            node.Inputs.Add(Input);
         }
 
-        internal void AddOutputPointer(Node node, OutputPointer output, int valueTypeIndex)
+        internal void AddOutputPointer(Node node, OutputPointer Output, int valueTypeIndex)
         {
             Node = node;
             ValueTypeIndex = valueTypeIndex;
 
-            node.outputs.Add(output);
+            node.Outputs.Add(Output);
         }
     }
 }

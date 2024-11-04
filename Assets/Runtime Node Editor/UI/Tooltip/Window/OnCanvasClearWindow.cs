@@ -1,25 +1,31 @@
-﻿namespace RuntimeNodeEditor.UI.Tooltip.Window
+﻿using RuntimeNodeEditor.UI.Canvas;
+
+namespace RuntimeNodeEditor.UI.Tooltip.Window
 {
     public class OnCanvasClearWindow : Window
     {
-        private Canvas.CanvasManager canvasManager;
-        private Canvas.Node.NodeUIManager nodeUIManager;
+        private CanvasManager _canvasManager;
+        private Canvas.Node.NodeUIManager _nodeUIManager;
 
         private void Awake()
         {
-            canvasManager = FindObjectOfType<Canvas.CanvasManager>();
-            nodeUIManager = FindObjectOfType<Canvas.Node.NodeUIManager>();
+            _canvasManager = FindObjectOfType<CanvasManager>();
+            _nodeUIManager = FindObjectOfType<Canvas.Node.NodeUIManager>();
         }
 
         public void Clear()
         {
-            if (canvasManager == null)
-                canvasManager = FindObjectOfType<Canvas.CanvasManager>();
-            canvasManager.Reset();
+            if (_canvasManager == null)
+            {
+                _canvasManager = FindObjectOfType<CanvasManager>();
+            }
+            _canvasManager.Reset();
 
-            if (nodeUIManager == null)
-                nodeUIManager = FindObjectOfType<Canvas.Node.NodeUIManager>();
-            nodeUIManager.Reset();
+            if (_nodeUIManager == null)
+            {
+                _nodeUIManager = FindObjectOfType<Canvas.Node.NodeUIManager>();
+            }
+            _nodeUIManager.Reset();
         }
 
         public void ClearCanvas()

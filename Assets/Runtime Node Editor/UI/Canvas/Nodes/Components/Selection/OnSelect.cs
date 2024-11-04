@@ -1,5 +1,3 @@
-using RuntimeNodeEditor.UI.Canvas.Node;
-
 namespace RuntimeNodeEditor.UI.Canvas.Node.Components
 {
     internal static partial class Selection
@@ -12,7 +10,6 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.Components
             }
 
             _currentNode = node;
-            
             _currentNode.GetComponent<NodeUI>().ToggleSelectColor();
         }
 

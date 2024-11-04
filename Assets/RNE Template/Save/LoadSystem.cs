@@ -52,6 +52,7 @@ namespace RNE.Template.Save
             LoadNodes(ref position, data);
             nodes = nodesObject.GetComponentsInChildren<Node>();
 
+            // TODO - Saving connections currently cuases an error on load
             LoadConnections(ref position, nodes, data);
 
             nodeExecution.Execute(nodes);
@@ -59,13 +60,21 @@ namespace RNE.Template.Save
 
         private void LoadZoom(ref int position, byte[] data)
         {
-            position += Zoom.Load(BitConverter.ToSingle(data, position));
+            Zoom.Load(BitConverter.ToSingle(data, position));
+            position += 4;
         }
 
         private void LoadPan(ref int position, byte[] data)
         {
-            position += Pan.LoadNodesRectPosition(BitConverter.ToSingle(data, position), BitConverter.ToSingle(data, position + 4));
-            position += Pan.LoadPositionFromOrigin(BitConverter.ToSingle(data, position), BitConverter.ToSingle(data, position + 4));
+            Pan.LoadWorldPan(
+                BitConverter.ToSingle(data, position), 
+                BitConverter.ToSingle(data, position + 4));
+            position += 8;
+            
+            Pan.LoadViewportPan(
+                BitConverter.ToSingle(data, position), 
+                BitConverter.ToSingle(data, position + 4));
+            position += 8;
         }
 
         private void LoadNodes(ref int position, byte[] data)
@@ -77,7 +86,9 @@ namespace RNE.Template.Save
                 return;
 
             for (int i = 0; i < numOfNodes; i++)
+            {
                 LoadNode(ref position, data);
+            }
         }
 
         private void LoadNode(ref int position, byte[] data)
@@ -102,8 +113,8 @@ namespace RNE.Template.Save
         private void LoadNodeConnection(ref int position, Node[] nodes, byte[] data)
         {
             nodeConnections.Load(
-                nodes[BitConverter.ToInt32(data, position)].inputs[data[position + 4]],
-                nodes[BitConverter.ToInt32(data, position + 5)].outputs[data[position + 9]]);
+                nodes[BitConverter.ToInt32(data, position)].Inputs[data[position + 4]],
+                nodes[BitConverter.ToInt32(data, position + 5)].Outputs[data[position + 9]]);
 
             position += 10;
         }

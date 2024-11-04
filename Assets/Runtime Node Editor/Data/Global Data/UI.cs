@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace RuntimeNodeEditor.Data
 {
-    public static class UIData
+    public static partial class GlobalData
     {
         public static bool TabOpened = false;
         public static bool WindowOpened = false;

@@ -5,13 +5,13 @@ namespace RNE.Template.Node.Pointer
 {
     public class BoolOutputPointer : OutputPointer
     {
-        public bool value = false;
+        public bool Value = false;
 
         public BoolOutputPointer(RuntimeNodeEditor.Node.Node node) : base(node) { }
 
         protected override void ResetPointer()
         {
-            value = false;
+            Value = false;
         }
 
         protected override Color GetLineColor()

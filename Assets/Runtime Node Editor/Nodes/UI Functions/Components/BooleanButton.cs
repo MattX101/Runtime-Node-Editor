@@ -5,14 +5,22 @@ namespace RuntimeNodeEditor.Node.UIFunctions.Component
 {
     public class BooleanButton
     {
-        public Button Button;
-        private RawImage _image;
-
-        public bool Toggled;
-
-        public BooleanButton(GameObject root, RawImage image, bool interactable)
+        public Button Button
         {
-            Button = root.AddComponent<Button>();
+            get;
+        }
+
+        private readonly RawImage _image;
+
+        public bool Toggled
+        {
+            get;
+            private set;
+        }
+
+        public BooleanButton(GameObject RootObject, RawImage image, bool interactable)
+        {
+            Button = RootObject.AddComponent<Button>();
             _image = image;
 
             Button.transition = Selectable.Transition.ColorTint;

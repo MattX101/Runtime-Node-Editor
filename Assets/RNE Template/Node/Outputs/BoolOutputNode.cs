@@ -1,8 +1,9 @@
 using RNE.Template.Node.Pointer.Value;
+using RuntimeNodeEditor.Node;
 
 namespace RNE.Template.Node
 {
-    public class BoolOutputNode : RuntimeNodeEditor.Node.Node
+    public class BoolOutputNode : EndNode
     {
         protected override void CodeToExecute()
         {
@@ -11,7 +12,7 @@ namespace RNE.Template.Node
 
         protected override void DataToGetAndSet()
         {
-            Elements.SetBoolean(Elements.Buttons[0], PointerValue.GetBool(inputs[0]));
+            Elements.SetBoolean(Elements.Buttons[0], PointerValue.GetBool(Inputs[0]));
         }
     }
 }

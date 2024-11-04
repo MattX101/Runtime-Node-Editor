@@ -7,7 +7,10 @@ namespace RuntimeNodeEditor.Node.UIFunctions.Elements
 {
     public partial class NodeUIElements
     {
-        public readonly Slider[] Sliders;
+        public Slider[] Sliders
+        {
+            get;
+        }
 
         public void SetSlider(Slider slider, float value)
         {

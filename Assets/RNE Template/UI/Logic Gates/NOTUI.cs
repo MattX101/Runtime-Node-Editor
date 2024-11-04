@@ -15,12 +15,10 @@ namespace RNE.Template.UI.Node
             InitBase(nodeId);
 
             PopulateRoot("NOT");
-            NOTNode node = root.AddComponent<NOTNode>();
+            NOTNode node = RootObject.AddComponent<NOTNode>();
 
             NumOfInputs = 1;
             NumOfOutputs = 1;
-
-            drawBodyImage = false;
 
             CreateNodeUI(node, NodeColor.LogicGate, "NOT");
 
@@ -32,8 +30,8 @@ namespace RNE.Template.UI.Node
             {
                 Buttons =
                 {
-                    [0] = AddBooleanPreview(node, node.inputs[0].transform, true),
-                    [1] = AddBooleanPreview(node, node.outputs[0].transform)
+                    [0] = AddBooleanPreview(node, node.Inputs[0].transform, true),
+                    [1] = AddBooleanPreview(node, node.Outputs[0].transform)
                 }
             };
         }

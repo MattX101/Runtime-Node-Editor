@@ -6,9 +6,9 @@ namespace RuntimeNodeEditor.Node.Connection.Lines
 {
     public partial class ConnectionLines
     {
-        public void Load(InputPointer input, OutputPointer output)
+        public void Load(InputPointer Input, OutputPointer Output)
         {
-            SetConnection(input, output);
+            SetConnection(Input, Output);
 
             _currentConnectionLine = null;
         }

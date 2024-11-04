@@ -32,10 +32,12 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.Components
             NodeUI copiedNodeUI = _copiedNode.GetComponent<NodeUI>();
             NodeUI newNodeUI = nodeUIManager.FactoryManager.SpawnWithReturn(copiedNodeUI.NodeId, copiedNodeUI.RootPosition);
 
-            RuntimeNodeEditor.Node.Node newNode = newNodeUI.root.GetComponent<RuntimeNodeEditor.Node.Node>();
+            RuntimeNodeEditor.Node.Node newNode = newNodeUI.RootObject.GetComponent<RuntimeNodeEditor.Node.Node>();
 
             if (newNode.Elements != null)
+            {
                 newNode.Elements.SetElements(_copiedNode.Elements);
+            }
             
             connectionLines.Paste(_copiedNode, newNode);
 

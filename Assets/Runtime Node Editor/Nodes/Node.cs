@@ -9,45 +9,55 @@ namespace RuntimeNodeEditor.Node
     public class Node : MonoBehaviour
     {
         private bool _wasExecuted;
-        public bool endNode = false;
 
-        public readonly List<InputPointer> inputs = new();
-        public readonly List<OutputPointer> outputs = new();
+        public bool EndNode
+        {
+            get;
+            protected set;
+        } = false;
+
+        public readonly List<InputPointer> Inputs = new();
+        public readonly List<OutputPointer> Outputs = new();
 
         public NodeUIElements Elements;
-        
-        public void AddPointer(InputPointer input, int valueTypeIndex)
+
+        public virtual void Init()
         {
-            input.AddInputPointer(this, input, valueTypeIndex);
+            //
         }
-        public void AddPointer(OutputPointer output, int valueTypeIndex)
+
+        public void AddPointer(InputPointer Input, int valueTypeIndex)
         {
-            output.AddOutputPointer(this, output, valueTypeIndex);
+            Input.AddInputPointer(this, Input, valueTypeIndex);
+        }
+        public void AddPointer(OutputPointer Output, int valueTypeIndex)
+        {
+            Output.AddOutputPointer(this, Output, valueTypeIndex);
         }
 
         public void DeletePointerConnections()
         {
-            foreach (InputPointer input in inputs)
-                input.DeleteConnection();
+            foreach (InputPointer Input in Inputs)
+                Input.DeleteConnection();
 
-            foreach (OutputPointer output in outputs)
-                output.DeleteConnections();
+            foreach (OutputPointer Output in Outputs)
+                Output.DeleteConnections();
         }
 
         public int MoveUp()
         {
-            if (endNode)
+            if (EndNode)
             {
                 Execute();
 
                 return 0;
             }
 
-            if (outputs == null)
+            if (Outputs == null)
                 return 0;
 
-            foreach (InputPointer input in outputs.Where(output => output.ConnectedInputPointers != null).SelectMany(output => output.ConnectedInputPointers))
-                input.Node.MoveUp();
+            foreach (InputPointer Input in Outputs.Where(Output => Output.ConnectedInputPointers != null).SelectMany(Output => Output.ConnectedInputPointers))
+                Input.Node.MoveUp();
 
             return 1;
         }
@@ -56,18 +66,18 @@ namespace RuntimeNodeEditor.Node
         {
             ResetExecution();
 
-            if (endNode)
+            if (EndNode)
             {
                 Execute();
 
                 return 0;
             }
 
-            if (outputs == null)
+            if (Outputs == null)
                 return 0;
 
-            foreach (InputPointer input in outputs.Where(output => output.ConnectedInputPointers != null).SelectMany(output => output.ConnectedInputPointers))
-                input.Node.OnValueChangeReset();
+            foreach (InputPointer Input in Outputs.Where(Output => Output.ConnectedInputPointers != null).SelectMany(Output => Output.ConnectedInputPointers))
+                Input.Node.OnValueChangeReset();
 
             return 1;
         }
@@ -88,8 +98,8 @@ namespace RuntimeNodeEditor.Node
 
         protected void ExecuteInputConnection(int i)
         {
-            if (IsValid(inputs[i]))
-                inputs[i].ConnectedOutputPointer.Node.Execute();
+            if (IsValid(Inputs[i]))
+                Inputs[i].ConnectedOutputPointer.Node.Execute();
         }
 
         protected virtual void DataToGetAndSet() { }
@@ -114,9 +124,9 @@ namespace RuntimeNodeEditor.Node
             _wasExecuted = false;
         }
 
-        public bool IsValid(InputPointer input)
+        public bool IsValid(InputPointer Input)
         {
-            return input && input.ConnectedOutputPointer;
+            return Input && Input.ConnectedOutputPointer;
         }
     }
 }

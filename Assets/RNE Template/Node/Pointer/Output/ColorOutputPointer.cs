@@ -5,13 +5,13 @@ namespace RNE.Template.Node.Pointer
 {
     public class ColorOutputPointer : OutputPointer
     {
-        public Color value = Color.black;
+        public Color Value = Color.black;
 
         public ColorOutputPointer(RuntimeNodeEditor.Node.Node node) : base(node) { }
 
         protected override void ResetPointer()
         {
-            value = Color.black;
+            Value = Color.black;
         }
 
         protected override Color GetLineColor()

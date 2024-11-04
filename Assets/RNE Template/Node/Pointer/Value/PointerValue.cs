@@ -17,28 +17,28 @@ namespace RNE.Template.Node.Pointer.Value
             new List<ValueType> { ValueType.Int, ValueType.Float, ValueType.Vector2 }, // vector3
         };
 
-        public static bool CheckCompatibility(int input, int output)
+        public static bool CheckCompatibility(int Input, int Output)
         {
-            if (input == output)
+            if (Input == Output)
                 return true;
 
-            //int index = GetValueTypeIndex(input);
+            //int index = GetValueTypeIndex(Input);
 
-            if (_compatiableValues[input] == null)
+            if (_compatiableValues[Input] == null)
                 return false;
 
-            foreach (ValueType value in _compatiableValues[input])
+            foreach (ValueType value in _compatiableValues[Input])
             {
-                if (output == (int)value)
+                if (Output == (int)value)
                     return true;
             }
 
             return false;
         }
 
-        private static int GetValueTypeIndex(ValueType input)
+        private static int GetValueTypeIndex(ValueType Input)
         {
-            return input switch
+            return Input switch
             {
                 ValueType.Int => 0,
                 ValueType.Float => 1,
@@ -52,9 +52,9 @@ namespace RNE.Template.Node.Pointer.Value
             };
         }*/
 
-        private static bool IsValid(InputPointer input)
+        private static bool IsValid(InputPointer Input)
         {
-            return input.Node.IsValid(input);
+            return Input.Node.IsValid(Input);
         }
     }
 }

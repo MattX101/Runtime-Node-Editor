@@ -12,8 +12,8 @@ namespace RNE.Template.Node
 
         protected override void DataToGetAndSet()
         {
-            bool a = PointerValue.GetBool(inputs[0]);
-            outputs[0].GetComponent<BoolOutputPointer>().value = !a;
+            bool a = PointerValue.GetBool(Inputs[0]);
+            Outputs[0].GetComponent<BoolOutputPointer>().Value = !a;
 
             Elements.SetBoolean(Elements.Buttons[0], a);
             Elements.SetBoolean(Elements.Buttons[1], !a);
@@ -21,7 +21,7 @@ namespace RNE.Template.Node
 
         protected override void CodeToReset()
         {
-            outputs[0].GetComponent<BoolOutputPointer>().Reset();
+            Outputs[0].GetComponent<BoolOutputPointer>().Reset();
         }
     }
 }

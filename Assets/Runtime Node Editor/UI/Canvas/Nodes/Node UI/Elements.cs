@@ -18,16 +18,14 @@ namespace RuntimeNodeEditor.UI.Canvas.Node
         private float _bodyHeight;
         private Vector2 _bodySize;
 
-        protected bool drawBodyImage = true;
-
         private GameObject _inputs, _outputs;
 
         private void AddHeader(Color headerHSL, string text)
         {
-            Vector3 headerPos = new Vector3(0, (rootRect.sizeDelta.y - (_sizeY + _borderX2)) / 2, 0);
+            Vector3 headerPos = new Vector3(0, (_rootRect.sizeDelta.y - (_sizeY + _borderX2)) / 2, 0);
 
             _header = UIElement.Create(
-                root.transform,
+                RootObject.transform,
                 "Header",
                 _rootSize,
                 headerPos);
@@ -52,22 +50,19 @@ namespace RuntimeNodeEditor.UI.Canvas.Node
             UIText.SetFontAlignment(_titleText, TextAlignmentOptions.Center);
         }
 
-        private void AddBody(Color bodyHSL)
+        private void AddBody()
         {
-            _bodySize = new Vector2(_sizeX, rootRect.sizeDelta.y - UISettings.HeaderHeight - UISettings.BorderSize);
+            _bodySize = new Vector2(_sizeX, _rootRect.sizeDelta.y - UISettings.HeaderHeight - UISettings.BorderSize);
             Vector3 bodyPos = new Vector3(0, (-UISettings.HeaderHeight + UISettings.BorderSize) / 2, 0);
 
             _body = UIElement.Create(
-                root.transform,
+                RootObject.transform,
                 "Body",
                 _bodySize,
                 bodyPos);
             _bodyRect = _body.GetComponent<RectTransform>();
 
-            if (drawBodyImage)
-                UIImage.Create(_body, bodyHSL);
-
-            // Pointer elements
+            // Pointer Elements
             _inputs = UIElement.Create(
                 _body.transform,
                 "Inputs",
@@ -82,7 +77,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Node
             _inputs.GetComponent<RectTransform>().transform.localPosition = new Vector3(0, 0, -1);
             _outputs.GetComponent<RectTransform>().transform.localPosition = new Vector3(0, 0, -1);
 
-            if (togglePreviewImage)
+            if (TogglePreviewImage)
             {
                 AddPreviewImage();
             }

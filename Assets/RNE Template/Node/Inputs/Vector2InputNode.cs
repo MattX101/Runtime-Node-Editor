@@ -9,15 +9,15 @@ namespace RNE.Template.Node
     {
         protected override void CodeToExecute()
         {
-            outputs[0].GetComponent<Vector2OutputPointer>().value = Vector2.zero;
+            Outputs[0].GetComponent<Vector2OutputPointer>().Value = Vector2.zero;
 
             TMP_InputField xField = Elements.InputFields[0];
             if (xField.text.Length != 0)
             {
                 float x = InputFieldToFloat.Get(xField.text);
 
-                outputs[1].GetComponent<FloatOutputPointer>().value = x;
-                outputs[0].GetComponent<Vector2OutputPointer>().value.x = x;
+                Outputs[1].GetComponent<FloatOutputPointer>().Value = x;
+                Outputs[0].GetComponent<Vector2OutputPointer>().Value.x = x;
             }
 
             TMP_InputField yField = Elements.InputFields[1];
@@ -25,14 +25,14 @@ namespace RNE.Template.Node
             {
                 float y = InputFieldToFloat.Get(yField.text);
 
-                outputs[2].GetComponent<FloatOutputPointer>().value = y;
-                outputs[0].GetComponent<Vector2OutputPointer>().value.y = y;
+                Outputs[2].GetComponent<FloatOutputPointer>().Value = y;
+                Outputs[0].GetComponent<Vector2OutputPointer>().Value.y = y;
             }
         }
 
         protected override void CodeToReset()
         {
-            outputs[0].GetComponent<Vector2OutputPointer>().Reset();
+            Outputs[0].GetComponent<Vector2OutputPointer>().Reset();
         }
     }
 }

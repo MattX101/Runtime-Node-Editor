@@ -1,6 +1,6 @@
 {
     "name": "RuntimeNodeEditor.UI.Tooltip",
-    "rootNamespace": "",
+    "rootNamespace": "RuntimeNodeEditor.UI.Tooltip",
     "references": [
         "GUID:a51e64d045fc8a144b8a9eef1e5ea548",
         "GUID:e2dd76dbb2b8d5c40ab42d8325e60c41",

@@ -1,9 +1,10 @@
 using RNE.Template.Node.Pointer.Value;
+using RuntimeNodeEditor.Node;
 using UnityEngine;
 
 namespace RNE.Template.Node
 {
-    public class Vector3OutputNode : RuntimeNodeEditor.Node.Node
+    public class Vector3OutputNode : EndNode
     {
         protected override void CodeToExecute()
         {
@@ -18,11 +19,11 @@ namespace RNE.Template.Node
         {
             Vector3 v = Vector3.zero;
 
-            v = PointerValue.GetVector3(inputs[0]);
+            v = PointerValue.GetVector3(Inputs[0]);
 
-            PointerValue.GetFloat(inputs[1], ref v.x);
-            PointerValue.GetFloat(inputs[2], ref v.y);
-            PointerValue.GetFloat(inputs[3], ref v.z);
+            PointerValue.GetFloat(Inputs[1], ref v.x);
+            PointerValue.GetFloat(Inputs[2], ref v.y);
+            PointerValue.GetFloat(Inputs[3], ref v.z);
 
             Elements.SetInputField(Elements.InputFields[0], v.x.ToString());
             Elements.SetInputField(Elements.InputFields[1], v.y.ToString());

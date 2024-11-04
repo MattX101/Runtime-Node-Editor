@@ -9,34 +9,31 @@ namespace RuntimeNodeEditor.UI.Canvas.Node
     {
         protected ImagePreview ImagePreview;
 
-        protected bool togglePreviewImage = false;
+        protected bool TogglePreviewImage = false;
 
         private void AddPreviewImage()
         {
-            if (!togglePreviewImage)
+            if (!TogglePreviewImage)
                 return;
 
             float size = UISettings.PreviewSize - UISettings.PreviewImageMargin;
 
             Vector2 previewImageSize = new Vector2(size, size);
-            float posY = (rootRect.sizeDelta.y - size - UISettings.PreviewImageMargin) / 2 - UISettings.HeaderHeight - _bodyHeight;
+            float posY = (_rootRect.sizeDelta.y - size - UISettings.PreviewImageMargin) / 2 - UISettings.HeaderHeight - _bodyHeight;
             Vector3 previewImagePos = new Vector3(0.0f, posY, 0.0f);
 
             GameObject previewImageObject = UIElement.Create(
-                root.transform,
+                RootObject.transform,
                 "Preview",
                 previewImageSize,
                 previewImagePos);
 
-            ImagePreview = new ImagePreview
-            {
-                Image = UIImage.Create(previewImageObject, Color.black)
-            };
+            ImagePreview = new ImagePreview(UIImage.Create(previewImageObject, Color.black));
         }
 
         protected void PreviewColor(Slider r, Slider g, Slider b)
         {
-            if (!togglePreviewImage)
+            if (!TogglePreviewImage)
                 return;
 
             if (ImagePreview == null)

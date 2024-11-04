@@ -8,19 +8,19 @@ namespace RuntimeNodeEditor.Input
     public static partial class Pan
     {
         private static RectTransform _nodesRect;
+        public static RectTransform NodesRect
+        {
+            set => _nodesRect = value;
+        }
+
         public static Vector3 NodesRectPosition
         {
             get => _nodesRect.position;
         }
 
-        public static void SetNodesRect(RectTransform nodesRect)
-        {
-            _nodesRect = nodesRect;
-        }
-
         public static void Reset()
         {
-            CanvasData.IsPanning = false;
+            GlobalData.IsPanning = false;
 
             _lastSavedWorldMousePos = Vector2.zero;
             _positionFromOriginZoomed = Vector3.zero;
@@ -31,8 +31,8 @@ namespace RuntimeNodeEditor.Input
         {
             List<byte> data = new();
             
-            data.AddRange(BitConverter.GetBytes(NodesRectPosition.x / CanvasData.ScalerFactor));
-            data.AddRange(BitConverter.GetBytes(NodesRectPosition.y / CanvasData.ScalerFactor));
+            data.AddRange(BitConverter.GetBytes(NodesRectPosition.x / GlobalData.ScalerFactor));
+            data.AddRange(BitConverter.GetBytes(NodesRectPosition.y / GlobalData.ScalerFactor));
             
             data.AddRange(BitConverter.GetBytes(PositionFromOriginZoomed.x));
             data.AddRange(BitConverter.GetBytes(PositionFromOriginZoomed.y));

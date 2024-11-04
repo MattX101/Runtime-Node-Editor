@@ -1,6 +1,6 @@
 {
     "name": "RuntimeNodeEditor.Input",
-    "rootNamespace": "",
+    "rootNamespace": "RuntimeNodeEditor.Input",
     "references": [
         "GUID:e2dd76dbb2b8d5c40ab42d8325e60c41"
     ],

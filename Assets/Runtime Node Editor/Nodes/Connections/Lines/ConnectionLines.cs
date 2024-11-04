@@ -15,7 +15,7 @@ namespace RuntimeNodeEditor.Node.Connection.Lines
 
         private void Update()
         {
-            if (UIData.TabOrWindowOpened)
+            if (GlobalData.TabOrWindowOpened)
                 return;
 
             _raycastHit2D = Physics2D.Raycast(_mousePos, Vector2.zero);
@@ -26,7 +26,7 @@ namespace RuntimeNodeEditor.Node.Connection.Lines
             {
                 CreateOnClick();
             }
-            else if (UnityEngine.Input.GetMouseButtonUp(0) && CanvasData.IsPointing)
+            else if (UnityEngine.Input.GetMouseButtonUp(0) && GlobalData.IsPointing)
             {
                 DropLine();
             }

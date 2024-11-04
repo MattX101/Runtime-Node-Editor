@@ -9,31 +9,31 @@ namespace RuntimeNodeEditor.UI.Canvas
 {
     public class CanvasManager : MonoBehaviour
     {
-        [SerializeField] private Color cameraBackgroundColour;
+        [SerializeField] private Color _cameraBackgroundColour;
 
-        [SerializeField] private RectTransform nodesRect, canvasRect;
+        [SerializeField] private RectTransform _nodesRect, _nodesCanvasRect;
 
-        [SerializeField] private RawImage gridImage;
+        [SerializeField] private RawImage _gridImage;
 
         private Vector3 _screenRes;
         
         private void Awake()
         {
-            Pan.SetNodesRect(nodesRect);
+            Pan.NodesRect = _nodesRect;
         }
 
         private void Start()
         {
-            BackgroundGrid.Instance.Init(gridImage);
+            BackgroundGrid.Instance.Init(_gridImage);
 
-            _screenRes = new Vector3(CanvasData.Camera.pixelWidth, CanvasData.Camera.pixelHeight, 1);
+            _screenRes = new Vector3(GlobalData.Camera.pixelWidth, GlobalData.Camera.pixelHeight, 1);
 
             UpdateCanvasScale();
         }
 
         private void Update()
         {
-            if (UIData.TabOrWindowOpened)
+            if (GlobalData.TabOrWindowOpened)
                 return;
 
             UpdateCanvasScale();
@@ -41,7 +41,7 @@ namespace RuntimeNodeEditor.UI.Canvas
             Pan.PanNodesCanvas();
             Zoom.ZoomCanvas();
 
-            Vector3 updatedScreenRes = new Vector3(CanvasData.Camera.pixelWidth, CanvasData.Camera.pixelHeight, 1);
+            Vector3 updatedScreenRes = new Vector3(GlobalData.Camera.pixelWidth, GlobalData.Camera.pixelHeight, 1);
             if (_screenRes != updatedScreenRes)
             {
                 _screenRes = updatedScreenRes;
@@ -64,12 +64,12 @@ namespace RuntimeNodeEditor.UI.Canvas
 
         private void SetBackgroundColor()
         {
-            if (cameraBackgroundColour == CanvasData.Camera.backgroundColor)
+            if (_cameraBackgroundColour == GlobalData.Camera.backgroundColor)
                 return;
 
-            CanvasData.Camera.backgroundColor = cameraBackgroundColour;
+            GlobalData.Camera.backgroundColor = _cameraBackgroundColour;
 
-            Vector3 hsl = ColourConversion.RGBToHSL(cameraBackgroundColour);
+            Vector3 hsl = ColourConversion.RGBToHSL(_cameraBackgroundColour);
             BackgroundGrid.Instance.SetGridColor(ColourConversion.HSLToRGB(
                 hsl.x,
                 hsl.y,
@@ -79,11 +79,9 @@ namespace RuntimeNodeEditor.UI.Canvas
         
         private void UpdateCanvasScale()
         {
-            ScreenScale.CalculateScale();
-
-            CanvasData.CanvasScale = 
-                new Vector2(canvasRect.rect.width, canvasRect.rect.height) 
-                / CanvasData.CanvasScaler.referenceResolution;
+            GlobalData.CanvasScale = 
+                new Vector2(_nodesCanvasRect.rect.width, _nodesCanvasRect.rect.height) 
+                / GlobalData.CanvasScaler.referenceResolution;
         }
     }
 }

@@ -15,11 +15,9 @@ namespace RNE.Template.UI.Node
             InitBase(nodeId);
 
             PopulateRoot("Float");
-            FloatInputNode node = root.AddComponent<FloatInputNode>();
+            FloatInputNode node = RootObject.AddComponent<FloatInputNode>();
 
             NumOfOutputs = 1;
-
-            drawBodyImage = false;
 
             CreateNodeUI(node, NodeColor.Default, "Float");
 
@@ -29,7 +27,7 @@ namespace RNE.Template.UI.Node
             {
                 InputFields =
                 {
-                    [0] = AddInputField(node, node.outputs[0].gameObject.transform, TMP_InputField.ContentType.DecimalNumber)
+                    [0] = AddInputField(node, node.Outputs[0].gameObject.transform, TMP_InputField.ContentType.DecimalNumber)
                 }
             };
         }

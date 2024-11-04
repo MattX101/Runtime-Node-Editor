@@ -9,7 +9,7 @@ using SFB;
 
 [RequireComponent(typeof(Button))]
 public class CanvasSampleOpenFileText : MonoBehaviour, IPointerDownHandler {
-    public Text output;
+    public Text Output;
 
 #if UNITY_WEBGL && !UNITY_EDITOR
     //
@@ -48,6 +48,6 @@ public class CanvasSampleOpenFileText : MonoBehaviour, IPointerDownHandler {
     private IEnumerator OutputRoutine(string url) {
         var loader = new WWW(url);
         yield return loader;
-        output.text = loader.text;
+        Output.text = loader.text;
     }
 }

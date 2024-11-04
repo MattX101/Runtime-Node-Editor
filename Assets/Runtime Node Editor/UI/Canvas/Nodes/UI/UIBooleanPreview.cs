@@ -8,11 +8,11 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.UI
     {
         public static BooleanButton Create(Transform parent, bool interactable = false)
         {
-            GameObject root = UIElement.Create(parent, "Boolean Preview", Vector2.one * 30, Vector3.zero);
+            GameObject RootObject = UIElement.Create(parent, "Boolean Preview", Vector2.one * 30, Vector3.zero);
 
             return new BooleanButton(
-                root, 
-                UIImage.Create(root, Color.red), 
+                RootObject, 
+                UIImage.Create(RootObject, Color.red), 
                 interactable);
         }
 

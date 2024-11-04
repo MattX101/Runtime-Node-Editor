@@ -10,18 +10,18 @@ namespace RuntimeNodeEditor.Node.Connection.Lines
             if (!_raycastHit2D.collider)
                 return false;
 
-            _raycastHit2D.collider.TryGetComponent(out InputPointer input);
+            _raycastHit2D.collider.TryGetComponent(out InputPointer Input);
 
-            if (!input)
+            if (!Input)
                 return false;
 
-            if (!CheckPointerCompatibility(input.ValueTypeIndex, _currentOutputPointer.ValueTypeIndex))
+            if (!CheckPointerCompatibility(Input.ValueTypeIndex, _currentOutputPointer.ValueTypeIndex))
                 return false;
 
-            if (input.HasConnection)
+            if (Input.HasConnection)
                 return false;
 
-            DropOnInputPointer(input);
+            DropOnInputPointer(Input);
 
             LinesData.Add(_currentConnectionLine);
             _currentOutputPointer.Node.MoveUp();
@@ -29,18 +29,18 @@ namespace RuntimeNodeEditor.Node.Connection.Lines
             return true;
         }
 
-        private void DropOnInputPointer(InputPointer input)
+        private void DropOnInputPointer(InputPointer Input)
         {
-            _currentOutputPointer.AddConnection(input);
-            _currentConnectionLine.Input = input;
+            _currentOutputPointer.AddConnection(Input);
+            _currentConnectionLine.Input = Input;
 
-            SetInputConnection(input, _currentOutputPointer, _currentConnectionLine);
-            input.Node.Reset();
+            SetInputConnection(Input, _currentOutputPointer, _currentConnectionLine);
+            Input.Node.Reset();
         }
 
-        private bool CheckPointerCompatibility(int input, int output)
+        private bool CheckPointerCompatibility(int Input, int Output)
         {
-            return input.Equals(output);
+            return Input.Equals(Output);
         }
     }
 }

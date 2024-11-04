@@ -15,12 +15,10 @@ namespace RNE.Template.UI.Node
             InitBase(nodeId);
 
             PopulateRoot("Float");
-            FloatOutputNode node = root.AddComponent<FloatOutputNode>();
-            node.endNode = true;
+            FloatOutputNode node = RootObject.AddComponent<FloatOutputNode>();
+            node.Init();
 
             NumOfInputs = 1;
-
-            drawBodyImage = false;
 
             CreateNodeUI(node, NodeColor.Default, "Float");
 
@@ -32,7 +30,7 @@ namespace RNE.Template.UI.Node
                 {
                     [0] = AddInputField(
                         node,
-                        node.inputs[0].gameObject.transform,
+                        node.Inputs[0].gameObject.transform,
                         TMP_InputField.ContentType.DecimalNumber,
                         true,
                         false)

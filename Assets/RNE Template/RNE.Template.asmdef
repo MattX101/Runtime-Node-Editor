@@ -1,6 +1,6 @@
 {
     "name": "RNE.Template",
-    "rootNamespace": "",
+    "rootNamespace": "RNE.Template",
     "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],

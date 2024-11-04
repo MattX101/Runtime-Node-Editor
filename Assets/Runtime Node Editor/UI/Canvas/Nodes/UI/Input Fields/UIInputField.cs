@@ -1,6 +1,6 @@
 using UnityEngine;
-using TMPro;
 using UnityEngine.UI;
+using TMPro;
 
 namespace RuntimeNodeEditor.UI.Canvas.Node.UI
 {
@@ -18,12 +18,12 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.UI
         internal static TMP_InputField AddInputField(Transform parent, string name, bool interactable, bool shorten, bool halfSize)
         {
             // Root
-            GameObject root = UIElement.Create(parent, name, CalcualteSize(shorten, halfSize), Vector3.zero);
-            RectTransform rect = root.GetComponent<RectTransform>();
-            UIImage.Create(root, Color.white);
+            GameObject RootObject = UIElement.Create(parent, name, CalcualteSize(shorten, halfSize), Vector3.zero);
+            RectTransform rect = RootObject.GetComponent<RectTransform>();
+            UIImage.Create(RootObject, Color.white);
 
             // Text Area
-            GameObject textArea = UIElement.Create(root.transform, "Text Area", Vector2.zero, Vector3.zero);
+            GameObject textArea = UIElement.Create(RootObject.transform, "Text Area", Vector2.zero, Vector3.zero);
             RectTransform textAreaRect = textArea.GetComponent<RectTransform>();
 
             // Text
@@ -34,7 +34,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.UI
             textText.gameObject.AddComponent<CanvasRenderer>();
 
             // Input Field
-            TMP_InputField inputField = root.AddComponent<TMP_InputField>();
+            TMP_InputField inputField = RootObject.AddComponent<TMP_InputField>();
             inputField.textViewport = textAreaRect;
             inputField.textComponent = textText;
             inputField.interactable = interactable;

@@ -1,6 +1,6 @@
 {
     "name": "RuntimeNodeEditor.UI.Canvas.Node",
-    "rootNamespace": "",
+    "rootNamespace": "RuntimeNodeEditor.UI.Canvas.Node",
     "references": [
         "GUID:e2dd76dbb2b8d5c40ab42d8325e60c41",
         "GUID:32356a874d537a64d9bfc3c26683f7ad",

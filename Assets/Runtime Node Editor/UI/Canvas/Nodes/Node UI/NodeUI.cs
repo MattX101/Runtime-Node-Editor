@@ -8,7 +8,11 @@ namespace RuntimeNodeEditor.UI.Canvas.Node
 {
     public partial class NodeUI : MonoBehaviour
     {
-        internal string NodeId { get; private set; } = "NodeUI";
+        internal string NodeId 
+        { 
+            get; 
+            private set; 
+        } = "NodeUI";
 
         // In/Out Pointers
         protected int NumOfLayers = 0, NumOfInputs = 0, NumOfOutputs = 0;
@@ -21,7 +25,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Node
         {
             NodeId = nodeId;
 
-            root = gameObject;
+            RootObject = gameObject;
         }
 
         protected void CreateNodeUI(RuntimeNodeEditor.Node.Node node, Color primaryColour, string title)
@@ -37,30 +41,30 @@ namespace RuntimeNodeEditor.UI.Canvas.Node
             SetRootColor(primaryHSL);
 
             // Root element
-            root.transform.SetParent(UISettings.NodeSpawnTransform);
-            _rootImage = root.AddComponent<RawImage>();
+            RootObject.transform.SetParent(UISettings.NodeSpawnTransform);
+            _rootImage = RootObject.AddComponent<RawImage>();
             SetPrimaryColor();
-            _canvasGroup = root.AddComponent<CanvasGroup>();
+            _canvasGroup = RootObject.AddComponent<CanvasGroup>();
 
-            rootRect = root.GetComponent<RectTransform>();
+            _rootRect = RootObject.GetComponent<RectTransform>();
 
-            rootRect.sizeDelta = new Vector2(
+            _rootRect.sizeDelta = new Vector2(
                 UISettings.NodeWidth,
                 UISettings.HeaderHeight + _bodyHeight);
 
-            if (togglePreviewImage)
-                rootRect.sizeDelta += new Vector2(0, UISettings.PreviewSize);
+            if (TogglePreviewImage)
+                _rootRect.sizeDelta += new Vector2(0, UISettings.PreviewSize);
 
             _borderX2 = UISettings.BorderSize * 2;
-            _sizeX = rootRect.sizeDelta.x - _borderX2;
+            _sizeX = _rootRect.sizeDelta.x - _borderX2;
             _sizeY = UISettings.HeaderHeight - _borderX2;
 
             _rootSize = new Vector2(_sizeX, _sizeY);
 
             AddHeader(ColourConversion.HSLToRGB(primaryHSL.x, primaryHSL.y, primaryHSL.z * 0.75f), title);
-            AddBody(ColourConversion.HSLToRGB(primaryHSL.x, primaryHSL.y * 0.5f, primaryHSL.z));
+            AddBody();
 
-            AddCollision(root);
+            AddCollision(RootObject);
         }
 
         private void AddCollision(GameObject gameObject)
@@ -86,11 +90,11 @@ namespace RuntimeNodeEditor.UI.Canvas.Node
                 pointerIsInput,
                 createText);
 
-            UIPointer uiPointer = uiPointerObject.AddComponent<UIPointer>();
-            uiPointer.nodeTitle = _titleText.text;
-            uiPointer.header = _titleText;
-            uiPointer.image = uiPointerObject.GetComponent<RawImage>();
-            uiPointer.color = color;
+            uiPointerObject.AddComponent<UIPointer>().Init(
+                _titleText.text, 
+                _titleText, 
+                uiPointerObject.GetComponent<RawImage>(), 
+                color);
 
             return uiPointerObject;
         }

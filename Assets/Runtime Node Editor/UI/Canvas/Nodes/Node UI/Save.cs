@@ -17,8 +17,8 @@ namespace RuntimeNodeEditor.UI.Canvas.Node
             bytes.AddRange(NodeId.Select(character => (byte)character));
 
             // Node Position
-            bytes.AddRange(BitConverter.GetBytes(rootRect.localPosition.x));
-            bytes.AddRange(BitConverter.GetBytes(rootRect.localPosition.y));
+            bytes.AddRange(BitConverter.GetBytes(_rootRect.localPosition.x));
+            bytes.AddRange(BitConverter.GetBytes(_rootRect.localPosition.y));
 
             return bytes.ToArray();
         }

@@ -19,18 +19,23 @@ namespace RuntimeNodeEditor.Node.Pointer
             private set;
         }
 
-        public OutputPointer(Node node) : base(node) { }
+        public OutputPointer(Node node) : base(node)
+        {
+            //
+        }
 
         private void Update()
         {
             if (Lines == null || Lines.Count == 0)
                 return;
 
-            if (!CanvasData.IsDragging && !CanvasData.IsPanning && !CanvasData.IsScrolling)
+            if (!GlobalData.IsDragging && !GlobalData.IsPanning && !GlobalData.IsScrolling)
                 return;
 
             foreach (ConnectionLine line in Lines)
+            {
                 line.UpdateLinePositions();
+            }
         }
 
         protected virtual void ResetPointer() { }
@@ -44,15 +49,15 @@ namespace RuntimeNodeEditor.Node.Pointer
             ConnectedInputPointers.Clear();
         }
 
-        internal void AddConnection(InputPointer input)
+        internal void AddConnection(InputPointer Input)
         {
             ConnectedInputPointers ??= new List<InputPointer>();
-            ConnectedInputPointers.Add(input);
+            ConnectedInputPointers.Add(Input);
         }
 
-        internal void RemoveConnection(InputPointer input)
+        internal void RemoveConnection(InputPointer Input)
         {
-            ConnectedInputPointers.Remove(input);
+            ConnectedInputPointers.Remove(Input);
         }
 
         internal void DeleteConnections()
@@ -61,7 +66,9 @@ namespace RuntimeNodeEditor.Node.Pointer
                 return;
 
             for (int i = ConnectedInputPointers.Count - 1; i >= 0; i--)
+            {
                 ConnectedInputPointers[i].DeleteConnection();
+            }
         }
 
         internal void AddLine(ConnectionLine connectionLine)

@@ -7,13 +7,13 @@ namespace RuntimeNodeEditor.UI.Canvas.Node
     public partial class NodeUI
     {
         // Root
-        protected internal GameObject root;
+        protected internal GameObject RootObject;
 
-        private RectTransform rootRect;
+        private RectTransform _rootRect;
         public Vector3 RootPosition
         {
-            get => rootRect.localPosition; 
-            set => rootRect.localPosition = value; 
+            get => _rootRect.localPosition; 
+            set => _rootRect.localPosition = value; 
         }
 
         private Vector2 _rootSize;
@@ -25,10 +25,10 @@ namespace RuntimeNodeEditor.UI.Canvas.Node
 
         protected void PopulateRoot(string title)
         {
-            root.name = title;
-            root.transform.parent = UISettings.NodeSpawnTransform.transform;
+            RootObject.name = title;
+            RootObject.transform.parent = UISettings.NodeSpawnTransform.transform;
             
-            RectTransform rect = root.AddComponent<RectTransform>();
+            RectTransform rect = RootObject.AddComponent<RectTransform>();
             rect.localScale = Vector3.one;
             rect.sizeDelta = Vector2.one;
             rect.localPosition = Vector3.zero;

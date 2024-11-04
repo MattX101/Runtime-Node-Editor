@@ -1,6 +1,6 @@
 {
     "name": "RuntimeNodeEditor.UI",
-    "rootNamespace": "",
+    "rootNamespace": "RuntimeNodeEditor.UI",
     "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],

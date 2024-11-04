@@ -8,8 +8,8 @@ namespace RuntimeNodeEditor.Node.Connection.Line
         {
             SetPositions();
 
-            _startPosition *= CanvasData.ScalerFactor;
-            _endPosition *= CanvasData.ScalerFactor;
+            _startPosition *= GlobalData.ScalerFactor;
+            _endPosition *= GlobalData.ScalerFactor;
 
             UpdatePoints();
         }

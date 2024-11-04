@@ -6,20 +6,16 @@ namespace RuntimeNodeEditor.Data
     internal class DataManager : MonoBehaviour
     {
         [SerializeField]
-        private new Camera camera;
+        private CanvasScaler _canvasScaler;
 
         [SerializeField]
-        private CanvasScaler canvasScaler;
-
-        [SerializeField]
-        private GameObject nodeUIPanel;
+        private GameObject _nodeUIPanel;
 
         private void Awake()
         {
-            CanvasData.Camera = camera;
-            CanvasData.CanvasScaler = canvasScaler;
-
-            UIData.NodeUIPanel = nodeUIPanel;
+            GlobalData.Camera = FindObjectOfType<Camera>();
+            GlobalData.CanvasScaler = _canvasScaler;
+            GlobalData.NodeUIPanel = _nodeUIPanel;
         }
     }
 }

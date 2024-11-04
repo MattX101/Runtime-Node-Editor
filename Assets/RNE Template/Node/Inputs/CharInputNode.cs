@@ -6,7 +6,7 @@ namespace RNE.Template.Node
     {
         protected override void CodeToExecute()
         {
-            outputs[0].GetComponent<CharOutputPointer>().value =
+            Outputs[0].GetComponent<CharOutputPointer>().Value =
                 Elements.InputFields[0].text.Length != 0 ?
                 Elements.InputFields[0].text[0] : 
                 ' ';
@@ -14,7 +14,7 @@ namespace RNE.Template.Node
 
         protected override void CodeToReset()
         {
-            outputs[0].GetComponent<CharOutputPointer>().Reset();
+            Outputs[0].GetComponent<CharOutputPointer>().Reset();
         }
     }
 }

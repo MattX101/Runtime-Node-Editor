@@ -13,7 +13,7 @@ namespace RuntimeNodeEditor.Node.Connection.Lines
         private Transform _linesParent;
 
         [SerializeField] 
-        private Material sourceMaterial;
+        private Material _sourceMaterial;
 
         private void Destroy(ConnectionLine line)
         {
@@ -22,28 +22,28 @@ namespace RuntimeNodeEditor.Node.Connection.Lines
 
         private void CreateOnClick()
         {
-            if (!CanvasData.CanPoint)
+            if (!GlobalData.CanPoint)
                 return;
 
-            if (!_raycastHit2D.collider || _raycastHit2D.collider.TryGetComponent(out OutputPointer output) == false)
+            if (!_raycastHit2D.collider || _raycastHit2D.collider.TryGetComponent(out OutputPointer Output) == false)
                 return;
 
-            CanvasData.IsPointing = true;
-            CanvasData.CanPoint = false;
+            GlobalData.IsPointing = true;
+            GlobalData.CanPoint = false;
 
-            Create(output);
+            Create(Output);
         }
 
-        private void Create(OutputPointer output)
+        private void Create(OutputPointer Output)
         {
-            _currentConnectionLine = new ConnectionLine(_linesParent, sourceMaterial, new Vector3(_mousePos.x, _mousePos.y, 100.0f))
+            _currentConnectionLine = new ConnectionLine(_linesParent, _sourceMaterial, new Vector3(_mousePos.x, _mousePos.y, 100.0f))
             {
-                Output = output
+                Output = Output
             };
 
-            _currentOutputPointer = output;
+            _currentOutputPointer = Output;
 
-            output.AddLine(_currentConnectionLine);
+            Output.AddLine(_currentConnectionLine);
         }
 
         private void DropLine()
@@ -53,8 +53,8 @@ namespace RuntimeNodeEditor.Node.Connection.Lines
                 Destroy(_currentConnectionLine);
             }
 
-            CanvasData.IsPointing = false;
-            CanvasData.CanPoint = true;
+            GlobalData.IsPointing = false;
+            GlobalData.CanPoint = true;
 
             _currentConnectionLine = null;
             _currentOutputPointer = null;

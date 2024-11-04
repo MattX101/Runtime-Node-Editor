@@ -6,7 +6,10 @@ namespace RuntimeNodeEditor.Node.UIFunctions.Elements
 {
     public partial class NodeUIElements
     {
-        public readonly BooleanButton[] Buttons;
+        public BooleanButton[] Buttons
+        {
+            get;
+        }
 
         public void SetBoolean(BooleanButton booleanButton, bool value)
         {

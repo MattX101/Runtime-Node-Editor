@@ -1,6 +1,6 @@
 {
     "name": "RNE.Template.UI",
-    "rootNamespace": "",
+    "rootNamespace": "RNE.Template.UI",
     "references": [
         "GUID:971907e042dcd334289fba405f52b119",
         "GUID:a51e64d045fc8a144b8a9eef1e5ea548",

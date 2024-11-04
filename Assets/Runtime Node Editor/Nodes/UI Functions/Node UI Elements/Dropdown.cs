@@ -6,11 +6,14 @@ namespace RuntimeNodeEditor.Node.UIFunctions.Elements
 {
     public partial class NodeUIElements
     {
-        public readonly Component.Dropdown[] Dropdowns;
+        public Component.Dropdown[] Dropdowns
+        {
+            get;
+        }
 
         public void SetDropdown(Component.Dropdown dropdown, int context, string text)
         {
-            dropdown.Context = context;
+            dropdown.SetContext(context);
             dropdown.Text.text = text;
         }
 

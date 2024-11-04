@@ -4,29 +4,29 @@ namespace RNE.Template.Node.Pointer.Value
 {
     public static partial class PointerValue
     {
-        public static float GetFloat(OutputPointer output)
+        public static float GetFloat(OutputPointer Output)
         {
-            return output.ValueTypeIndex switch
+            return Output.ValueTypeIndex switch
             {
-                (int)ValueType.Float => output.GetComponent<FloatOutputPointer>().value,
-                (int)ValueType.Int => output.GetComponent<IntOutputPointer>().value,
+                (int)ValueType.Float => Output.GetComponent<FloatOutputPointer>().Value,
+                (int)ValueType.Int => Output.GetComponent<IntOutputPointer>().Value,
                 _ => 0.0f
             };
         }
 
-        public static float GetFloat(InputPointer input)
+        public static float GetFloat(InputPointer Input)
         {
             return 
-                IsValid(input) ? 
-                GetFloat(input.ConnectedOutputPointer) : 
+                IsValid(Input) ? 
+                GetFloat(Input.ConnectedOutputPointer) : 
                 0.0f;
         }
 
-        public static void GetFloat(InputPointer input, ref float value)
+        public static void GetFloat(InputPointer Input, ref float value)
         {
             value = 
-                IsValid(input) ? 
-                GetFloat(input.ConnectedOutputPointer) : 
+                IsValid(Input) ? 
+                GetFloat(Input.ConnectedOutputPointer) : 
                 value;
         }
     }

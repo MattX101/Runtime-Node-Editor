@@ -1,6 +1,6 @@
 {
     "name": "RuntimeNodeEditor",
-    "rootNamespace": "",
+    "rootNamespace": "RuntimeNodeEditor",
     "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],

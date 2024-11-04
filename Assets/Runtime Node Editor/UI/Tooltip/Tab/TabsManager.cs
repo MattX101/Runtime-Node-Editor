@@ -14,7 +14,9 @@ namespace RuntimeNodeEditor.UI.Tooltip.Tab
         public void HideTabs()
         {
             foreach (Tab tab in _tabs)
+            {
                 tab.Hide();
+            }
         }
     }
 }
