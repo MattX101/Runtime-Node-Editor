@@ -52,6 +52,9 @@ namespace RuntimeNodeEditor.Node.Connection.Data
 
         private static void DeleteOutputConnections(OutputPointer Output)
         {
+            if (Output.Lines == null || Output.Lines.Count == 0)
+                return;
+
             foreach (ConnectionLine line in Output.Lines)
             {
                 Remove(line);
@@ -62,6 +65,9 @@ namespace RuntimeNodeEditor.Node.Connection.Data
 
         private static void DeleteInputConnection(InputPointer Input)
         {
+            if (Input.Line == null)
+                return;
+
             Remove(Input.Line);
             Input.DeleteConnection();
         }
