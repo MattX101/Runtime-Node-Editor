@@ -66,8 +66,10 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.Save
 
                 for (int inputPointerIndex = 0; inputPointerIndex < nodes[nodeIndex].Inputs.Count; inputPointerIndex++)
                 {
-                    SaveOutput(bytes, nodes, nodeIndex, nodes[nodeIndex].Inputs[inputPointerIndex].ConnectedOutputPointer, inputPointerIndex);
-                    count++;
+                    if (SaveOutput(bytes, nodes, nodeIndex, nodes[nodeIndex].Inputs[inputPointerIndex].ConnectedOutputPointer, inputPointerIndex))
+                    {
+                        count++;
+                    }
                 }
             }
 
@@ -80,17 +82,17 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.Save
             return bytes.ToArray();
         }
 
-        private static void SaveOutput(List<byte> bytes, RuntimeNodeEditor.Node.Node[] nodes, int nodeIndex, OutputPointer outputPointer, int inputPointerIndex)
+        private static bool SaveOutput(List<byte> bytes, RuntimeNodeEditor.Node.Node[] nodes, int nodeIndex, OutputPointer outputPointer, int inputPointerIndex)
         {
             if (outputPointer == null)
-                return;
+                return false;
 
             int connectedOutputNode = FindNode(
                 nodes,
                 outputPointer.Node);
 
             if (connectedOutputNode == -1)
-                return;
+                return false;
 
             int connectedOutputIndex = FindPointer(
                 nodes,
@@ -98,13 +100,15 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.Save
                 outputPointer);
 
             if (connectedOutputIndex == -1)
-                return;
+                return false;
 
             bytes.AddRange(BitConverter.GetBytes(nodeIndex));
             bytes.Add((byte)inputPointerIndex);
 
             bytes.AddRange(BitConverter.GetBytes(connectedOutputNode));
             bytes.Add((byte)connectedOutputIndex);
+
+            return true;
         }
 
         private static int FindNode(RuntimeNodeEditor.Node.Node[] nodes, RuntimeNodeEditor.Node.Node nodeToFind)

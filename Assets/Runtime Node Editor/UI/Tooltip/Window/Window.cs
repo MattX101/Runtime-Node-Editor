@@ -32,9 +32,9 @@ namespace RuntimeNodeEditor.UI.Tooltip.Window
                 Destroy(gameObject);
             }
 
-            Toggle();
-
             GlobalData.WindowOpened = openWindow;
+
+            Toggle();
         }
 
         private void Toggle()
