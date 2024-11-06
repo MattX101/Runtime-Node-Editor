@@ -46,12 +46,18 @@ namespace RuntimeNodeEditor.Node.Connection.Lines
             foreach (ConnectionLine line in LinesData.DroppedLinesArray)
             {
                 UpdateLineWidth(line);
+                UpdateLinePosition(line);
             }
         }
 
         private void UpdateLineWidth(ConnectionLine line)
         {
             line.UpdateWidth();
+        }
+
+        private void UpdateLinePosition(ConnectionLine line)
+        {
+            line.UpdateLinePositions();
         }
     }
 }

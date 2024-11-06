@@ -11,11 +11,17 @@ namespace RuntimeNodeEditor.Node.Connection.Line
         private void SetPositions()
         {
             _startPosition = Output.transform.position;
+            _startPosition.z = 100;
+
             _endPosition = Input.transform.position;
+            _endPosition.z= 100;
         }
 
         private void UpdatePoints()
         {
+            _startPosition.z = 100;
+            _endPosition.z = 100;
+
             SetNumberOfPoints(_endPosition);
 
             _lineRenderer.SetPosition(0, _endPosition);

@@ -28,7 +28,7 @@ namespace RuntimeNodeEditor.Node.Connection.Line
             _lineRenderer.material = new Material(material);
 
             _startPosition = start;
-            _lineRenderer.SetPosition(0, start);
+            _lineRenderer.SetPosition(0, _startPosition);
         }
 
         public void SetMaterial(Color color)
