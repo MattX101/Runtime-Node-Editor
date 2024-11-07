@@ -25,6 +25,8 @@ namespace RuntimeNodeEditor.Input
             _lastSavedWorldMousePos = Vector2.zero;
             _lastSavedViewportMousePos = Vector2.zero;
 
+            ViewportPosition = Vector2.zero;
+
             _positionFromOriginZoomed = Vector3.zero;
             _nodesRect.position = new Vector3(0, 0, NodesRectPosition.z);
         }
