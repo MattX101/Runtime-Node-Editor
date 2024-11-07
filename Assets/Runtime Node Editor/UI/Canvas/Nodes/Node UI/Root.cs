@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using RuntimeNodeEditor.Data;
+using UnityEngine;
 using UnityEngine.UI;
 using Utils.Colour;
 
@@ -26,7 +27,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Node
         protected void PopulateRoot(string title)
         {
             RootObject.name = title;
-            RootObject.transform.parent = UISettings.NodeSpawnTransform.transform;
+            RootObject.transform.parent = GlobalData.NodeSpawnTransform.transform;
             
             RectTransform rect = RootObject.AddComponent<RectTransform>();
             rect.localScale = Vector3.one;

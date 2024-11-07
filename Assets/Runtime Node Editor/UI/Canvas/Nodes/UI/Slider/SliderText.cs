@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using TMPro;
+using RuntimeNodeEditor.Data;
 
 namespace RuntimeNodeEditor.UI.Canvas.Node.UI
 {
@@ -7,7 +8,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.UI
     {
         private static TextMeshPro CreateTextField(Transform parent)
         {
-            Vector2 scale = new Vector2(UISettings.SliderTextFieldWidth, UISettings.PointerSize);
+            Vector2 scale = new Vector2(GlobalData.SliderTextFieldWidth, GlobalData.PointerSize);
 
             // Text Field
             GameObject textPreviewObject = UIElement.Create(
@@ -40,7 +41,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.UI
         {
             get
             {
-                return UISettings.NodeWidth + (UISettings.PointerSize / 4) - UISettings.SliderTextFieldWidth - (UISettings.BorderSize * 2);
+                return GlobalData.NodeWidth + (GlobalData.PointerSize / 4) - GlobalData.SliderTextFieldWidth - (GlobalData.BorderSize * 2);
             }
         }
     }

@@ -1,6 +1,6 @@
-using RuntimeNodeEditor.UI.Canvas.Grid;
-using RuntimeNodeEditor.Input;
 using RuntimeNodeEditor.Data;
+using RuntimeNodeEditor.Input;
+using RuntimeNodeEditor.UI.Canvas.Grid;
 using Utils.Colour;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,13 +10,16 @@ namespace RuntimeNodeEditor.UI.Canvas
     public class CanvasManager : MonoBehaviour
     {
         [SerializeField] private Color _cameraBackgroundColour;
-
-        [SerializeField] private RectTransform _nodesRect, _nodesCanvasRect;
-
         [SerializeField] private RawImage _gridImage;
 
+        [Header("Nodes")]
+        [SerializeField] private GameObject _nodesParent;
+        [SerializeField] private RectTransform _nodesRect;
+        [SerializeField] private RectTransform _nodesCanvasRect;
+        [SerializeField] private Tooltip.Window.Window _canvasClearWindow;
+
         private Vector3 _screenRes;
-        
+
         private void Awake()
         {
             Pan.NodesRect = _nodesRect;
@@ -57,6 +60,13 @@ namespace RuntimeNodeEditor.UI.Canvas
             BackgroundGrid.Instance.UpdateGrid();
         }
 
+        public void ResetOnValidate()
+        {
+            if (_nodesParent.transform.childCount > 0)
+                return;
+
+            Reset();
+        }
         public void Reset()
         {
             UpdateCanvasScale();
@@ -82,6 +92,16 @@ namespace RuntimeNodeEditor.UI.Canvas
             GlobalData.CanvasScale = 
                 new Vector2(_nodesCanvasRect.rect.width, _nodesCanvasRect.rect.height) 
                 / GlobalData.CanvasScaler.referenceResolution;
+        }
+
+        public void ClearCanvas()
+        {
+            if (_nodesParent.transform.childCount > 0)
+            {
+                _canvasClearWindow.Create();
+
+                return;
+            }
         }
     }
 }

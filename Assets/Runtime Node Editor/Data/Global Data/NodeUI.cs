@@ -1,8 +1,8 @@
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace RuntimeNodeEditor.UI
+namespace RuntimeNodeEditor.Data
 {
-    public static class UISettings
+    public static partial class GlobalData
     {
         public const float NodeWidth = 240.0f;
         public const float HeaderHeight = 60.0f;

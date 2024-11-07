@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using RuntimeNodeEditor.Data;
 
 namespace RuntimeNodeEditor.UI.Canvas.Node.UI
 {
@@ -22,7 +23,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.UI
             GameObject sliderObject = UIElement.Create(
                 parent,
                 "Slider",
-                new Vector2(scaleX, UISettings.PointerSize),
+                new Vector2(scaleX, GlobalData.PointerSize),
                 new Vector3(scaleX / 2, 0, 0));
 
             // Fill
@@ -37,8 +38,8 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.UI
             GameObject handleObject = UIElement.Create(
                 sliderObject.transform,
                 "Handle",
-                new Vector2(UISettings.SliderHandleWidth, 0),
-                new Vector3(UISettings.SliderHandleWidth / 2, 0, 0));
+                new Vector2(GlobalData.SliderHandleWidth, 0),
+                new Vector3(GlobalData.SliderHandleWidth / 2, 0, 0));
 
             return AddSliderComponent(
                 sliderObject.AddComponent<Slider>(),
@@ -68,7 +69,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.UI
         {
             get
             {
-                return UISettings.NodeWidth - (UISettings.PointerSize / 2) - UISettings.SliderHandleWidth - UISettings.SliderTextFieldWidth - (UISettings.BorderSize * 2);
+                return GlobalData.NodeWidth - (GlobalData.PointerSize / 2) - GlobalData.SliderHandleWidth - GlobalData.SliderTextFieldWidth - (GlobalData.BorderSize * 2);
             }
         }
 

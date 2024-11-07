@@ -1,3 +1,4 @@
+using RuntimeNodeEditor.Data;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -29,7 +30,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.UI
                 "Slider Element",
                 Vector2.zero,
                 new Vector3(
-                    -UISettings.NodeWidth + UISettings.BorderSize,
+                    -GlobalData.NodeWidth + GlobalData.BorderSize,
                     0,
                     -1)
                 );
@@ -43,14 +44,14 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.UI
         private static void CreateBackground(Transform parent, Color color)
         {
             // Background
-            float scaleX = UISettings.NodeWidth;
-            scaleX -= UISettings.PointerSize / 2;
-            scaleX -= UISettings.BorderSize * 4;
+            float scaleX = GlobalData.NodeWidth;
+            scaleX -= GlobalData.PointerSize / 2;
+            scaleX -= GlobalData.BorderSize * 4;
 
             GameObject background = UIElement.Create(
                 parent,
                 "Background",
-                new Vector2(scaleX, UISettings.PointerSize),
+                new Vector2(scaleX, GlobalData.PointerSize),
                 new Vector3(scaleX / 2, 0, 0));
 
             RawImage backgroundImage = background.AddComponent<RawImage>();
@@ -62,10 +63,10 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.UI
             float posX = sliderObject.transform.localPosition.x;
             if (pointerIsInput)
             {
-                posX += UISettings.NodeWidth;
-                posX += UISettings.SliderTextFieldWidth;
-                posX += UISettings.BorderSize;
-                posX += UISettings.PointerSize * 1.5f;
+                posX += GlobalData.NodeWidth;
+                posX += GlobalData.SliderTextFieldWidth;
+                posX += GlobalData.BorderSize;
+                posX += GlobalData.PointerSize * 1.5f;
             }
             sliderObject.transform.localPosition = new Vector3(posX, 0, -1);
         }

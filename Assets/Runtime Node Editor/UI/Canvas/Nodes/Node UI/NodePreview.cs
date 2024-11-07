@@ -1,4 +1,5 @@
-﻿using RuntimeNodeEditor.Node.UIFunctions.Component;
+﻿using RuntimeNodeEditor.Data;
+using RuntimeNodeEditor.Node.UIFunctions.Component;
 using RuntimeNodeEditor.UI.Canvas.Node.UI;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,10 +17,10 @@ namespace RuntimeNodeEditor.UI.Canvas.Node
             if (!TogglePreviewImage)
                 return;
 
-            float size = UISettings.PreviewSize - UISettings.PreviewImageMargin;
+            float size = GlobalData.PreviewSize - GlobalData.PreviewImageMargin;
 
             Vector2 previewImageSize = new Vector2(size, size);
-            float posY = (_rootRect.sizeDelta.y - size - UISettings.PreviewImageMargin) / 2 - UISettings.HeaderHeight - _bodyHeight;
+            float posY = (_rootRect.sizeDelta.y - size - GlobalData.PreviewImageMargin) / 2 - GlobalData.HeaderHeight - _bodyHeight;
             Vector3 previewImagePos = new Vector3(0.0f, posY, 0.0f);
 
             GameObject previewImageObject = UIElement.Create(

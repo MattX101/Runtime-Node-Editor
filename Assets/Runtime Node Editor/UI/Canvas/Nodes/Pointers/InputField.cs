@@ -1,4 +1,5 @@
-﻿using RuntimeNodeEditor.UI.Canvas.Node.UI;
+﻿using RuntimeNodeEditor.Data;
+using RuntimeNodeEditor.UI.Canvas.Node.UI;
 using UnityEngine;
 using TMPro;
 
@@ -8,12 +9,12 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.Pointer
     {
         internal static TMP_InputField AddInputField(RuntimeNodeEditor.Node.Node node, Transform parent, TMP_InputField.ContentType contentType, bool pointerIsInput = false, bool interactable = true, bool shorten = false, int layer = 0)
         {
-            float posX = UISettings.NodeWidth / 2;
-            posX += UISettings.PointerSize / 4;
-            posX = shorten ? posX - UISettings.PointerSize / 4 : posX;
+            float posX = GlobalData.NodeWidth / 2;
+            posX += GlobalData.PointerSize / 4;
+            posX = shorten ? posX - GlobalData.PointerSize / 4 : posX;
             posX = !pointerIsInput ? -posX : posX;
             
-            float posY = layer * -(UISettings.InputFieldHeight + UISettings.PointerPadding);
+            float posY = layer * -(GlobalData.InputFieldHeight + GlobalData.PointerPadding);
 
             TMP_InputField inputField = AddInputFieldOfType(node, contentType, parent, interactable, shorten);
             inputField.gameObject.transform.localPosition = new Vector3(posX, posY, -1);
@@ -23,10 +24,10 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.Pointer
 
         internal static TMP_InputField AddHalfInputField(RuntimeNodeEditor.Node.Node node, Transform parent, TMP_InputField.ContentType contentType, bool pointerIsInput = false, bool interactable = true, bool shorten = false, int layer = 0)
         {
-            float posX = UISettings.NodeWidth / 4;
-            posX += UISettings.PointerSize / 4;
+            float posX = GlobalData.NodeWidth / 4;
+            posX += GlobalData.PointerSize / 4;
             posX = !pointerIsInput ? -posX : posX;
-            float posY = layer * -(UISettings.InputFieldHeight + UISettings.PointerPadding);
+            float posY = layer * -(GlobalData.InputFieldHeight + GlobalData.PointerPadding);
 
             TMP_InputField inputField = AddInputFieldOfType(node, contentType, parent, interactable, shorten, true);
             inputField.gameObject.transform.localPosition = new Vector3(posX, posY, -1);

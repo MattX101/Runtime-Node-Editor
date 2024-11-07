@@ -10,12 +10,6 @@ namespace RuntimeNodeEditor.UI.Tooltip
 
         private Button[] _buttons;
 
-        [SerializeField]
-        private GameObject _nodesObject;
-
-        [SerializeField]
-        private Window.OnCanvasClearWindow _canvasClearWindow;
-
         [Header("Auto Tooltip Scaling")]
         [SerializeField] private Camera _camera;
         [SerializeField] private CanvasScaler _scaler;
@@ -44,18 +38,6 @@ namespace RuntimeNodeEditor.UI.Tooltip
         {
             foreach (Button button in _buttons)
                 button.enabled = active;
-        }
-
-        public void ClearCanvas()
-        {
-            if (_nodesObject.GetComponentsInChildren<Node.Node>().Length > 0)
-            {
-                _canvasClearWindow.Create();
-
-                return;
-            }
-
-            _canvasClearWindow.Clear();
         }
     }
 }

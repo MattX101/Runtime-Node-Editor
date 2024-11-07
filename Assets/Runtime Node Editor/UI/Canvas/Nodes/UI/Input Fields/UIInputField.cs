@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using RuntimeNodeEditor.Data;
 
 namespace RuntimeNodeEditor.UI.Canvas.Node.UI
 {
@@ -53,14 +54,17 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.UI
 
         private static Vector2 CalcualteSize(bool shorten, bool halfSize)
         {
-            float width = UISettings.NodeWidth;
+            float width = GlobalData.NodeWidth;
             width /= halfSize ? 2 : 1;
-            width -= UISettings.PointerSize / 2;
-            if (shorten && !halfSize)
-                width -= UISettings.PointerSize / 2;
-            width -= UISettings.PointerPadding * 2;
+            width -= GlobalData.PointerSize / 2;
+            width -= GlobalData.PointerPadding * 2;
 
-            return new Vector2(width, UISettings.InputFieldHeight);
+            if (shorten && !halfSize)
+            {
+                width -= GlobalData.PointerSize / 2;
+            }
+
+            return new Vector2(width, GlobalData.InputFieldHeight);
         }
 
         public static void SetSingleCharacterInputField(TMP_InputField inputField)

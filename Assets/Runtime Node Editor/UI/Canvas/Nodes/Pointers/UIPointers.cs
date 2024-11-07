@@ -1,3 +1,4 @@
+using RuntimeNodeEditor.Data;
 using RuntimeNodeEditor.UI.Canvas.Node.UI;
 using UnityEngine;
 
@@ -10,7 +11,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.Pointer
             GameObject uiElement = UIElement.Create(
                 parent.transform,
                 name,
-                new Vector2(UISettings.PointerSize, UISettings.PointerSize),
+                new Vector2(GlobalData.PointerSize, GlobalData.PointerSize),
                 CalcualtePosition(
                     parent.GetComponent<RectTransform>(),
                     pointerIsInput,
@@ -30,12 +31,12 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.Pointer
 
         private static Vector3 CalcualtePosition(RectTransform rect, bool isInput, int layer)
         {
-            float posX = rect.sizeDelta.x + UISettings.BorderSize * 2;
+            float posX = rect.sizeDelta.x + GlobalData.BorderSize * 2;
             posX = isInput ? -posX : posX;
             posX /= 2;
 
-            float posY = (rect.sizeDelta.y - UISettings.PointerSize) / 2;
-            posY -= layer * (UISettings.PointerSize + UISettings.PointerPadding);
+            float posY = (rect.sizeDelta.y - GlobalData.PointerSize) / 2;
+            posY -= layer * (GlobalData.PointerSize + GlobalData.PointerPadding);
 
             return new Vector3(posX, posY, 0.0f);
         }

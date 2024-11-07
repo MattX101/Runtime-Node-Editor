@@ -1,3 +1,4 @@
+using RuntimeNodeEditor.Data;
 using RuntimeNodeEditor.UI.Canvas.Node.Pointer;
 using RuntimeNodeEditor.UI.Canvas.Node.UI;
 using Utils.Colour;
@@ -32,16 +33,16 @@ namespace RuntimeNodeEditor.UI.Canvas.Node
         {
             int count = NumOfInputs > NumOfOutputs ? NumOfInputs : NumOfOutputs;
             count += NumOfLayers;
-            _bodyHeight = count * UISettings.PointerSize;
-            _bodyHeight += (count - 1) * UISettings.PointerPadding;
-            _bodyHeight += UISettings.BorderSize;
+            _bodyHeight = count * GlobalData.PointerSize;
+            _bodyHeight += (count - 1) * GlobalData.PointerPadding;
+            _bodyHeight += GlobalData.BorderSize;
 
             // Colors
             Vector3 primaryHSL = ColourConversion.RGBToHSL(primaryColour);
             SetRootColor(primaryHSL);
 
             // Root element
-            RootObject.transform.SetParent(UISettings.NodeSpawnTransform);
+            RootObject.transform.SetParent(GlobalData.NodeSpawnTransform);
             _rootImage = RootObject.AddComponent<RawImage>();
             SetPrimaryColor();
             _canvasGroup = RootObject.AddComponent<CanvasGroup>();
@@ -49,15 +50,15 @@ namespace RuntimeNodeEditor.UI.Canvas.Node
             _rootRect = RootObject.GetComponent<RectTransform>();
 
             _rootRect.sizeDelta = new Vector2(
-                UISettings.NodeWidth,
-                UISettings.HeaderHeight + _bodyHeight);
+                GlobalData.NodeWidth,
+                GlobalData.HeaderHeight + _bodyHeight);
 
             if (TogglePreviewImage)
-                _rootRect.sizeDelta += new Vector2(0, UISettings.PreviewSize);
+                _rootRect.sizeDelta += new Vector2(0, GlobalData.PreviewSize);
 
-            _borderX2 = UISettings.BorderSize * 2;
+            _borderX2 = GlobalData.BorderSize * 2;
             _sizeX = _rootRect.sizeDelta.x - _borderX2;
-            _sizeY = UISettings.HeaderHeight - _borderX2;
+            _sizeY = GlobalData.HeaderHeight - _borderX2;
 
             _rootSize = new Vector2(_sizeX, _sizeY);
 
@@ -70,7 +71,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Node
         private void AddCollision(GameObject gameObject)
         {
             BoxCollider2D boxCollider = gameObject.AddComponent<BoxCollider2D>();
-            boxCollider.offset = new Vector2(0, (_bodySize.y + UISettings.BorderSize) / 2);
+            boxCollider.offset = new Vector2(0, (_bodySize.y + GlobalData.BorderSize) / 2);
             boxCollider.size = _rootSize;
         }
 
@@ -85,7 +86,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Node
                 name,
                 pointerIsInput ? _inputs : _outputs, 
                 color,
-                UISettings.PointerTexture,
+                GlobalData.PointerTexture,
                 layer,
                 pointerIsInput,
                 createText);

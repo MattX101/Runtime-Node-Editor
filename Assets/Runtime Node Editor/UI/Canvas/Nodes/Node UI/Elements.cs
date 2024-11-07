@@ -1,4 +1,5 @@
-﻿using RuntimeNodeEditor.UI.Canvas.Node.UI;
+﻿using RuntimeNodeEditor.Data;
+using RuntimeNodeEditor.UI.Canvas.Node.UI;
 using UnityEngine;
 using TMPro;
 
@@ -52,8 +53,8 @@ namespace RuntimeNodeEditor.UI.Canvas.Node
 
         private void AddBody()
         {
-            _bodySize = new Vector2(_sizeX, _rootRect.sizeDelta.y - UISettings.HeaderHeight - UISettings.BorderSize);
-            Vector3 bodyPos = new Vector3(0, (-UISettings.HeaderHeight + UISettings.BorderSize) / 2, 0);
+            _bodySize = new Vector2(_sizeX, _rootRect.sizeDelta.y - GlobalData.HeaderHeight - GlobalData.BorderSize);
+            Vector3 bodyPos = new Vector3(0, (-GlobalData.HeaderHeight + GlobalData.BorderSize) / 2, 0);
 
             _body = UIElement.Create(
                 RootObject.transform,

@@ -16,6 +16,9 @@ namespace RuntimeNodeEditor.UI.Canvas.Node
         {
             get => _factoryManager;
         }
+        [Header("Nodes")]
+        [SerializeField]
+        private GameObject _nodesParent;
 
         private void Update()
         {
@@ -23,6 +26,14 @@ namespace RuntimeNodeEditor.UI.Canvas.Node
             Drag.ManageDrag();
         }
 
+
+        public void ResetOnValidate()
+        {
+            if (_nodesParent.transform.childCount > 0)
+                return;
+
+            Reset();
+        }
         public void Reset()
         {
             Pan.Reset();

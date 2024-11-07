@@ -18,7 +18,7 @@ namespace RNE.Template.Save
         private NodeExecution nodeExecution;
 
         [SerializeField]
-        private RuntimeNodeEditor.UI.Tooltip.Window.OnCanvasClearWindow onOpenWindow;
+        private RuntimeNodeEditor.UI.Tooltip.Window.Window onOpenWindow;
 
         // TODO - Fix On Open bug
         public void Load()

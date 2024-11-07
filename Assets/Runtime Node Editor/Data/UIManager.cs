@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using RuntimeNodeEditor.Data;
+using UnityEngine;
 
 namespace RuntimeNodeEditor.UI
 {
@@ -13,10 +14,10 @@ namespace RuntimeNodeEditor.UI
 
         private void Awake()
         {
-            UISettings.NodeSpawnTransform = _nodeSpawnTransform;
-            UISettings.WindowSpawnParent = _windowSpawnParent;
+            GlobalData.NodeSpawnTransform = _nodeSpawnTransform;
+            GlobalData.WindowSpawnParent = _windowSpawnParent;
 
-            UISettings.PointerTexture = _pointerTexture;
+            GlobalData.PointerTexture = _pointerTexture;
         }
     }
 }

@@ -10,7 +10,7 @@ namespace RuntimeNodeEditor.UI.Tooltip.Window
         
         public void Create()
         {
-            if (GlobalData.NodesCanvasIsActive || UISettings.WindowSpawnParent.childCount != 0)
+            if (GlobalData.NodesCanvasIsActive || GlobalData.WindowSpawnParent.childCount != 0)
                 return;
 
             Manage(true);
@@ -25,7 +25,7 @@ namespace RuntimeNodeEditor.UI.Tooltip.Window
         {
             if (openWindow)
             {
-                Instantiate(WindowObject, UISettings.WindowSpawnParent);
+                Instantiate(WindowObject, GlobalData.WindowSpawnParent);
             }
             else
             {

@@ -1,4 +1,5 @@
-﻿using RuntimeNodeEditor.Node.UIFunctions.Component;
+﻿using RuntimeNodeEditor.Data;
+using RuntimeNodeEditor.Node.UIFunctions.Component;
 using RuntimeNodeEditor.UI.Canvas.Node.UI;
 using UnityEngine;
 using UnityEngine.UI;
@@ -42,7 +43,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.Pointer
             BooleanButton button = UIBooleanPreview.Create(parent, interactable);
             UIBooleanPreview.AddOnValueChange(button.Button, node);
 
-            float posX = UISettings.PointerSize * 1.5f;
+            float posX = GlobalData.PointerSize * 1.5f;
             posX = pointerIsInput ? posX : -posX;
             button.Button.gameObject.transform.localPosition = new Vector3(posX, 0, -1);
 
