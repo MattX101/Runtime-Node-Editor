@@ -22,7 +22,17 @@ namespace RuntimeNodeEditor.Node.Pointer
             private set;
         }
 
-        public InputPointer(Node node) : base(node)
+        private void Awake()
+        {
+            ValueTypeIndex = 1;
+        }
+
+        public virtual void DisableUIElement()
+        {
+            //
+        }
+
+        public virtual void EnableUIElement()
         {
             //
         }

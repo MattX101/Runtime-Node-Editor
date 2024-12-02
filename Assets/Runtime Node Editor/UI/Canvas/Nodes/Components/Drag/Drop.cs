@@ -16,8 +16,6 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.Components
 
         private static void Drop()
         {
-            _selectedNodeUI.BlockRaycasts(true);
-
             _dragOnSpawn = false;
             GlobalData.IsDragging = false;
 

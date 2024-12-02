@@ -1,22 +1,33 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace RuntimeNodeEditor.UI.Canvas.Node.Factory
 {
     public class FactoryManager : MonoBehaviour
     {
-        public void Spawn(string id)
+        [SerializeField]
+        private Transform _nodesParent;
+
+        public void Spawn(GameObject node)
         {
-            Spawn(id, Vector3.zero);
+            InitSpawnDrag(
+                Instantiate(node, _nodesParent).GetComponent<NodeUI>()
+                );
         }
 
-        public void Spawn(string id, Vector3 position)
+        public GameObject ReturnSpawn(GameObject node)
         {
-            InitSpawnDrag(Factory.CreateNode(id, position));
+            GameObject nodeObject = Instantiate(node, _nodesParent);
+
+            InitSpawnDrag(nodeObject.GetComponent<NodeUI>());
+
+            return nodeObject;
         }
 
-        public NodeUI SpawnWithReturn(string id, Vector3 position)
+        public NodeUI ReturnSpawnUI(NodeUI node)
         {
-            NodeUI nodeUI = Factory.CreateNode(id, position);
+            GameObject nodeObject = Instantiate(node.gameObject, _nodesParent);
+
+            NodeUI nodeUI = nodeObject.GetComponent<NodeUI>();
             InitSpawnDrag(nodeUI);
 
             return nodeUI;

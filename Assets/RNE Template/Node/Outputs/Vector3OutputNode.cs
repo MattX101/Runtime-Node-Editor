@@ -25,9 +25,9 @@ namespace RNE.Template.Node
             PointerValue.GetFloat(Inputs[2], ref v.y);
             PointerValue.GetFloat(Inputs[3], ref v.z);
 
-            Elements.SetInputField(Elements.InputFields[0], v.x.ToString());
-            Elements.SetInputField(Elements.InputFields[1], v.y.ToString());
-            Elements.SetInputField(Elements.InputFields[2], v.z.ToString());
+            Elements.SetInputField(Elements.inputFields[0], v.x.ToString());
+            Elements.SetInputField(Elements.inputFields[1], v.y.ToString());
+            Elements.SetInputField(Elements.inputFields[2], v.z.ToString());
         }
     }
 }

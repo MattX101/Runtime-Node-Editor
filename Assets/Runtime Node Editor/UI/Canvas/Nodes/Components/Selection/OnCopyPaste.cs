@@ -6,12 +6,12 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.Components
     {
         private static bool _currentCopyIsCut;
 
-        private static RuntimeNodeEditor.Node.Node _copiedNode;
+        private static NodeUI _copiedNodeUI;
         private static bool CopiedNodeIsNull
         {
             get
             {
-                return _copiedNode == null;
+                return _copiedNodeUI == null;
             }
         }
 
@@ -20,7 +20,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.Components
             if (CurrentNodeIsNull)
                 return;
 
-            _copiedNode = _currentNode;
+            _copiedNodeUI = _currentNode;
             _currentCopyIsCut = cut;
         }
 
@@ -29,22 +29,25 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.Components
             if (CopiedNodeIsNull)
                 return;
 
-            NodeUI copiedNodeUI = _copiedNode.GetComponent<NodeUI>();
-            NodeUI newNodeUI = nodeUIManager.FactoryManager.SpawnWithReturn(copiedNodeUI.NodeId, copiedNodeUI.RootPosition);
+            Deselect();
+            DeselectCopiedNode();
 
-            RuntimeNodeEditor.Node.Node newNode = newNodeUI.RootObject.GetComponent<RuntimeNodeEditor.Node.Node>();
+            NodeUI nodeUI = nodeUIManager.FactoryManager.ReturnSpawnUI(_copiedNodeUI);
+
+            RuntimeNodeEditor.Node.Node copiedNode = _copiedNodeUI.GetComponent<RuntimeNodeEditor.Node.Node>();
+            RuntimeNodeEditor.Node.Node newNode = nodeUI.GetComponent<RuntimeNodeEditor.Node.Node>();
 
             if (newNode.Elements != null)
             {
-                newNode.Elements.SetElements(_copiedNode.Elements);
+                newNode.Elements.SetElements(copiedNode.Elements);
             }
             
-            connectionLines.Paste(_copiedNode, newNode);
+            connectionLines.Paste(copiedNode, newNode);
 
             if (_currentCopyIsCut)
             {
-                Delete(_copiedNode);
-                _currentNode = newNode;
+                Delete(_copiedNodeUI, true);
+                _currentNode = nodeUI;
                 Copy(false);
             }
         }

@@ -23,21 +23,37 @@ namespace RNE.Template.Node
 
         protected override void DataToGetAndSet()
         {
-            bool a = PointerValue.GetBool(Inputs[0]);
-            bool b = PointerValue.GetBool(Inputs[1]);
+            bool a = false;
+            if (Inputs[0].ConnectedOutputPointer)
+            {
+                a = PointerValue.GetBool(Inputs[0]);
+                Elements.SetBoolean(Elements.buttons[0], a);
+            }
+            else
+            {
+                a = Elements.buttons[0].isOn;
+            }
 
-            Elements.SetBoolean(Elements.Buttons[0], a);
-            Elements.SetBoolean(Elements.Buttons[1], b);
+            bool b = false;
+            if (Inputs[1].ConnectedOutputPointer)
+            {
+                b = PointerValue.GetBool(Inputs[1]);
+                Elements.SetBoolean(Elements.buttons[1], b);
+            }
+            else
+            {
+                b = Elements.buttons[1].isOn;
+            }
 
             bool result = CalcualteGate(a, b);
 
             Outputs[0].GetComponent<BoolOutputPointer>().Value = result;
-            Elements.SetBoolean(Elements.Buttons[2], result);
+            Elements.SetBoolean(Elements.buttons[2], result);
         }
 
         private bool CalcualteGate(bool a, bool b)
         {
-            return Elements.Dropdowns[0].Context switch
+            return Elements.dropdowns[0].value switch
             {
                 0 => AND(a, b),
                 1 => OR(a, b),

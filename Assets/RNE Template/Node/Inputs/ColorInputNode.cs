@@ -7,15 +7,15 @@ namespace RNE.Template.Node
     {
         protected override void CodeToExecute()
         {
-            Outputs[1].GetComponent<FloatOutputPointer>().Value = Elements.Sliders[0].value;
-            Outputs[2].GetComponent<FloatOutputPointer>().Value = Elements.Sliders[1].value;
-            Outputs[3].GetComponent<FloatOutputPointer>().Value = Elements.Sliders[2].value;
+            Outputs[0].GetComponent<FloatOutputPointer>().Value = Elements.sliders[0].value;
+            Outputs[1].GetComponent<FloatOutputPointer>().Value = Elements.sliders[1].value;
+            Outputs[2].GetComponent<FloatOutputPointer>().Value = Elements.sliders[2].value;
 
-            Outputs[0].GetComponent<ColorOutputPointer>().Value =
+            Outputs[3].GetComponent<ColorOutputPointer>().Value =
                 new Color(
-                    Elements.Sliders[0].value,
-                    Elements.Sliders[1].value,
-                    Elements.Sliders[2].value);
+                    Elements.sliders[0].value,
+                    Elements.sliders[1].value,
+                    Elements.sliders[2].value);
         }
 
         protected override void CodeToReset()

@@ -5,7 +5,7 @@ namespace RuntimeNodeEditor.Node.Connection.Line
 {
     internal partial class ConnectionLine
     {
-        private const float LineWidth = 0.1f;
+        private const float LineWidth = 0.05f;
 
         internal void UpdateWidth()
         {

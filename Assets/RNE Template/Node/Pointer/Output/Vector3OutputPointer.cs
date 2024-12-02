@@ -1,3 +1,4 @@
+using RNE.Template.Node.Pointer.Value;
 using RuntimeNodeEditor.Node.Pointer;
 using UnityEngine;
 
@@ -7,7 +8,10 @@ namespace RNE.Template.Node.Pointer
     {
         public Vector3 Value = Vector3.zero;
 
-        public Vector3OutputPointer(RuntimeNodeEditor.Node.Node node) : base(node) { }
+        private void Awake()
+        {
+            ValueTypeIndex = (int)ValueType.Vector3;
+        }
 
         protected override void ResetPointer()
         {

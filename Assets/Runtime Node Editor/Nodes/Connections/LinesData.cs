@@ -70,6 +70,7 @@ namespace RuntimeNodeEditor.Node.Connection.Data
 
             Remove(Input.Line);
             Input.DeleteConnection();
+            Input.EnableUIElement();
         }
     }
 }

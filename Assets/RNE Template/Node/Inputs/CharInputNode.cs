@@ -7,8 +7,8 @@ namespace RNE.Template.Node
         protected override void CodeToExecute()
         {
             Outputs[0].GetComponent<CharOutputPointer>().Value =
-                Elements.InputFields[0].text.Length != 0 ?
-                Elements.InputFields[0].text[0] : 
+                Elements.inputFields[0].text.Length != 0 ?
+                Elements.inputFields[0].text[0] : 
                 ' ';
         }
 

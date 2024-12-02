@@ -1,4 +1,4 @@
-using RuntimeNodeEditor.Node.UIFunctions.Component;
+using RuntimeNodeEditor.Node.UI.Functions;
 using RNE.Template.Node.Pointer;
 using UnityEngine;
 using TMPro;
@@ -11,7 +11,7 @@ namespace RNE.Template.Node
         {
             Outputs[0].GetComponent<Vector2OutputPointer>().Value = Vector2.zero;
 
-            TMP_InputField xField = Elements.InputFields[0];
+            TMP_InputField xField = Elements.inputFields[0];
             if (xField.text.Length != 0)
             {
                 float x = InputFieldToFloat.Get(xField.text);
@@ -20,7 +20,7 @@ namespace RNE.Template.Node
                 Outputs[0].GetComponent<Vector2OutputPointer>().Value.x = x;
             }
 
-            TMP_InputField yField = Elements.InputFields[1];
+            TMP_InputField yField = Elements.inputFields[1];
             if (yField.text.Length != 0)
             {
                 float y = InputFieldToFloat.Get(yField.text);

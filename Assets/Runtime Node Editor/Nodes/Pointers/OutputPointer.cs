@@ -19,11 +19,6 @@ namespace RuntimeNodeEditor.Node.Pointer
             private set;
         }
 
-        public OutputPointer(Node node) : base(node)
-        {
-            //
-        }
-
         private void Update()
         {
             if (Lines == null || Lines.Count == 0)
@@ -67,6 +62,7 @@ namespace RuntimeNodeEditor.Node.Pointer
 
             for (int i = ConnectedInputPointers.Count - 1; i >= 0; i--)
             {
+                ConnectedInputPointers[i].EnableUIElement();
                 ConnectedInputPointers[i].DeleteConnection();
             }
         }

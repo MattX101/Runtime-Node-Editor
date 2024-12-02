@@ -1,31 +1,31 @@
-using RuntimeNodeEditor.UI.Canvas.Node.Components;
-using RuntimeNodeEditor.Node.Connection.Lines;
 using RuntimeNodeEditor.Input;
+using RuntimeNodeEditor.Node.Connection.Lines;
+using RuntimeNodeEditor.UI.Canvas.Node.Components;
 using UnityEngine;
 
 namespace RuntimeNodeEditor.UI.Canvas.Node
 {
     public class NodeUIManager : MonoBehaviour
     {
-        [SerializeField] 
+        [SerializeField]
         private ConnectionLines _connectionLines;
 
-        [SerializeField] 
+        [SerializeField]
         private Factory.FactoryManager _factoryManager;
-        internal Factory.FactoryManager FactoryManager
+        public Factory.FactoryManager FactoryManager
         {
             get => _factoryManager;
         }
+
         [Header("Nodes")]
         [SerializeField]
         private GameObject _nodesParent;
 
-        private void Update()
+        void Update()
         {
             Selection.OnUpdate(this, _connectionLines);
             Drag.ManageDrag();
         }
-
 
         public void ResetOnValidate()
         {
@@ -39,7 +39,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Node
             Pan.Reset();
             Zoom.Reset();
 
-            foreach (RuntimeNodeEditor.Node.Node node in GetComponentsInChildren<RuntimeNodeEditor.Node.Node>())
+            foreach (NodeUI node in GetComponentsInChildren<NodeUI>())
             {
                 Selection.Delete(node, true);
             }

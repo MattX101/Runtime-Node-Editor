@@ -5,7 +5,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.Components
 {
     internal static partial class Selection
     {
-        internal static void Delete(RuntimeNodeEditor.Node.Node node, bool ignoreChecks = false)
+        internal static void Delete(NodeUI node, bool ignoreChecks = false)
         {
             if (!ignoreChecks)
             {
@@ -16,7 +16,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.Components
                     return;
             }
 
-            node.DeletePointerConnections();
+            node.GetComponent<RuntimeNodeEditor.Node.Node>().DeletePointerConnections();
 
             Object.Destroy(node.gameObject);
             _currentNode = null;

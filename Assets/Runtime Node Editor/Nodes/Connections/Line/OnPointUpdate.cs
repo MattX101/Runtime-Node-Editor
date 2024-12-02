@@ -5,8 +5,8 @@ namespace RuntimeNodeEditor.Node.Connection.Line
 {
     internal partial class ConnectionLine
     {
-        private const int PositionCountMin = 8;
-        private const int PositionCountMax = 32;
+        private const int PositionCountMin = 32;
+        private const int PositionCountMax = 128;
 
         private void SetPositions()
         {

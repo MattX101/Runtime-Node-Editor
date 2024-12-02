@@ -12,7 +12,7 @@ namespace RNE.Template.Node
 
         protected override void DataToGetAndSet()
         {
-            Elements.SetInputField(Elements.InputFields[0], PointerValue.GetString(Inputs[0]));
+            Elements.SetInputField(Elements.inputFields[0], PointerValue.GetString(Inputs[0]));
         }
     }
 }

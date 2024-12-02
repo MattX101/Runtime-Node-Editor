@@ -33,7 +33,7 @@ namespace RuntimeNodeEditor.Node.Connection.Line
 
         public void SetMaterial(Color color)
         {
-            _lineRenderer.material.color = color;
+            _lineRenderer.material.color = color * new Color(0.9f, 0.9f, 0.9f, 1.0f);
         }
     }
 }

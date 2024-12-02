@@ -4,12 +4,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.Factory.Data
 {
     public partial class LoadData
     {
-        internal int[] DropdownContext
-        {
-            get;
-            private set;
-        }
-        internal string[] DropdownText
+        internal int[] DropdownValue
         {
             get;
             private set;
@@ -25,24 +20,12 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.Factory.Data
                 return index;
             }
 
-            DropdownContext = new int[numOfDropdowns];
-            DropdownText = new string[numOfDropdowns];
+            DropdownValue = new int[numOfDropdowns];
 
             for (int i = 0; i < numOfDropdowns; i++)
             {
-                DropdownContext[i] = BitConverter.ToInt32(data, index);
+                DropdownValue[i] = BitConverter.ToInt32(data, index);
                 index += 4;
-
-                int textLength = BitConverter.ToInt32(data, index);
-                index += 4;
-
-                DropdownText[i] = "";
-                for (int j = 0; j < textLength; j++)
-                {
-                    DropdownText[i] += (char)data[index + j];
-                }
-
-                index += textLength;
             }
 
             return index;

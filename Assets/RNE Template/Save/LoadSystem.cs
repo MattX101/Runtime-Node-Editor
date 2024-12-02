@@ -1,4 +1,5 @@
 ﻿using RuntimeNodeEditor.Node.Connection.Lines;
+using RuntimeNodeEditor.Node.Serialization;
 using RuntimeNodeEditor.Node;
 using RuntimeNodeEditor.Input;
 using RuntimeNodeEditor.UI.Canvas.Node.Factory;
@@ -11,6 +12,9 @@ namespace RNE.Template.Save
 {
     internal partial class SaveSystem
     {
+        [SerializeField]
+        private NodesList _nodesList;
+
         [SerializeField]
         private ConnectionLines nodeConnections;
 
@@ -51,6 +55,9 @@ namespace RNE.Template.Save
 
             LoadNodes(ref position, data);
             nodes = nodesObject.GetComponentsInChildren<Node>();
+
+            if (nodes.Length == 0)
+                return;
 
             // TODO - Saving connections currently cuases an error on load
             LoadConnections(ref position, nodes, data);
@@ -93,9 +100,34 @@ namespace RNE.Template.Save
 
         private void LoadNode(ref int position, byte[] data)
         {
-            OnLoad.Load(
-                new LoadData(data, ref position)
-                );
+            int length = data[position];
+            position++;
+
+            if (length > 1)
+            {
+                NodesGroup group = _nodesList.NodesGroup;
+
+                for (int i = 0; i < length - 1; i++)
+                {
+                    group = _nodesList.NodesGroup.GetGroup(data[position]);
+                    position++;
+                }
+
+                GameObject nodeObject = Instantiate(group.GetNode(data[position]), nodesObject.transform);
+                position++;
+
+                nodeObject.GetComponent<RectTransform>().localPosition = 
+                    new Vector3(
+                        BitConverter.ToSingle(data, position), 
+                        BitConverter.ToSingle(data, position + 4), 
+                        0);
+                position += 8;
+
+                OnLoad.Load(
+                    nodeObject.GetComponent<Node>(),
+                    new LoadData(data, ref position)
+                    );
+            }
         }
 
         private void LoadConnections(ref int position, Node[] nodes, byte[] data)

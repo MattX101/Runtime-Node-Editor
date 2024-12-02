@@ -36,6 +36,7 @@ namespace RuntimeNodeEditor.Node.Connection.Lines
 
             SetInputConnection(Input, _currentOutputPointer, _currentConnectionLine);
             Input.Node.Reset();
+            Input.DisableUIElement();
         }
 
         private bool CheckPointerCompatibility(int Input, int Output)

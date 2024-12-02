@@ -6,7 +6,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.Components
 {
     internal static partial class Selection
     {
-        private static RuntimeNodeEditor.Node.Node _currentNode;
+        private static NodeUI _currentNode;
         private static bool CurrentNodeIsNull
         {
             get
@@ -33,7 +33,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.Components
 
             if (hit2D.collider)
             {
-                hit2D.collider.TryGetComponent(out RuntimeNodeEditor.Node.Node node);
+                hit2D.collider.TryGetComponent(out NodeUI node);
                 if (!node)
                     return;
 

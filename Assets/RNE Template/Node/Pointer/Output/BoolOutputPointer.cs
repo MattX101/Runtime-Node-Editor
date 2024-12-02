@@ -1,3 +1,4 @@
+using RNE.Template.Node.Pointer.Value;
 using RuntimeNodeEditor.Node.Pointer;
 using UnityEngine;
 
@@ -7,7 +8,10 @@ namespace RNE.Template.Node.Pointer
     {
         public bool Value = false;
 
-        public BoolOutputPointer(RuntimeNodeEditor.Node.Node node) : base(node) { }
+        private void Awake()
+        {
+            ValueTypeIndex = (int)ValueType.Bool;
+        }
 
         protected override void ResetPointer()
         {

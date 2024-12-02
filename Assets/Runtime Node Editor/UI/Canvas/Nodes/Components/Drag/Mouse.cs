@@ -19,8 +19,6 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.Components
             if (!_selectedNodeUI)
                 return;
 
-            _selectedNodeUI.BlockRaycasts(false);
-
             GlobalData.IsDragging = true;
 
             _distanceFromMouseToNodeCenter =
@@ -41,12 +39,12 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.Components
 
         private static void OnHover()
         {
-            NodeUI newNodeUI = SelectNodeUI(Physics2D.Raycast(
+            NodeUI NodeUI = SelectNodeUI(Physics2D.Raycast(
                 MouseController.MouseWorldPosition,
                 Vector2.zero)
                 );
 
-            if (!newNodeUI)
+            if (!NodeUI)
                 return;
 
             if (_hover)
@@ -54,7 +52,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.Components
                 _hover.SetAlpha(1.0f);
             }
 
-            _hover = newNodeUI;
+            _hover = NodeUI;
             _hover.SetAlpha(0.5f);
         }
 
@@ -75,10 +73,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.Components
             if (!hit.collider)
                 return null;
 
-            if (!hit.collider.gameObject.TryGetComponent(out RuntimeNodeEditor.Node.Node node))
-                return null;
-
-            return node.gameObject.GetComponent<NodeUI>();
+            return hit.collider.GetComponent<NodeUI>();
         }
     }
 }

@@ -1,4 +1,4 @@
-using RuntimeNodeEditor.Node.Pointer;
+﻿using RuntimeNodeEditor.Node.Pointer;
 using UnityEngine;
 using System;
 using System.Collections.Generic;
@@ -17,7 +17,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.Save
             {
                 return bytes.ToArray();
             }
-            
+
             byte[] numOfNodes = BitConverter.GetBytes(nodes.Length);
             bytes.Add(numOfNodes[0]);
             bytes.Add(numOfNodes[1]);
@@ -40,7 +40,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.Save
                     bytes.AddRange(node.Elements.Save());
                 }
             }
-            
+
             // TODO - Saving connections currently cuases an error on load
             bytes.AddRange(SaveNodeConnections(nodes));
 
@@ -74,7 +74,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.Save
             }
 
             byte[] countBytes = BitConverter.GetBytes(count);
-            bytes[lengthIndex    ] = countBytes[0];
+            bytes[lengthIndex] = countBytes[0];
             bytes[lengthIndex + 1] = countBytes[1];
             bytes[lengthIndex + 2] = countBytes[2];
             bytes[lengthIndex + 3] = countBytes[3];
@@ -111,6 +111,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.Save
             return true;
         }
 
+
         private static int FindNode(RuntimeNodeEditor.Node.Node[] nodes, RuntimeNodeEditor.Node.Node nodeToFind)
         {
             for (int i = 0; i < nodes.Length; i++)
@@ -129,7 +130,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.Save
                 if (nodes[nodeIndex].Outputs[i] == pointerToFind)
                     return i;
             }
-            
+
             return -1;
         }
     }

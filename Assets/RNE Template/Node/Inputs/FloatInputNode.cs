@@ -1,5 +1,5 @@
 using RNE.Template.Node.Pointer;
-using RuntimeNodeEditor.Node.UIFunctions.Component;
+using RuntimeNodeEditor.Node.UI.Functions;
 
 namespace RNE.Template.Node
 {
@@ -8,8 +8,8 @@ namespace RNE.Template.Node
         protected override void CodeToExecute()
         {
             Outputs[0].GetComponent<FloatOutputPointer>().Value =
-                Elements.InputFields[0].text.Length != 0
-                ? InputFieldToFloat.Get(Elements.InputFields[0].text)
+                Elements.inputFields[0].text.Length != 0
+                ? InputFieldToFloat.Get(Elements.inputFields[0].text)
                 : 0.0f;
         }
 

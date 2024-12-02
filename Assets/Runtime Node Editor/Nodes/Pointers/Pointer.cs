@@ -4,26 +4,21 @@ namespace RuntimeNodeEditor.Node.Pointer
 {
     public class Pointer : MonoBehaviour
     {
+        [SerializeField]
+        private Node _node;
         public Node Node
         {
-            get;
-            private set;
+            get => _node;
         }
 
         public int ValueTypeIndex
         {
             get;
-            private set;
-        }
-
-        public Pointer(Node node)
-        {
-            Node = node;
+            protected set;
         }
 
         internal void AddInputPointer(Node node, InputPointer Input, int valueTypeIndex)
         {
-            Node = node;
             ValueTypeIndex = valueTypeIndex;
 
             node.Inputs.Add(Input);
@@ -31,7 +26,6 @@ namespace RuntimeNodeEditor.Node.Pointer
 
         internal void AddOutputPointer(Node node, OutputPointer Output, int valueTypeIndex)
         {
-            Node = node;
             ValueTypeIndex = valueTypeIndex;
 
             node.Outputs.Add(Output);

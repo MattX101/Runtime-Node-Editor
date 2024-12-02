@@ -12,7 +12,7 @@ namespace RNE.Template.Node
 
         protected override void DataToGetAndSet()
         {
-            Elements.SetBoolean(Elements.Buttons[0], PointerValue.GetBool(Inputs[0]));
+            Elements.SetBoolean(Elements.buttons[0], PointerValue.GetBool(Inputs[0]));
         }
     }
 }

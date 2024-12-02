@@ -1,5 +1,5 @@
 using RuntimeNodeEditor.Node.Pointer;
-using RuntimeNodeEditor.Node.UIFunctions.Elements;
+using RuntimeNodeEditor.Node.UI.Functions.Elements;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -10,21 +10,19 @@ namespace RuntimeNodeEditor.Node
     {
         private bool _wasExecuted;
 
-        public bool EndNode
-        {
-            get;
-            protected set;
-        } = false;
+        [SerializeField]
+        private bool _endNode = false;
+        public bool EndNode => _endNode;
 
-        public readonly List<InputPointer> Inputs = new();
-        public readonly List<OutputPointer> Outputs = new();
+        [SerializeField]
+        private List<InputPointer> _inputs = new();
+        public List<InputPointer> Inputs => _inputs;
+
+        [SerializeField]
+        private List<OutputPointer> _outputs = new();
+        public List<OutputPointer> Outputs => _outputs;
 
         public NodeUIElements Elements;
-
-        public virtual void Init()
-        {
-            //
-        }
 
         public void AddPointer(InputPointer Input, int valueTypeIndex)
         {
@@ -38,10 +36,14 @@ namespace RuntimeNodeEditor.Node
         public void DeletePointerConnections()
         {
             foreach (InputPointer Input in Inputs)
+            {
                 Input.DeleteConnection();
+            }
 
             foreach (OutputPointer Output in Outputs)
+            {
                 Output.DeleteConnections();
+            }
         }
 
         public int MoveUp()
@@ -57,12 +59,14 @@ namespace RuntimeNodeEditor.Node
                 return 0;
 
             foreach (InputPointer Input in Outputs.Where(Output => Output.ConnectedInputPointers != null).SelectMany(Output => Output.ConnectedInputPointers))
+            {
                 Input.Node.MoveUp();
+            }
 
             return 1;
         }
 
-        public int OnValueChangeReset()
+        public void OnValueChangeReset()
         {
             ResetExecution();
 
@@ -70,16 +74,16 @@ namespace RuntimeNodeEditor.Node
             {
                 Execute();
 
-                return 0;
+                return;
             }
 
             if (Outputs == null)
-                return 0;
+                return;
 
             foreach (InputPointer Input in Outputs.Where(Output => Output.ConnectedInputPointers != null).SelectMany(Output => Output.ConnectedInputPointers))
+            {
                 Input.Node.OnValueChangeReset();
-
-            return 1;
+            }
         }
 
         protected virtual void CodeToExecute() { }
@@ -99,7 +103,9 @@ namespace RuntimeNodeEditor.Node
         protected void ExecuteInputConnection(int i)
         {
             if (IsValid(Inputs[i]))
+            {
                 Inputs[i].ConnectedOutputPointer.Node.Execute();
+            }
         }
 
         protected virtual void DataToGetAndSet() { }

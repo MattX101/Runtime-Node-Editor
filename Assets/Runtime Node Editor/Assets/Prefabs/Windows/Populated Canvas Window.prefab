@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8496306231791046549}
   - component: {fileID: 3508801798568631349}
   - component: {fileID: 1385459168575032854}
-  - component: {fileID: 7618371746024273331}
+  - component: {fileID: 6506361170714105535}
   m_Layer: 5
   m_Name: Populated Canvas Window
   m_TagString: Untagged
@@ -107,7 +107,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 593cd083fe6a854409e12ce0d1cc796a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &7618371746024273331
+--- !u!114 &6506361170714105535
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -116,7 +116,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 53723236487150527}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9065532686ab754bae8fa5257b6be61, type: 3}
+  m_Script: {fileID: 11500000, guid: f3f14e9902518714ca93b5d80347039e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1179519814267019772
@@ -850,9 +850,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7618371746024273331}
-        m_TargetAssemblyTypeName: RuntimeNodeEditor.UI.Canvas.Node.NodeUIManagerOnReset,
-          RuntimeNodeEditor.UI.Canvas.Node
+      - m_Target: {fileID: 6506361170714105535}
+        m_TargetAssemblyTypeName: RuntimeNodeEditor.UI.Canvas.NewNode.NodeUIManagerOnReset,
+          RuntimeNodeEditor.UI.Canvas.NewNode
         m_MethodName: Reset
         m_Mode: 1
         m_Arguments:

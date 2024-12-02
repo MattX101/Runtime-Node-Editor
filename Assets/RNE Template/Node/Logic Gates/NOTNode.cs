@@ -1,5 +1,6 @@
 using RNE.Template.Node.Pointer;
 using RNE.Template.Node.Pointer.Value;
+using UnityEngine;
 
 namespace RNE.Template.Node
 {
@@ -15,12 +16,13 @@ namespace RNE.Template.Node
             bool a = PointerValue.GetBool(Inputs[0]);
             Outputs[0].GetComponent<BoolOutputPointer>().Value = !a;
 
-            Elements.SetBoolean(Elements.Buttons[0], a);
-            Elements.SetBoolean(Elements.Buttons[1], !a);
+            Elements.SetBoolean(Elements.buttons[0], a);
+            Elements.SetBoolean(Elements.buttons[1], !a);
         }
 
         protected override void CodeToReset()
         {
+            Debug.Log("nay");
             Outputs[0].GetComponent<BoolOutputPointer>().Reset();
         }
     }

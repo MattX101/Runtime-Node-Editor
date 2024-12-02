@@ -6,7 +6,7 @@ namespace RNE.Template.Node
     {
         protected override void CodeToExecute()
         {
-            Outputs[0].GetComponent<BoolOutputPointer>().Value = Elements.Buttons[0].Toggled;
+            Outputs[0].GetComponent<BoolOutputPointer>().Value = Elements.buttons[0].isOn;
         }
 
         protected override void CodeToReset()
