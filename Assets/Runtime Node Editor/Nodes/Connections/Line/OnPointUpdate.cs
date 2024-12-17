@@ -50,7 +50,7 @@ namespace RuntimeNodeEditor.Node.Connection.Line
                 i,
                 new Vector3(
                         Mathf.Lerp(a.x, b.x, (float)i / _lineRenderer.positionCount),
-                        Mathf.Lerp(a.y, b.y, LinearEaseCurves.EaseInOutCos((float)i / _lineRenderer.positionCount)),
+                        Mathf.Lerp(a.y, b.y, Curves.EaseInOut((float)i / _lineRenderer.positionCount, 2)),
                         100)
                     );
             }

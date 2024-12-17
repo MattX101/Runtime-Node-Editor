@@ -1,9 +1,10 @@
 using RuntimeNodeEditor.Data;
 using RuntimeNodeEditor.Input;
 using RuntimeNodeEditor.UI.Canvas.Grid;
-using Utils.Colour;
+using Utils.Colors.Model;
 using UnityEngine;
 using UnityEngine.UI;
+using Utils.Colors;
 
 namespace RuntimeNodeEditor.UI.Canvas
 {
@@ -79,12 +80,9 @@ namespace RuntimeNodeEditor.UI.Canvas
 
             GlobalData.Camera.backgroundColor = _cameraBackgroundColour;
 
-            Vector3 hsl = ColourConversion.RGBToHSL(_cameraBackgroundColour);
-            BackgroundGrid.Instance.SetGridColor(ColourConversion.HSLToRGB(
-                hsl.x,
-                hsl.y,
-                hsl.z * 0.9f)
-                );
+            HSL hsl = ColorConversion.RGBToHSL(_cameraBackgroundColour);
+            HSL lineColor = new HSL(hsl.Hue, hsl.Saturation, hsl.Lightness * 0.9f);
+            BackgroundGrid.Instance.SetGridColor(ColorConversion.HSLToRGB(lineColor));
         }
         
         private void UpdateCanvasScale()
