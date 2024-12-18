@@ -1,7 +1,6 @@
-﻿using RuntimeNodeEditor.Data;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace RuntimeNodeEditor.UI
+namespace RuntimeNodeEditor.Data
 {
     internal class UIManager : MonoBehaviour
     {

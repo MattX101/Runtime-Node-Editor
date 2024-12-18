@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 using TMPro;
 
-namespace RuntimeNodeEditor.UI.Canvas.Node.UI
+namespace RuntimeNodeEditor.UI.Canvas.Node
 {
     internal class UIPointer : MonoBehaviour
     {
