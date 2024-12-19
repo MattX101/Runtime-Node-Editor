@@ -17,6 +17,9 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.UI.Editor
         [MenuItem(GameObjectPath + "Elements/Dropdown", false, 1), MenuItem(AssetsPath + "Elements/Dropdown", false, 1)]
         private static void CreateDropdown() => CreateUIPrefab(ElementsPath + "Dropdown");
 
+        [MenuItem(GameObjectPath + "Elements/Colour Picker", false, 2), MenuItem(AssetsPath + "Elements/Colour Picker", false, 2)]
+        private static void CreateColourPicker() => CreateUIPrefab(ElementsPath + "Colour Picker");
+
         private static void CreateUIPrefab(string path)
         {
             GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(path + ".prefab");
