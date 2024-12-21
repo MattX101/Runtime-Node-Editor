@@ -268,7 +268,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9147592260650573588, guid: c8391ee90759cff4b9fc58df5db89199, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9147592260650573588, guid: c8391ee90759cff4b9fc58df5db89199, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -296,7 +296,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9147592260650573588, guid: c8391ee90759cff4b9fc58df5db89199, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ChainReset
+      value: ResetAndExecute
       objectReference: {fileID: 0}
     - target: {fileID: 9147592260650573588, guid: c8391ee90759cff4b9fc58df5db89199, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName

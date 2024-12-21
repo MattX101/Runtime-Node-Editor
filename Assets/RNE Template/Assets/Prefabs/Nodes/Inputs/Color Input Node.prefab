@@ -195,7 +195,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1752165868414573771, guid: 9588d305222bfbe4faa935d7fa25e39d, type: 3}
       propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.size
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1752165868414573771, guid: 9588d305222bfbe4faa935d7fa25e39d, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
@@ -235,7 +235,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1752165868414573771, guid: 9588d305222bfbe4faa935d7fa25e39d, type: 3}
       propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: ChainReset
+      value: ResetAndExecute
       objectReference: {fileID: 0}
     - target: {fileID: 1752165868414573771, guid: 9588d305222bfbe4faa935d7fa25e39d, type: 3}
       propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
@@ -311,7 +311,7 @@ PrefabInstance:
       objectReference: {fileID: 7450714994277841918}
     - target: {fileID: 3824376284187016983, guid: 9588d305222bfbe4faa935d7fa25e39d, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3824376284187016983, guid: 9588d305222bfbe4faa935d7fa25e39d, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
@@ -339,7 +339,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3824376284187016983, guid: 9588d305222bfbe4faa935d7fa25e39d, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: ChainReset
+      value: ResetAndExecute
       objectReference: {fileID: 0}
     - target: {fileID: 3824376284187016983, guid: 9588d305222bfbe4faa935d7fa25e39d, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
@@ -451,7 +451,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5685786953618417520, guid: 9588d305222bfbe4faa935d7fa25e39d, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5685786953618417520, guid: 9588d305222bfbe4faa935d7fa25e39d, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
@@ -479,7 +479,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5685786953618417520, guid: 9588d305222bfbe4faa935d7fa25e39d, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: ChainReset
+      value: ResetAndExecute
       objectReference: {fileID: 0}
     - target: {fileID: 5685786953618417520, guid: 9588d305222bfbe4faa935d7fa25e39d, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
@@ -523,7 +523,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7438597140159777780, guid: 9588d305222bfbe4faa935d7fa25e39d, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7438597140159777780, guid: 9588d305222bfbe4faa935d7fa25e39d, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
@@ -551,7 +551,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7438597140159777780, guid: 9588d305222bfbe4faa935d7fa25e39d, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: ChainReset
+      value: ResetAndExecute
       objectReference: {fileID: 0}
     - target: {fileID: 7438597140159777780, guid: 9588d305222bfbe4faa935d7fa25e39d, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
@@ -579,7 +579,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8836754317835524119, guid: 9588d305222bfbe4faa935d7fa25e39d, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8836754317835524119, guid: 9588d305222bfbe4faa935d7fa25e39d, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
@@ -607,7 +607,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8836754317835524119, guid: 9588d305222bfbe4faa935d7fa25e39d, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: ChainReset
+      value: ResetAndExecute
       objectReference: {fileID: 0}
     - target: {fileID: 8836754317835524119, guid: 9588d305222bfbe4faa935d7fa25e39d, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName

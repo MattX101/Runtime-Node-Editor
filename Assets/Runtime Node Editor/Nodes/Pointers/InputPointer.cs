@@ -63,8 +63,7 @@ namespace RuntimeNodeEditor.Node.Pointer
             ConnectedOutputPointer.RemoveConnection(this);
             ConnectedOutputPointer = null;
 
-            Node.ChainReset();
-            Node.ExecuteChain();
+            Node.ResetAndExecute();
         }
     }
 }

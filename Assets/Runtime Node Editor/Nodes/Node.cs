@@ -46,7 +46,26 @@ namespace RuntimeNodeEditor.Node
             }
         }
 
-        public void ExecuteChain()
+        public void ResetAndExecute()
+        {
+            ChainReset();
+            ExecuteChain();
+        }
+
+        private void ChainReset()
+        {
+            ResetExecution();
+
+            if (EndNode || Outputs == null)
+                return;
+
+            foreach (InputPointer Input in Outputs.Where(Output => Output.ConnectedInputPointers != null).SelectMany(Output => Output.ConnectedInputPointers))
+            {
+                Input.Node.ChainReset();
+            }
+        }
+
+        private void ExecuteChain()
         {
             if (EndNode)
             {
@@ -61,19 +80,6 @@ namespace RuntimeNodeEditor.Node
             foreach (InputPointer Input in Outputs.Where(Output => Output.ConnectedInputPointers != null).SelectMany(Output => Output.ConnectedInputPointers))
             {
                 Input.Node.ExecuteChain();
-            }
-        }
-
-        public void ChainReset()
-        {
-            ResetExecution();
-
-            if (EndNode || Outputs == null)
-                return;
-
-            foreach (InputPointer Input in Outputs.Where(Output => Output.ConnectedInputPointers != null).SelectMany(Output => Output.ConnectedInputPointers))
-            {
-                Input.Node.ChainReset();
             }
         }
 
