@@ -7,12 +7,7 @@ namespace RNE.Template.Node.Pointer.Value
     {
         public static Color GetColor(OutputPointer Output)
         {
-            Color color = Output.GetComponent<ColorOutputPointer>().Value;
-            color.r /= 255;
-            color.g /= 255;
-            color.b /= 255;
-
-            return color;
+            return Output.GetComponent<ColorOutputPointer>().Value;
         }
 
         public static Color GetColor(InputPointer Input)

@@ -3,6 +3,7 @@
     "rootNamespace": "RNE.Template.Node",
     "references": [
         "GUID:dc71d4e70a7f5154196ea46513c5d4f2",
+        "GUID:b16b6ce5e0775e343b616f7ce3837b3a",
         "GUID:9337d4506e8f8e3459d9df69b4e76df0",
         "GUID:971907e042dcd334289fba405f52b119",
         "GUID:456b2fb18c4dc974294da24465e19126",

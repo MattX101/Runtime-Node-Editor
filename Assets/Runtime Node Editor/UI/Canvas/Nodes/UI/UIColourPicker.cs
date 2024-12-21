@@ -7,7 +7,7 @@ using TMPro;
 
 namespace RuntimeNodeEditor.UI.Canvas.Node.UI
 {
-    internal class UIColourPicker : MonoBehaviour
+    public class UIColourPicker : MonoBehaviour
     {
         [Header("Dropdown")]
         [SerializeField] private TMP_Dropdown _colorModelDropdown;
@@ -31,23 +31,33 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.UI
 
         private HexValidator _hexValidator;
 
+        // Prevents updates to UI Colour Picker while true.
+        // Previously, while opening a saved file below functions were being called cuasing issues when the color model dropdown is not set to RGB
+        // Example of the issue: If color model is HSL, when on open the hsl are applied to the image color as if it was RGB
+        private bool _skipOnChangeChecks = false;
+
+        // Used to prevent OnSliderValueChange from being executed to prevent issues when updating other UI elements
         private bool _skipSliderOnChangeUpdate = false;
 
         private void Awake()
         {
+            _skipOnChangeChecks = true;
+
             _hexValidator = new HexValidator();
             _hexValueInputfield.inputValidator = _hexValidator;
         }
 
         private void Start()
         {
-            SetText((int)(_uiSliderA.Value * 255), (int)(_uiSliderB.Value * 255), (int)(_uiSliderC.Value * 255));
-            SetHexField();
-            SetColor(new Color(_uiSliderA.Value, _uiSliderB.Value, _uiSliderC.Value));
+            _skipOnChangeChecks = false;
+            OnSliderValueChange();
         }
 
         public void OnDropdownValueChange()
         {
+            if (_skipOnChangeChecks)
+                return;
+
             _skipSliderOnChangeUpdate = true;
 
             if (_colorModelDropdown.value == 1)
@@ -83,7 +93,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.UI
 
         public void OnSliderValueChange()
         {
-            if (_skipSliderOnChangeUpdate)
+            if (_skipOnChangeChecks || _skipSliderOnChangeUpdate)
                 return;
 
             SetHexField();
@@ -111,6 +121,9 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.UI
 
         public void OnHexFieldEdit()
         {
+            if (_skipOnChangeChecks)
+                return;
+
             _skipSliderOnChangeUpdate = true;
 
             string hex = _hexValueInputfield.text;
@@ -191,6 +204,17 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.UI
         private void SetColor(Color c)
         {
             _image.color = c;
+        }
+
+        public Color CalcualteColor()
+        {
+            return _colorModelDropdown.value switch
+            {
+                0 => new Color(_uiSliderA.Value, _uiSliderB.Value, _uiSliderC.Value),
+                1 => ColorConversion.HSLToRGB(new HSL(_uiSliderA.Value * 360, _uiSliderB.Value, _uiSliderC.Value)),
+                2 => ColorConversion.HSVToRGB(new HSV(_uiSliderA.Value * 360, _uiSliderB.Value, _uiSliderC.Value)),
+                _ => new Color(_uiSliderA.Value, _uiSliderB.Value, _uiSliderC.Value)
+            };
         }
     }
 }

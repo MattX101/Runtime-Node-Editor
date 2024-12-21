@@ -46,43 +46,34 @@ namespace RuntimeNodeEditor.Node
             }
         }
 
-        public int MoveUp()
+        public void ExecuteChain()
         {
             if (EndNode)
             {
                 Execute();
 
-                return 0;
+                return;
             }
 
             if (Outputs == null)
-                return 0;
+                return;
 
             foreach (InputPointer Input in Outputs.Where(Output => Output.ConnectedInputPointers != null).SelectMany(Output => Output.ConnectedInputPointers))
             {
-                Input.Node.MoveUp();
+                Input.Node.ExecuteChain();
             }
-
-            return 1;
         }
 
-        public void OnValueChangeReset()
+        public void ChainReset()
         {
             ResetExecution();
 
-            if (EndNode)
-            {
-                Execute();
-
-                return;
-            }
-
-            if (Outputs == null)
+            if (EndNode || Outputs == null)
                 return;
 
             foreach (InputPointer Input in Outputs.Where(Output => Output.ConnectedInputPointers != null).SelectMany(Output => Output.ConnectedInputPointers))
             {
-                Input.Node.OnValueChangeReset();
+                Input.Node.ChainReset();
             }
         }
 

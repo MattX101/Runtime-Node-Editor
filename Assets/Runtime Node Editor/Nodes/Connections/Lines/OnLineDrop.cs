@@ -24,7 +24,8 @@ namespace RuntimeNodeEditor.Node.Connection.Lines
             DropOnInputPointer(Input);
 
             LinesData.Add(_currentConnectionLine);
-            _currentOutputPointer.Node.MoveUp();
+            _currentOutputPointer.Node.ChainReset();
+            _currentOutputPointer.Node.ExecuteChain();
 
             return true;
         }

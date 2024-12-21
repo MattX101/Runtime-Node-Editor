@@ -9,10 +9,7 @@ namespace RNE.Template.Node
         protected override void CodeToExecute()
         {
             ExecuteInputConnection(0);
-        }
 
-        protected override void DataToGetAndSet()
-        {
             bool a = PointerValue.GetBool(Inputs[0]);
             Outputs[0].GetComponent<BoolOutputPointer>().Value = !a;
 
