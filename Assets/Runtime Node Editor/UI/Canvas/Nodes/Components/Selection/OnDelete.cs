@@ -1,11 +1,12 @@
 ﻿using RuntimeNodeEditor.Data;
+using RuntimeNodeEditor.Node;
 using UnityEngine;
 
 namespace RuntimeNodeEditor.UI.Canvas.Node.Components
 {
     internal static partial class Selection
     {
-        internal static void Delete(NodeUI node, bool ignoreChecks = false)
+        internal static void Delete(NodeUI nodeUI, bool ignoreChecks = false)
         {
             if (!ignoreChecks)
             {
@@ -16,9 +17,11 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.Components
                     return;
             }
 
-            node.GetComponent<RuntimeNodeEditor.Node.Node>().DeletePointerConnections();
+            RuntimeNodeEditor.Node.Node node = nodeUI.GetComponent<RuntimeNodeEditor.Node.Node>();
+            NodeList.Remove(nodeUI.gameObject.GetHashCode(), node);
+            node.DeletePointerConnections();
 
-            Object.Destroy(node.gameObject);
+            Object.Destroy(nodeUI.gameObject);
             _currentNode = null;
         }
     }

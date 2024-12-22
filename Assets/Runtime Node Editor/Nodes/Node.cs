@@ -24,6 +24,11 @@ namespace RuntimeNodeEditor.Node
 
         public NodeUIElements Elements;
 
+        public void Awake()
+        {
+            NodeList.Add(this.gameObject.GetHashCode(), this);
+        }
+
         public void AddPointer(InputPointer Input, int valueTypeIndex)
         {
             Input.AddInputPointer(this, Input, valueTypeIndex);
@@ -46,40 +51,17 @@ namespace RuntimeNodeEditor.Node
             }
         }
 
+        // TODO - Optimize to a more effient process
         public void ResetAndExecute()
         {
-            ChainReset();
-            ExecuteChain();
-        }
-
-        private void ChainReset()
-        {
-            ResetExecution();
-
-            if (EndNode || Outputs == null)
-                return;
-
-            foreach (InputPointer Input in Outputs.Where(Output => Output.ConnectedInputPointers != null).SelectMany(Output => Output.ConnectedInputPointers))
+            foreach (Node node in NodeList.Nodes.Values)
             {
-                Input.Node.ChainReset();
-            }
-        }
-
-        private void ExecuteChain()
-        {
-            if (EndNode)
-            {
-                Execute();
-
-                return;
+                node.ResetExecution();
             }
 
-            if (Outputs == null)
-                return;
-
-            foreach (InputPointer Input in Outputs.Where(Output => Output.ConnectedInputPointers != null).SelectMany(Output => Output.ConnectedInputPointers))
+            foreach (Node endNode in NodeList.Nodes.Values.Where(node => node.EndNode))
             {
-                Input.Node.ExecuteChain();
+                endNode.Execute();
             }
         }
 

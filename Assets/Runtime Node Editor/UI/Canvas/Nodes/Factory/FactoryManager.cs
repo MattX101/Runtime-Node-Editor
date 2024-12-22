@@ -17,7 +17,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.Factory
         public GameObject ReturnSpawn(GameObject node)
         {
             GameObject nodeObject = Instantiate(node, _nodesParent);
-
+            
             InitSpawnDrag(nodeObject.GetComponent<NodeUI>());
 
             return nodeObject;

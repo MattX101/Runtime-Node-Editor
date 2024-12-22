@@ -41,7 +41,6 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.Save
                 }
             }
 
-            // TODO - Saving connections currently cuases an error on load
             bytes.AddRange(SaveNodeConnections(nodes));
 
             return bytes.ToArray();

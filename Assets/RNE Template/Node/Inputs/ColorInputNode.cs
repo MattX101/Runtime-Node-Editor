@@ -13,9 +13,9 @@ namespace RNE.Template.Node
         {
             Color color = _colourPicker.CalcualteColor();
 
-            Outputs[0].GetComponent<FloatOutputPointer>().Value = color.r;
-            Outputs[1].GetComponent<FloatOutputPointer>().Value = color.g;
-            Outputs[2].GetComponent<FloatOutputPointer>().Value = color.b;
+            Outputs[0].GetComponent<FloatOutputPointer>().Value = (int)(color.r * 255);
+            Outputs[1].GetComponent<FloatOutputPointer>().Value = (int)(color.g * 255);
+            Outputs[2].GetComponent<FloatOutputPointer>().Value = (int)(color.b * 255);
 
             Outputs[3].GetComponent<ColorOutputPointer>().Value =
                 new Color(
