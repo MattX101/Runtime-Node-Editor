@@ -12,7 +12,6 @@ namespace RNE.Template.Node
         protected override void CodeToExecute()
         {
              ExecuteInputConnection(0);
-
             _image.color = PointerValue.GetColor(Inputs[0]);
         }
     }

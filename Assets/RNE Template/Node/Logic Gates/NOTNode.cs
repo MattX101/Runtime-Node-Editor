@@ -1,6 +1,5 @@
 using RNE.Template.Node.Pointer;
 using RNE.Template.Node.Pointer.Value;
-using UnityEngine;
 
 namespace RNE.Template.Node
 {
@@ -19,7 +18,6 @@ namespace RNE.Template.Node
 
         protected override void CodeToReset()
         {
-            Debug.Log("nay");
             Outputs[0].GetComponent<BoolOutputPointer>().Reset();
         }
     }

@@ -75,8 +75,6 @@ namespace RuntimeNodeEditor.Node
                 CodeToExecute();
                 _wasExecuted = true;
             }
-
-            GetData();
         }
 
         protected void ExecuteInputConnection(int i)
@@ -85,14 +83,6 @@ namespace RuntimeNodeEditor.Node
             {
                 Inputs[i].ConnectedOutputPointer.Node.Execute();
             }
-        }
-
-        protected virtual void DataToGetAndSet() { }
-        private void GetData()
-        {
-            Debug.Log("Get data of node: " + gameObject.name + " " + gameObject.GetHashCode());
-
-            DataToGetAndSet();
         }
 
         protected virtual void CodeToReset() { }
