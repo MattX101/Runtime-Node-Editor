@@ -68,6 +68,10 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.UI
                 _skipSliderOnChangeUpdate = false;
 
                 SetText((float)Math.Round(hsl.Hue, 2), (float)Math.Round(hsl.Saturation * 100, 2), (float)Math.Round(hsl.Lightness * 100, 2));
+                ChangeSliderColors(
+                    ColorConversion.HSLToRGB(new HSL(hsl.Hue, 1.0f, 0.5f)),
+                    ColorConversion.HSLToRGB(new HSL(hsl.Hue, hsl.Saturation, 0.5f)),
+                    ColorConversion.HSLToRGB(new HSL(hsl.Hue, 1.0f, hsl.Lightness)));
 
                 return;
             }
@@ -79,6 +83,10 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.UI
                 _skipSliderOnChangeUpdate = false;
 
                 SetText((float)Math.Round(hsv.Hue, 2), (float)Math.Round(hsv.Saturation * 100, 2), (float)Math.Round(hsv.Value * 100, 2));
+                ChangeSliderColors(
+                    ColorConversion.HSVToRGB(new HSV(hsv.Hue, 1.0f, 1.0f)),
+                    ColorConversion.HSVToRGB(new HSV(hsv.Hue, hsv.Saturation, 1.0f)),
+                    ColorConversion.HSVToRGB(new HSV(hsv.Hue, 1.0f, hsv.Value)));
 
                 return;
             }
@@ -87,6 +95,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.UI
             _skipSliderOnChangeUpdate = false;
 
             SetText((int)(_image.color.r * 255), (int)(_image.color.g * 255), (int)(_image.color.b * 255));
+            ChangeSliderColors(Color.red, Color.green, Color.blue);
 
             OnSliderValueChange();
         }
@@ -106,11 +115,25 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.UI
                     break;
                 case 1:
                     SetText((float)Math.Round(_uiSliderA.Value * 360, 2), (float)Math.Round(_uiSliderB.Value * 100, 2), (float)Math.Round(_uiSliderC.Value * 100, 2));
-                    SetColor(ColorConversion.HSLToRGB(new HSL(_uiSliderA.Value * 360, _uiSliderB.Value, _uiSliderC.Value)));
+
+                    HSL hsl = new HSL(_uiSliderA.Value * 360, _uiSliderB.Value, _uiSliderC.Value);
+                    SetColor(ColorConversion.HSLToRGB(hsl));
+                    ChangeSliderColors(
+                        ColorConversion.HSLToRGB(new HSL(hsl.Hue, 1.0f, 0.5f)),
+                        ColorConversion.HSLToRGB(new HSL(hsl.Hue, hsl.Saturation, 0.5f)),
+                        ColorConversion.HSLToRGB(new HSL(hsl.Hue, 1.0f, hsl.Lightness)));
+
                     break;
                 case 2:
                     SetText((float)Math.Round(_uiSliderA.Value * 360, 2), (float)Math.Round(_uiSliderB.Value * 100, 2), (float)Math.Round(_uiSliderC.Value * 100, 2));
-                    SetColor(ColorConversion.HSVToRGB(new HSV(_uiSliderA.Value * 360, _uiSliderB.Value, _uiSliderC.Value)));
+
+                    HSV hsv = new HSV(_uiSliderA.Value * 360, _uiSliderB.Value, _uiSliderC.Value);
+                    SetColor(ColorConversion.HSVToRGB(hsv));
+                    ChangeSliderColors(
+                        ColorConversion.HSVToRGB(new HSV(hsv.Hue, 1.0f, 1.0f)),
+                        ColorConversion.HSVToRGB(new HSV(hsv.Hue, hsv.Saturation, 1.0f)),
+                        ColorConversion.HSVToRGB(new HSV(hsv.Hue, 1.0f, hsv.Value)));
+
                     break;
                 default:
                     SetText((int)(_uiSliderA.Value * 255), (int)(_uiSliderB.Value * 255), (int)(_uiSliderC.Value * 255));
@@ -162,6 +185,10 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.UI
 
                 SetSliders(hsl.Hue / 360.0f, hsl.Saturation, hsl.Lightness);
                 SetText((float)Math.Round(hsl.Hue, 2), (float)Math.Round(hsl.Saturation * 100, 2), (float)Math.Round(hsl.Lightness * 100, 2));
+                ChangeSliderColors(
+                    ColorConversion.HSLToRGB(new HSL(hsl.Hue, 1.0f, 0.5f)),
+                    ColorConversion.HSLToRGB(new HSL(hsl.Hue, hsl.Saturation, 0.5f)),
+                    ColorConversion.HSLToRGB(new HSL(hsl.Hue, 1.0f, hsl.Lightness)));
             }
             else if (_colorModelDropdown.value == 2)
             {
@@ -169,11 +196,16 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.UI
 
                 SetSliders(hsv.Hue / 360.0f, hsv.Saturation, hsv.Value);
                 SetText((float)Math.Round(hsv.Hue, 2), (float)Math.Round(hsv.Saturation * 100, 2), (float)Math.Round(hsv.Value * 100, 2));
+                ChangeSliderColors(
+                    ColorConversion.HSVToRGB(new HSV(hsv.Hue, 1.0f, 1.0f)),
+                    ColorConversion.HSVToRGB(new HSV(hsv.Hue, hsv.Saturation, 1.0f)),
+                    ColorConversion.HSVToRGB(new HSV(hsv.Hue, 1.0f, hsv.Value)));
             }
             else
             {
                 SetSliders(color.r, color.g, color.b);
                 SetText((int)(color.r * 255), (int)(color.g * 255), (int)(color.b * 255));
+                ChangeSliderColors(Color.red, Color.green, Color.blue);
             }
 
             SetColor(color);
@@ -215,6 +247,13 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.UI
                 2 => ColorConversion.HSVToRGB(new HSV(_uiSliderA.Value * 360, _uiSliderB.Value, _uiSliderC.Value)),
                 _ => new Color(_uiSliderA.Value, _uiSliderB.Value, _uiSliderC.Value)
             };
+        }
+
+        private void ChangeSliderColors(Color a, Color b, Color c)
+        {
+            _uiSliderA.ChangeColor(a);
+            _uiSliderB.ChangeColor(b);
+            _uiSliderC.ChangeColor(c);
         }
     }
 }

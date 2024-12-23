@@ -107,6 +107,7 @@ MonoBehaviour:
   _fill: {fileID: 8422656536397298101}
   _handle: {fileID: 7196235960406779814}
   _color: {r: 1, g: 1, b: 1, a: 1}
+  slider: {fileID: 2489791172447971278}
 --- !u!1 &1474265885487193713
 GameObject:
   m_ObjectHideFlags: 0
