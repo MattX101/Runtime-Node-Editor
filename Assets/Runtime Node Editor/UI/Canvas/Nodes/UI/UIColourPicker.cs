@@ -27,7 +27,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.UI
         [SerializeField] private TMP_InputField _hexValueInputfield;
 
         [Header("Image")]
-        [SerializeField] private RawImage _image;
+        [SerializeField] private Image _image;
 
         private HexValidator _hexValidator;
 
@@ -236,6 +236,16 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.UI
         private void SetColor(Color c)
         {
             _image.color = c;
+        }
+
+        protected void ResetDropdown()
+        {
+            _colorModelDropdown.value = 0;
+        }
+
+        protected void SetImage(Image newImage)
+        {
+            _image = newImage;
         }
 
         public Color CalcualteColor()
