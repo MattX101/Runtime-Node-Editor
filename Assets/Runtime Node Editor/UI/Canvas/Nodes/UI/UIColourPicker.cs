@@ -251,9 +251,14 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.UI
 
         private void ChangeSliderColors(Color a, Color b, Color c)
         {
-            _uiSliderA.ChangeColor(a);
-            _uiSliderB.ChangeColor(b);
-            _uiSliderC.ChangeColor(c);
+            _uiSliderA.ChangeFillColor(a);
+            _uiSliderA.ChangeHandleColor(a);
+
+            _uiSliderB.ChangeFillColor(b);
+            _uiSliderB.ChangeHandleColor(b);
+
+            _uiSliderC.ChangeFillColor(c);
+            _uiSliderC.ChangeHandleColor(c);
         }
     }
 }

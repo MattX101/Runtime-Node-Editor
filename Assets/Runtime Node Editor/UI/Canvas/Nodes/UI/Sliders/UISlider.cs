@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 namespace RuntimeNodeEditor.UI.Canvas.Node.UI
 {
-    internal class UISlider : MonoBehaviour
+    public class UISlider : MonoBehaviour
     {
         [SerializeField]
         protected Slider slider;
@@ -14,12 +14,19 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.UI
         [SerializeField]
         private Vector2 _valueRange = new Vector2(0, 1);
 
+        [SerializeField]
+        private float _startValue = 0.0f;
+
         [SerializeField] 
         private Color _color = Color.white;
+        public Color Color => _handle.color;
 
         private void Awake()
         {
-            _fill.color = _color;
+            if (_fill != null)
+            {
+                _fill.color = _color;
+            }
             _handle.color = _color;
 
             if (!slider)
@@ -31,7 +38,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.UI
             slider.minValue = _valueRange.x < _valueRange.y ? _valueRange.x : _valueRange.y;
             slider.maxValue = _valueRange.x > _valueRange.y ? _valueRange.x : _valueRange.y;
 
-            slider.value = slider.minValue;
+            slider.value = _startValue;
         }
 
         internal float Value
@@ -58,10 +65,24 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.UI
             }
         }
 
-        internal void ChangeColor(Color newColor)
+        public void ChangeFillColor(Color newColor)
         {
             _fill.color = newColor;
+        }
+
+        public void ChangeHandleColor(Color newColor)
+        {
             _handle.color = newColor;
+        }
+
+        public void SetMinValue(float value)
+        {
+            slider.minValue = value;
+        }
+
+        public void SetMaxValue(float value)
+        {
+            slider.maxValue = value;
         }
     }
 }
