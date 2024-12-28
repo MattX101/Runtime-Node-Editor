@@ -41,7 +41,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.UI
             slider.value = _startValue;
         }
 
-        internal float Value
+        public float Value
         {
             get 
             {

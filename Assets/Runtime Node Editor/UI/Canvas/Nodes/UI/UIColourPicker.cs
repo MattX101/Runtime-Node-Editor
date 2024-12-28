@@ -214,26 +214,26 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.UI
             _skipSliderOnChangeUpdate = false;
         }
 
-        private void SetSliders(float a, float b, float c)
+        protected void SetSliders(float a, float b, float c)
         {
             _uiSliderA.Value = a;
             _uiSliderB.Value = b;
             _uiSliderC.Value = c;
         }
 
-        private void SetText(float a, float b, float c)
+        protected void SetText(float a, float b, float c)
         {
             _redText.text = a.ToString();
             _greenText.text = b.ToString();
             _blueText.text = c.ToString();
         }
 
-        private void SetHexField()
+        protected void SetHexField()
         {
             _hexValueInputfield.text = ColorConversion.RGBToHex(_image.color).Hex;
         }
 
-        private void SetColor(Color c)
+        protected void SetColor(Color c)
         {
             _image.color = c;
         }
