@@ -5,9 +5,12 @@ namespace RuntimeNodeEditor.Node
 {
     public class NodeExecution : MonoBehaviour
     {
+        [SerializeField]
+        private GameObject _nodesParent;
+
         public void Execute()
         {
-            Execute(FindObjectsOfType<Node>());
+            Execute(_nodesParent.GetComponentsInChildren<Node>());
         }
 
         public void Execute(Node[] nodes)
