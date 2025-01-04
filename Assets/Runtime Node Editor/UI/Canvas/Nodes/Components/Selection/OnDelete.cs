@@ -10,7 +10,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.Components
         {
             if (!ignoreChecks)
             {
-                if (CurrentNodeIsNull)
+                if (SelectionData.ActiveNodeUIIsNull)
                     return;
 
                 if (GlobalData.IsPointing || GlobalData.IsDragging || GlobalData.IsPanning || GlobalData.IsScrolling)
@@ -22,7 +22,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.Components
             node.DeletePointerConnections();
 
             Object.Destroy(nodeUI.gameObject);
-            _currentNode = null;
+            SelectionData.currentActiveNodeUI = null;
         }
     }
 }

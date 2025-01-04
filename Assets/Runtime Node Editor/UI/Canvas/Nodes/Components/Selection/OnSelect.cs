@@ -4,22 +4,22 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.Components
     {
         private static void Select(NodeUI node)
         {
-            if (!CurrentNodeIsNull)
+            if (!SelectionData.ActiveNodeUIIsNull)
             {
-                _currentNode.SetPrimaryColor();
+                SelectionData.currentActiveNodeUI.SetPrimaryColor();
             }
 
-            _currentNode = node;
-            _currentNode.ToggleSelectColor();
+            SelectionData.currentActiveNodeUI = node;
+            SelectionData.currentActiveNodeUI.ToggleSelectColor();
         }
 
         private static void Deselect()
         {
-            if (CurrentNodeIsNull)
+            if (SelectionData.ActiveNodeUIIsNull)
                 return;
-            
-            _currentNode.SetPrimaryColor();
-            _currentNode = null;
+
+            SelectionData.currentActiveNodeUI.SetPrimaryColor();
+            SelectionData.currentActiveNodeUI = null;
         }
 
         private static void DeselectCopiedNode()

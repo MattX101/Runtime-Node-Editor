@@ -6,15 +6,6 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.Components
 {
     internal static partial class Selection
     {
-        private static NodeUI _currentNode;
-        private static bool CurrentNodeIsNull
-        {
-            get
-            {
-                return _currentNode == null;
-            }
-        }
-
         internal static void OnUpdate(NodeUIManager nodeUIManager, ConnectionLines connectionLines)
         {
             MangeSelection();
@@ -65,7 +56,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.Components
 
             if (UnityEngine.Input.GetKeyDown(KeyCode.Delete))
             {
-                Delete(_currentNode);
+                Delete(SelectionData.currentActiveNodeUI);
             }
         }
     }

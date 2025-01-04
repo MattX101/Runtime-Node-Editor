@@ -17,10 +17,10 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.Components
 
         private static void Copy(bool cut)
         {
-            if (CurrentNodeIsNull)
+            if (SelectionData.ActiveNodeUIIsNull)
                 return;
 
-            _copiedNodeUI = _currentNode;
+            _copiedNodeUI = SelectionData.currentActiveNodeUI;
             _currentCopyIsCut = cut;
         }
 
@@ -41,13 +41,13 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.Components
             {
                 newNode.Elements.SetElements(copiedNode.Elements);
             }
-            
+
             connectionLines.Paste(copiedNode, newNode);
 
             if (_currentCopyIsCut)
             {
                 Delete(_copiedNodeUI, true);
-                _currentNode = nodeUI;
+                SelectionData.currentActiveNodeUI = nodeUI;
                 Copy(false);
             }
         }
