@@ -263,12 +263,15 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.UI
         {
             _uiSliderA.ChangeFillColor(a);
             _uiSliderA.ChangeHandleColor(a);
+            _uiSliderA.ChangeBackgroundColor(a);
 
             _uiSliderB.ChangeFillColor(b);
             _uiSliderB.ChangeHandleColor(b);
+            _uiSliderB.ChangeBackgroundColor(b);
 
             _uiSliderC.ChangeFillColor(c);
             _uiSliderC.ChangeHandleColor(c);
+            _uiSliderC.ChangeBackgroundColor(c);
         }
     }
 }

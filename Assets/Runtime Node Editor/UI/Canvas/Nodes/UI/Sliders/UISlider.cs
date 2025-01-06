@@ -9,6 +9,8 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.UI
         protected Slider slider;
 
         [SerializeField]
+        private RawImage _background;
+        [SerializeField]
         private Image _fill, _handle;
 
         [SerializeField]
@@ -26,6 +28,10 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.UI
             if (_fill != null)
             {
                 _fill.color = _color;
+            }
+            if (_background != null)
+            {
+                _background.color = _color * new Color(0.75f, 0.7f, 0.7f, 1.0f);
             }
             _handle.color = _color;
 
@@ -73,6 +79,11 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.UI
         public void ChangeHandleColor(Color newColor)
         {
             _handle.color = newColor;
+        }
+
+        public void ChangeBackgroundColor(Color newColor)
+        {
+            _background.color = newColor * new Color(0.75f, 0.7f, 0.7f, 1.0f);
         }
 
         public void SetMinValue(float value)

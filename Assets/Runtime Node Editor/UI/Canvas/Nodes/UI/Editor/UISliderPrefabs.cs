@@ -14,7 +14,10 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.UI.Editor
         private static void CreateValueSlider() => CreateUIPrefab(ElementsPath + "Slider/Value Slider");
 
         [MenuItem(GameObjectPath + "Elements/Slider/Slider With Preview", false, 0), MenuItem(AssetsPath + "Elements/Slider/Slider With Preview", false, 0)]
-        private static void CreateSliderWithpreview() => CreateUIPrefab(ElementsPath + "Slider/Slider With Preview");
+        private static void CreateSliderWithPreview() => CreateUIPrefab(ElementsPath + "Slider/Slider With Preview");
+
+        [MenuItem(GameObjectPath + "Elements/Slider/Range Slider", false, 0), MenuItem(AssetsPath + "Elements/Slider/Range Slider", false, 0)]
+        private static void CreateRangeSlider() => CreateUIPrefab(ElementsPath + "Slider/Range Slider");
     }
 }
 #endif
