@@ -1,7 +1,6 @@
+using Utils.IO.Serialization;
 using UnityEngine;
 using UnityEngine.UI;
-using System;
-using System.Collections.Generic;
 using TMPro;
 
 namespace RuntimeNodeEditor.UI.Canvas.Node
@@ -74,32 +73,21 @@ namespace RuntimeNodeEditor.UI.Canvas.Node
             _canvasGroup.alpha = alpha;
         }
 
-        internal byte[] SaveNodeUI()
+        internal void SaveNodeUI(FileWriter writer)
         {
-            List<byte> bytes;
+            writer.Write((byte)id.Length);
 
-            if (id.Length == 0)
+            if (id.Length > 0)
             {
-                bytes = new List<byte>
+                for (int i = 0; i < id.Length; i++)
                 {
-                    (byte)0
-                };
+                    writer.Write(id[i]);
+                }
 
-                return bytes.ToArray();
+                // Node Position
+                writer.Write(_rectTransform.localPosition.x);
+                writer.Write(_rectTransform.localPosition.y);
             }
-
-            bytes = new List<byte>
-            {
-                (byte)id.Length
-            };
-
-            bytes.AddRange(id);
-
-            // Node Position
-            bytes.AddRange(BitConverter.GetBytes(_rectTransform.localPosition.x));
-            bytes.AddRange(BitConverter.GetBytes(_rectTransform.localPosition.y));
-
-            return bytes.ToArray();
         }
     }
 }

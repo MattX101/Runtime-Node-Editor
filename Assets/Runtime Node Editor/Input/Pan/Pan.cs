@@ -1,7 +1,6 @@
 using RuntimeNodeEditor.Data;
 using UnityEngine;
-using System;
-using System.Collections.Generic;
+using Utils.IO.Serialization;
 
 namespace RuntimeNodeEditor.Input
 {
@@ -31,17 +30,19 @@ namespace RuntimeNodeEditor.Input
             _nodesRect.position = new Vector3(0, 0, NodesRectPosition.z);
         }
 
-        public static byte[] Save()
+        public static void Save(FileWriter writer)
         {
-            List<byte> data = new();
-            
-            data.AddRange(BitConverter.GetBytes(NodesRectPosition.x / GlobalData.ScalerFactor));
-            data.AddRange(BitConverter.GetBytes(NodesRectPosition.y / GlobalData.ScalerFactor));
-            
-            data.AddRange(BitConverter.GetBytes(PositionFromOriginZoomed.x));
-            data.AddRange(BitConverter.GetBytes(PositionFromOriginZoomed.y));
+            writer.Write(NodesRectPosition.x / GlobalData.ScalerFactor);
+            writer.Write(NodesRectPosition.y / GlobalData.ScalerFactor);
 
-            return data.ToArray();
+            writer.Write(PositionFromOriginZoomed.x);
+            writer.Write(PositionFromOriginZoomed.y);
+        }
+
+        public static void Load(FileReader reader)
+        {
+            LoadWorldPan(reader);
+            LoadViewportPan(reader);
         }
     }
 }

@@ -1,61 +1,48 @@
 ﻿using RuntimeNodeEditor.Node.Pointer;
+using Utils.IO.Serialization;
 using UnityEngine;
-using System;
-using System.Collections.Generic;
 
 namespace RuntimeNodeEditor.UI.Canvas.Node.Save
 {
     public static class OnSave
     {
-        public static byte[] Save(GameObject nodesObject)
+        public static void Save(FileWriter writer, GameObject nodesObject)
         {
-            List<byte> bytes = new();
-
             RuntimeNodeEditor.Node.Node[] nodes = nodesObject.GetComponentsInChildren<RuntimeNodeEditor.Node.Node>();
 
             if (nodes == null)
             {
-                return bytes.ToArray();
+                writer.Write(0);
+
+                return;
             }
-
-            byte[] numOfNodes = BitConverter.GetBytes(nodes.Length);
-            bytes.Add(numOfNodes[0]);
-            bytes.Add(numOfNodes[1]);
-            bytes.Add(numOfNodes[2]);
-            bytes.Add(numOfNodes[3]);
-
-            foreach (RuntimeNodeEditor.Node.Node node in nodes)
+            else
             {
-                bytes.AddRange(node.gameObject.GetComponent<NodeUI>().SaveNodeUI());
+                writer.Write(nodes.Length);
 
-                if (node.Elements == null)
+                foreach (RuntimeNodeEditor.Node.Node node in nodes)
                 {
-                    bytes.Add(0);
-                    bytes.Add(0);
-                    bytes.Add(0);
-                    bytes.Add(0);
+                    node.gameObject.GetComponent<NodeUI>().SaveNodeUI(writer);
+
+                    if (node.Elements == null)
+                    {
+                        writer.Write(0);
+                        writer.Write(0);
+                        writer.Write(0);
+                        writer.Write(0);
+                    }
+                    else
+                    {
+                        node.Elements.Save(writer);
+                    }
                 }
-                else
-                {
-                    bytes.AddRange(node.Elements.Save());
-                }
+
+                SaveNodeConnections(writer, nodes);
             }
-
-            bytes.AddRange(SaveNodeConnections(nodes));
-
-            return bytes.ToArray();
         }
 
-        private static byte[] SaveNodeConnections(RuntimeNodeEditor.Node.Node[] nodes)
+        private static void SaveNodeConnections(FileWriter writer, RuntimeNodeEditor.Node.Node[] nodes)
         {
-            List<byte> bytes = new List<byte>();
-
-            int lengthIndex = bytes.Count;
-            bytes.Add(0);
-            bytes.Add(0);
-            bytes.Add(0);
-            bytes.Add(0);
-
             int count = 0;
 
             for (int nodeIndex = 0; nodeIndex < nodes.Length; nodeIndex++)
@@ -65,33 +52,51 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.Save
 
                 for (int inputPointerIndex = 0; inputPointerIndex < nodes[nodeIndex].Inputs.Count; inputPointerIndex++)
                 {
-                    if (SaveOutput(bytes, nodes, nodeIndex, nodes[nodeIndex].Inputs[inputPointerIndex].ConnectedOutputPointer, inputPointerIndex))
-                    {
-                        count++;
-                    }
+                    CountOutput(ref count, nodes, nodes[nodeIndex].Inputs[inputPointerIndex].ConnectedOutputPointer);
                 }
             }
 
-            byte[] countBytes = BitConverter.GetBytes(count);
-            bytes[lengthIndex] = countBytes[0];
-            bytes[lengthIndex + 1] = countBytes[1];
-            bytes[lengthIndex + 2] = countBytes[2];
-            bytes[lengthIndex + 3] = countBytes[3];
+            writer.Write(count);
 
-            return bytes.ToArray();
+            for (int nodeIndex = 0; nodeIndex < nodes.Length; nodeIndex++)
+            {
+                if (nodes[nodeIndex].Inputs == null)
+                    continue;
+
+                for (int inputPointerIndex = 0; inputPointerIndex < nodes[nodeIndex].Inputs.Count; inputPointerIndex++)
+                {
+                    SaveOutput(writer, nodes, nodeIndex, nodes[nodeIndex].Inputs[inputPointerIndex].ConnectedOutputPointer, inputPointerIndex);
+                }
+            }
         }
 
-        private static bool SaveOutput(List<byte> bytes, RuntimeNodeEditor.Node.Node[] nodes, int nodeIndex, OutputPointer outputPointer, int inputPointerIndex)
+        private static void CountOutput(ref int count, RuntimeNodeEditor.Node.Node[] nodes, OutputPointer outputPointer)
         {
             if (outputPointer == null)
-                return false;
+                return;
+
+            int connectedOutputNode = FindNode(nodes, outputPointer.Node);
+
+            if (connectedOutputNode == -1)
+                return;
+
+            if (FindPointer(nodes, connectedOutputNode, outputPointer) == -1)
+                return;
+
+            count++;
+        }
+
+        private static void SaveOutput(FileWriter writer, RuntimeNodeEditor.Node.Node[] nodes, int nodeIndex, OutputPointer outputPointer, int inputPointerIndex)
+        {
+            if (outputPointer == null)
+                return;
 
             int connectedOutputNode = FindNode(
                 nodes,
                 outputPointer.Node);
 
             if (connectedOutputNode == -1)
-                return false;
+                return;
 
             int connectedOutputIndex = FindPointer(
                 nodes,
@@ -99,17 +104,14 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.Save
                 outputPointer);
 
             if (connectedOutputIndex == -1)
-                return false;
+                return;
 
-            bytes.AddRange(BitConverter.GetBytes(nodeIndex));
-            bytes.Add((byte)inputPointerIndex);
+            writer.Write(nodeIndex);
+            writer.Write((byte)inputPointerIndex);
 
-            bytes.AddRange(BitConverter.GetBytes(connectedOutputNode));
-            bytes.Add((byte)connectedOutputIndex);
-
-            return true;
+            writer.Write(connectedOutputNode);
+            writer.Write((byte)connectedOutputIndex);
         }
-
 
         private static int FindNode(RuntimeNodeEditor.Node.Node[] nodes, RuntimeNodeEditor.Node.Node nodeToFind)
         {

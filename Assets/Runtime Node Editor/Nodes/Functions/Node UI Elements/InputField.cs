@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using Utils.IO.Serialization;
 using TMPro;
 
 namespace RuntimeNodeEditor.Node.UI.Functions.Elements
@@ -34,28 +33,22 @@ namespace RuntimeNodeEditor.Node.UI.Functions.Elements
             }
         }
 
-        private List<byte> SaveInputFields(List<byte> bytes, TMP_InputField[] inputFields)
+        private void SaveInputFields(FileWriter writer, TMP_InputField[] inputFields)
         {
-            if (inputFields.Length == 0)
+            writer.Write((byte)inputFields.Length);
+
+            if (inputFields.Length > 0)
             {
-                bytes.Add(0);
+                foreach (TMP_InputField inputField in inputFields)
+                {
+                    writer.Write(inputField.text.Length);
 
-                return bytes;
+                    if (inputField.text.Length == 0)
+                        continue;
+
+                    writer.Write(inputField.text);
+                }
             }
-
-            bytes.Add((byte)inputFields.Length);
-
-            foreach (TMP_InputField inputField in inputFields)
-            {
-                bytes.Add((byte)inputField.text.Length);
-
-                if (inputField.text.Length == 0)
-                    continue;
-
-                bytes.AddRange(inputField.text.Select(character => (byte)character));
-            }
-
-            return bytes;
         }
     }
 }

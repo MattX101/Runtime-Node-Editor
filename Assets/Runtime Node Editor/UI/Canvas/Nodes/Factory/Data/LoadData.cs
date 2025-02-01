@@ -1,13 +1,15 @@
+using Utils.IO.Serialization;
+
 namespace RuntimeNodeEditor.UI.Canvas.Node.Factory.Data
 {
     public partial class LoadData
     {
-        public LoadData(byte[] data, ref int index)
+        public LoadData(FileReader reader)
         {
-            index = LoadInputFields(data, index);
-            index = LoadBooleans(data, index);
-            index = LoadSliders(data, index);
-            index = LoadDropdowns(data, index);
+            LoadInputFields(reader);
+            LoadBooleans(reader);
+            LoadSliders(reader);
+            LoadDropdowns(reader);
         }
     }
 }

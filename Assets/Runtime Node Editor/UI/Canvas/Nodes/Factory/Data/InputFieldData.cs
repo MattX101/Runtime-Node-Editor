@@ -1,4 +1,6 @@
-﻿namespace RuntimeNodeEditor.UI.Canvas.Node.Factory.Data
+﻿using Utils.IO.Serialization;
+
+namespace RuntimeNodeEditor.UI.Canvas.Node.Factory.Data
 {
     public partial class LoadData
     {
@@ -8,35 +10,22 @@
             private set; 
         }
 
-        private int LoadInputFields(byte[] data, int index)
+        private void LoadInputFields(FileReader reader)
         {
-            byte numOfInputFields = data[index];
-            index++;
+            byte numOfInputFields = reader.ReadByte();
 
-            if (numOfInputFields == 0)
+            if (numOfInputFields > 0)
             {
-                return index;
-            }
+                Texts = new string[numOfInputFields];
 
-            Texts = new string[numOfInputFields];
-
-            for (int i = 0; i < Texts.Length; i++)
-            {
-                byte lengthOfInputField = data[index];
-                index++;
-
-                if (lengthOfInputField == 0)
-                    continue;
-
-                for (int j = 0; j < lengthOfInputField; j++)
+                for (int i = 0; i < Texts.Length; i++)
                 {
-                    Texts[i] += (char)data[index + j];
+                    if (reader.ReadInt() == 0)
+                        continue;
+
+                    Texts[i] = reader.ReadString();
                 }
-
-                index += Texts[i].Length;
             }
-
-            return index;
         }
     }
 }

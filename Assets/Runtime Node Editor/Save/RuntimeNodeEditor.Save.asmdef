@@ -1,14 +1,14 @@
 {
-    "name": "RNE.Template.Save",
-    "rootNamespace": "RNE.Template.Save",
+    "name": "RuntimeNodeEditor.Save",
+    "rootNamespace": "RuntimeNodeEditor.Save",
     "references": [
-        "GUID:32356a874d537a64d9bfc3c26683f7ad",
         "GUID:971907e042dcd334289fba405f52b119",
-        "GUID:2ddc451d3d4ba564aa8dfea390a38ef2",
-        "GUID:13030a587de7ba54aa801ce6818f4317",
+        "GUID:32356a874d537a64d9bfc3c26683f7ad",
         "GUID:9337d4506e8f8e3459d9df69b4e76df0",
+        "GUID:09d381e51b0834b4394362a80fa3fe6f",
         "GUID:35719f50b5d2c9a4aab9ec193da9455f",
-        "GUID:09d381e51b0834b4394362a80fa3fe6f"
+        "GUID:ac744a3653ae5bf45ad04e73c3ab1984",
+        "GUID:2ddc451d3d4ba564aa8dfea390a38ef2"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

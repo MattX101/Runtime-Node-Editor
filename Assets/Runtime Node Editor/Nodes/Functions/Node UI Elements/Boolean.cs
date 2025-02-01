@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using Utils.IO.Serialization;
 using UnityEngine.UI;
 
 namespace RuntimeNodeEditor.Node.UI.Functions.Elements
@@ -30,19 +29,17 @@ namespace RuntimeNodeEditor.Node.UI.Functions.Elements
                 SetBoolean(buttons[i], values[i].isOn);
         }
 
-        private List<byte> SaveBooleanButtons(List<byte> bytes, Toggle[] buttons)
+        private void SaveBooleanButtons(FileWriter writer, Toggle[] buttons)
         {
-            if (buttons.Length == 0)
+            writer.Write((byte)buttons.Length);
+
+            if (buttons.Length > 0)
             {
-                bytes.Add(0);
-
-                return bytes;
+                for (int i = 0; i < buttons.Length; i++)
+                {
+                    writer.Write(buttons[i].isOn);
+                }
             }
-
-            bytes.Add((byte)buttons.Length);
-            bytes.AddRange(buttons.Select(button => button.isOn ? (byte)1 : (byte)0));
-
-            return bytes;
         }
     }
 }

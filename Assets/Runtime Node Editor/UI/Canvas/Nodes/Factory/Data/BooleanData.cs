@@ -1,4 +1,6 @@
-﻿namespace RuntimeNodeEditor.UI.Canvas.Node.Factory.Data
+﻿using Utils.IO.Serialization;
+
+namespace RuntimeNodeEditor.UI.Canvas.Node.Factory.Data
 {
     public partial class LoadData
     {
@@ -8,24 +10,19 @@
             private set; 
         }
 
-        private int LoadBooleans(byte[] data, int index)
+        private void LoadBooleans(FileReader reader)
         {
-            byte numOfBooleans = data[index];
-            index++;
+            byte numOfBooleans = reader.ReadByte();
 
-            if (numOfBooleans == 0)
+            if (numOfBooleans > 0)
             {
-                return index;
+                Booleans = new bool[numOfBooleans];
+
+                for (int i = 0; i < Booleans.Length; i++)
+                {
+                    Booleans[i] = reader.ReadBool();
+                }
             }
-
-            Booleans = new bool[numOfBooleans];
-
-            for (int i = 0; i < Booleans.Length; i++, index++)
-            {
-                Booleans[i] = data[index] == 1;
-            }
-
-            return index;
         }
     }
 }

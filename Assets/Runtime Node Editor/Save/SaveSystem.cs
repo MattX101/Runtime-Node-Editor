@@ -1,11 +1,10 @@
 using RuntimeNodeEditor.Input;
 using RuntimeNodeEditor.UI.Canvas.Node.Save;
 using Utils.IO;
+using Utils.IO.Serialization;
 using UnityEngine;
-using System.IO;
-using System.Collections.Generic;
 
-namespace RNE.Template.Save
+namespace RuntimeNodeEditor.Save
 {
     internal partial class SaveSystem : MonoBehaviour
     {
@@ -14,10 +13,9 @@ namespace RNE.Template.Save
 
         [Header("Nodes")]
         [SerializeField]
-        private GameObject nodesObject;
+        private GameObject _nodesObject;
 
         private const string SaveExtension = "data";
-        private readonly List<byte> _data = new();
 
         public void Save()
         {
@@ -38,13 +36,13 @@ namespace RNE.Template.Save
 
         private void WriteData()
         {
-            _data.Clear();
-            
-            _data.AddRange(Zoom.Save());
-            _data.AddRange(Pan.Save());
-            _data.AddRange(OnSave.Save(nodesObject));
+            FileWriter writer = new FileWriter(_saveDirectory);
 
-            File.WriteAllBytes(_saveDirectory, _data.ToArray());
+            Zoom.Save(writer);
+            Pan.Save(writer);
+            OnSave.Save(writer, _nodesObject);
+
+            writer.Close();
         }
     }
 }

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Utils.IO.Serialization;
 using UnityEngine.UI;
 
 namespace RuntimeNodeEditor.Node.UI.Functions.Elements
@@ -35,19 +33,17 @@ namespace RuntimeNodeEditor.Node.UI.Functions.Elements
             }
         }
 
-        private List<byte> SaveSliders(List<byte> bytes, Slider[] sliders)
+        private void SaveSliders(FileWriter writer, Slider[] sliders)
         {
-            if (sliders.Length == 0)
+            writer.Write((byte)sliders.Length);
+
+            if (sliders.Length > 0)
             {
-                bytes.Add(0);
-
-                return bytes;
+                for (int i = 0; i < sliders.Length; i++)
+                {
+                    writer.Write(sliders[i].value);
+                }
             }
-
-            bytes.Add((byte)sliders.Length);
-            bytes.AddRange(sliders.SelectMany(slider => BitConverter.GetBytes(slider.value)));
-
-            return bytes;
         }
     }
 }

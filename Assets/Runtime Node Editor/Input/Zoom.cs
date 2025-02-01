@@ -1,6 +1,6 @@
 using RuntimeNodeEditor.Data;
 using UnityEngine;
-using System;
+using Utils.IO.Serialization;
 
 namespace RuntimeNodeEditor.Input
 {
@@ -45,14 +45,14 @@ namespace RuntimeNodeEditor.Input
             _scale = 1.0f;
         }
 
-        public static byte[] Save()
+        public static void Save(FileWriter writer)
         {
-            return BitConverter.GetBytes(_scale);
+            writer.Write(_scale);
         }
 
-        public static void Load(float scale)
+        public static void Load(FileReader reader)
         {
-            _scale = scale;
+            _scale = reader.ReadFloat();
             SetScaler();
         }
     }

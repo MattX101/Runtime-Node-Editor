@@ -1,4 +1,4 @@
-﻿using System;
+﻿using Utils.IO.Serialization;
 
 namespace RuntimeNodeEditor.UI.Canvas.Node.Factory.Data
 {
@@ -10,24 +10,19 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.Factory.Data
             private set;
         }
 
-        private int LoadSliders(byte[] data, int index)
+        private void LoadSliders(FileReader reader)
         {
-            byte numOfSliders = data[index];
-            index++;
+            byte numOfSliders = reader.ReadByte();
 
-            if (numOfSliders == 0)
+            if (numOfSliders > 0)
             {
-                return index;
+                SliderValues = new float[numOfSliders];
+
+                for (int i = 0; i < SliderValues.Length; i++)
+                {
+                    SliderValues[i] = reader.ReadFloat();
+                }
             }
-
-            SliderValues = new float[numOfSliders];
-
-            for (int i = 0; i < SliderValues.Length; i++, index += 4)
-            {
-                SliderValues[i] = BitConverter.ToSingle(data, index);
-            }
-
-            return index;
         }
     }
 }

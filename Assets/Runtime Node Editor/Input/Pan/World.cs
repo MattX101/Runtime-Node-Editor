@@ -1,5 +1,6 @@
 ﻿using RuntimeNodeEditor.Data;
 using UnityEngine;
+using Utils.IO.Serialization;
 
 namespace RuntimeNodeEditor.Input
 {
@@ -36,9 +37,12 @@ namespace RuntimeNodeEditor.Input
             _lastSavedWorldMousePos = mousePos;
         }
 
-        public static void LoadWorldPan(float x, float y)
+        private static void LoadWorldPan(FileReader reader)
         {
-            CalculateWorldPan(x, y);
+            CalculateWorldPan(
+                reader.ReadFloat(), 
+                reader.ReadFloat()
+            );
         }
 
         private static void CalculateWorldPan(float x, float y)

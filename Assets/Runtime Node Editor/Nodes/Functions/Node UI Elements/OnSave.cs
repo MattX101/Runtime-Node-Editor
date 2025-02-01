@@ -1,19 +1,15 @@
-using System.Collections.Generic;
+using Utils.IO.Serialization;
 
 namespace RuntimeNodeEditor.Node.UI.Functions.Elements
 {
     public partial class NodeUIElements
     {
-        public byte[] Save()
+        public void Save(FileWriter writer)
         {
-            List<byte> bytes = new List<byte>();
-
-            bytes = SaveInputFields(bytes, inputFields);
-            bytes = SaveBooleanButtons(bytes, buttons);
-            bytes = SaveSliders(bytes, sliders);
-            bytes = SaveDropdowns(bytes, dropdowns);
-
-            return bytes.ToArray();
+            SaveInputFields(writer, inputFields);
+            SaveBooleanButtons(writer, buttons);
+            SaveSliders(writer, sliders);
+            SaveDropdowns(writer, dropdowns);
         }
     }
 }

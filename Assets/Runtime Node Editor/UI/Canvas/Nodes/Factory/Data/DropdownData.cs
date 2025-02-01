@@ -1,4 +1,4 @@
-﻿using System;
+﻿using Utils.IO.Serialization;
 
 namespace RuntimeNodeEditor.UI.Canvas.Node.Factory.Data
 {
@@ -10,25 +10,19 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.Factory.Data
             private set;
         }
 
-        private int LoadDropdowns(byte[] data, int index)
+        private void LoadDropdowns(FileReader reader)
         {
-            byte numOfDropdowns = data[index];
-            index++;
+            byte numOfDropdowns = reader.ReadByte();
 
-            if (numOfDropdowns == 0)
+            if (numOfDropdowns > 0)
             {
-                return index;
+                DropdownValue = new int[numOfDropdowns];
+
+                for (int i = 0; i < numOfDropdowns; i++)
+                {
+                    DropdownValue[i] = reader.ReadInt();
+                }
             }
-
-            DropdownValue = new int[numOfDropdowns];
-
-            for (int i = 0; i < numOfDropdowns; i++)
-            {
-                DropdownValue[i] = BitConverter.ToInt32(data, index);
-                index += 4;
-            }
-
-            return index;
         }
     }
 }

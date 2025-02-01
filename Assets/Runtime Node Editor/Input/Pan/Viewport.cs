@@ -1,5 +1,6 @@
 ﻿using RuntimeNodeEditor.Data;
 using UnityEngine;
+using Utils.IO.Serialization;
 
 namespace RuntimeNodeEditor.Input
 {
@@ -36,9 +37,13 @@ namespace RuntimeNodeEditor.Input
             _lastSavedViewportMousePos = viewportMousePos;
         }
 
-        public static void LoadViewportPan(float x, float y)
+        private static void LoadViewportPan(FileReader reader)
         {
-            _positionFromOriginZoomed = new Vector3(x, y, 0);
+            _positionFromOriginZoomed = new Vector3(
+                reader.ReadFloat(), 
+                reader.ReadFloat(), 
+                0
+            );
         }
     }
 }
