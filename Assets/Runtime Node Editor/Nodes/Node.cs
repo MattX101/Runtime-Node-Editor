@@ -1,5 +1,5 @@
 using RuntimeNodeEditor.Node.Pointer;
-using RuntimeNodeEditor.Node.UI.Functions.Elements;
+using Utils.IO.Serialization;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -15,14 +15,17 @@ namespace RuntimeNodeEditor.Node
         public bool EndNode => _endNode;
 
         [SerializeField]
+        private byte[] id;
+
+        [Space]
+
+        [SerializeField]
         private List<InputPointer> _inputs = new();
         public List<InputPointer> Inputs => _inputs;
 
         [SerializeField]
         private List<OutputPointer> _outputs = new();
         public List<OutputPointer> Outputs => _outputs;
-
-        public NodeUIElements Elements;
 
         public void Awake()
         {
@@ -103,5 +106,23 @@ namespace RuntimeNodeEditor.Node
         {
             return Input && Input.ConnectedOutputPointer;
         }
+
+        public void CodeToSave(FileWriter writer)
+        {
+            writer.Write((byte)id.Length);
+
+            if (id.Length > 0)
+            {
+                for (int i = 0; i < id.Length; i++)
+                {
+                    writer.Write(id[i]);
+                }
+            }
+
+            OnSave(writer);
+        }
+        public virtual void OnSave(FileWriter writer) { }
+        
+        public virtual void OnLoad(FileReader reader) { }
     }
 }

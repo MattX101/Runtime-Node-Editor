@@ -37,11 +37,6 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.Components
             RuntimeNodeEditor.Node.Node copiedNode = _copiedNodeUI.GetComponent<RuntimeNodeEditor.Node.Node>();
             RuntimeNodeEditor.Node.Node newNode = nodeUI.GetComponent<RuntimeNodeEditor.Node.Node>();
 
-            if (newNode.Elements != null)
-            {
-                newNode.Elements.SetElements(copiedNode.Elements);
-            }
-
             connectionLines.Paste(copiedNode, newNode);
 
             if (_currentCopyIsCut)

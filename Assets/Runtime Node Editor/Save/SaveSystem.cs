@@ -1,5 +1,4 @@
 using RuntimeNodeEditor.Input;
-using RuntimeNodeEditor.UI.Canvas.Node.Save;
 using Utils.IO;
 using Utils.IO.Serialization;
 using UnityEngine;
@@ -40,7 +39,15 @@ namespace RuntimeNodeEditor.Save
 
             Zoom.Save(writer);
             Pan.Save(writer);
-            OnSave.Save(writer, _nodesObject);
+
+            Node.Node[] nodes = _nodesObject.GetComponentsInChildren<Node.Node>();
+            if (nodes != null)
+            {
+                writer.Write(nodes == null ? 0 : nodes.Length);
+
+                Node.Save.OnSave.Save(writer, nodes);
+                UI.Canvas.Node.Save.OnSave.Save(writer, nodes);
+            }
 
             writer.Close();
         }

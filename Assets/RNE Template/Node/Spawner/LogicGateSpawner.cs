@@ -14,7 +14,7 @@ namespace RNE.Template.Node.Spawner
         public void Spawn(int value)
         {
             LogicGateNode logic = _manager.ReturnSpawn(_node).GetComponent<LogicGateNode>();
-            logic.Elements.SetDropdown(logic.Elements.dropdowns[0], value);
+            logic.SetDropdownValue(value);
         }
     }
 }

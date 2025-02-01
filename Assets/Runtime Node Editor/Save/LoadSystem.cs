@@ -1,8 +1,6 @@
 using RuntimeNodeEditor.Node;
 using RuntimeNodeEditor.Node.Serialization;
 using RuntimeNodeEditor.Node.Connection.Lines;
-using RuntimeNodeEditor.UI.Canvas.Node.Factory.Data;
-using RuntimeNodeEditor.UI.Canvas.Node.Factory;
 using RuntimeNodeEditor.Input;
 using Utils.IO.Serialization;
 using UnityEngine;
@@ -57,6 +55,7 @@ namespace RuntimeNodeEditor.Save
                 return;
 
             LoadConnections(reader, nodes);
+            LoadNodePositions(reader, nodes);
 
             reader.Close();
 
@@ -70,13 +69,15 @@ namespace RuntimeNodeEditor.Save
             if (numOfNodes == 0)
                 return;
 
+            GameObject[] nodes = new GameObject[numOfNodes];
+
             for (int i = 0; i < numOfNodes; i++)
             {
-                LoadNode(reader);
+                nodes[i] = LoadNode(reader);
             }
         }
 
-        private void LoadNode(FileReader reader)
+        private GameObject LoadNode(FileReader reader)
         {
             byte length = reader.ReadByte();
 
@@ -90,17 +91,12 @@ namespace RuntimeNodeEditor.Save
                 }
                 GameObject nodeObject = Instantiate(group.GetNode(reader.ReadByte()), _nodesObject.transform);
 
-                nodeObject.GetComponent<RectTransform>().localPosition =
-                    new Vector3(
-                        reader.ReadFloat(),
-                        reader.ReadFloat(),
-                        0);
+                nodeObject.GetComponent<Node.Node>().OnLoad(reader);
 
-                OnLoad.Load(
-                    nodeObject.GetComponent<Node.Node>(),
-                    new LoadData(reader)
-                    );
+                return nodeObject;
             }
+
+            return null;
         }
 
         private void LoadConnections(FileReader reader, Node.Node[] nodes)
@@ -120,5 +116,17 @@ namespace RuntimeNodeEditor.Save
                 nodes[reader.ReadInt()].Inputs[reader.ReadByte()],
                 nodes[reader.ReadInt()].Outputs[reader.ReadByte()]);
         }
+
+        private void LoadNodePositions(FileReader reader, Node.Node[] nodes)
+        {
+            for (int i = 0; i < nodes.Length; i++)
+            {
+                nodes[i].GetComponent<RectTransform>().localPosition =
+                    new Vector3(
+                        reader.ReadFloat(),
+                        reader.ReadFloat(),
+                        0);
+            }
+        }    
     }
 }

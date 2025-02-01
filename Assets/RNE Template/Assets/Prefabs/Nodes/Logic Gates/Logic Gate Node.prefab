@@ -155,20 +155,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _endNode: 0
+  id: 0201
   _inputs:
   - {fileID: 6336091664284026091}
   - {fileID: 7811119279074188971}
   _outputs:
   - {fileID: 2043598103255354977}
-  Elements:
-    buttons:
-    - {fileID: 6373631450016706211}
-    - {fileID: 7204433796448023779}
-    - {fileID: 8136542288004824385}
-    dropdowns:
-    - {fileID: 1344955911472751636}
-    inputFields: []
-    sliders: []
+  _dropdown: {fileID: 1344955911472751636}
+  _toggleA: {fileID: 6373631450016706211}
+  _toggleB: {fileID: 7204433796448023779}
+  _out: {fileID: 8136542288004824385}
 --- !u!114 &2608118963166151078 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 198873547779197522, guid: a9419d852d2edad4f84deb8820be92eb, type: 3}

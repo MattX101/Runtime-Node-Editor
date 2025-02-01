@@ -1,6 +1,9 @@
 using RuntimeNodeEditor.UI.Canvas.Node.UI;
 using RNE.Template.Node.Pointer;
+using Utils.IO.Serialization;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 namespace RNE.Template.Node
 {
@@ -8,6 +11,23 @@ namespace RNE.Template.Node
     {
         [SerializeField]
         private UIColourPicker _colourPicker;
+
+        [Space]
+
+        [SerializeField] private TMP_Dropdown _dropdown;
+
+        [Space]
+
+        [SerializeField] private Slider _redSlider;
+        [SerializeField] private Slider _greenSlider;
+        [SerializeField] private Slider _blueSlider;
+
+        [Space]
+
+        [SerializeField] private TMP_InputField _redInputfield;
+        [SerializeField] private TMP_InputField _greenInputfield;
+        [SerializeField] private TMP_InputField _blueInputfield;
+        [SerializeField] private TMP_InputField _hexInputfield;
 
         protected override void CodeToExecute()
         {
@@ -30,6 +50,34 @@ namespace RNE.Template.Node
             Outputs[1].GetComponent<FloatOutputPointer>().Reset();
             Outputs[2].GetComponent<FloatOutputPointer>().Reset();
             Outputs[3].GetComponent<ColorOutputPointer>().Reset();
+        }
+
+        public override void OnSave(FileWriter writer)
+        {
+            writer.Write(_dropdown.value);
+
+            writer.Write(_redSlider.value);
+            writer.Write(_greenSlider.value);
+            writer.Write(_blueSlider.value);
+
+            writer.Write(_redInputfield.text);
+            writer.Write(_greenInputfield.text);
+            writer.Write(_blueInputfield.text);
+            writer.Write(_hexInputfield.text);
+        }
+
+        public override void OnLoad(FileReader reader)
+        {
+            _dropdown.value = reader.ReadInt();
+
+            _redSlider.value = reader.ReadFloat();
+            _greenSlider.value = reader.ReadFloat();
+            _blueSlider.value = reader.ReadFloat();
+
+            _redInputfield.text = reader.ReadString();
+            _greenInputfield.text = reader.ReadString();
+            _blueInputfield.text = reader.ReadString();
+            _hexInputfield.text = reader.ReadString();
         }
     }
 }

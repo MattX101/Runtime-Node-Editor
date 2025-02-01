@@ -142,26 +142,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _endNode: 0
+  id: 0007
   _inputs: []
   _outputs:
   - {fileID: 878247989884242413}
   - {fileID: 8060136393837212063}
   - {fileID: 7745427266463700660}
   - {fileID: 5976240061614045344}
-  Elements:
-    buttons: []
-    dropdowns:
-    - {fileID: 7938306629946387792}
-    inputFields:
-    - {fileID: 1106407313407428408}
-    - {fileID: 2858097456822410314}
-    - {fileID: 2861458402582817340}
-    - {fileID: 4857307806717054604}
-    sliders:
-    - {fileID: 4324399667363568051}
-    - {fileID: 1576144669573248311}
-    - {fileID: 2421277566931061328}
   _colourPicker: {fileID: 1528778298427927848}
+  _dropdown: {fileID: 7938306629946387792}
+  _redSlider: {fileID: 4324399667363568051}
+  _greenSlider: {fileID: 1576144669573248311}
+  _blueSlider: {fileID: 2421277566931061328}
+  _redInputfield: {fileID: 1106407313407428408}
+  _greenInputfield: {fileID: 2858097456822410314}
+  _blueInputfield: {fileID: 2861458402582817340}
+  _hexInputfield: {fileID: 4857307806717054604}
 --- !u!114 &8371260224499552190 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5798104940624980900, guid: 6e972d1ca6051d84998bc927e5362a04, type: 3}

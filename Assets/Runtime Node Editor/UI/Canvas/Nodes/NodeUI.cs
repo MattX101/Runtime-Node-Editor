@@ -10,9 +10,6 @@ namespace RuntimeNodeEditor.UI.Canvas.Node
         [SerializeField]
         private string _nodeTitle = "NodeUI";
 
-        [SerializeField]
-        private byte[] id;
-
         private RectTransform _rectTransform;
         public Vector3 RootPosition
         {
@@ -75,19 +72,9 @@ namespace RuntimeNodeEditor.UI.Canvas.Node
 
         internal void SaveNodeUI(FileWriter writer)
         {
-            writer.Write((byte)id.Length);
-
-            if (id.Length > 0)
-            {
-                for (int i = 0; i < id.Length; i++)
-                {
-                    writer.Write(id[i]);
-                }
-
-                // Node Position
-                writer.Write(_rectTransform.localPosition.x);
-                writer.Write(_rectTransform.localPosition.y);
-            }
+            // Node Position
+            writer.Write(_rectTransform.localPosition.x);
+            writer.Write(_rectTransform.localPosition.y);
         }
     }
 }
