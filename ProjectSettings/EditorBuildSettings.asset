@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Scene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 0
-    path: Assets/Scenes/Tests/File Selection.unity
+    path: Assets/Runtime Node Editor/Scenes/Tests/File Selection.unity
     guid: f9e15d1d24de3b04c9f15eb62182323a
   m_configObjects: {}
