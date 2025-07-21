@@ -4,6 +4,7 @@ using Utils.IO.Serialization;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Utils.Colors;
 
 namespace RNE.Template.Node
 {
@@ -55,29 +56,19 @@ namespace RNE.Template.Node
         public override void OnSave(FileWriter writer)
         {
             writer.Write(_dropdown.value);
-
+            
             writer.Write(_redSlider.value);
             writer.Write(_greenSlider.value);
             writer.Write(_blueSlider.value);
-
-            writer.Write(_redInputfield.text);
-            writer.Write(_greenInputfield.text);
-            writer.Write(_blueInputfield.text);
-            writer.Write(_hexInputfield.text);
         }
 
         public override void OnLoad(FileReader reader)
         {
             _dropdown.value = reader.ReadInt();
-
+            
             _redSlider.value = reader.ReadFloat();
             _greenSlider.value = reader.ReadFloat();
             _blueSlider.value = reader.ReadFloat();
-
-            _redInputfield.text = reader.ReadString();
-            _greenInputfield.text = reader.ReadString();
-            _blueInputfield.text = reader.ReadString();
-            _hexInputfield.text = reader.ReadString();
         }
     }
 }

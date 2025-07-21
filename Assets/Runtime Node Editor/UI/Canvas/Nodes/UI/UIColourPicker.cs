@@ -51,6 +51,8 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.UI
         {
             _skipOnChangeChecks = false;
             OnSliderValueChange();
+
+            SetHexField();
         }
 
         public void OnDropdownValueChange()
