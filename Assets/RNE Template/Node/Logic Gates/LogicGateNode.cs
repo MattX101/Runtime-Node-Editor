@@ -49,7 +49,7 @@ namespace RNE.Template.Node
             if (Inputs[1].ConnectedOutputPointer)
             {
                 b = PointerValue.GetBool(Inputs[1]);
-                _toggleA.isOn = b;
+                _toggleB.isOn = b;
             }
             else
             {
