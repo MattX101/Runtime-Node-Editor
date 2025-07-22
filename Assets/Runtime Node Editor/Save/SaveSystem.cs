@@ -5,10 +5,15 @@ using UnityEngine;
 
 namespace RuntimeNodeEditor.Save
 {
-    internal partial class SaveSystem : MonoBehaviour
+    public class SaveSystem : MonoBehaviour
     {
         private readonly IOSelection _iOSelection = new();
-        private string _saveDirectory;
+
+        public string SaveDirectory
+        {
+            get; 
+            private set;
+        }
 
         [Header("Nodes")]
         [SerializeField]
@@ -16,9 +21,14 @@ namespace RuntimeNodeEditor.Save
 
         private const string SaveExtension = "data";
 
+        public void SelectSaveDirectory()
+        {
+            SaveDirectory = _iOSelection.SelectSingleFile(SaveExtension);
+        }
+        
         public void Save()
         {
-            if (_saveDirectory == null)
+            if (SaveDirectory == null)
             {
                 SaveAs();
             }
@@ -28,14 +38,14 @@ namespace RuntimeNodeEditor.Save
 
         public void SaveAs()
         {
-            _saveDirectory = _iOSelection.SelectSavePath("Save", SaveExtension);
+            SaveDirectory = _iOSelection.SelectSavePath("Save", SaveExtension);
 
             WriteData();
         }
 
         private void WriteData()
         {
-            FileWriter writer = new FileWriter(_saveDirectory);
+            FileWriter writer = new FileWriter(SaveDirectory);
 
             Zoom.Save(writer);
             Pan.Save(writer);

@@ -2,13 +2,22 @@ using RuntimeNodeEditor.Node;
 using RuntimeNodeEditor.Node.Serialization;
 using RuntimeNodeEditor.Node.Connection.Lines;
 using RuntimeNodeEditor.Input;
+using RuntimeNodeEditor.Save;
 using Utils.IO.Serialization;
 using UnityEngine;
 
-namespace RuntimeNodeEditor.Save
+namespace RuntimeNodeEditor.Load
 {
-    internal partial class SaveSystem
+    internal class LoadSystem : MonoBehaviour
     {
+        [SerializeField] 
+        private SaveSystem _saveSystem;
+
+        [SerializeField]
+        private UI.Tooltip.Window.Window onOpenWindow;
+        
+        [Header("Nodes")]
+        
         [SerializeField]
         private NodesList _nodesList;
 
@@ -18,8 +27,10 @@ namespace RuntimeNodeEditor.Save
         [SerializeField]
         private NodeExecution nodeExecution;
 
+        [Space]
+        
         [SerializeField]
-        private UI.Tooltip.Window.Window onOpenWindow;
+        private GameObject _nodesObject;
 
         public void Load()
         {
@@ -32,18 +43,16 @@ namespace RuntimeNodeEditor.Save
                 return;
             }
 
-            string path = _iOSelection.SelectSingleFile(SaveExtension);
+            _saveSystem.SelectSaveDirectory();
 
-            if (path == null)
+            if (_saveSystem.SaveDirectory == null)
             {
                 Debug.LogWarning("Save file was not opened!");
 
                 return;
             }
-
-            _saveDirectory = path;
-
-            FileReader reader = new FileReader(_saveDirectory);
+            
+            FileReader reader = new FileReader(_saveSystem.SaveDirectory);
 
             Zoom.Load(reader);
             Pan.Load(reader);
