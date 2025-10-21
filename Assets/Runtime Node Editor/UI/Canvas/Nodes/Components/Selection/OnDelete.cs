@@ -6,7 +6,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.Components
 {
     internal static partial class Selection
     {
-        internal static void Delete(NodeUI nodeUI, bool ignoreChecks = false)
+        internal static void Delete(NodeUI nodeUI, bool ignoreChecks = false, Factory.FactoryManager factoryManager = null)
         {
             if (!ignoreChecks)
             {
@@ -18,6 +18,12 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.Components
             }
 
             RuntimeNodeEditor.Node.Node node = nodeUI.GetComponent<RuntimeNodeEditor.Node.Node>();
+
+            if (node.EndNode && factoryManager != null)
+            {
+                factoryManager.ExecutionNodeDeleted();
+            }
+
             NodeList.Remove(nodeUI.gameObject.GetHashCode(), node);
             node.DeletePointerConnections();
 

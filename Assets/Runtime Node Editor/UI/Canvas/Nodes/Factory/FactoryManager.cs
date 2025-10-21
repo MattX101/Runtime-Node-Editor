@@ -7,11 +7,32 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.Factory
         [SerializeField]
         private Transform _nodesParent;
 
+        [SerializeField]
+        private bool _singleExecutionNode = false;
+        
+        private bool _executionNodeSpawned = false;
+
         public void Spawn(GameObject node)
         {
             InitSpawnDrag(
                 Instantiate(node, _nodesParent).GetComponent<NodeUI>()
                 );
+        }
+
+        public void SpawnExecutionNode(GameObject node)
+        {
+            if (_executionNodeSpawned == true && _singleExecutionNode == true)
+            {
+                Debug.Log("Only one end node can be active!");
+
+                return;
+            }
+            else
+            {
+                Spawn(node);
+
+                _executionNodeSpawned = true;
+            }
         }
 
         public GameObject ReturnSpawn(GameObject node)
@@ -36,6 +57,11 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.Factory
         private void InitSpawnDrag(NodeUI nodeUI)
         {
             Components.Drag.InitSpawnDrag(nodeUI);
+        }
+
+        public void ExecutionNodeDeleted()
+        {
+            _executionNodeSpawned = false;
         }
     }
 }

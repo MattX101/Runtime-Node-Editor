@@ -56,7 +56,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.Components
 
             if (UnityEngine.Input.GetKeyDown(KeyCode.Delete))
             {
-                Delete(SelectionData.currentActiveNodeUI);
+                Delete(SelectionData.currentActiveNodeUI, false, nodeUIManager.FactoryManager);
             }
         }
     }
