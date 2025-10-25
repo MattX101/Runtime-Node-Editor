@@ -1,5 +1,6 @@
 ﻿using Utils.Colors;
 using Utils.Colors.Model;
+using Utils.IO.Serialization;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
@@ -274,6 +275,24 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.UI
             _uiSliderC.ChangeFillColor(c);
             _uiSliderC.ChangeHandleColor(c);
             _uiSliderC.ChangeBackgroundColor(c);
+        }
+
+        public void OnSave(FileWriter writer)
+        {
+            CodeToSave(writer);
+        }
+        protected virtual void CodeToSave(FileWriter writer)
+        {
+            //
+        }
+
+        public void OnLoad(FileReader reader)
+        {
+            CodeToLoad(reader);
+        }
+        protected virtual void CodeToLoad(FileReader reader)
+        {
+            //
         }
     }
 }

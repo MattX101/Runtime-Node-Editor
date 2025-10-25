@@ -3,6 +3,7 @@
     "rootNamespace": "RuntimeNodeEditor.UI.Canvas.Node.UI",
     "references": [
         "GUID:600dc5895527919418a524c8c5b3bfce",
+        "GUID:ac744a3653ae5bf45ad04e73c3ab1984",
         "GUID:6055be8ebefd69e48b49212b09b47b2f"
     ],
     "includePlatforms": [],
