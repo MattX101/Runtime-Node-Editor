@@ -30,6 +30,13 @@ namespace RuntimeNodeEditor.Node
         public void Awake()
         {
             NodeList.Add(this.gameObject.GetHashCode(), this);
+
+            Init();
+        }
+
+        protected virtual void Init()
+        {
+            return;
         }
 
         public void AddPointer(InputPointer Input, int valueTypeIndex)
