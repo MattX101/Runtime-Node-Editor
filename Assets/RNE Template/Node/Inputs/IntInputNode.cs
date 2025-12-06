@@ -13,7 +13,7 @@ namespace RNE.Template.Node
 
         protected override void CodeToExecute()
         {
-            Outputs[0].GetComponent<IntOutputPointer>().Value =
+            PointerAccess.GetInt(Outputs[0].Id).Value =
                 _inputfield.text.Length != 0
                 ? InputFieldToInt.Get(_inputfield.text)
                 : 0;
@@ -21,7 +21,7 @@ namespace RNE.Template.Node
 
         protected override void CodeToReset()
         {
-            Outputs[0].GetComponent<IntOutputPointer>().Reset();
+            PointerAccess.GetInt(Outputs[0].Id).Reset();
         }
 
         public override void OnSave(FileWriter writer)

@@ -12,12 +12,12 @@ namespace RNE.Template.Node
 
         protected override void CodeToExecute()
         {
-            Outputs[0].GetComponent<BoolOutputPointer>().Value = _toggle.isOn;
+            PointerAccess.GetBool(Outputs[0].Id).Value = _toggle.isOn;
         }
 
         protected override void CodeToReset()
         {
-            Outputs[0].GetComponent<BoolOutputPointer>().Reset();
+            PointerAccess.GetBool(Outputs[0].Id).Reset();
         }
 
         public override void OnSave(FileWriter writer)

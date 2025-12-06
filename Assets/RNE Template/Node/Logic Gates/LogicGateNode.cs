@@ -57,8 +57,7 @@ namespace RNE.Template.Node
             }
 
             bool result = CalcualteGate(a, b);
-
-            Outputs[0].GetComponent<BoolOutputPointer>().Value = result;
+            PointerAccess.GetBool(Outputs[0].Id).Value = result;
             _out.isOn = result;
         }
 
@@ -78,7 +77,7 @@ namespace RNE.Template.Node
 
         protected override void CodeToReset()
         {
-            Outputs[0].GetComponent<BoolOutputPointer>().Reset();
+            PointerAccess.GetBool(Outputs[0].Id).Reset();
         }
 
         private bool AND(bool a, bool b) => a && b;

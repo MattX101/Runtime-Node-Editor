@@ -93,6 +93,10 @@ PrefabInstance:
       value: 17.5
       objectReference: {fileID: 0}
     - target: {fileID: 6956023495269750317, guid: 6e972d1ca6051d84998bc927e5362a04, type: 3}
+      propertyPath: _node
+      value: 
+      objectReference: {fileID: 7984525364673504923}
+    - target: {fileID: 6956023495269750317, guid: 6e972d1ca6051d84998bc927e5362a04, type: 3}
       propertyPath: _nodeTitle
       value: Int
       objectReference: {fileID: 0}
@@ -119,6 +123,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 7984525364673504923}
   m_SourcePrefab: {fileID: 100100000, guid: 6e972d1ca6051d84998bc927e5362a04, type: 3}
+--- !u!224 &715555723070046866 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 115217234666677971, guid: 6e972d1ca6051d84998bc927e5362a04, type: 3}
+  m_PrefabInstance: {fileID: 610096279642039361}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &4880511581421388070 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5461863840995386727, guid: 6e972d1ca6051d84998bc927e5362a04, type: 3}
@@ -154,6 +163,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _endNode: 1
   id: 0100
+  _rectTransform: {fileID: 715555723070046866}
   _inputs:
   - {fileID: 3776657631171855514}
   _outputs: []

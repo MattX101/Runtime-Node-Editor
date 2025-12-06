@@ -222,6 +222,10 @@ PrefabInstance:
       value: 140
       objectReference: {fileID: 0}
     - target: {fileID: 6986467484705591435, guid: 0becbdcdeda75eb48a75fffbe9e723d6, type: 3}
+      propertyPath: _node
+      value: 
+      objectReference: {fileID: 7420244380032468004}
+    - target: {fileID: 6986467484705591435, guid: 0becbdcdeda75eb48a75fffbe9e723d6, type: 3}
       propertyPath: _nodeTitle
       value: Color
       objectReference: {fileID: 0}
@@ -271,6 +275,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _endNode: 1
   id: 0107
+  _rectTransform: {fileID: 7161953227075150953}
   _inputs:
   - {fileID: 7722853927060592709}
   _outputs: []
@@ -302,3 +307,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &7161953227075150953 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 136652648310759541, guid: 0becbdcdeda75eb48a75fffbe9e723d6, type: 3}
+  m_PrefabInstance: {fileID: 7097992282316145692}
+  m_PrefabAsset: {fileID: 0}

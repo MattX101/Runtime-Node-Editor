@@ -10,6 +10,13 @@ namespace RuntimeNodeEditor.UI.Canvas.Node
         [SerializeField]
         private string _nodeTitle = "NodeUI";
 
+        [SerializeField]
+        private RuntimeNodeEditor.Node.Node _node;
+        public RuntimeNodeEditor.Node.Node Node => _node;
+
+        [Space]
+
+        [SerializeField]
         private RectTransform _rectTransform;
         public Vector3 RootPosition
         {
@@ -17,23 +24,29 @@ namespace RuntimeNodeEditor.UI.Canvas.Node
             set => _rectTransform.localPosition = value;
         }
 
+        [SerializeField]
         private Image _rootImage;
         private Color _primaryColor;
 
         [SerializeField]
-        private TMP_Text _titleText;
-
         private CanvasGroup _canvasGroup;
+
+        [Space]
+
+        [SerializeField]
+        private TMP_Text _titleText;
 
         private void Awake()
         {
             _titleText.text = _nodeTitle;
-
-            _rectTransform = GetComponent<RectTransform>();
-            _canvasGroup = GetComponent<CanvasGroup>();
-
-            _rootImage = GetComponent<Image>();
             _primaryColor = _rootImage.color;
+            
+            NodeUIDictionary.NodesUI.Add(this.GetHashCode(), this);
+        }
+
+        private void OnDestroy()
+        {
+            NodeUIDictionary.NodesUI.Remove(this.GetHashCode());
         }
 
         private void OnMouseDown()

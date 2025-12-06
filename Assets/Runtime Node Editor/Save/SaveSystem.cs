@@ -2,6 +2,8 @@ using RuntimeNodeEditor.Input;
 using Utils.IO;
 using Utils.IO.Serialization;
 using UnityEngine;
+using RuntimeNodeEditor.Node;
+using System.Linq;
 
 namespace RuntimeNodeEditor.Save
 {
@@ -50,13 +52,12 @@ namespace RuntimeNodeEditor.Save
             Zoom.Save(writer);
             Pan.Save(writer);
 
-            Node.Node[] nodes = _nodesObject.GetComponentsInChildren<Node.Node>();
-            if (nodes != null)
+            if (NodeDictionary.Nodes != null)
             {
-                writer.Write(nodes == null ? 0 : nodes.Length);
+                writer.Write(NodeDictionary.Nodes == null ? 0 : NodeDictionary.Nodes.Count);
 
-                Node.Save.OnSave.Save(writer, nodes);
-                UI.Canvas.Node.Save.OnSave.Save(writer, nodes);
+                Node.Save.OnSave.Save(writer, NodeDictionary.Nodes.Values.ToArray());
+                UI.Canvas.Node.Save.OnSave.Save(writer);
             }
 
             writer.Close();

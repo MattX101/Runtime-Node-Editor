@@ -14,10 +14,7 @@
         {
             get
             {
-                if (ActiveNodeUIIsNull)
-                    return null;
-
-                return ActiveNodeUI.GetComponent<RuntimeNodeEditor.Node.Node>();
+                return ActiveNodeUIIsNull ? null : ActiveNodeUI.Node;
             }
         }
     }

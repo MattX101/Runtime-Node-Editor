@@ -9,10 +9,10 @@ namespace RNE.Template.Node.Pointer.Value
         {
             return Output.ValueTypeIndex switch
             {
-                (int)ValueType.Vector2 => Output.GetComponent<Vector2OutputPointer>().Value,
-                (int)ValueType.Int => new Vector2(Output.GetComponent<IntOutputPointer>().Value, Output.GetComponent<IntOutputPointer>().Value),
-                (int)ValueType.Float => new Vector2(Output.GetComponent<FloatOutputPointer>().Value, Output.GetComponent<FloatOutputPointer>().Value),
-                (int)ValueType.Vector3 => new Vector2(Output.GetComponent<Vector3OutputPointer>().Value.x, Output.GetComponent<Vector3OutputPointer>().Value.y),
+                (int)ValueType.Vector2 => PointerAccess.GetVector2(Output.Id).Value,
+                (int)ValueType.Int => new Vector2(PointerAccess.GetInt(Output.Id).Value, PointerAccess.GetInt(Output.Id).Value),
+                (int)ValueType.Float => new Vector2(PointerAccess.GetFloat(Output.Id).Value, PointerAccess.GetFloat(Output.Id).Value),
+                (int)ValueType.Vector3 => new Vector2(PointerAccess.GetVector3(Output.Id).Value.x, PointerAccess.GetVector3(Output.Id).Value.y),
                 _ => Vector2.zero
             };
         }

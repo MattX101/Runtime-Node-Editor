@@ -34,10 +34,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.Components
 
             NodeUI nodeUI = nodeUIManager.FactoryManager.ReturnSpawnUI(_copiedNodeUI);
 
-            RuntimeNodeEditor.Node.Node copiedNode = _copiedNodeUI.GetComponent<RuntimeNodeEditor.Node.Node>();
-            RuntimeNodeEditor.Node.Node newNode = nodeUI.GetComponent<RuntimeNodeEditor.Node.Node>();
-
-            connectionLines.Paste(copiedNode, newNode);
+            connectionLines.Paste(_copiedNodeUI.Node, nodeUI.Node);
 
             if (_currentCopyIsCut)
             {

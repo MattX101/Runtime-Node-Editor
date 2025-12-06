@@ -6,7 +6,7 @@ namespace RNE.Template.Node.Pointer.Value
     {
         public static bool GetBool(OutputPointer Output)
         {
-            return Output.GetComponent<BoolOutputPointer>().Value;
+            return PointerAccess.GetBool(Output.Id).Value;
         }
 
         public static bool GetBool(InputPointer Input)

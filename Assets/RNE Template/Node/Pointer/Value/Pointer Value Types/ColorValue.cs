@@ -7,7 +7,7 @@ namespace RNE.Template.Node.Pointer.Value
     {
         public static Color GetColor(OutputPointer Output)
         {
-            return Output.GetComponent<ColorOutputPointer>().Value;
+            return PointerAccess.GetColor(Output.Id).Value;
         }
 
         public static Color GetColor(InputPointer Input)

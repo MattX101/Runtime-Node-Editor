@@ -9,10 +9,10 @@ namespace RNE.Template.Node.Pointer.Value
         {
             return Output.ValueTypeIndex switch
             {
-                (int)ValueType.Vector3 => Output.GetComponent<Vector3OutputPointer>().Value,
-                (int)ValueType.Int => new Vector3(Output.GetComponent<IntOutputPointer>().Value, Output.GetComponent<IntOutputPointer>().Value, Output.GetComponent<IntOutputPointer>().Value),
-                (int)ValueType.Float => new Vector3(Output.GetComponent<FloatOutputPointer>().Value, Output.GetComponent<FloatOutputPointer>().Value, Output.GetComponent<FloatOutputPointer>().Value),
-                (int)ValueType.Vector2 => new Vector3(Output.GetComponent<Vector2OutputPointer>().Value.x, Output.GetComponent<Vector2OutputPointer>().Value.y, 0),
+                (int)ValueType.Vector3 => PointerAccess.GetVector3(Output.Id).Value,
+                (int)ValueType.Int => new Vector3(PointerAccess.GetInt(Output.Id).Value, PointerAccess.GetInt(Output.Id).Value, PointerAccess.GetInt(Output.Id).Value),
+                (int)ValueType.Float => new Vector3(PointerAccess.GetFloat(Output.Id).Value, PointerAccess.GetFloat(Output.Id).Value, PointerAccess.GetFloat(Output.Id).Value),
+                (int)ValueType.Vector2 => new Vector3(PointerAccess.GetVector2(Output.Id).Value.x, PointerAccess.GetVector2(Output.Id).Value.y, 0),
                 _ => Vector3.zero
             };
         }

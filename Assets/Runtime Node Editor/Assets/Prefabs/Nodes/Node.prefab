@@ -333,7 +333,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _nodeTitle: Node
+  _rectTransform: {fileID: 115217234666677971}
+  _rootImage: {fileID: 1458922266286551284}
   _titleText: {fileID: 5798104940624980900}
+  _canvasGroup: {fileID: 939303415406794608}
 --- !u!1 &9049754885318911735
 GameObject:
   m_ObjectHideFlags: 0

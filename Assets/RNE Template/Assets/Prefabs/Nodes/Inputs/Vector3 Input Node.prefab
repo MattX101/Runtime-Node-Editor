@@ -469,6 +469,10 @@ PrefabInstance:
       value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 6956023495269750317, guid: 6e972d1ca6051d84998bc927e5362a04, type: 3}
+      propertyPath: _node
+      value: 
+      objectReference: {fileID: 2042808554041869132}
+    - target: {fileID: 6956023495269750317, guid: 6e972d1ca6051d84998bc927e5362a04, type: 3}
       propertyPath: _nodeTitle
       value: Vector 3
       objectReference: {fileID: 0}
@@ -523,6 +527,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _endNode: 0
   id: 0003
+  _rectTransform: {fileID: 7179548494348067730}
   _inputs: []
   _outputs:
   - {fileID: 2437573408986503758}
@@ -546,6 +551,11 @@ MonoBehaviour:
 --- !u!224 &5429500517997354439 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2982159018174830726, guid: 6e972d1ca6051d84998bc927e5362a04, type: 3}
+  m_PrefabInstance: {fileID: 7078449323184342337}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &7179548494348067730 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 115217234666677971, guid: 6e972d1ca6051d84998bc927e5362a04, type: 3}
   m_PrefabInstance: {fileID: 7078449323184342337}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8383292079365369330

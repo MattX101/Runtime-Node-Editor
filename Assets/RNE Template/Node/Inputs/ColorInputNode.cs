@@ -4,7 +4,6 @@ using Utils.IO.Serialization;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using Utils.Colors;
 
 namespace RNE.Template.Node
 {
@@ -34,11 +33,11 @@ namespace RNE.Template.Node
         {
             Color color = _colourPicker.CalcualteColor();
 
-            Outputs[0].GetComponent<FloatOutputPointer>().Value = (int)(color.r * 255);
-            Outputs[1].GetComponent<FloatOutputPointer>().Value = (int)(color.g * 255);
-            Outputs[2].GetComponent<FloatOutputPointer>().Value = (int)(color.b * 255);
+            PointerAccess.GetFloat(Outputs[0].Id).Value = (int)(color.r * 255);
+            PointerAccess.GetFloat(Outputs[1].Id).Value = (int)(color.g * 255);
+            PointerAccess.GetFloat(Outputs[2].Id).Value = (int)(color.b * 255);
 
-            Outputs[3].GetComponent<ColorOutputPointer>().Value =
+            PointerAccess.GetColor(Outputs[3].Id).Value =
                 new Color(
                     color.r,
                     color.g,
@@ -47,10 +46,10 @@ namespace RNE.Template.Node
 
         protected override void CodeToReset()
         {
-            Outputs[0].GetComponent<FloatOutputPointer>().Reset();
-            Outputs[1].GetComponent<FloatOutputPointer>().Reset();
-            Outputs[2].GetComponent<FloatOutputPointer>().Reset();
-            Outputs[3].GetComponent<ColorOutputPointer>().Reset();
+            PointerAccess.GetFloat(Outputs[0].Id).Reset();
+            PointerAccess.GetFloat(Outputs[1].Id).Reset();
+            PointerAccess.GetFloat(Outputs[2].Id).Reset();
+            PointerAccess.GetColor(Outputs[3].Id).Reset();
         }
 
         public override void OnSave(FileWriter writer)

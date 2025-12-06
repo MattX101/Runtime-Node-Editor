@@ -6,7 +6,7 @@ namespace RNE.Template.Node.Pointer.Value
     {
         public static char GetChar(OutputPointer Output)
         {
-            return Output.GetComponent<CharOutputPointer>().Value;
+            return PointerAccess.GetChar(Output.Id).Value;
         }
 
         public static char GetChar(InputPointer Input)

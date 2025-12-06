@@ -11,12 +11,12 @@ namespace RuntimeNodeEditor.UI.Canvas.Node
         [SerializeField]
         private TMP_Text _header;
 
+        [SerializeField]
         private Image _image;
         private Color _color;
 
         private void Awake()
         {
-            _image = GetComponent<Image>();
             _color = _image.color;
         }
 

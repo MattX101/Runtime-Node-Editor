@@ -4,11 +4,11 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.Save
 {
     public static class OnSave
     {
-        public static void Save(FileWriter writer, RuntimeNodeEditor.Node.Node[] nodes)
+        public static void Save(FileWriter writer)
         {
-            foreach (RuntimeNodeEditor.Node.Node node in nodes)
+            foreach (NodeUI node in NodeUIDictionary.NodesUI.Values)
             {
-                node.GetComponent<NodeUI>().SaveNodeUI(writer);
+                node.SaveNodeUI(writer);
             }
         }
     }

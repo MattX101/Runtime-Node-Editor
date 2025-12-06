@@ -12,12 +12,12 @@ namespace RNE.Template.Node
 
         protected override void CodeToExecute()
         {
-            Outputs[0].GetComponent<StringOutputPointer>().Value = _inputfield.text;
+            PointerAccess.GetString(Outputs[0].Id).Value = _inputfield.text;
         }
 
         protected override void CodeToReset()
         {
-            Outputs[0].GetComponent<StringOutputPointer>().Reset();
+            PointerAccess.GetString(Outputs[0].Id).Reset();
         }
 
         public override void OnSave(FileWriter writer)

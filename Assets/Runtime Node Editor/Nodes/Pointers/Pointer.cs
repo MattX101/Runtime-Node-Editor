@@ -4,6 +4,9 @@ namespace RuntimeNodeEditor.Node.Pointer
 {
     public class Pointer : MonoBehaviour
     {
+        protected int id;
+        public int Id => id; 
+
         [SerializeField]
         private Node _node;
         public Node Node
@@ -15,6 +18,11 @@ namespace RuntimeNodeEditor.Node.Pointer
         {
             get;
             protected set;
+        }
+
+        public Pointer()
+        {
+            id = GetHashCode();
         }
 
         internal void AddInputPointer(Node node, InputPointer Input, int valueTypeIndex)

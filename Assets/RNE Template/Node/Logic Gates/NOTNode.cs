@@ -16,7 +16,7 @@ namespace RNE.Template.Node
             ExecuteInputConnection(0);
 
             bool a = PointerValue.GetBool(Inputs[0]);
-            Outputs[0].GetComponent<BoolOutputPointer>().Value = !a;
+            PointerAccess.GetBool(Outputs[0].Id).Value = !a;
 
             _in.isOn = a;
             _out.isOn = !a;
@@ -24,7 +24,7 @@ namespace RNE.Template.Node
 
         protected override void CodeToReset()
         {
-            Outputs[0].GetComponent<BoolOutputPointer>().Reset();
+            PointerAccess.GetBool(Outputs[0].Id).Reset();
         }
 
         public override void OnSave(FileWriter writer)

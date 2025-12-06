@@ -12,7 +12,7 @@ namespace RNE.Template.Node
 
         protected override void CodeToExecute()
         {
-            Outputs[0].GetComponent<CharOutputPointer>().Value =
+            PointerAccess.GetChar(Outputs[0].Id).Value =
                 _inputfield.text.Length != 0 ?
                 _inputfield.text[0] : 
                 ' ';
@@ -20,7 +20,7 @@ namespace RNE.Template.Node
 
         protected override void CodeToReset()
         {
-            Outputs[0].GetComponent<CharOutputPointer>().Reset();
+            PointerAccess.GetChar(Outputs[0].Id).Reset();
         }
 
         public override void OnSave(FileWriter writer)

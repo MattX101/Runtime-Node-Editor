@@ -6,6 +6,7 @@ using UnityEngine;
 
 namespace RuntimeNodeEditor.Node
 {
+    [RequireComponent(typeof(RectTransform))]
     public class Node : MonoBehaviour
     {
         private bool _wasExecuted;
@@ -20,6 +21,12 @@ namespace RuntimeNodeEditor.Node
         [Space]
 
         [SerializeField]
+        private RectTransform _rectTransform;
+        public RectTransform RectTransform => _rectTransform;
+
+        [Space]
+
+        [SerializeField]
         private List<InputPointer> _inputs = new();
         public List<InputPointer> Inputs => _inputs;
 
@@ -29,9 +36,15 @@ namespace RuntimeNodeEditor.Node
 
         public void Awake()
         {
-            NodeList.Add(this.gameObject.GetHashCode(), this);
+            NodeDictionary.Nodes.Add(this.gameObject.GetHashCode(), this);
 
             Init();
+
+            foreach (OutputPointer pointer in Outputs)
+            {
+                Debug.Log("Added Pointer to Dictionary: " + pointer.Id);
+                PointerDictionary.Pointers.Add(pointer.Id, pointer);
+            }
         }
 
         protected virtual void Init()
@@ -64,12 +77,12 @@ namespace RuntimeNodeEditor.Node
         // TODO - Optimize to a more effient process
         public void ResetAndExecute()
         {
-            foreach (Node node in NodeList.Nodes.Values)
+            foreach (Node node in NodeDictionary.Nodes.Values)
             {
                 node.ResetExecution();
             }
 
-            foreach (Node endNode in NodeList.Nodes.Values.Where(node => node.EndNode))
+            foreach (Node endNode in NodeDictionary.Nodes.Values.Where(node => node.EndNode))
             {
                 endNode.Execute();
             }

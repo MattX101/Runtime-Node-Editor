@@ -17,6 +17,10 @@ PrefabInstance:
       value: Logic Gate Node
       objectReference: {fileID: 0}
     - target: {fileID: 3620130260909651931, guid: a9419d852d2edad4f84deb8820be92eb, type: 3}
+      propertyPath: _node
+      value: 
+      objectReference: {fileID: 3963541466038794831}
+    - target: {fileID: 3620130260909651931, guid: a9419d852d2edad4f84deb8820be92eb, type: 3}
       propertyPath: _nodeTitle
       value: AND
       objectReference: {fileID: 0}
@@ -94,11 +98,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5993410118303418149, guid: a9419d852d2edad4f84deb8820be92eb, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 750
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5993410118303418149, guid: a9419d852d2edad4f84deb8820be92eb, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -550
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5993410118303418149, guid: a9419d852d2edad4f84deb8820be92eb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -156,6 +160,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _endNode: 0
   id: 0201
+  _rectTransform: {fileID: 8493703888264121553}
   _inputs:
   - {fileID: 6336091664284026091}
   - {fileID: 7811119279074188971}
@@ -184,6 +189,11 @@ RectTransform:
 --- !u!224 &6711531169232515716 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8923682665424730480, guid: a9419d852d2edad4f84deb8820be92eb, type: 3}
+  m_PrefabInstance: {fileID: 2806705812144344052}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &8493703888264121553 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 5993410118303418149, guid: a9419d852d2edad4f84deb8820be92eb, type: 3}
   m_PrefabInstance: {fileID: 2806705812144344052}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5533591351476831640

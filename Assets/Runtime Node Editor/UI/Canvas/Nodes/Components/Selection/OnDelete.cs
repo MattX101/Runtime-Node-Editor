@@ -17,15 +17,13 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.Components
                     return;
             }
 
-            RuntimeNodeEditor.Node.Node node = nodeUI.GetComponent<RuntimeNodeEditor.Node.Node>();
-
-            if (node.EndNode && factoryManager != null)
+            if (nodeUI.Node.EndNode && factoryManager != null)
             {
                 factoryManager.ExecutionNodeDeleted();
             }
 
-            NodeList.Remove(nodeUI.gameObject.GetHashCode(), node);
-            node.DeletePointerConnections();
+            NodeDictionary.Nodes.Remove(nodeUI.gameObject.GetHashCode());
+            nodeUI.Node.DeletePointerConnections();
 
             Object.Destroy(nodeUI.gameObject);
             SelectionData.currentActiveNodeUI = null;

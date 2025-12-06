@@ -93,6 +93,10 @@ PrefabInstance:
       value: 52.5
       objectReference: {fileID: 0}
     - target: {fileID: 6956023495269750317, guid: 6e972d1ca6051d84998bc927e5362a04, type: 3}
+      propertyPath: _node
+      value: 
+      objectReference: {fileID: 8058922152314157216}
+    - target: {fileID: 6956023495269750317, guid: 6e972d1ca6051d84998bc927e5362a04, type: 3}
       propertyPath: _nodeTitle
       value: Vector2
       objectReference: {fileID: 0}
@@ -129,6 +133,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 8058922152314157216}
   m_SourcePrefab: {fileID: 100100000, guid: 6e972d1ca6051d84998bc927e5362a04, type: 3}
+--- !u!224 &1862516710867158861 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 115217234666677971, guid: 6e972d1ca6051d84998bc927e5362a04, type: 3}
+  m_PrefabInstance: {fileID: 1747863271189782942}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &5203533178599082554 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5798104940624980900, guid: 6e972d1ca6051d84998bc927e5362a04, type: 3}
@@ -164,6 +173,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _endNode: 1
   id: 0102
+  _rectTransform: {fileID: 1862516710867158861}
   _inputs:
   - {fileID: 1082387482130467528}
   - {fileID: 5618369039546573694}

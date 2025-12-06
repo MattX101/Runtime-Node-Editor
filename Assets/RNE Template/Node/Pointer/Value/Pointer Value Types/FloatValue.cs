@@ -8,8 +8,8 @@ namespace RNE.Template.Node.Pointer.Value
         {
             return Output.ValueTypeIndex switch
             {
-                (int)ValueType.Float => Output.GetComponent<FloatOutputPointer>().Value,
-                (int)ValueType.Int => Output.GetComponent<IntOutputPointer>().Value,
+                (int)ValueType.Float => PointerAccess.GetFloat(Output.Id).Value,
+                (int)ValueType.Int => PointerAccess.GetInt(Output.Id).Value,
                 _ => 0.0f
             };
         }

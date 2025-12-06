@@ -8,11 +8,11 @@ namespace RNE.Template.Node.Pointer.Value
         {
             return Output.ValueTypeIndex switch
             {
-                (int)ValueType.String => Output.GetComponent<StringOutputPointer>().Value,
-                (int)ValueType.Int => Output.GetComponent<IntOutputPointer>().Value.ToString(),
-                (int)ValueType.Float => Output.GetComponent<FloatOutputPointer>().Value.ToString(),
-                (int)ValueType.Bool => Output.GetComponent<BoolOutputPointer>().Value.ToString(),
-                (int)ValueType.Char => Output.GetComponent<CharOutputPointer>().Value.ToString(),
+                (int)ValueType.String => PointerAccess.GetString(Output.Id).Value,
+                (int)ValueType.Int => PointerAccess.GetColor(Output.Id).Value.ToString(),
+                (int)ValueType.Float => PointerAccess.GetFloat(Output.Id).Value.ToString(),
+                (int)ValueType.Bool => PointerAccess.GetBool(Output.Id).Value.ToString(),
+                (int)ValueType.Char => PointerAccess.GetChar(Output.Id).Value.ToString(),
                 _ => ""
             };
         }
