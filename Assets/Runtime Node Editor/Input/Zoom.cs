@@ -1,13 +1,12 @@
 using RuntimeNodeEditor.Data;
-using UnityEngine;
 using Utils.IO.Serialization;
+using UnityEngine;
 
 namespace RuntimeNodeEditor.Input
 {
     public static class Zoom
     {
         private static float _scale = 1.0f;
-        private static float _screenScale;
 
         public static void ZoomCanvas()
         {
@@ -22,11 +21,11 @@ namespace RuntimeNodeEditor.Input
             }
             GlobalData.IsScrolling = true;
 
-            _screenScale = GlobalData.Camera.pixelWidth / 1000.0f;
+            float screenScale = GlobalData.Camera.pixelWidth / 1000.0f;
             _scale = Mathf.Clamp(
                 _scale + UnityEngine.Input.GetAxis("Mouse ScrollWheel"), 
-                0.1f * _screenScale, 
-                2.0f * _screenScale
+                0.1f * screenScale, 
+                2.0f * screenScale
                 );
 
             SetScaler();

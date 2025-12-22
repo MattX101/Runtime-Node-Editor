@@ -1,9 +1,8 @@
 using RuntimeNodeEditor.Input;
+using RuntimeNodeEditor.Node;
 using Utils.IO;
 using Utils.IO.Serialization;
 using UnityEngine;
-using RuntimeNodeEditor.Node;
-using System.Linq;
 
 namespace RuntimeNodeEditor.Save
 {
@@ -25,7 +24,7 @@ namespace RuntimeNodeEditor.Save
 
         public void SelectSaveDirectory()
         {
-            SaveDirectory = _iOSelection.SelectSingleFile(SaveExtension);
+            SaveDirectory = _iOSelection.SelectFile(SaveExtension);
         }
         
         public void Save()
@@ -56,7 +55,7 @@ namespace RuntimeNodeEditor.Save
             {
                 writer.Write(NodeDictionary.Nodes == null ? 0 : NodeDictionary.Nodes.Count);
 
-                Node.Save.OnSave.Save(writer, NodeDictionary.Nodes.Values.ToArray());
+                Node.Save.OnSave.Save(writer);
                 UI.Canvas.Node.Save.OnSave.Save(writer);
             }
 

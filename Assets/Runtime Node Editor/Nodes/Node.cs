@@ -42,7 +42,6 @@ namespace RuntimeNodeEditor.Node
 
             foreach (OutputPointer pointer in Outputs)
             {
-                Debug.Log("Added Pointer to Dictionary: " + pointer.Id);
                 PointerDictionary.Pointers.Add(pointer.Id, pointer);
             }
         }
@@ -74,7 +73,6 @@ namespace RuntimeNodeEditor.Node
             }
         }
 
-        // TODO - Optimize to a more effient process
         public void ResetAndExecute()
         {
             foreach (Node node in NodeDictionary.Nodes.Values)
@@ -88,13 +86,14 @@ namespace RuntimeNodeEditor.Node
             }
         }
 
-        protected virtual void CodeToExecute() { }
+        protected virtual void CodeToExecute()
+        {
+            //
+        }
         internal void Execute()
         {
             if (!_wasExecuted)
             {
-                Debug.Log("Executing node: " + gameObject.name + " " + gameObject.GetHashCode());
-
                 CodeToExecute();
                 _wasExecuted = true;
             }
@@ -108,11 +107,12 @@ namespace RuntimeNodeEditor.Node
             }
         }
 
-        protected virtual void CodeToReset() { }
+        protected virtual void CodeToReset()
+        {
+            //
+        }
         internal void Reset()
         {
-            Debug.Log("Reseting node: " + gameObject.name + " " + gameObject.GetHashCode());
-
             CodeToReset();
             ResetExecution();
         }
@@ -141,8 +141,14 @@ namespace RuntimeNodeEditor.Node
 
             OnSave(writer);
         }
-        public virtual void OnSave(FileWriter writer) { }
+        public virtual void OnSave(FileWriter writer)
+        {
+            //
+        }
         
-        public virtual void OnLoad(FileReader reader) { }
+        public virtual void OnLoad(FileReader reader)
+        {
+            //
+        }
     }
 }

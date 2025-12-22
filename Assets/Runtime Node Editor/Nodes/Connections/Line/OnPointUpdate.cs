@@ -14,7 +14,7 @@ namespace RuntimeNodeEditor.Node.Connection.Line
             _startPosition.z = 100;
 
             _endPosition = Input.transform.position;
-            _endPosition.z= 100;
+            _endPosition.z = 100;
         }
 
         private void UpdatePoints()
@@ -44,15 +44,20 @@ namespace RuntimeNodeEditor.Node.Connection.Line
             if (_lineRenderer.positionCount <= 2)
                 return;
 
+            float eased = 0.0f;
             for (int i = 1; i < _lineRenderer.positionCount - 1; i++)
             {
+                eased = (float)i / _lineRenderer.positionCount;
+                Curves.SetToCurve(ref eased, Curves.Equations.EaseInOut, 2);
+
                 _lineRenderer.SetPosition(
-                i,
-                new Vector3(
+                    i,
+                    new Vector3(
                         Mathf.Lerp(a.x, b.x, (float)i / _lineRenderer.positionCount),
-                        Mathf.Lerp(a.y, b.y, Curves.EaseInOut((float)i / _lineRenderer.positionCount, 2)),
-                        100)
-                    );
+                        Mathf.Lerp(a.y, b.y, eased),
+                        100
+                    )
+                );
             }
         }
     }

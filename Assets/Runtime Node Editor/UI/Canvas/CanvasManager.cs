@@ -1,10 +1,10 @@
 using RuntimeNodeEditor.Data;
 using RuntimeNodeEditor.Input;
 using RuntimeNodeEditor.UI.Canvas.Grid;
+using Utils.Colors;
 using Utils.Colors.Model;
 using UnityEngine;
 using UnityEngine.UI;
-using Utils.Colors;
 
 namespace RuntimeNodeEditor.UI.Canvas
 {

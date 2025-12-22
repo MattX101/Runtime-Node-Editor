@@ -33,7 +33,10 @@ namespace RuntimeNodeEditor.Node.Pointer
             }
         }
 
-        protected virtual void ResetPointer() { }
+        protected virtual void ResetPointer()
+        {
+            //
+        }
         public void Reset()
         {
             ResetPointer();

@@ -5044,6 +5044,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 845c8ca4f7bc3534fbe1e66a94e9185b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _mousePos: {x: 0, y: 0}
+  _currentOutputPointer: {fileID: 0}
   _linesParent: {fileID: 1135406250}
   _sourceMaterial: {fileID: 2100000, guid: c7c12c2b7a8a5e94da7da553c6500f31, type: 2}
 --- !u!114 &1777772070
@@ -5282,6 +5284,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bb4f1bf69299804b91cd28600a300f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _camera: {fileID: 519420031}
   _canvasScaler: {fileID: 1809428005}
   _nodeUIPanel: {fileID: 2073969288}
 --- !u!224 &1821974726 stripped

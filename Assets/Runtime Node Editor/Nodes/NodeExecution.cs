@@ -15,8 +15,6 @@ namespace RuntimeNodeEditor.Node
 
         public void Execute(Node[] nodes)
         {
-            Debug.Log("Executing nodes!");
-
             foreach (Node node in nodes)
             {
                 node.ResetExecution();

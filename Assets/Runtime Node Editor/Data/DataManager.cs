@@ -6,6 +6,9 @@ namespace RuntimeNodeEditor.Data
     internal class DataManager : MonoBehaviour
     {
         [SerializeField]
+        private Camera _camera;
+
+        [SerializeField]
         private CanvasScaler _canvasScaler;
 
         [SerializeField]
@@ -13,7 +16,7 @@ namespace RuntimeNodeEditor.Data
 
         private void Awake()
         {
-            GlobalData.Camera = FindObjectOfType<Camera>();
+            GlobalData.Camera = _camera;
             GlobalData.CanvasScaler = _canvasScaler;
             GlobalData.NodeUIPanel = _nodeUIPanel;
         }

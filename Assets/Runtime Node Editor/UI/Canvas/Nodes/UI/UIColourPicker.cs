@@ -30,8 +30,6 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.UI
         [Header("Image")]
         [SerializeField] private Image _image;
 
-        private HexValidator _hexValidator;
-
         // Prevents updates to UI Colour Picker while true.
         // Previously, while opening a saved file below functions were being called cuasing issues when the color model dropdown is not set to RGB
         // Example of the issue: If color model is HSL, when on open the hsl are applied to the image color as if it was RGB
@@ -43,9 +41,8 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.UI
         private void Awake()
         {
             _skipOnChangeChecks = true;
-
-            _hexValidator = new HexValidator();
-            _hexValueInputfield.inputValidator = _hexValidator;
+            
+            _hexValueInputfield.inputValidator = new HexValidator();
         }
 
         private void Start()
@@ -180,7 +177,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.UI
                     break;
             }
 
-            Color color = ColorConversion.HEXToRGB(new HEX(hex));
+            Color color = ColorConversion.HexToRGB(new HEX(hex));
 
             if (_colorModelDropdown.value == 1)
             {

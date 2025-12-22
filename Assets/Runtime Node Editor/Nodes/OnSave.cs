@@ -1,82 +1,94 @@
 ﻿using RuntimeNodeEditor.Node.Pointer;
 using Utils.IO.Serialization;
+using System.Linq;
 
 namespace RuntimeNodeEditor.Node.Save
 {
     public static class OnSave
     {
-        public static void Save(FileWriter writer, Node[] nodes)
+        private static Node[] _nodes;
+
+        public static void Save(FileWriter writer)
         {
-            foreach (Node node in nodes)
+            _nodes = NodeDictionary.Nodes.Values.ToArray();
+            foreach (Node node in _nodes)
             {
                 node.CodeToSave(writer);
             }
 
-            SaveNodeConnections(writer, nodes);
+            SaveNodeConnections(writer);
         }
 
-        private static void SaveNodeConnections(FileWriter writer, Node[] nodes)
+        private static void SaveNodeConnections(FileWriter writer)
         {
-            int count = 0;
+            int nodeConnectionsCount = 0;
 
-            for (int nodeIndex = 0; nodeIndex < nodes.Length; nodeIndex++)
+            foreach (Node node in _nodes)
             {
-                if (nodes[nodeIndex].Inputs == null)
-                    continue;
-
-                for (int inputPointerIndex = 0; inputPointerIndex < nodes[nodeIndex].Inputs.Count; inputPointerIndex++)
+                if (node.Inputs == null)
                 {
-                    CountOutput(ref count, nodes, nodes[nodeIndex].Inputs[inputPointerIndex].ConnectedOutputPointer);
+                    continue;
+                }
+
+                foreach (InputPointer inputPointer in node.Inputs)
+                {
+                    CountOutput(ref nodeConnectionsCount, inputPointer.ConnectedOutputPointer);
                 }
             }
 
-            writer.Write(count);
+            writer.Write(nodeConnectionsCount);
 
-            for (int nodeIndex = 0; nodeIndex < nodes.Length; nodeIndex++)
+            int nodeIndex = 0;
+            int inputPointerIndex = 0;
+            foreach (Node node in _nodes)
             {
-                if (nodes[nodeIndex].Inputs == null)
-                    continue;
-
-                for (int inputPointerIndex = 0; inputPointerIndex < nodes[nodeIndex].Inputs.Count; inputPointerIndex++)
+                if (node.Inputs == null)
                 {
-                    SaveOutput(writer, nodes, nodeIndex, nodes[nodeIndex].Inputs[inputPointerIndex].ConnectedOutputPointer, inputPointerIndex);
+                    continue;
                 }
+
+                inputPointerIndex = 0;
+                foreach (InputPointer inputPointer in node.Inputs)
+                {
+                    SaveOutput(writer, nodeIndex, inputPointer.ConnectedOutputPointer, inputPointerIndex);
+                    inputPointerIndex++;
+                }
+
+                nodeIndex++;
             }
         }
 
-        private static void CountOutput(ref int count, Node[] nodes, OutputPointer outputPointer)
+        private static void CountOutput(ref int count, OutputPointer outputPointer)
         {
             if (outputPointer == null)
+            {
                 return;
+            }
 
-            int connectedOutputNode = FindNode(nodes, outputPointer.Node);
-
+            int connectedOutputNode = FindNode(outputPointer.Node);
             if (connectedOutputNode == -1)
+            {
                 return;
+            }
 
-            if (FindPointer(nodes, connectedOutputNode, outputPointer) == -1)
+            if (FindPointer(connectedOutputNode, outputPointer) == -1)
+            {
                 return;
+            }
 
             count++;
         }
 
-        private static void SaveOutput(FileWriter writer, Node[] nodes, int nodeIndex, OutputPointer outputPointer, int inputPointerIndex)
+        private static void SaveOutput(FileWriter writer, int nodeIndex, OutputPointer outputPointer, int inputPointerIndex)
         {
             if (outputPointer == null)
                 return;
 
-            int connectedOutputNode = FindNode(
-                nodes,
-                outputPointer.Node);
-
+            int connectedOutputNode = FindNode(outputPointer.Node);
             if (connectedOutputNode == -1)
                 return;
 
-            int connectedOutputIndex = FindPointer(
-                nodes,
-                connectedOutputNode,
-                outputPointer);
-
+            int connectedOutputIndex = FindPointer(connectedOutputNode, outputPointer);
             if (connectedOutputIndex == -1)
                 return;
 
@@ -87,23 +99,27 @@ namespace RuntimeNodeEditor.Node.Save
             writer.Write((byte)connectedOutputIndex);
         }
 
-        private static int FindNode(Node[] nodes, Node nodeToFind)
+        private static int FindNode(Node nodeToFind)
         {
-            for (int i = 0; i < nodes.Length; i++)
+            for (int i = 0; i < _nodes.Length; i++)
             {
-                if (nodes[i] == nodeToFind)
+                if (_nodes[i] == nodeToFind)
+                {
                     return i;
+                }
             }
 
             return -1;
         }
 
-        private static int FindPointer(Node[] nodes, int nodeIndex, OutputPointer pointerToFind)
+        private static int FindPointer(int nodeIndex, OutputPointer pointerToFind)
         {
-            for (int i = 0; i < nodes[nodeIndex].Outputs.Count; i++)
+            for (int i = 0; i < _nodes[nodeIndex].Outputs.Count; i++)
             {
-                if (nodes[nodeIndex].Outputs[i] == pointerToFind)
+                if (_nodes[nodeIndex].Outputs[i] == pointerToFind)
+                {
                     return i;
+                }
             }
 
             return -1;

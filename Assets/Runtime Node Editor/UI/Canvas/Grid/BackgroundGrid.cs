@@ -17,14 +17,6 @@ namespace RuntimeNodeEditor.UI.Canvas.Grid
 
         private RawImage _image;
 
-        private const float GridSize = 500.0f;
-
-        private float ScaleX => GlobalData.Camera.pixelWidth / GridSize * GlobalData.Camera.orthographicSize;
-        private float Width => ScaleX / GlobalData.ScalerFactor;
-
-        private float ScaleY => GlobalData.Camera.pixelHeight / GridSize * GlobalData.Camera.orthographicSize;
-        private float Height => ScaleY / GlobalData.ScalerFactor;
-
         internal void Init(RawImage image)
         {
             _image = image;
@@ -34,8 +26,13 @@ namespace RuntimeNodeEditor.UI.Canvas.Grid
 
         internal void UpdateGrid()
         {
-            float width = Width;
-            float height = Height;
+            const float GridSize = 500.0f;
+
+            float width = GlobalData.Camera.pixelWidth / GridSize * GlobalData.Camera.orthographicSize;
+            width /= GlobalData.ScalerFactor;
+
+            float height = GlobalData.Camera.pixelHeight / GridSize * GlobalData.Camera.orthographicSize;
+            height /= GlobalData.ScalerFactor;
 
             Pan.PanBackgroundGrid(width, height);
 

@@ -1,6 +1,6 @@
 ﻿using RuntimeNodeEditor.Data;
-using UnityEngine;
 using Utils.IO.Serialization;
+using UnityEngine;
 
 namespace RuntimeNodeEditor.Input
 {

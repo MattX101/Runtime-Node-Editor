@@ -23,7 +23,7 @@ namespace RuntimeNodeEditor.UI.Canvas.Node.Factory
         {
             if (_executionNodeSpawned == true && _singleExecutionNode == true)
             {
-                Debug.Log("Only one end node can be active!");
+                Debug.LogError("Only one end node can be active!");
 
                 return;
             }
